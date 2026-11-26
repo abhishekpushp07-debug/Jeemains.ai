@@ -30,6 +30,7 @@ import time
 from fastapi import APIRouter, HTTPException, Path, Request
 from starlette.responses import JSONResponse
 
+import workspace
 from fast_json import FastJSONResponse
 from jl_transport import UpstreamError, canonical_request
 from matched import ID, _id, _text, site_data
@@ -240,7 +241,8 @@ def make_router(db, client):
     async def sample_on() -> bool:
         if time.monotonic() - _sample["read"] > 60:
             row = await db.rf_meta.find_one({"_id": SAMPLE_META}, {"value": 1})
-            _sample.update(value=bool(row and row.get("value") is True), read=time.monotonic())
+            # Only on the workspace's own server: production never shows a made-up chapter, whatever its database holds.
+            _sample.update(value=bool(workspace.own() and row and row.get("value") is True), read=time.monotonic())
         return _sample["value"]
 
     async def sample_bank():

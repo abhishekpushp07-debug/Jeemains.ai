@@ -4,6 +4,31 @@
 > `memory/REQUIRED_CHANGES_GUIDE.md` (the owner's Hindi to-do guide), `memory/test_credentials.md` (test rules + ids).
 > `memory/HANDOFF_SUMMARY.md` is very old (Nov early days); do not plan from it.
 
+
+## ⛔ READ BEFORE ANYTHING ELSE (written 27 Nov 2026, 02:20 IST) — production's database; DO NOT DEPLOY
+
+- The Publish of 26 Nov 2026 (14:40 UTC) was made from a fork and was a **replacement**: production
+  (`jeelive-mobile.emergent.host`) now runs on `jeelive-feature-book-test_database`, **a copy of this preview's
+  database**. The real one (`scale-engine-50k-test_database`, 626 profiles) still exists but is not in use. Run
+  `6ceca625-dae5-48fa-97bd-3532ab966001`, fork job `fe746b83-35a3-436f-b6af-8276ad2c59aa` (deployer agent's report).
+- The object storage of the job before the fork is not readable with this fork's key: `/api/brand/*` and
+  `/api/marketing/launch/*` answer 503 on the preview and in production (the app's screens use neither).
+  `test_iter53_marketing_media_public.py` and `test_iter56_mobile_zip_downloads.py` fail for that reason only.
+- **Only Emergent support can put this right** (support@emergent.sh; the owner writes, with job ids, run id,
+  screenshots). **No Deploy / Redeploy / Publish / Rollback in either job until support answers.** Never call
+  `emergent__send_to_deployer` with intent deploy before the owner says support has answered.
+- Never restore, merge or delete a database yourself. Never upload to object storage again without the owner's yes.
+- Waiting on the preview for a safe Publish: the browser Rapid Fire copy with its icon font (production shows empty
+  boxes for icons), the slow-device rest in that copy, and the rule that a made-up sample is never given out by a
+  server that is not the workspace's own (`backend/workspace.py`). Details: last section of `memory/PRD.md`.
+- The website hand-off book is **version 4** (`handoff/feature_book`, Part 7 = every door of the website the app
+  uses; `build_book.py` stops when a door of the app's code is missing in Part 7.2). After any change to an app
+  call to the website, build the book again and issue new owner links (`backend/tools/owner_download.py`).
+- The table of §1 below is from 26 Nov and is **older than this block**: everything it marks "NO (needs Publish)" up
+  to the Student Choice colours went live with that Publish; production's browser copy is the one of 26 Nov.
+
+---
+
 ---
 
 ## 0. The owner, the app, the rules

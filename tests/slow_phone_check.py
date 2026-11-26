@@ -20,6 +20,12 @@ from rf_daily_fixture import fake_daily_done  # noqa: E402
 from shine_helpers import sign_in  # noqa: E402
 
 BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
+# `slow_phone_check.py arena` = the same three runs in the browser copy of Rapid Fire (/api/arena): there the lobby is the
+# first screen after the sign-in (no Home, no tab bar), so run C slows the browser down on the lobby itself.
+ARENA = "arena" in sys.argv[1:]
+ARGS = [a for a in sys.argv[1:] if a != "arena"]
+if ARENA:
+    BASE += "/api/arena"
 OUT = Path("/tmp/slow_phone"); OUT.mkdir(exist_ok=True)
 KEY = "shine.level.v1"
 RUNNING = "document.getAnimations().filter(a => a.playState === 'running').length"
@@ -67,8 +73,9 @@ async def one(p, tag, kept=None, slow=0):
     errors = []
     page.on("pageerror", lambda e: errors.append(str(e)[:200]))
     await fake_daily_done(page)
+    tag = ("arena_" if ARENA else "") + tag
     await page.goto(BASE + "/entry", wait_until="domcontentloaded", timeout=90000)
-    await sign_in(page, aits=None, board=False)
+    await sign_in(page, aits=None, board=False, landing="rapid-fire-home" if ARENA else "home-tile-choice")
     home = None
     if slow:
         cdp = await ctx.new_cdp_session(page)
@@ -81,16 +88,17 @@ async def one(p, tag, kept=None, slow=0):
             await page.wait_for_timeout(1000)
         home = {"kept_after_home": await page.evaluate(f"localStorage.getItem('{KEY}')"), "seconds": round(time.time() - began, 1)}
         await cdp.send("Emulation.setCPUThrottlingRate", {"rate": 1})
-    await page.click('[data-testid="tab-rapid"]')  # no reload: the level in memory is what counts
+    if not ARENA:
+        await page.click('[data-testid="tab-rapid"]')  # no reload: the level in memory is what counts
     state = await lobby_state(page, tag)
     await browser.close()
     return state, home, errors
 
 
 async def main():
-    rate = int(sys.argv[1]) if len(sys.argv) > 1 else 20  # `slow_phone_check.py 60` = run C alone, slowed 60 times
+    rate = int(ARGS[0]) if ARGS else 20  # `slow_phone_check.py 60` = run C alone, slowed 60 times
     async with async_playwright() as p:
-        if len(sys.argv) > 1:
+        if ARGS:
             return await run_c(p, rate)
         a, _, ea = await one(p, "A_full")
         print("A (nothing kept):", a)
@@ -117,7 +125,7 @@ async def main():
 
 async def run_c(p, rate):
     c, home, ec = await one(p, "C_slowed", slow=rate)
-    print(f"C (slowed {rate} times on Home):", home, c)
+    print(f"C (slowed {rate} times on {'the lobby' if ARENA else 'Home'}):", home, c)
     check("C: no page error", not ec, ec)
     level = (home["kept_after_home"] or "").strip('"').split(":")[0]
     if level == "2":

@@ -15,7 +15,7 @@
 | `GET /api/app/switches` | everyone | `{ "pictures": …, "matched": true or false }`: whether Home shows the Matched card | |
 | `DELETE /api/rf/dream/mocks/<attempt id>` | a signed-in student | takes a paper that is no full mock out of that account's Dream College meter, for good | |
 
-**The website: doors in use today** (nothing to build; do not change their fields without telling the app side)
+**The website: doors in use today** (nothing to build; do not change their fields without telling the app side). These are the ones the two new features lean on. **The whole list of the website's doors the app uses is in Part 7.2.**
 
 | Door | Used for |
 | --- | --- |
@@ -96,7 +96,7 @@ And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part
 | Where | What |
 | --- | --- |
 | collection `matched_shifts` | one document per shift: `_id` (the shift's id), `published`, `asked`, `updated_at`, `paper_id`, `items`; `source: "website"` and `synced_at` on a shift copied from the website; `sample: true` on the preview's made-up shifts |
-| `rf_meta`, row `matched:card` | Home's card: `on`, `off` or `auto` |
+| `rf_meta`, row `matched:card` | Home's card: `on`, `off` or `auto`, and `by`: who wrote it (`website`, `owner`, or `sample` for the preview's samples). Outside the app's own preview only a word by `website` or `owner` counts |
 | `rf_meta`, row `matched:aits_last_day` | the All India series' last day, as last read from the website |
 | `rf_meta`, row `choice:sample` and collection `choice_sample` | **preview only:** made-up chapters and questions for walking the question-picking screens. Off. Production has no such row |
 | `rf_dreams`, field `dropped` | papers taken out of a student's Dream College meter (up to 200 for an account) |
@@ -121,11 +121,11 @@ Nothing about Student Choice is written anywhere on the app's server: no chapter
 | Take one chapter out of Student Choice | take that chapter-wise test back on the website | the super admin | about 4 minutes |
 | Empty Student Choice | hide the Chapter-wise section: the tile stays and says "Chapters abhi nahi mile" | the super admin | about 4 minutes |
 | Take the Student Choice tile off Home | **there is no switch:** a new app build | the app side | a new build |
-| Turn Home's Matched card and the sign-in bar on or off | `card` in the website's list door; or the row `matched:card` in the app's database when the website sends no `card` | the super admin; the app side | about 3 minutes, then at each phone's next app launch |
+| Turn Home's Matched card and the sign-in bar on or off | `card` in the website's list door; or the row `matched:card` in the app's database, written with `by: "owner"`, when the website sends no `card` | the super admin; the app side | about 3 minutes, then at each phone's next app launch |
 | Take one shift back | unpublish it on the website | the super admin | about 5 minutes |
 | Take a shift back when the website cannot | set `published` to `false` on its document in `matched_shifts` (a shift the website still lists comes back on the next pass) | the app side | 1 to 2 minutes |
 | Stop the JEE question showing under ours for a paper | take the shift back, or take the `question_id`s out and save | the super admin | about 5 minutes |
-| Hide the preview's samples | `python3 backend/tests/matched_sample.py hide`; `python3 backend/tests/choice_sample.py hide` | the app side | 1 to 2 minutes |
+| Hide the preview's samples | `python3 backend/tests/matched_sample.py hide`; `python3 backend/tests/choice_sample.py hide`. (A server that is not the workspace's own never shows them anyway: Part 2.12) | the app side | 1 to 2 minutes |
 
 None of these needs an app update, except taking the tile off Home.
 
@@ -212,11 +212,13 @@ None of these needs an app update, except taking the tile off Home.
 | Dream College meter | `frontend/src/dream/store.ts` (`isFullMock`), `frontend/app/result/[id].tsx`, `backend/dream.py` |
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
 | Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
-| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
+| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5), `test_samples_stay_home.py` (6): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
 | Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4) |
 | All India Rapid's "Misfires" | server `backend/daily.py` (`GET /api/rf/daily/misses`); app `frontend/src/rapid/DailyMisses.tsx` |
-| Rapid Fire in a browser | the built copy `backend/arena_web/`, served by `backend/arena_web.py` at `/api/arena`; built by `scripts/build_arena_web.sh` (then the owner's Publish) |
+| Rapid Fire in a browser | the built copy `backend/arena_web/`, served by `backend/arena_web.py` at `/api/arena`; built by `scripts/build_arena_web.sh` (then the owner's Publish); `backend/tests/test_arena_web_complete.py` (every file the copy names is answered; no file is left out of a Publish; no workspace address in it). In a browser: `python3 tests/slow_phone_check.py arena`, `python3 tests/slow_phone_wins.py arena` (also with `calm`, `reduce`, `narrow`, `laptop`) |
 | One account | `frontend/src/auth.tsx`, `frontend/src/api/client.ts`, `backend/jl_proxy.py` (the website's doors), `backend/rf_access.py` (Rapid Fire's id from `auth/me`), `backend/account_deletion.py`, `backend/pin_reset.py` |
+| Working together (Part 7) | the app's calls: `frontend/src/api/client.ts` and the screens; the app's server: `backend/jl_proxy.py`, `jl_transport.py`, `website_shield.py`, `session_coordination.py`, `login_guard.py`, `client_ip.py`. The read-only walk: `python3 tests/website_doors_walk.py`. The list of Part 7.2 is checked against the app's code by `build_book.py` |
+| Samples stay in the workspace | `backend/workspace.py`; used by `backend/matched.py` and `backend/choice.py`; `backend/tests/test_samples_stay_home.py` (6) |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
 | Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on {{TODAY}} and takes their place for readers outside the app side |
 | This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
@@ -253,9 +255,9 @@ Also true on {{TODAY}}, seen through the app's preview: the website lists **81 c
 To check again, from any machine:
 
 ```
-# "matched": false until the card is on
+# "matched": true only when a real shift is published, or from the day after the series ends
 curl -s https://jeelive-mobile.emergent.host/api/app/switches
-# the published shifts ("shifts": [] today)
+# the published shifts (none is real before JEE Main's first shift: Part 0.2)
 curl -s https://jeelive-mobile.emergent.host/api/matched
 # 401 = the door is there, for signed-in students only
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive-mobile.emergent.host/api/choice/bank
@@ -294,3 +296,4 @@ curl -s https://jeelive.ai/api/auth/session
 | 6 | **The made-up sample shifts on the preview:** keep them for looking, or hide them now? | they stay published on the preview only |
 | 7 | **The `kind` of Student Choice papers and Matched papers in the paper history** (a question for the website agent, Part 4.4 point 5) | their Misfire questions are in "Sab" |
 | 8 | **Opening Rapid Fire from the website without typing the PIN again** (Part 5.4: written, not built) | the student types the phone and PIN once in the browser Rapid Fire |
+{{OPEN_PROD}}

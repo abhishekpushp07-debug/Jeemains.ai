@@ -1376,3 +1376,44 @@ Owner approved exactly two leftover jobs (no enhancement; the website's "Setup" 
 - **Not rebuilt:** the browser copy of Rapid Fire (`backend/arena_web/`) still has the old celebrations. `scripts/build_arena_web.sh` brings them over; left for the owner's yes.
 - This fork's Metro cache still held three files with the old fork's host, so the preview bundle called the old address; those three cache files were moved to `/tmp/metro_stale` (not deleted) and Metro rebuilt them. No `.env`, no config file was touched.
 
+
+
+
+## 27 Nov 2026 — Browser Rapid Fire copy rebuilt, samples never leave the workspace, website hand-off book version 4; and what the Publish of 26 Nov did to production's data
+Owner approved two jobs and left the technical decisions to the agent ("dono ka coordination and compatibility perfect ho"): (1) build the app's own browser copy of Rapid Fire (`/api/arena`) again with the app's latest work and check it; (2) version 4 of the website hand-off: what the website needs and version 3 did not have.
+
+**0. Found on the way — production's data (a platform matter; NOT fixed, NOT touched; do not deploy)**
+- The Publish of 26 Nov 2026 was made from this fork. The platform recorded it as a **replacement** (run `6ceca625-dae5-48fa-97bd-3532ab966001`, fork job `fe746b83-35a3-436f-b6af-8276ad2c59aa`, started 14:32:21 UTC, live 14:40:01 UTC; Mongo migration 14:36:47–14:37:19 UTC). Production's database pointer moved from `scale-engine-50k-test_database` (the real one) to `jeelive-feature-book-test_database`, **a copy of this preview's database**. Read from the deployer agent's report, not guessed.
+- The real database still exists and can be read: `rf_profiles` 626, `jl_jars` 914, `rf_cards` 24241, no `matched_shifts`. The copy production now uses: `rf_profiles` 619, `jl_jars` 1129 (the preview had 1229 a day later), three made-up Matched shifts published, `rf_meta matched:card` = "on".
+- So students were shown the preview's test data, three made-up shifts and a Matched card that should be off. Accounts, papers, attempts and results are the website's and were not touched.
+- **Second effect, seen 27 Nov:** the object storage of the job before the fork cannot be read with this fork's key (init 200, every object 404). `/api/brand/*` and `/api/marketing/launch/*` answer 503 on the preview and in production. The app's screens use neither (the logo is in the bundle). The launch films are still in `/app/marketing/launch45/output/` with the same SHA-256 as the manifest; nothing was uploaded again.
+- Support's answer (27 Nov): only Emergent support can point production back and make the old storage readable; write to support@emergent.sh with both job ids, the run id, screenshots and the owner's own words; ask them to keep both databases and to merge what was written after 26 Nov 14:40 UTC if possible; ask how to deploy a fork's code without replacing the database. **Until then: no Deploy, no Redeploy, no Publish, no Rollback, in either job.** Building on the preview may go on.
+- Nothing was restored, merged, deleted or deployed by the app side.
+
+**1. A made-up sample never leaves the workspace** (built because of 0; preview only)
+- New `backend/workspace.py`: `own()` is true only when this server's MongoDB runs on this machine without a password. A server that cannot tell counts as production.
+- `backend/matched.py`: `shown()` leaves out every shift marked `sample: true` unless `own()`; `card_word()` follows the row `matched:card` outside the workspace only when it was written by the website's super admin (`by: "website"`, written by `sync_site`) or by the owner (`by: "owner"`). The "on" the sample script writes is `by: "sample"`; the row that reached production has no `by`: neither switches the card for students.
+- `backend/choice.py`: the made-up chapters only when `own()`. `backend/tests/matched_sample.py` and `choice_sample.py` refuse a database that is not the workspace's own.
+- Nothing is deleted from any database: the samples stay stored and are simply not given out.
+- Checked: `tests/test_samples_stay_home.py` (6) + the testing agent's `test_samples_stay_home_t1_extra.py` (8); a production-like server on this very database keeps 3 samples stored, lists 0 shifts, card off; the preview still lists its 3 samples and its card.
+- **It protects only after a Publish, and a Publish is on hold (0).**
+
+**2. The browser copy of Rapid Fire** (`backend/arena_web/`, 186 files, 8.7 MB; preview only)
+- Why production shows empty boxes for icons: the build kept the icon font in `assets/node_modules/…`, and git never carries a folder of that name, so the font never reached production (font 404 there on 27 Nov; the page itself 200).
+- Now: the build ships that folder as `assets/_modules`; `backend/arena_web.py` answers the old address from it. `scripts/build_arena_web.sh` builds into temp folders with its own Metro cache, with an empty `EXPO_PUBLIC_BACKEND_URL` (the copy always talks to the server it came from), and never puts in place a build that is incomplete, carries a workspace address or holds a file git would leave out. The copy served before is kept in `/tmp/arena_web_previous.<time>` (three are there), never deleted.
+- Slow devices: Smooth Mode looks at the frames only while a Shine moves, and the browser copy has no Home and so no Shine. `useArenaFrameWatch()` (`src/motion.tsx`, called by `rapid/LobbyTab.tsx`) lets the lobby say "I am moving" in the browser copy only. In the app it does nothing. No gameplay, scoring, coins, timers or sign-in code changed.
+- A name longer than the file system allows no longer answers 500 (testing agent's finding; now 404 for an asset, the page for anything else).
+- Checked in a browser (QA learner, read-only, the tests' stand-ins): browser copy `slow_phone_check.py arena` 15/15, `slow_phone_wins.py arena` 35/35, calm 18/18, reduce 17/17, narrow 17/17, laptop 18/18; the app itself wins 35/35, check 15/15, smoke 22 + 22 screens, dream 11/11, surfaces 11/11 (the last two by the testing agent). Icon font on the preview: 200, `font/ttf`, 1,307,660 bytes, the same bytes as on disk; no workspace address in any file of the copy. `tsc` clean.
+- **Production still serves the old copy (icons missing) until a Publish.**
+
+**3. The website hand-off book, version 4** (`handoff/feature_book/`; 67 pages; PDF, `BOOK.md`, ZIP)
+- New **Part 7, working together** (`parts/70_together.md`): every door of the website the app uses (7.2), how the app's server reaches the website (one address, `X-Forwarded-For`, cookies, headers passed on, no redirects, waits and retries, the shield, what an answer looks like), what the website may change freely and what it must tell the app side first (7.4), the doors the app already asks for that are not built (Student Choice A/B/C, Matched's two, the whole-series leaderboard with its shape), what was checked and what was not (7.6).
+- The build cannot leave a door out: `build_book.py check_doors()` reads every call to the website out of `frontend/src` and `frontend/app` and stops when Part 7.2 does not name one. `state()` reads production when the book is built and writes the red box of Part 0.2 only while production really lists the preview's samples.
+- Corrected from version 3: "production has none of this / the list is empty" (no longer true); what is live since the Publish of 26 Nov; the icons of the browser copy; two new rules (25: never a redirect or an HTML page on an API door; 26: tell the app side before a door changes); open point 9 (production's database).
+- A read-only walk of the app (`tests/website_doors_walk.py`): 30 screens, 21 doors seen, 19 answered 200; `series/all-india-jee/leaderboard` 404 (not built on the website; the app waits).
+- Owner's links (7 days, bound to these exact files; old links stopped working when the files changed): PDF, ZIP and `.md` each answered 200 as a download (`Content-Disposition: attachment`; the `.md` as `application/octet-stream`, so a browser saves it instead of opening it), the same bytes as the files.
+
+**Independent check:** testing agent, `/app/test_reports/iteration_149.json`: backend and frontend all passed; one small finding (the long name → 500), fixed and tested.
+
+**NOT checked / not done:** production (nothing deployed); any real phone; the website's write doors (listed from code only); whether the website counts `X-Forwarded-For`; the two sides under load — **no number of students at once is claimed**; putting production's real database back (support).
+

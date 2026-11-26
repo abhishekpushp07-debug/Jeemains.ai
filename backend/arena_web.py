@@ -10,6 +10,9 @@ from fastapi.responses import FileResponse
 ARENA_DIR = (Path(__file__).parent / "arena_web").resolve()
 router = APIRouter()
 SAFE = {"X-Content-Type-Options": "nosniff", "Referrer-Policy": "strict-origin-when-cross-origin"}
+# git never carries a folder named node_modules, so a copy that kept the icon font there reached production without it
+# (empty boxes in place of every icon). The build keeps that folder as assets/_modules; the pages ask for the old name.
+PACKAGES = ("assets/node_modules/", "assets/_modules/")
 
 
 def _index():
@@ -29,8 +32,13 @@ async def arena_root():
 @router.get("/arena/{path:path}", include_in_schema=False)
 @router.head("/arena/{path:path}", include_in_schema=False)
 async def arena_file(path: str):
-    target = (ARENA_DIR / path).resolve()
-    if path and target.is_file() and target.is_relative_to(ARENA_DIR):
+    kept = PACKAGES[1] + path[len(PACKAGES[0]):] if path.startswith(PACKAGES[0]) else path
+    target = (ARENA_DIR / kept).resolve()
+    try:
+        found = bool(path) and target.is_file() and target.is_relative_to(ARENA_DIR)
+    except OSError:  # a name longer than the file system allows is simply not one of the copy's files
+        found = False
+    if found:
         # Bundles and assets carry a content hash in their name: they can be kept for a year.
         hashed = path.startswith(("_expo/", "assets/"))
         return FileResponse(target, headers={**SAFE, "Cache-Control": "public, max-age=31536000, immutable" if hashed else "public, max-age=3600"})

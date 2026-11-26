@@ -12,6 +12,7 @@ import re
 import sys
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 from dotenv import dotenv_values
 from playwright.async_api import async_playwright
@@ -19,7 +20,13 @@ from playwright.async_api import async_playwright
 sys.path.insert(0, "/app/tests")
 from shine_helpers import sign_in  # noqa: E402
 
-BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
+SITE = BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
+# `slow_phone_wins.py arena [reduce|calm|narrow|laptop]` = the same run in the browser copy of Rapid Fire (backend/arena_web, served at /api/arena)
+ARENA = "arena" in sys.argv[1:]
+ARGS = [a for a in sys.argv[1:] if a != "arena"]
+if ARENA:
+    BASE += "/api/arena"
+LANDING = "rapid-fire-home" if ARENA else "home-tile-choice"
 OUT = Path("/tmp/slow_phone"); OUT.mkdir(exist_ok=True)
 KEY = "shine.level.v1"
 checks = []
@@ -150,10 +157,25 @@ async def stand_ins(page, cid, seen):
 
 
 RULES = ("Rendered more hooks", "Rendered fewer hooks", "order of Hooks", "Cannot update a component", "Maximum update depth", "state update on an unmounted", "state update on a component that")
-# Does the page scroll sideways, and is any of these parts cut off at the left or right edge of the phone?
-FITS = """(ids) => ({ sideways: document.scrollingElement.scrollWidth > window.innerWidth + 1,
+# Is any of these parts cut off at the left or right edge of the phone, and is the page wider than the screen?
+# (The edges are the page body's: the whole phone, or the 480-wide column of the browser copy on a laptop.)
+FITS = """(ids) => { const col = document.body.getBoundingClientRect(); return {
+  wide: document.scrollingElement.scrollWidth > window.innerWidth + 1, column: Math.round(col.width),
   cut: ids.filter((id) => { const el = document.querySelector(`[data-testid="${id}"]`); if (!el) return true;
-    const b = el.getBoundingClientRect(); return b.left < -1 || b.right > window.innerWidth + 1 || b.width < 2; }) })"""
+    const b = el.getBoundingClientRect(); return b.left < col.left - 1 || b.right > col.right + 1 || b.width < 2; }) }; }"""
+
+
+async def fits(page, ids):
+    """`sideways` = a hand can move the page sideways (tried with a sideways wheel). `wide` = the page is wider than the
+    screen on paper only: in the browser copy the crown's sunburst counts as page width (the column's transform), yet a
+    wheel and a touch swipe do not move the page (seen 27 Nov 2026: scrollX stays 0), so it is told apart from `sideways`."""
+    await page.mouse.move(page.viewport_size["width"] // 2, 300)
+    await page.mouse.wheel(300, 0)
+    await page.wait_for_timeout(150)
+    moved = await page.evaluate("window.scrollX")
+    if moved:
+        await page.evaluate("window.scrollTo(0, 0)")
+    return {"sideways": bool(moved), **(await page.evaluate(FITS, ids))}
 FLARE_COUNT = """() => { window.__flares = 0; new MutationObserver((list) => { for (const m of list) for (const n of m.addedNodes)
   if (n.nodeType === 1 && (n.matches('[data-testid="rf-gem-flare"]') || n.querySelector('[data-testid="rf-gem-flare"]'))) window.__flares++; })
   .observe(document.body, { childList: true, subtree: true }); }"""
@@ -173,10 +195,13 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
     errors, seen, got, console = [], {"answered": [], "stopped": [], "sent": []}, {"fits": {}}, []
     page.on("pageerror", lambda e: errors.append(str(e)[:200]))
     page.on("console", lambda m: console.append(m.text[:300]) if m.type in ("error", "warning") else None)
+    elsewhere = set()  # calls to a server's /api that do not go to the server the page came from
+    page.on("request", lambda r: elsewhere.add(urlparse(r.url).netloc) if "/api/" in urlparse(r.url).path and urlparse(r.url).netloc != urlparse(SITE).netloc else None)
+    tag = ("arena_" if ARENA else "") + tag
     cid = f"standin-{tag}-{int(time.time())}"
     await stand_ins(page, cid, seen)
     await page.goto(BASE + "/entry", wait_until="domcontentloaded", timeout=90000)
-    await sign_in(page, aits=None, board=False, width=width, height=height)
+    await sign_in(page, aits=None, board=False, width=width, height=height, landing=LANDING)
 
     # 1. The crown celebration of a cup just won
     await page.goto(BASE + "/rapid/cup/" + cid, wait_until="domcontentloaded", timeout=90000)
@@ -190,7 +215,7 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
     got["rays"] = await page.evaluate(RAYS)
     got["rays_move"] = one != got["rays"]
     got["crown"] = await page.evaluate(LOOK, "crown-celebration-crown")
-    got["fits"]["crown"] = await page.evaluate(FITS, ["crown-celebration-" + t for t in ("crown", "kicker", "title", "chip", "line", "see", "close")])
+    got["fits"]["crown"] = await fits(page, ["crown-celebration-" + t for t in ("crown", "kicker", "title", "chip", "line", "see", "close")])
     await page.screenshot(path=str(OUT / f"{tag}_crown.jpeg"), type="jpeg", quality=40)
     await page.click('[data-testid="crown-celebration-close"]')
     await page.wait_for_selector('[data-testid="crown-celebration"]', state="detached", timeout=15000)
@@ -210,7 +235,7 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
     got["flare"] = await flare
     await card_no(page, 4)
     got["streak_counts"].append(await text(page, "rf-streak-count"))
-    got["fits"]["sprint"] = await page.evaluate(FITS, ["rf-card", "rf-option-0", "rf-option-3", "rf-skip-button", "rf-next-button", "rf-streak-gem"])
+    got["fits"]["sprint"] = await fits(page, ["rf-card", "rf-option-0", "rf-option-3", "rf-skip-button", "rf-next-button", "rf-streak-gem"])
     await page.screenshot(path=str(OUT / f"{tag}_sprint.jpeg"), type="jpeg", quality=40)
 
     # 3. The last card ends the sprint: the reward panel and the level-up moment
@@ -223,7 +248,7 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
         await page.wait_for_selector('[data-testid="level-up-overlay"]', state="detached", timeout=15000)
     got["summary"] = [await text(page, "rf-summary-score"), await text(page, "reward-xp"), await text(page, "reward-coins"), await count(page, "reward-level-up"),
                       await count(page, "reward-xp-bar"), await count(page, "rf-diamonds-won-red")]
-    got["fits"]["reward"] = await page.evaluate(FITS, ["reward-panel", "reward-xp", "reward-coins", "reward-streak", "reward-level-up", "reward-xp-bar", "rf-diamonds-won", "rf-summary-score"])
+    got["fits"]["reward"] = await fits(page, ["reward-panel", "reward-xp", "reward-coins", "reward-streak", "reward-level-up", "reward-xp-bar", "rf-diamonds-won", "rf-summary-score"])
     await page.screenshot(path=str(OUT / f"{tag}_summary.jpeg"), type="jpeg", quality=40)
     await page.click('[data-testid="rf-done"]')
     await page.wait_for_selector('[data-testid="rapid-fire-home"]', timeout=30000)
@@ -261,6 +286,7 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
     await page.wait_for_selector('[data-testid="rapid-fire-home"]', timeout=30000)
     got["react_rules"] = sorted({c[:160] for c in console if any(r in c for r in RULES)})
     got["console"] = sorted({c[:110] for c in console})[:10]
+    got["api_elsewhere"] = sorted(elsewhere)
     got["kept"] = await page.evaluate(f"localStorage.getItem('{KEY}')")
     await browser.close()
     return got, errors, seen
@@ -268,6 +294,7 @@ async def wins(p, tag, kept=None, reduce=False, width=390, height=844):
 
 def common(tag, got, errors, seen, skipped=False):
     check(f"{tag}: no page error and no React rule warning in the console", not errors and not got["react_rules"], (errors, got["react_rules"]))
+    check(f"{tag}: every call to a server goes to the server the page came from", not got["api_elsewhere"], got["api_elsewhere"])
     check(f"{tag}: both sprints were started and finished by the browser, no write was stopped or sent on",
           seen["answered"].count("POST /sessions") == 2 and seen["answered"].count("POST /sessions/<stand-in>/complete") == 2 and not seen["stopped"], (sorted(set(seen["answered"])), seen["stopped"]))
     check(f"{tag}: the app sent the four answers as given (all correct, option B)", seen["sent"][:1] == [[[c["id"], "correct", 1] for c in CARDS]], seen["sent"][:1])
@@ -320,14 +347,14 @@ def moving(tag, got):
 
 async def main():
     async with async_playwright() as p:
-        if sys.argv[1:] == ["reduce"]:  # `slow_phone_wins.py reduce` = the phone's own Reduce Motion alone (nothing kept by Smooth Mode)
+        if ARGS == ["reduce"]:  # `slow_phone_wins.py reduce` = the phone's own Reduce Motion alone (nothing kept by Smooth Mode)
             got, e, s = await wins(p, "W_reduce", reduce=True)
             print("Reduce Motion:   ", json.dumps(got)[:1800])
             common("reduce motion", got, e, s, skipped=True)
             calm("reduce motion", got)
             check("reduce motion: Smooth Mode kept nothing (the calm form comes from the phone's setting alone)", got["kept"] is None, got["kept"])
             return
-        if sys.argv[1:] == ["calm"]:  # `slow_phone_wins.py calm` = Smooth Mode's middle level: only the Shine calms, the celebrations still move
+        if ARGS == ["calm"]:  # `slow_phone_wins.py calm` = Smooth Mode's middle level: only the Shine calms, the celebrations still move
             got, e, s = await wins(p, "W_calm", kept=f"1:{int(time.time() * 1000)}")
             print("CALM kept:       ", json.dumps(got)[:1800])
             common("calm level", got, e, s)
@@ -335,11 +362,19 @@ async def main():
             if (got["kept"] or "").strip('"').startswith("1:"):
                 moving("calm level", got)
             return
-        if sys.argv[1:] == ["narrow"]:  # `slow_phone_wins.py narrow` = the calm forms on a 320-wide phone
+        if ARGS == ["narrow"]:  # `slow_phone_wins.py narrow` = the calm forms on a 320-wide phone
             got, e, s = await wins(p, "W_narrow", kept=f"2:{int(time.time() * 1000)}", width=320, height=700)
             print("STILL, 320 wide: ", json.dumps(got)[:1800])
             common("still, 320 wide", got, e, s)
             calm("still, 320 wide", got)
+            return
+        if ARGS == ["laptop"]:  # `slow_phone_wins.py arena laptop` = the browser copy on a 1280-wide screen: a 480-wide column, the calm forms inside it
+            got, e, s = await wins(p, "W_laptop", kept=f"2:{int(time.time() * 1000)}", width=1280, height=800)
+            print("STILL, laptop:   ", json.dumps(got)[:1800])
+            common("still, laptop", got, e, s)
+            calm("still, laptop", got)
+            if ARENA:
+                check("still, laptop: every screen is the 480-wide column", all(v["column"] == 480 for v in got["fits"].values()), {k: v["column"] for k, v in got["fits"].items()})
             return
         full, e1, s1 = await wins(p, "W_full")
         print("everything moves:", json.dumps(full)[:1800])

@@ -25,6 +25,7 @@ import { AllIndiaCard } from "./AllIndiaCard";
 import { dailyStyleName, useDaily, useDailyLook } from "./daily";
 import { WeakSprintStrip, useWeakTopics } from "./WeakSprint";
 import { WeakChapters, WeakSheet } from "./WeakSheet";
+import { useArenaFrameWatch } from "@/src/motion";
 
 function Sticker({ icon, label, badge, onPress, testID, delay, narrow }: { icon: GameIconName; label: string; badge: number; onPress: () => void; testID: string; delay: number; narrow?: boolean }) {
   return <Jelly testID={testID} onPress={onPress} accessibilityLabel={badge ? `${label}, ${badge}` : label} style={[styles.sticker, narrow && styles.stickerNarrow]}>
@@ -49,6 +50,7 @@ function Tile({ icon, label, sub, badge, onPress, testID, delay, disabled, narro
 /** Arena tab: a game lobby with a stage, three mode tiles, your gang and friends, and one big PLAY button. */
 export function LobbyTab() {
   const router = useRouter(), { user } = useAuth(), uid = user?.id || "";
+  useArenaFrameWatch();
   const { width } = useWindowDimensions(), narrow = width < 360;
   const picks = useScope(), inbox = useInbox();
   const [sheet, setSheet] = useState<"" | "chapters" | "weak">(""), [pending, setPending] = useState<"" | "ai" | "solo">("");

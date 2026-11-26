@@ -5,6 +5,14 @@
 > बाकी: बदलाव 3 (Rapid Fire code, पहले बात), 4 (Misfire tabs, website के बाद), 6 (खुले फैसले), 7 (Publish + builds;
 > मालिक नए agent के साथ करेंगे)। अगले agent के लिए पूरा हाल: `memory/HANDOFF_NEXT_AGENT.md`।
 
+> **⛔ सबसे ज़रूरी (27 Nov 2026):** 26 Nov के Publish (fork से) ने production को **preview के database की copy** पर
+> चला दिया। असली database delete नहीं हुआ, पर उसे वापस सिर्फ Emergent support लगा सकता है (support@emergent.sh)।
+> **Support का जवाब आने तक Deploy / Redeploy / Publish / Rollback कुछ नहीं दबाना, दोनों jobs में।**
+> 27 Nov को preview पर बना (Publish का इंतज़ार): browser Rapid Fire के icons ठीक, slow device पर आराम,
+> sample कभी workspace के बाहर नहीं दिखेगा, और website hand-off का **version 4** (Part 7: साथ काम करने के नियम)।
+> पूरा हाल: `memory/PRD.md` का आख़िरी हिस्सा।
+
+
 > मालिक के कहने पर लिखी गई: "website को देने वाला अभी मत बनाओ। पहले required changes का detailed guide बनाओ, और
 > क्या-क्या काम बाकी है। फिर permission लो, फिर code करो।"
 > **इस गाइड के लिए app का कोई code नहीं बदला गया।** हर बदलाव मालिक की permission के बाद होगा।

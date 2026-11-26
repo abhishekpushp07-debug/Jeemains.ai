@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import { useReducedMotion } from "react-native-reanimated";
-import { STILL, useShineLevel } from "@/src/analysis/smooth";
+import { STILL, shineMoves, useShineLevel } from "@/src/analysis/smooth";
+import { ARENA } from "@/src/arenaMode";
 
 // Endless decoration (glitter rings, floating art, twinkles, clocks that tick every second) belongs to the screen the
 // student is looking at. A screen covered by another one (the lobby under a match, Home under a test) stays mounted, so
@@ -39,4 +40,13 @@ export function useLowMotion() {
 export function useStill() {
   const low = useLowMotion();
   return !useContext(InFront) || low;
+}
+
+/** For the lobby of Rapid Fire. Smooth Mode looks at the frames only while a Shine moves, and the browser copy of
+ *  Rapid Fire (/api/arena) has no Home and so no Shine: a slow device was never noticed there. In that copy the lobby
+ *  says "I am moving" the way a Shine does, while it is in front and not resting. In the app nothing changes: Home's
+ *  Shines do this there. */
+export function useArenaFrameWatch() {
+  const still = useStill();
+  useEffect(() => (ARENA && !still ? shineMoves() : undefined), [still]);
 }

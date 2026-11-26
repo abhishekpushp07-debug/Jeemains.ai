@@ -19,9 +19,14 @@ This is the app's own live server. If the app's live address ever changes, the a
 
 [[shots: r01_arena_laptop | 17. Rapid Fire in a laptop's browser, from the app's server]]
 
-## 5.2 What changed for it (26 Nov 2026)
+## 5.2 What changed for it (26 and 27 Nov 2026)
 
-The browser copy has to be built again whenever the app's screens change. Building it is one command on the app side, followed by the owner's Publish. It is not a code change. The copy in production was built on 21 Nov 2026, so it **lacks** everything Rapid Fire gained after that day, among it **All India Rapid's "Misfires" tab** (Part 4.5). It was **built again on 26 Nov 2026** on the app's preview. Students get the new copy **with the owner's next Publish**. The state in production is read when this book is built (Part 3.7).
+The browser copy has to be built again whenever the app's screens change. Building it is one command on the app side, followed by the owner's Publish. It is not a code change.
+
+- **26 Nov 2026:** built again with **All India Rapid's "Misfires" tab** (Part 4.5). This copy is in production since the owner's Publish of that day.
+- **Found on 27 Nov 2026: in production its icons are empty boxes.** The copy's icon font sat in a folder that does not travel with a Publish, so production answers 404 for it. On the sign-in screen the phone, the lock and the eye are drawn as empty boxes, and so is every other icon that comes from that font; words, pictures and the game itself are right. The preview read the font from its own disk, so it was not seen there. **Mended on 27 Nov 2026, on the preview:** the font now ships under a name that travels; the build refuses to put a copy in place when one of its files would be left out of a Publish; and a test asks the app's server for every file the copy's pages name (`backend/tests/test_arena_web_complete.py`).
+- **27 Nov 2026, the same new copy:** on a slow device the browser Rapid Fire now notices it and rests its decoration and its celebrations, as the app does; scores, coins and the game do not change. The copy talks only to the server it was opened from: no address of a workspace is in it (the build refuses one).
+- Students get the new copy **with the owner's next Publish**. The state in production is read when this book is built (Part 3.7).
 
 Nothing in the address, the sign-in or the website's part changes with a rebuild.
 
@@ -51,4 +56,5 @@ Today a student who is signed in on the website types the phone and PIN once mor
 ## 5.5 Not checked
 
 - The website's Rapid Fire button: whether it is on jeelive.ai today was not checked by the app side.
-- The rebuilt browser copy in production: it reaches production with the next Publish. On the preview it opens and signs in (picture 17).
+- The copy of 27 Nov 2026 in production: it reaches production with the next Publish. On the preview it was walked in a browser at a phone's width, at 320 points and at a laptop's width, at full motion and at rest: it opens, signs in and plays a practice round answered by the browser (picture 17 is the copy of 26 Nov).
+- A real slow phone: the rest on a slow device was checked in a browser slowed down on purpose, not on a phone.

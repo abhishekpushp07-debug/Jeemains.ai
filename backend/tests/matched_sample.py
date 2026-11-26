@@ -14,6 +14,9 @@ from pathlib import Path
 from dotenv import dotenv_values
 from pymongo import MongoClient
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import workspace
+
 
 def q(text, options=None, correct=None, answer="", solution="", **more):
     return {"text": text, "options": options or [], "correct": correct, "answer": answer, "solution": solution, **more}
@@ -126,10 +129,13 @@ for _ours, _qid in zip((o for item in SHIFTS[PAPER_SHIFT] for o in item["ours"])
 
 def main(what):
     env = dotenv_values(Path(__file__).resolve().parents[1] / ".env")
+    if not workspace.own(env["MONGO_URL"]):  # a sample is never written into a database that is not the workspace's own
+        sys.exit("This database is not the workspace's own: samples are for the preview only. Nothing was written.")
     db = MongoClient(env["MONGO_URL"])[env["DB_NAME"]]
     shifts = db.matched_shifts
     if what in ("show", "hide"):
-        db.rf_meta.update_one({"_id": "matched:card"}, {"$set": {"value": "on" if what == "show" else "auto", "ts": time.time()}}, upsert=True)
+        # `by: "sample"`: outside the workspace this word never switches the card (matched.card_word).
+        db.rf_meta.update_one({"_id": "matched:card"}, {"$set": {"value": "on" if what == "show" else "auto", "ts": time.time(), "by": "sample"}}, upsert=True)
     if what == "show":
         for sid, items in SHIFTS.items():
             shifts.replace_one({"_id": sid}, {"_id": sid, "published": True, "sample": True, "asked": 75, "updated_at": int(time.time()), "items": items,

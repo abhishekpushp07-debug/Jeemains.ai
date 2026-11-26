@@ -17,8 +17,9 @@ from misfire_fixture import fake_aits  # noqa: E402
 PHONE, PIN = "7004186276", "5524"
 
 
-async def sign_in(page, aits="done", board=True, width=390, height=844, **board_args):
-    """Signs the QA learner in from the entry screen. Stand-ins are registered first, so no stand-in day ever asks the website."""
+async def sign_in(page, aits="done", board=True, width=390, height=844, landing="home-tile-choice", **board_args):
+    """Signs the QA learner in from the entry screen. Stand-ins are registered first, so no stand-in day ever asks the website.
+    `landing` = the part that shows the sign-in is through: Home's tile in the app, "rapid-fire-home" in the browser copy (/api/arena)."""
     await page.set_viewport_size({"width": width, "height": height})
     await page.wait_for_selector('[data-testid="entry-phone-input"]', timeout=60000)
     if aits:
@@ -30,7 +31,7 @@ async def sign_in(page, aits="done", board=True, width=390, height=844, **board_
     # The button rests until the app has finished checking for an old session.
     await page.wait_for_selector('[data-testid="entry-continue-button"]:not([aria-disabled="true"])', timeout=45000)
     await page.click('[data-testid="entry-continue-button"]')
-    await page.wait_for_selector('[data-testid="home-tile-choice"]', timeout=45000)
+    await page.wait_for_selector(f'[data-testid="{landing}"]', timeout=45000)
 
 
 async def fake_name(page, calls=None, fail=None, state=None):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Builds the app side's hand-off book (Student Choice, Matched, Misfire, Rapid Fire in a browser, one account) for the
-JE Live website agent and super admin.
+"""Builds the app side's hand-off book (Student Choice, Matched, Misfire, Rapid Fire in a browser, one account, working
+together) for the JE Live website agent and super admin.
 
     cd /app/handoff/feature_book && python3 build_book.py
 
@@ -17,6 +17,7 @@ Needs python-markdown, which is not one of the app server's packages:  pip insta
 import asyncio
 import html
 import json
+import os
 import re
 import subprocess
 import sys
@@ -43,9 +44,9 @@ import choice  # noqa: E402
 import matched  # noqa: E402
 
 NAME = "JEELIVE_Student_Choice_and_Matched_Book"
-VERSION = "3"
+VERSION = "4"
 PARTS = ["00_start", "10_choice_today", "11_choice_doors", "12_choice_rest", "20_matched_student", "21_matched_website", "22_matched_admin", "30_reference",
-         "40_misfire", "50_rapid_fire", "60_one_account"]
+         "40_misfire", "50_rapid_fire", "60_one_account", "70_together"]
 PDF, MD, ZIP = HERE / f"{NAME}.pdf", HERE / "BOOK.md", ROOT / "handoff" / f"{NAME}.zip"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
@@ -203,16 +204,63 @@ def ask(url):
         return "no answer", ""
 
 
+def local_samples() -> dict:
+    """The preview's made-up Matched shifts as {id: updated_at}: what must never be listed anywhere else."""
+    from pymongo import MongoClient
+    client = MongoClient(os.environ["MONGO_URL"], serverSelectionTimeoutMS=5000)
+    try:
+        return {d["_id"]: d.get("updated_at") for d in client[os.environ["DB_NAME"]].matched_shifts.find({"sample": True}, {"updated_at": 1})}
+    finally:
+        client.close()
+
+
+PROD_NOTE = """<div class="box red" markdown="1">
+
+### Production on {{TODAY}}: its database is not the real one
+
+- The owner's Publish of 26 Nov 2026 (live at 14:40 UTC) was made from a **copy of the workspace**. It pointed production at a **copy of the preview's database** instead of production's own. (Read from the platform's own record of that Publish on 27 Nov 2026. No code of the app did this.)
+- So production now holds the preview's test data, and **lists the preview's %(count)s made-up sample shifts as published** (%(ids)s). Home's Matched card is on because of them. **They are not real shifts.** The website has published nothing: its Matched doors are not built (Part 3.7).
+- **The real production database was not deleted.** Putting it back is with the owner and the platform's support.
+- **Built on the app side on 27 Nov 2026:** a server that is not the workspace's own never shows a sample and never follows the samples' own switch, whatever its database holds (Part 2.12). It reaches production with the next Publish.
+- **Nothing for the website to do.** No student's `id` changed: the ids are the website's (Part 6).
+
+</div>"""
+
+
 def state():
     rows, facts = [], {}
-    status, body = ask(PRODUCTION + "/app/switches")
-    on = json.loads(body).get("matched") if status == 200 else None
-    rows.append(("The app's server in production: `GET /api/app/switches`", f'{status}, `"matched": {json.dumps(on)}`' if status == 200 else status,
-                 "Home shows the All India series card; no Matched bar on the sign-in screen" if on is False else "Home shows the Matched card" if on else "not read"))
+    samples = local_samples()
     status, body = ask(PRODUCTION + "/matched")
     data = json.loads(body) if status == 200 else {}
-    rows.append(("The app's server in production: `GET /api/matched`", f'{status}, {len(data.get("shifts", []))} shifts, {data.get("total", 0)} questions' if status == 200 else status,
-                 "no shift is published in production" if status == 200 and not data.get("shifts") else "shifts are published" if status == 200 else "not read"))
+    listed = data.get("shifts", [])
+    leaked = [s["id"] for s in listed if s.get("id") in samples and s.get("updated_at") == samples[s["id"]]]
+    real = len(listed) - len(leaked)
+    switch_status, body = ask(PRODUCTION + "/app/switches")
+    on = json.loads(body).get("matched") if switch_status == 200 else None
+    rows.append(("The app's server in production: `GET /api/app/switches`", f'{switch_status}, `"matched": {json.dumps(on)}`' if switch_status == 200 else switch_status,
+                 "Home shows the All India series card; no Matched bar on the sign-in screen" if on is False
+                 else "Home shows the Matched card, **only because of the preview's samples** (Part 0.2)" if on and leaked and not real
+                 else "Home shows the Matched card" if on else "not read"))
+    rows.append(("The app's server in production: `GET /api/matched`", f'{status}, {len(listed)} shifts, {data.get("total", 0)} questions' if status == 200 else status,
+                 "not read" if status != 200
+                 else f"**{len(leaked)} of them are the preview's made-up samples, not real shifts** (Part 0.2); " + (f"{real} real shifts are published" if real else "no real shift is published") if leaked
+                 else "shifts are published" if listed else "no shift is published in production"))
+    facts["MATCHED_PROD"] = (f"In production **no real shift** is published; on {TODAY} it wrongly lists the preview's {len(leaked)} made-up samples (the red box under this table)" if leaked and not real
+                             else "In production shifts are published" if listed else "In production the list is **empty** and the card is **off**")
+    facts["CARD_PROD"] = ("**On in production, wrongly:** switched on by the preview's samples and by the samples' own switch, which came with them. With them gone it is off until the first real shift is published, "
+                          "and on from **{{CARD_DAY}}** (India time) at the latest" if leaked and not real
+                          else "**On in production**" if on
+                          else "**Off in production:** no shift is published. They come on by themselves **when the first shift is published**, and on **{{CARD_DAY}}** (India time) at the latest")
+    facts["CARD_WAITS"] = "the real database put back, or the next Publish (the red box under this table); then the first published shift (Part 2.6)" if leaked and not real else "the first published shift (Part 2.6)"
+    facts["PROD_NOTE"] = PROD_NOTE % {"count": len(leaked), "ids": ", ".join(f"`{i}`" for i in sorted(leaked))} if leaked else ""
+    facts["OWNER_PROD_LINE"] = ("**Sabse zaroori (production, {{TODAY}}):** 26 Nov ke Publish (14:40 UTC) ne production ko **preview ke database ki copy** par chala diya. Isliye students ko abhi preview ka test data dikh raha hai, "
+                                f"aur Matched mein **{len(leaked)} banawati (sample) shifts** asli ki tarah dikh rahe hain. Asli database delete nahi hua; use wapas lagwana platform support ka kaam hai (Part 0.2 ka laal box). "
+                                "App side par 27 Nov ko rok laga di gayi hai: workspace ke bahar sample kabhi nahi dikhega (agle Publish se)." if leaked
+                                else "**Production:** is book ke bante waqt wahan koi banawati (sample) shift nahi mila.")
+    facts["SAMPLES_PROD"] = ("**Production must have none of this. On {{TODAY}} it wrongly has it** (Part 0.2): a Publish made from a copy of the workspace pointed production at a copy of the preview's database, samples and switch included."
+                             if leaked else "**Production has none of this** (checked, Part 3.7).")
+    facts["OPEN_PROD"] = ("| 9 | **Production's database** (Part 0.2): putting the real one back; and how to publish from a copy of the workspace without changing the database | "
+                          "with the owner and the platform's support. Until then production runs on a copy of the preview's database |" if leaked else "")
     status, _ = ask(PRODUCTION + "/choice/bank")
     rows.append(("The app's server in production: `GET /api/choice/bank`, signed out", status, "the door is there, for signed-in students only" if status == 401 else "not as expected"))
     for path, what in (("matched", "Matched: the list of shifts"), ("matched/2027-01-25-s1", "Matched: one shift"), ("choice/bank?exam=jee-main", "Student Choice: door A (asked signed out here; a signed-in student got 404 on 26 Nov 2026)")):
@@ -230,9 +278,22 @@ def state():
     status, body = ask(PRODUCTION + "/arena")
     live = re.search(r"entry-[0-9a-f]+\.js", body) if status == 200 else None
     built = re.search(r"entry-[0-9a-f]+\.js", (BACKEND / "arena_web" / "index.html").read_text())
+    newest = bool(live and built and live[0] == built[0])
     rows.append(("The app's server in production: `GET /api/arena` (Rapid Fire in a browser, Part 5)", status,
-                 "the newest copy is live" if live and built and live[0] == built[0]
-                 else "an older copy is live; the copy built on the preview (with All India Rapid's Misfires tab) comes with the next Publish" if live else "not read"))
+                 "the newest copy is live" if newest
+                 else "an older copy is live; the copy built on the preview on 27 Nov 2026 comes with the owner's next Publish" if live else "not read"))
+    # Its icon font: git never carried the folder the build kept it in, so production answered 404 for it (Part 5.2).
+    font = next(m for m in (re.search(r'"/api/arena/(assets/node_modules/[^"]*MaterialDesignIcons\.[0-9a-f]+\.ttf)"', p.read_text(errors="replace"))
+                            for p in sorted((BACKEND / "arena_web" / "_expo" / "static" / "js" / "web").glob("*.js"))) if m)[1]
+    font_status, _ = ask(f"{PRODUCTION}/arena/{font}")
+    rows.append(("The app's server in production: the icon font of Rapid Fire in a browser", font_status,
+                 "the icons are drawn" if font_status == 200 else "**missing: its icons are empty boxes**, until the owner's next Publish (Part 5.2)" if font_status == 404 else "not read"))
+    facts["ARENA_COPY"] = ("**Works** in production, from the newest copy (built on 27 Nov 2026)" if newest
+                           else "**Works** in production, from the copy built on 26 Nov 2026 (with All India Rapid's \"Misfires\" tab; live since the Publish of that day). Built again on 27 Nov 2026 on the preview")
+    facts["ARENA_ICONS"] = ("Its icons are drawn in production" if font_status == 200
+                            else "**In production its icons are empty boxes** (the icon font never reached production; found and mended on the preview on 27 Nov 2026, Part 5.2)" if font_status == 404
+                            else "Its icon font in production could not be read when this book was built")
+    facts["ARENA_WAITS"] = "nothing; the website: a link (Part 5.3)" if newest and font_status == 200 else "the owner's next Publish; the website: a link (Part 5.3)"
     status, body = ask(WEBSITE + "/auth/session")
     try:
         session = json.loads(body) if status == 200 else {}
@@ -246,10 +307,39 @@ def state():
 
 
 def tests_line():
-    run = subprocess.run([sys.executable, "-m", "pytest", "tests/test_choice.py", "tests/test_matched.py", "tests/test_matched_sync.py", "-q"], cwd=BACKEND, capture_output=True, text=True)
+    run = subprocess.run([sys.executable, "-m", "pytest", "tests/test_choice.py", "tests/test_matched.py", "tests/test_matched_sync.py", "tests/test_samples_stay_home.py", "-q"],
+                         cwd=BACKEND, capture_output=True, text=True)
     passed = re.search(r"(\d+) passed", run.stdout)
-    assert run.returncode == 0 and passed, run.stdout[-800:]
+    assert run.returncode == 0 and passed and passed[1] == "29", run.stdout[-800:]  # 12 + 6 + 5 + 6, as Part 3.6 says
     return f"all {passed[1]} pass on {TODAY}"
+
+
+def doors_in_code():
+    """Every door of the website that the app's screens name outright, as "GET /attempts/<id>/results": read from the
+    app's own code (frontend/src and frontend/app), so that Part 7.2 cannot leave one out."""
+    call = re.compile(r"(?<![\w.])(api|apiRaw|apiBytes|post|put|del)\s*(?:<[^>(]*>)?\(\s*([`\"'])(/[^`\"']*)\2")
+    found = set()
+    for folder in ("src", "app"):
+        for f in sorted((ROOT / "frontend" / folder).rglob("*.ts*")):
+            source = f.read_text()
+            for m in call.finditer(source):
+                method = {"post": "POST", "put": "PUT", "del": "DELETE"}.get(m[1], "GET")
+                said = re.search(r"method:\s*[\"'](\w+)[\"']", source[m.end():m.end() + 160])
+                if m[1] in ("api", "apiRaw") and said:
+                    method = said[1]
+                path = re.sub(r"\$\{[^}]+\}", "<id>", m[3]).split("?")[0]
+                path = re.sub(r"(\.[a-z]{3})<id>$", r"\1", path)  # report.pdf${query}
+                found.add(f"{method} {path + '<id>' if path.endswith('/') else path}")
+    return sorted(found)
+
+
+def check_doors():
+    """Part 7.2 names every door found in the code, written the same way."""
+    part = (HERE / "parts" / "70_together.md").read_text()
+    code = doors_in_code()
+    missing = [d for d in code if f"`{d}`" not in part]
+    assert len(code) >= 40 and not missing, f"Part 7.2 does not name these doors of the app's code: {missing}"
+    return str(len(re.findall(r"^\| `(?:GET|POST|PUT|DELETE) /", part[part.index("## 7.2"):part.index("## 7.3")], flags=re.M)))
 
 
 def shots(line, as_html):
@@ -266,7 +356,8 @@ def text(as_html):
     facts_text, facts = ratio_facts(rows)
     state_table, state_facts = state()
     values = {"TODAY": TODAY, "NOW": f"{NOW:%H:%M} India time on {TODAY}", "TIME_TABLE": time_table(), "SPLIT_TABLE": split_table(), "CHAPTER_TABLE": chapter_table(rows),
-              "RATIO_FACTS": facts_text, "SHAPED_SHIFT": shaped_text(check_examples()), "STATE_TABLE": state_table, "TESTS_LINE": tests_line(), **facts, **state_facts}
+              "RATIO_FACTS": facts_text, "SHAPED_SHIFT": shaped_text(check_examples()), "STATE_TABLE": state_table, "TESTS_LINE": tests_line(), "DOOR_COUNT": check_doors(),
+              **facts, **state_facts}
     body = "# Part 0 — Read this first\n\n" + "\n\n".join((HERE / "parts" / f"{p}.md").read_text().strip() for p in PARTS) + "\n"
     body = re.sub(r"\{\{file:([^}]+)\}\}", lambda m: "```json\n" + (HERE / m.group(1)).read_text().strip() + "\n```", body)
     # Twice: a value may hold another one (the tests line holds the day).
@@ -292,7 +383,8 @@ def headings(body):
 
 LEAD = ("The app side's final hand-off to jeelive.ai. The app's two new features, Student Choice and Matched: what a student sees, "
         "what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen. "
-        "Then the three things that keep the website and the app one: Misfire, Rapid Fire in a browser, and one account. And what has not been checked yet.")
+        "Then the three things that keep the website and the app one: Misfire, Rapid Fire in a browser, and one account. "
+        "Then how the two sides work together: every door of the website the app uses, and how a change to one is agreed. And what has not been checked yet.")
 TITLE = "Student Choice, Matched, Misfire, Rapid Fire and one account"
 
 
@@ -314,6 +406,16 @@ README = f"""# {TITLE}: the website hand-off (v{VERSION}, {TODAY})
 For the JE Live website agent and the JE Live super admin. Written by the app side from the app's code on {TODAY}.
 Give the website agent `BOOK.md` (paste it into its chat) or the PDF. Nothing in it is a password, a key or a private link.
 
+New in version 4 (27 Nov 2026). A reader who has version 3 needs only the box "New in version 4" at the start of Part 0:
+- Where things stand after the owner's Publish of 26 Nov 2026 (Part 0.2), read when the book was built.
+- Rapid Fire in a browser (Part 5.2): in production its icons are empty boxes, because its icon font never reached
+  production. Found and mended on the app's preview on 27 Nov 2026; students get it with the owner's next Publish.
+  The website has nothing to do. The same new copy rests its decoration and celebrations on a slow device.
+- Part 7, working together: every door of the website the app uses (so that the website's own work never breaks the
+  app unseen), how the app's server reaches the website, how a change to a door is agreed, and the doors the app
+  already asks for.
+- Two more rules in Part 0.4 (25 and 26). A made-up sample is never shown outside the app's own workspace (Part 2.12).
+
 New in version 3 (the owner's later decisions of 26 Nov 2026):
 - Student Choice's colours: a dark-red top card like the result page's, glossy subject tabs (Physics red, Chemistry amber,
   Maths teal); the cards below stay white. A made paper's subject minutes now add up to its time (Parts 1.2 and 1.7).
@@ -321,7 +423,6 @@ New in version 3 (the owner's later decisions of 26 Nov 2026):
 - Part 5, Rapid Fire in a browser: the app's; the website only links to it. Its copy was built again with All India
   Rapid's "Misfires" tab. Rapid Fire's code was not changed.
 - Part 6, one account: sign up on the website or in the app, sign in on both; what the website must keep.
-The colours and the new browser copy are on the app's preview and reach students with the next Publish.
 
 New in version 2 (two decisions of the owner, 26 Nov 2026; both are on the app's preview and reach students with the next Publish):
 - A whole chapter test follows the 80 / 60 / 40 ratio and is never longer than three hours (Part 1.8).

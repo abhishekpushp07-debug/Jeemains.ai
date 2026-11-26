@@ -24,6 +24,7 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, HTTPException, Path
 
+import workspace
 from fast_json import FastJSONResponse
 from jl_transport import canonical_request
 from metadata_cache import MetadataCache
@@ -135,22 +136,29 @@ def shape_shift(doc):
             "updated_at": int(stamp) if isinstance(stamp, (int, float)) and not isinstance(stamp, bool) and stamp > 0 else 0, "items": items}
 
 
+def shown() -> dict:
+    """Which shifts may leave this server: the published ones. A made-up sample (`sample: true`, written by
+    tests/matched_sample.py for the owner's eyes) only on the workspace's own server: production never shows one,
+    whatever its database holds (workspace.py tells why)."""
+    return {"published": True} if workspace.own() else {"published": True, "sample": {"$ne": True}}
+
+
 async def load_index(db) -> dict:
     """Every published shift, newest first, without its questions."""
-    docs = await db.matched_shifts.find({"published": True}).sort("_id", -1).to_list(MAX_SHIFTS)
+    docs = await db.matched_shifts.find(shown()).sort("_id", -1).to_list(MAX_SHIFTS)
     shifts = [s for s in (shape_shift(d) for d in docs) if s]
     return {"total": sum(s["matched"] for s in shifts), "updated_at": max((s["updated_at"] for s in shifts), default=0),
             "shifts": [{k: v for k, v in s.items() if k != "items"} for s in shifts]}
 
 
 async def load_shift(db, shift_id: str):
-    doc = await db.matched_shifts.find_one({"_id": shift_id, "published": True})
+    doc = await db.matched_shifts.find_one({"_id": shift_id, **shown()})
     return shape_shift(doc) if doc else None
 
 
 async def load_paper(db, paper_id: str):
     """The shift whose real paper this is (the newest, should two name the same paper)."""
-    doc = await db.matched_shifts.find_one({"paper_id": paper_id, "published": True}, sort=[("_id", -1)])
+    doc = await db.matched_shifts.find_one({"paper_id": paper_id, **shown()}, sort=[("_id", -1)])
     shift = shape_shift(doc) if doc else None
     return shift if shift and shift["paper_id"] == paper_id else None
 
@@ -184,7 +192,8 @@ def make_router(db):
 # ---- When Home shows the Matched card -------------------------------------------------------------------------------
 _series = {"last": None, "loaded": False}  # the All India series' last day, as this process last knew it
 MODES = ("on", "off", "auto")
-CARD_META = "matched:card"  # rf_meta: {"_id": "matched:card", "value": "on" | "off" | "auto"}
+CARD_META = "matched:card"  # rf_meta: {"_id": "matched:card", "value": "on" | "off" | "auto", "by": who wrote it}
+CARD_BY = ("website", "owner")  # the website's super admin (sync_site), or the owner through the app side
 _owner = {"value": None, "read": float("-inf")}
 
 
@@ -222,11 +231,18 @@ def card_mode(owner, code: str) -> str:
     return owner if owner in MODES else code
 
 
+def card_word(row, own: bool):
+    """The word of the switch kept in Mongo. Outside the workspace only a word written by the website's super admin or
+    by the owner (`by`, CARD_BY) counts: the "on" that tests/matched_sample.py writes next to its made-up shifts must
+    never switch the card for students (26 Nov 2026: it reached production with a copy of the preview's database)."""
+    return row.get("value") if row and (own or row.get("by") in CARD_BY) else None
+
+
 async def _owner_mode(db):
     """The switch kept in Mongo (rf_meta, CARD_META), read again at most once a minute."""
     if time.monotonic() - _owner["read"] > 60:
-        row = await db.rf_meta.find_one({"_id": CARD_META}, {"value": 1})
-        _owner.update(value=row.get("value") if row else None, read=time.monotonic())
+        row = await db.rf_meta.find_one({"_id": CARD_META}, {"value": 1, "by": 1})
+        _owner.update(value=card_word(row, workspace.own()), read=time.monotonic())
     return _owner["value"]
 
 
@@ -345,7 +361,7 @@ async def sync_site(db, client) -> bool:
     if gone:
         await db.matched_shifts.update_many({"_id": {"$in": gone}, "source": "website"}, {"$set": {"published": False, "synced_at": now}})
     if data.get("card") in MODES:  # the super admin's switch for Home's card
-        await db.rf_meta.update_one({"_id": CARD_META}, {"$set": {"value": data["card"], "ts": now}}, upsert=True)
+        await db.rf_meta.update_one({"_id": CARD_META}, {"$set": {"value": data["card"], "ts": now, "by": "website"}}, upsert=True)
     return True
 
 

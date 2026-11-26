@@ -15,6 +15,8 @@ from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import workspace
 
 STEMS = {
     "Physics": ["A ball is thrown vertically up with speed $u$. The time it takes to come back to the thrower's hand is",
@@ -53,6 +55,8 @@ def docs():
 
 
 async def main(word: str):
+    if word == "show" and not workspace.own():  # a sample is never written into a database that is not the workspace's own
+        sys.exit("This database is not the workspace's own: samples are for the preview only. Nothing was written.")
     db = AsyncIOMotorClient(os.environ["MONGO_URL"])[os.environ["DB_NAME"]]
     if word == "show":
         for d in docs():

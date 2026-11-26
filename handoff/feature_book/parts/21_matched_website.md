@@ -110,7 +110,7 @@ Why point 12 of Part 0.4 matters: when a shift's own `updated_at` and the list's
 | the phone, or a cache on the way, holds the answer | 1 minute |
 | **together** | **usually within 3 minutes, about 5 at the outside**. The student sees it on opening the page, on coming back to it, or on pulling it down |
 
-Only shifts that came from the website are ever hidden by the copy. A shift written into the app's database by hand (as the preview's samples are) is shown and left alone, unless the website publishes a shift with the same id: then the website's shift takes its place.
+Only shifts that came from the website are ever hidden by the copy. A shift written into the app's database by hand (as the preview's samples are) is left alone, unless the website publishes a shift with the same id: then the website's shift takes its place. **A sample is shown only by the app's own preview** (Part 2.12): a server in production never lists one.
 
 ## 2.6 Home's card and the sign-in bar: when they are on
 
@@ -124,13 +124,13 @@ One switch decides both: Home's Matched card (in the All India series card's pla
 
 **The All India series while Matched has its place.** For the series' remaining days it is a bar right under the Matched card (Part 2.2, picture 10). There is no switch for the bar: the app shows it while the series' own `today` is not past its `last_date` (both from `GET /api/series/all-india-jee`), and drops it the day after. If the website moves the series' last day, the bar and the card's latest day move with it.
 
-**Where this rule is.** The first-shift rule and the bar were built on 26 Nov 2026 and are on the app's preview. **Production gets them with the owner's next Publish of the app.** Until then production's `auto` still means only "from {{CARD_DAY}}", and the switch `on` would be needed to show Matched earlier. Before the exam session, ask the app side to confirm that production has the rule.
+**Where this rule is.** The first-shift rule and the bar were built on 26 Nov 2026. **The rule is in production's server since the owner's Publish of that day** (live at 14:40 UTC); the bar is a screen, and a phone shows it with an app build made after that Publish. Before the exam session, ask the app side to confirm on production that publishing a shift turns the card.
 
 **Who holds the switch,** strongest first:
 
 1. **The super admin, through the website:** `card` in the list door (Part 2.4c). When the website sends it, the app's server takes it over on every pass (every 2 minutes).
-2. **The last word written in the app's database** (the row `matched:card`). It stays in force when the website sends no `card`. The app side can write it by hand; a `card` from the website overwrites it within 2 minutes.
-3. **The word in the app server's code:** `auto`. Used when nothing else is set. That is production's state on {{TODAY}}.
+2. **The last word written in the app's database** (the row `matched:card`). It stays in force when the website sends no `card`. The app side can write it by hand, signed `by: "owner"`; a `card` from the website overwrites it within 2 minutes. **A word that nobody signed counts only on the app's own preview** (the samples' switch is such a word, Part 2.12): in production it is passed over.
+3. **The word in the app server's code:** `auto`. Used when nothing else is set, which is how production is meant to run.
 
 **How fast a phone follows:** the app's server learns the switch within about 3 minutes, and a newly published shift within about 5. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.
 
