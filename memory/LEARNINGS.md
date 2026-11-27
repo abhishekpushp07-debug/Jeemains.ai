@@ -20,3 +20,11 @@
 - `/root/p2` (scratch logs, runner scripts) is outside the repo. The runner scripts are copied to `backend/tests/runners/`; the logs that matter go to `test_reports/`.
 - Write a code review's result into a file as soon as it arrives; one answer was cut off by the tool and a "medium" point was lost for hours.
 
+
+## 2026-11-27: the long chain aborted the preview MongoDB seven times (the builder's own miss)
+- What happened: `tests/runners/n1_chain.sh` (54 suites, one at a time) was started without raising mongod's open-file limit. mongod aborted at 13:13, 13:14, 13:15, 13:19, 13:22, 13:23 and 13:24 UTC ("Too many open files") and supervisor restarted it each time within 2 seconds. The limit had fallen back to 1024 after a pod restart.
+- Effect on the tests: `publish_progress_iso217` failed 4 of 5 inside that chain with "connection closed"; alone it passed 5/5 twice. Any other result of that first run is less trustworthy for the same reason, so the chain was run again with the limit raised (14:47–15:00 UTC): no abort, 1,918 checks, 1,898 pass, 20 fail, the 20 old lines only.
+- The app's own preview database afterwards: students 2, sets 252, attempts 8, staff 1; `validate` passed on tejas_sets, tejas_attempts, tejas_phone_profiles, tejas_users, tejas_sessions. Nothing was lost.
+- Fix: `tests/runners/solo.sh` (and its copy /root/p2/solo.sh) now raises the limit itself (`prlimit … --nofile=65536:1048576`) before it starts anything. Always start suites through solo.sh.
+- Two throw-away databases are still there from older failing suites (`tejas_isolated_book170_19f082e9`, `tejas_isolated_window177_66e69d`). Not dropped: that needs the owner's word.
+
