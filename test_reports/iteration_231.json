@@ -1,0 +1,58 @@
+{
+  "summary": "Pocket C1b verification: ran the chain `solo.sh c1b_fix.sh question_names_edge258 question_names256 ui_links255 ui_names257` (STEP 1). All four isolated suites passed, FIXDONE at 02:39:47. Real DB untouched (0 question records, 0 Chapter-names audits, only the two older isolated databases remain). No stray processes after FIXDONE. Read-only code review of question_records.py (show / names_mark / chapter_names / names_from / _name) and analysis_api.py load() + analysis_pdf.py Sheet.text/row/chapter table completed; all six invariants (a)-(f) hold. Screenshots on desktop and 390 px look clean: no clipped text, overlap or broken layout.",
+  "totals_from_c1b_fix_log": {
+    "question_names_edge258": "TOTAL 22 PASS 22 FAIL 0 (exit 0)",
+    "question_names256": "TOTAL 19 PASS 19 FAIL 0 (exit 0)",
+    "ui_links255": "TOTAL 17 PASS 17 FAIL 0",
+    "ui_names257": "TOTAL 16 PASS 16 FAIL 0",
+    "FIXDONE": "02:39:47"
+  },
+  "post_run_safety_check": {
+    "pgrep_python_tests_or_bridge": "empty (no leftovers)",
+    "tejas_question_records_count": 0,
+    "tejas_audits_chapter_names_count": 0,
+    "tejas_isolated_databases": ["tejas_isolated_book170_19f082e9", "tejas_isolated_window177_66e69d"]
+  },
+  "code_review_answers": {
+    "a_no_write_on_noop_press": "HOLDS. tejas/question_records.py:259-267 (show). The conditional filter {'show_chapters': {'$ne': True}} for On (with upsert=True) / {'show_chapters': True} for Off (no upsert), combined with DuplicateKeyError catch at line 263, guarantees modified_count==0 and upserted_id is None for an idempotent press, so `changed` stays False and neither the audit() call (line 267) nor the $set of show_at/show_by runs again. show_at is set only inside the conditional update so it cannot be bumped by a no-op.",
+    "b_no_half_state_on_concurrent_presses": "HOLDS. On+On concurrent: first wins the $ne:True filter and sets show_chapters=True; second's filter no longer matches, upsert=True with same _id yields DuplicateKeyError which is caught (line 263) -> changed=False. Off+Off: both match show_chapters:True; first flips it, second modifies 0 (filter no longer True) -> changed=False. On+Off: last writer wins; each writer either sees modified_count==1 (legit flip, audit) or 0 (no-op); no partial document because $set is atomic and the doc only carries show_chapters/show_at/show_by. No 500 observed in suites; DuplicateKeyError handled.",
+    "c_no_write_to_attempt_pack_set_ledger_score": "HOLDS. analysis_api.py:97-101 (load): names applied only to in-memory `q['topic']` of the questions list that is zlib-compressed into the analysis cache doc (line 115). Nothing is written to tejas_attempts / tejas_sets / tejas_packs / ledger / score. score_attempt is called on `graded` (line 96) before the topic label is applied, so even the cached score is independent of the switch.",
+    "d_cache_mark_identical_when_off": "HOLDS. names_mark returns '' when show_chapters is falsy (question_records.py:278). analysis_api.py:90 then does `mark = [...] + (['jod:' + jod] if jod else [])`, i.e. an empty jod DOES NOT append any 'jod:' element, so the mark list is byte-identical to the pre-C1b mark. Cached rows written before C1b remain hits.",
+    "e_practice_or_chapterwise_attempt_untouched": "HOLDS. analysis_api.py:89 guards with `if a.get('series_id')`. A practice / chapter-wise attempt has no series_id -> jod='' -> no chapter_names call, no topic relabel, mark unchanged.",
+    "f_pdf_prints_chapter_name_as_plain_text": "HOLDS. analysis_pdf.py Sheet.row (107-116) renders cells via self.text; Sheet.text (55-63) uses MuPDF insert_text for latin-1 (no HTML parsing) and insert_htmlbox with html.escape(s) for non-latin1 (Hindi) names. Chapter-table row at line 349 and weak-chapter bar at 346-347 feed c['name']/g['name'] into these routines. No raw HTML injection possible; output is plain text."
+  },
+  "screenshot_review": {
+    "ui257/desk_switch_on.jpg": "Toast 'On: AITS ke analysis mein chapter ke naam dikhenge', red switch ON state, Jod box aligned; no clipping or overlap.",
+    "ui257/desk_on_weak.jpg": "Performance 'Marks kis chapter se gaye' section with Redox Reactions bar; red bar, -5 label; layout correct.",
+    "ui257/mob_on_chapters.jpg": "Mobile 390 px chapter-wise table scrollable (Chapter / Sawaal / Sahi / Galat columns fit); nothing clipped.",
+    "ui257/mob_off.jpg": "Off state: 'Is paper ke sawaalon par chapter ka tag nahi hai...' empty state rendered correctly; tab bar not overlapping copy.",
+    "ui255/desk_made.jpg": "Toast 'Jod ban gaya: 166 record, 2 dono jagah jude'; switch below off; counts tiles aligned.",
+    "ui255/mob_done.jpg": "Mobile Jod view: toast visible, record tiles stacked; no overflow."
+  },
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/root/p2/c1b_fix.log",
+    "/root/p2/c1b_fix_question_names_edge258.log",
+    "/root/p2/c1b_fix_question_names256.log",
+    "/root/p2/ui255.log",
+    "/root/p2/ui257.log",
+    "/app/.screenshots/ui255/",
+    "/app/.screenshots/ui257/"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "question_records.show() correctly handles idempotent presses via a conditional filter + DuplicateKeyError catch; no audit/show_at churn on no-ops (invariant verified in question_names_edge258 pass).",
+    "analysis_api.load() mark concatenation only adds 'jod:<hash>' when the switch is On; empty jod does not perturb pre-C1b cache keys. Good.",
+    "The C1b label is applied strictly in-memory on cached analysis questions; score_attempt runs before the overlay. Clean separation.",
+    "analysis_pdf.Sheet.text uses html.escape for the rich-text fallback path, so chapter names containing HTML-like characters render as literal text in the PDF. No injection surface."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (41/41 backend checks across edge258+names256)", "frontend": "100% (33/33 across ui_links255+ui_names257)"},
+  "test_credentials": "Not used. Each isolated suite creates its own owner/reviewer/student inside a disposable tejas_isolated_* DB (per /app/memory/test_credentials.md top block).",
+  "seed_data_creation": "None in the real DB. Each suite creates and drops its own tejas_isolated_* DB.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Pocket C1b is green: edge258 22/22, names256 19/19, ui_links255 17/17, ui_names257 16/16, FIXDONE 02:39:47. Real DB clean (0/0 and only the two legacy isolated DBs tejas_isolated_book170_19f082e9 / tejas_isolated_window177_66e69d remain). No application code was modified by this run. If a new regression lands, rerun the same chain through /root/p2/solo.sh; never start suites directly.",
+  "rca of the issue": "N/A – no defect reproduced; suites and code review both pass."
+}
