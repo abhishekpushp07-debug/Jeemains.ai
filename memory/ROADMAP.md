@@ -1,3 +1,6 @@
+## 2026-11-27, night (owner, talk only): TAGS CHANGED from 10 to 20. AI scores every question (AITS and the 2027 papers) on the same 20 tags, each 0–100. Matched has two gates: (1) the same concept mixture, (2) more than 70% match. Builder gave a proposed 20-tag list, a match formula and an Excel format (Tag list / Sawaal / Jodi sheets). The owner will send judged examples; only then is the formula fixed. One AITS upload is enough (AI reads the stored records later; chapter-wise and Student Choice get the same card through Jod). The 2027 upload place (memory-based + NTA) is NOT built (Matched H4).
+
+
 ## 2026-11-27, night (owner, talk only): Student Choice is to be built TODAY ("App jaisa poora"), Matched later. Wait for the owner's logic text, talk the plan through, build only on his go. Misfire checked by reading the app code: the app reads the website's own /api/my/misfire, /my/misfire/summary, /my/chapters through its pass-through proxy (/api/jl), so one account = one Misfire (not tested on a phone).
 
 
