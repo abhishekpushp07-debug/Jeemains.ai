@@ -46,6 +46,10 @@
   "saved" answer (`social.name_kept`, `chosen_name`) and Rapid Fire shows the same name. **Not built, owner said later:**
   a Class 11 random mock / AITS mock from chapters. **Tests must never delete or drop in MongoDB** (owner's rule):
   `test_chosen_name.py` shows how (fixed TEST- players, reset by update). Details: last section of `memory/PRD.md`.
+- **Note for the website agent (27 Nov, night):** `memory/WEBSITE_NAME_CLASS_NOTE.md`, given to the owner in chat
+  (pasted to the website project or not: unknown). Asks: `display_name` in `auth/me` (our server already reads it, no
+  app update), `class_level` on chapter rows + `per_page` (small app change when they exist, not made), two test
+  students, the open list of the book, load questions. The Class 11 mock is in it as "not asked for yet".
 
 ---
 
