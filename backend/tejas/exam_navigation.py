@@ -14,6 +14,8 @@ PAGE_SIZE = 12
 
 
 def classify_set(s):
+    if s.get('test_kind') == 'choice':
+        return 'choice'
     if s.get('test_kind') == 'pyq':
         return 'pyq'
     if s.get('chapter_book_id') or s.get('test_kind') == 'chapter':

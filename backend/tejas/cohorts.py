@@ -61,7 +61,7 @@ def identity(a):
     return str(uuid.uuid5(uuid.NAMESPACE_URL,'jeemains-cohort:'+json.dumps(data,sort_keys=True,default=str)))
 
 async def record(a,ledger):
-    if a.get('mode')!='practice' or a.get('status')!='completed' or not ledger:return False
+    if a.get('mode')!='practice' or a.get('status')!='completed' or not ledger or a.get('test_kind')=='choice':return False
     # Owner and reviewer practice runs are checks, not students: they never enter student statistics.
     if await db.tejas_users.find_one({'id':a['user_id']},{'_id':1}):return False
     if a.get('competition_end'):
@@ -165,6 +165,7 @@ async def read(id:str,bg:BackgroundTasks,score_version:str='original',u=Depends(
     if retry:
         a=await owned(a['parent_attempt'],u)
     if a.get('mode')!='practice':return CohortResponse(state='unavailable',reason='This peer comparison is for original practice attempts; competition standings remain separate.')
+    if a.get('test_kind')=='choice':return CohortResponse(state='unavailable',reason='Is test par Rank nahi banta.')
     if u.get('access_type')!='unverified_phone':return CohortResponse(state='unavailable',reason='Staff practice attempts are kept out of student statistics, so they have no peer rank.')
     if not a.get('ledger'):return CohortResponse(state='preparing',reason='Your frozen scoring ledger is still being prepared.')
     if not a.get('cohort_indexed'):await record(a,a['ledger'])

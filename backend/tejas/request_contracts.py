@@ -24,6 +24,31 @@ class EmptyPayload(Payload):
     pass
 
 
+class ChoicePaperPayload(Payload):
+    """Door C of Student Choice; the business checks (and their plain sentences) live in choice.make_paper."""
+    exam: str = Field(max_length=40)
+    request_key: str = Field(min_length=1, max_length=200)
+    mode: str = Field(max_length=20)
+    question_ids: list[Annotated[str, Field(max_length=120)]] | None = Field(default=None, max_length=400)
+    count: int | None = Field(default=None, ge=-100000, le=100000)
+
+
+class ChoiceMinutes(Payload):
+    Physics: float
+    Chemistry: float
+    Mathematics: float
+
+
+class ChoiceSettingsPayload(Payload):
+    expected_revision: int = Field(ge=0, le=2**62)
+    pick: bool
+    random: bool
+    max_questions: int = Field(ge=-1000, le=1000)
+    max_per_subject: int | None = Field(default=None, ge=-1000, le=1000)
+    minutes_per_question: ChoiceMinutes
+    daily_limit: int = Field(ge=-1000, le=1000)
+
+
 class CompareAttemptsPayload(Payload):
     left: Identity
     right: Identity
@@ -392,6 +417,7 @@ class EventPayload(Payload):
 
 
 MODELS.update({'activity.record_event': EventPayload, 'contacts.save_contacts': ContactsPayload})
+MODELS.update({'choice.make_paper': ChoicePaperPayload, 'choice.owner_save': ChoiceSettingsPayload})
 from .book_delete import DeleteUpload  # noqa: E402
 MODELS['book_delete.delete_upload'] = DeleteUpload
 from .question_records import ShowChapters  # noqa: E402

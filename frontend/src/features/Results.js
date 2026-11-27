@@ -350,7 +350,7 @@ function ResultsView() {
       </section>
       {view==='progress'&&<JourneyView data={meters.journey} retry={meters.retry}/>}
       {view==='accuracy'&&<ConfidenceView data={meters.journey} retry={meters.retry} latestAccuracy={s.accuracy}/>}
-      {view==='rank'&&(r.exam==='BITSAT'?<BitsatBranchView key={`${id}-${scoreVersion}`} data={meters.rank} retry={meters.retry}/>:<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>)}
+      {view==='rank'&&(r.test_kind==='choice'?<section className="result-view-panel result-choice-no-rank" data-testid="result-choice-no-rank"><Trophy size={22}/><h2>Is test par Rank nahi banta</h2><p>Student Choice ka paper aapka apna hai, har student ka alag. Isliye ispe rank ya class se tulna nahi hoti, aur yeh Dream College meter mein full mock nahi ginta. Score, analysis aur solutions poore milte hain.</p></section>:r.exam==='BITSAT'?<BitsatBranchView key={`${id}-${scoreVersion}`} data={meters.rank} retry={meters.retry}/>:<HistoricalRankView data={meters.rank} cohort={extras.cohort} retry={meters.retry}/>)}
       {view === 'solutions' && <section className="result-view-panel" data-testid="result-solutions-panel" aria-label="Question solutions">
       <SolutionNavigator subjects={subjects} subject={activeSubject} questions={qs} allQuestions={allQuestions} filter={filter} selected={activeQuestion?.id} onSubject={chooseSubject} onQuestion={openQuestion} tags={analysis.data?.copy?.tags}/>
       <div className="review-heading" id="results-review-heading">

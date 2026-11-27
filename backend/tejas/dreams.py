@@ -13,7 +13,7 @@ FULL = {'jee': 300, 'bitsat': 390, 'comedk': 180}
 FULL_QUESTIONS = {'jee': 75, 'bitsat': 130, 'comedk': 180}
 GOOD_PCT = 40
 FIELDS = {'_id': 0, 'id': 1, 'title': 1, 'exam': 1, 'count': 1, 'summary.score': 1, 'summary.maximum': 1, 'submitted_at': 1,
-          'series_id': 1, 'competition_end': 1, 'mode': 1}
+          'series_id': 1, 'competition_end': 1, 'mode': 1, 'test_kind': 1}
 
 
 def exam_of(name):
@@ -23,7 +23,8 @@ def exam_of(name):
 
 def is_full(exam, a):
     s = a.get('summary') or {}
-    return bool(exam) and (s.get('maximum') or 0) >= FULL[exam] / 2 and (a.get('count') or 0) >= FULL_QUESTIONS[exam] * 0.9
+    # A chapter test and a Student Choice paper never count as a full mock (owner's rule, app book Part 1.9).
+    return bool(exam) and a.get('test_kind') not in ('chapter', 'choice') and (s.get('maximum') or 0) >= FULL[exam] / 2 and (a.get('count') or 0) >= FULL_QUESTIONS[exam] * 0.9
 
 
 def scaled(exam, raw, top):

@@ -67,9 +67,12 @@ async def report_wrong(id: str, qid: str, data: QuestionReportPayload, u=Depends
         raise HTTPException(403, 'Only question or display issues can be reported before results are released.')
     rid = str(uuid5(NAMESPACE_URL, f"question-report:{u['id']}:{id}:{qid}"))
     from .manual_solutions import fingerprint
-    r = QuestionReport(id=rid, user_id=u['id'], attempt_id=id, set_id=a['set_id'], question_id=qid,
-        number=q['number'], title=a['title'], exam=a['exam'], version=a['version'], category=data.category,
-        context=data.context, note=data.note.strip(), created_at=now(), source_hash=fingerprint(q))
+    from .choice import source_of
+    src = source_of(q)  # a Student Choice question is reported on the chapter test it came from
+    set_id, question_id, number, version = src if src else (a['set_id'], qid, q['number'], a['version'])
+    r = QuestionReport(id=rid, user_id=u['id'], attempt_id=id, set_id=set_id, question_id=question_id,
+        number=number or q['number'], title=a['title'], exam=a['exam'], version=version or a['version'], category=data.category,
+        context=data.context, note=data.note.strip(), created_at=now(), source_hash=fingerprint({**q, 'id': question_id}))
     try:
         await reports.insert_one(r.to_mongo())
     except DuplicateKeyError:

@@ -40,7 +40,7 @@ async def hints_for(set_id):
 
 async def record(a, t=None, touch=True):
     """Keep this student's first released attempt on the paper as short codes. Safe to call again. Returns the class id."""
-    if a.get('mode') not in MODES or a.get('status') != 'completed' or not a.get('ledger'):
+    if a.get('mode') not in MODES or a.get('status') != 'completed' or not a.get('ledger') or a.get('test_kind') == 'choice':
         return None
     if a.get('competition_end', 0) > (now() if t is None else t):
         return None

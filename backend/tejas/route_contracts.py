@@ -274,6 +274,13 @@ SPEC = {
     'contacts.list_contacts': ('own_student_picked_contacts', 'normal', 'read'),
     'contacts.save_contacts': ('own_student_picked_contacts_consented', 'normal', 'upsert_by_phone'),
     'contacts.remove_contact': ('own_student_picked_contacts', 'normal', 'idempotent_delete'),
+    'choice.bank': ('any_session_switches_only_no_personal_data', 'normal', 'read'),
+    'choice.chapter_questions': ('any_session_live_chapter_questions_no_options_keys_or_solutions', 'normal', 'read'),
+    'choice.choice_picture': ('public_signed_expiring_question_piece_no_options_keys_or_solutions', 'batch', 'read_immutable_cdn_cacheable'),
+    'choice.make_paper': ('own_student_paper_daily_quota', 'normal', 'idempotent_by_request_key'),
+    'choice.home': ('own_student_choice_page', 'normal', 'read'),
+    'choice.owner_view': ('owner_student_choice_settings', 'normal', 'read'),
+    'choice.owner_save': ('owner_student_choice_settings', 'normal', 'revision_checked_update'),
     'dreams.celebration': ('own_released_attempt_scores_only', 'normal', 'read'),
 }
 
@@ -331,7 +338,7 @@ def install_contracts(app):
             limit = 16 * 1024
         elif key in ('app_connect.dream_save', 'app_connect.dream_mocks', 'app_connect.dream_cheered'):
             limit = 64 * 1024
-        elif key == 'contacts.save_contacts':
+        elif key in ('contacts.save_contacts', 'choice.make_paper'):
             limit = 48 * 1024
         if key == 'book_imports.repair_page':
             limit = 512 * 1024

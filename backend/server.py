@@ -71,6 +71,7 @@ from tejas import (
     activity,
     contacts,
     series_insights,
+    choice,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -323,6 +324,7 @@ for module in [
     activity,
     contacts,
     series_insights,
+    choice,
 ]:
     app.include_router(module.router)
 

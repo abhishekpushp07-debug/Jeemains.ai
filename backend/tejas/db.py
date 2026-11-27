@@ -109,6 +109,10 @@ async def indexes():
     db, users, sessions, sets, attempts, files, jobs, audits = (SafeIndexes(g[n]) for n in ('db', 'users', 'sessions', 'sets', 'attempts', 'files', 'jobs', 'audits'))
     await db.tejas_books.create_index([('owner_id', 1), ('created_at', -1)])
     await db.tejas_step_hangs.create_index('at')
+    await db.tejas_choice_papers.create_index('id', unique=True)
+    await db.tejas_choice_papers.create_index([('user_id', 1), ('created_at', -1)])
+    await db.tejas_choice_papers.create_index([('exam_slug', 1), ('day', 1)])
+
     await db.tejas_books.create_index('deleting.at', sparse=True)
     await db.tejas_book_parts.create_index([('book_id', 1), ('number', 1)], unique=True)
     await db.tejas_book_pages.create_index([('book_id', 1), ('number', 1)], unique=True)

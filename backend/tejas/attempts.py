@@ -177,6 +177,9 @@ async def my_sets(exam: str = "", q: str = "", page: int = 1, u=Depends(current)
 async def my_set(id: str, u=Depends(current)):
     from .structure import hidden_from, path_for, visibility
     await visibility()
+    if not await sets.find_one({'id': id}, {'_id': 1}):
+        from .choice import paper_page
+        return await paper_page(id, u)
     s = await get(sets, id)
     if s["status"] != "published" or not permitted(s, u, at=await database_now()) or await hidden_from(s, u):
         raise HTTPException(404, "This set is not available to your account.")
@@ -188,7 +191,8 @@ async def preflight(id: str, data: dict, u=Depends(current)):
     from .papers import HEADER, paper
     s = await sets.find_one({'id': id}, HEADER)
     if not s:
-        raise HTTPException(404, "This item is unavailable or does not exist.")
+        from .choice import preflight_paper
+        return await preflight_paper(id, u, data)
     preview = data.get("preview") and u["role"] in ["owner", "reviewer"]
     t = await database_now()
     from .structure import hidden_from
@@ -227,6 +231,10 @@ async def start(id: str, data: Start, u=Depends(current)):
         return attempt_view(await expire(existing))
     from .papers import HEADER, paper, start_data
     s = await clocked_one(sets, {'id': id}, HEADER)
+    chosen = None
+    if not s:
+        from .choice import start_parts
+        s, chosen = await start_parts(id, u)
     if not s:
         raise HTTPException(404, 'This set is not available.')
     started_at = s.pop('_database_now')
@@ -251,7 +259,7 @@ async def start(id: str, data: Start, u=Depends(current)):
     from .structure import hidden_from
     if not preview and (s["status"] != "published" or not permitted(s, u, at=started_at) or await hidden_from(s, u)):
         raise HTTPException(404, "This set is not available to start.")
-    entry = await paper(s)
+    entry = chosen or await paper(s)
     if not preview:
         guard_start(s, started_at, early=u['role'] == 'owner')
         guard_live_start(s, started_at)

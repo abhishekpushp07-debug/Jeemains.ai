@@ -52,7 +52,8 @@ export default function SetDetail() {
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
   const autoStarted = useRef(false);
-  const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? seriesPath(s.series_id) : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
+  const choice = s?.test_kind === 'choice';
+  const returnTo = safeExamReturn(location.state?.returnTo, s ? choice ? '/choice' : s.series_id ? seriesPath(s.series_id) : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
     setS(null); setError('');
@@ -86,8 +87,8 @@ export default function SetDetail() {
   if (!s) return <div className="container page"><ErrorBox error={error} retry={() => setRetry(v => v + 1)} />{!error && <Loading />}</div>;
   return (
     <div className="container page set-detail set-simple" data-testid="set-detail-page">
-      <Link className="breadcrumb" data-testid="set-back" to={preview ? previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (previewBack ? 'Back to Master' : 'Back to Content Studio') : s.series_id ? 'Back to All India series' : 'Back to '+s.exam+' tests'}</Link>
-      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : s.series_id ? `${s.exam.toUpperCase()} · ALL INDIA TEST SERIES` : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Original supplied solutions unlock after you submit.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
+      <Link className="breadcrumb" data-testid="set-back" to={preview ? previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (previewBack ? 'Back to Master' : 'Back to Content Studio') : choice ? 'Back to Student Choice' : s.series_id ? 'Back to All India series' : 'Back to '+s.exam+' tests'}</Link>
+      <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : choice ? `${s.exam.toUpperCase()} · STUDENT CHOICE` : s.series_id ? `${s.exam.toUpperCase()} · ALL INDIA TEST SERIES` : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Original supplied solutions unlock after you submit.' : choice ? 'Aapka apna paper: JEE Main ke chapter-wise sawaal. Result, analysis aur solutions har paper ki tarah milenge. Is test par Rank nahi banta.' : s.source} action={!preview&&user&&!choice?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       <SeriesNote s={s} />
       <Card className="card set-start-card" data-testid="set-instructions">

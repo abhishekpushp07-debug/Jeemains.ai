@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink,Navigate,Route,Routes,useLocation,useSearchParams} from 'react-router-dom';
-import {LayoutGrid,Archive,UsersRound,ShieldCheck} from 'lucide-react';
+import {LayoutGrid,Archive,UsersRound,ShieldCheck,ListChecks} from 'lucide-react';
 import {useAuth} from '../../lib/auth';
 import MasterHome from './master/MasterHome';
 import MasterExam from './master/MasterExam';
@@ -13,12 +13,13 @@ import ChapterSplit from './master/ChapterSplit';
 import AdminStudents from './AdminStudents';
 import AdminTeam from './AdminTeam';
 import AdminLibrary from './AdminLibrary';
+import AdminChoice from './AdminChoice';
 import BookPublishing from '../BookPublishing';
 import {StorageBadge} from '../../components/master/StorageBadge';
 import {useNoIndex,usePageTitle} from '../../lib/pageMeta';
 import '../../book-publishing.css';
 
-const LINKS=[['library','Library',Archive],['students','Students',UsersRound],['team','Team',ShieldCheck]];
+const LINKS=[['library','Library',Archive],['students','Students',UsersRound],['team','Team',ShieldCheck],['choice','Student Choice',ListChecks]];
 
 function BookRepair(){
  const [params]=useSearchParams();
@@ -54,6 +55,7 @@ export default function AdminWorkspace(){
     <Route path="library" element={gate(<AdminLibrary/>)}/>
     <Route path="students" element={gate(<AdminStudents/>)}/>
     <Route path="team" element={gate(<AdminTeam/>)}/>
+    <Route path="choice" element={gate(<AdminChoice/>)}/>
     <Route path="*" element={<Navigate to="/super-admin" replace/>}/>
    </Routes>
   </section>

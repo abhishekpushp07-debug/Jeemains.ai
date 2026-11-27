@@ -175,6 +175,7 @@ async def seal(questions):
                 "disposition",
                 "accepted_answers",
                 "source_option_labels", "source_warning", "source_evidence", "pairing_evidence", "typed_options", "c_refs",
+                "source_set_id", "source_question_id", "source_number", "source_version", "source_section",  # Student Choice copies only
             }
         }
         for q in questions

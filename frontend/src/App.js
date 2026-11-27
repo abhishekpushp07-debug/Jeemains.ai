@@ -41,6 +41,7 @@ import './series-app.css';
 const Rank = lazy(() => import('./features/Rank'));
 const Mission = lazy(() => import('./features/Mission'));
 const Misfire = lazy(() => import('./features/Misfire'));
+const StudentChoice = lazy(() => import('./features/StudentChoice'));
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const SeriesAnalysis = lazy(() => import('./features/SeriesAnalysis'));
@@ -172,6 +173,7 @@ function Shell() {
             <Route path="/rank" element={<Rank />} />
             <Route path="/mission" element={<Protected><Mission /></Protected>} />
             <Route path="/misfire" element={<Protected><Misfire /></Protected>} />
+            <Route path="/choice" element={<Protected><StudentChoice /></Protected>} />
             <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
             <Route path="/login" element={<Auth />} />
