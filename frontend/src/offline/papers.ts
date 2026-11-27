@@ -139,7 +139,8 @@ export async function keepAiCopy(id: string, data: any): Promise<void> {
 async function finished(signal: AbortSignal): Promise<Listed[] | null> {
   const out: Listed[] = [];
   for (let page = 1, pages = 1; page <= pages && page <= MAX_PAGES; page++) {
-    const d = await api<{ items?: Listed[]; pages?: number }>("/my/tests?" + new URLSearchParams({ tab: "completed", page: String(page), q: "", status: "all", exam: "" }), { signal });
+    // per_page=100: one page when the website honours it (asked in our note of 27 Nov); 12 a page as before when not.
+    const d = await api<{ items?: Listed[]; pages?: number }>("/my/tests?" + new URLSearchParams({ tab: "completed", page: String(page), q: "", status: "all", exam: "", per_page: "100" }), { signal });
     if (!d || !Array.isArray(d.items)) return null;
     pages = Number(d.pages) || 1;
     // Finished only (the same reading as the Tests tab and PYQ): never a paper that can still be resumed.

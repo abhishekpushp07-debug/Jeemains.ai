@@ -20,6 +20,7 @@ CEO_KIT_TYPE = "ceo-dashboard-handoff-zip"
 BOOK_PDF_TYPE = "choice-matched-book-pdf"
 BOOK_ZIP_TYPE = "choice-matched-book-zip"
 BOOK_MD_TYPE = "choice-matched-book-md"
+WORK_LIST_TYPE = "website-work-list-md"
 BOOK = "JEELIVE_Student_Choice_and_Matched_Book"
 # .md goes out as plain bytes so a browser saves the file instead of opening it as a page.
 MEDIA_TYPES = {".pdf": "application/pdf", ".zip": "application/zip", ".md": "application/octet-stream"}
@@ -33,6 +34,7 @@ ARTIFACTS = {
     BOOK_PDF_TYPE: (ROOT / "handoff" / "feature_book" / f"{BOOK}.pdf", f"{BOOK}.pdf", 168),
     BOOK_ZIP_TYPE: (ROOT / "handoff" / f"{BOOK}.zip", f"{BOOK}.zip", 168),
     BOOK_MD_TYPE: (ROOT / "handoff" / "feature_book" / "BOOK.md", f"{BOOK}.md", 168),
+    WORK_LIST_TYPE: (ROOT / "handoff" / "website_work" / "JEELIVE_Website_Work_List.md", "JEELIVE_Website_Work_List.md", 168),
 }
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}

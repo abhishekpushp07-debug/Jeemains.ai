@@ -8,6 +8,11 @@
 5. Never crash; always ultra-fast.
 6. Take care of everything; do not rush; make it perfect.
 
+## One place for all website work + Student Choice status (28 Nov 2026, later)
+- Owner: "list ab 100 ek saath maangti hai - ha ye acha hai aise hi banao"; asked whether Student Choice is 100% done, and for ONE place listing what the website must build for the app and for its own test-taking students.
+- Built: `handoff/website_work/JEELIVE_Website_Work_List.md` (Part A: 15 items for the app with live status of 28 Nov; Part B: 6 items for website students; Part C: 8 owner decisions). Owner download type `website-work-list-md` in `backend/owner_downloads.py` (link issued, 7 days; never written into files). `src/offline/papers.ts` now also sends `per_page=100` on `/my/tests?tab=completed` (harmless when ignored).
+- Live 28 Nov (reads only, `tests/website_doors_peek.py`): choice/bank 404, choice/chapters 404, matched 404, series leaderboard + my-days 404, all 81 chapter tests 60 min, no class_level, no display_name, no test_kind on my/tests rows. Student Choice: app side complete on the preview; pick / paper / random wait for doors A, B, C.
+
 ## Background download while the app is closed + AI solutions offline + website packet N1 (28 Nov 2026) — PREVIEW ONLY, not published
 - **Owner's picks:** "App band hone par bhi download", "Offline solutions"; iPhone locked too: "Haan, lock par bhi"; storage meter: "Banana hi nahi hai" (do not build). On the chapter list: "Itna mehnat se class 11th and 12th wise divide kiye wo rhega" — the Class 11/12 division stays exactly; the website must follow the app's list.
 - **Built:** `src/offline/background.ts` (expo-background-task + expo-task-manager; every 30 min at the soonest on Android, iOS chooses; only the 7-day confirmed account after a fresh `/auth/session` with the same uid; rounds → cards → finished papers; 8-min budget; switch `background` in `backend/app_switches.py`). Session handle Keychain `AFTER_FIRST_UNLOCK` + never made off screen (`src/api/client.ts`). AI step-by-step solutions kept with finished papers and shown in the offline reader (`src/offline/papers.ts`, `app/offline/result.tsx`). `catalogueAll` sends `per_page=100`. Full story: `memory/OFFLINE_KEPT.md` section 7.
