@@ -4,6 +4,8 @@
 - Also: frontend/src/components/analysis/QsByQs.js: the phone card of a question prints its chapter after the subject when it has one.
 - Tests: new tests/question_names256.py 19/19; tests/ui_links255.py + tests/links_bridge255.py got the switch (17/17); new tests/names_bridge257.py + tests/ui_names257.py 16/16; runners /root/p2/c1b_chain.sh, names_ui.sh and solo.sh (the one-at-a-time lock), copies in backend/tests/runners.
 - S1b: the full-size run tests/source_repaint_full251.py PASSED 10/10 (2,500 older pictures of the whole Chemistry book repainted in 1,220 s, fake Supabase).
+- Older suites after C1a + C1b: 54 suites, 1,918 checks, 1,898 pass, 20 fail; the 20 are the same old lines as before (not fixed here); no new failure.
+- 27 Nov 02:00–02:26 UTC, after the testing agent's first pass was cut off (no report file): backend/tejas/question_records.py `show`: a press of the switch that changes nothing writes nothing (no audit line, no new time); presses at the same moment end plainly On or Off. tests/question_names_edge258.py (first written by the testing agent, 8 of 12; its 4 failed lines were faults of the test) put right and made harder by the builder: 22/22 (a chapter-wise test sat for real, report PDF On / Off / On, markup in a chapter name comes back as the same letters, deleted chapter upload, another exam, presses in a row and together). Run again alone after the change: question_names256 19/19, ui_links255 17/17, ui_names257 16/16, question_records_iso254 36/36 (/root/p2/c1b_fix.log). /root/p2/solo.sh no longer refuses its own command; new runner /root/p2/c1b_fix.sh (copies in backend/tests/runners).
 
 
 ## 2026-11-26/27 (night) — Pocket C1a: "Jod: ek sawaal, ek record" (preview only, NOT deployed)

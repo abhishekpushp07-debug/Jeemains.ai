@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """TEST-ONLY: the re-run of the older suites after C1a + C1b (/root/p2/c1_reg_*.log) held against the same suites from before this work
 (/root/p2/r2_reg_*.log = after S1b, before C1). Reads logs only. Says, suite by suite, whether the failing lines are the very same lines."""
-import glob, os, re
+import os, re
 
 P = '/root/p2/'
 TOTAL = re.compile(r'^TOTAL (\d+) PASS (\d+) FAIL (\d+)', re.M)
+RANDOM = re.compile(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')   # a request id is new on every run
+
+
+def line(l):
+    return RANDOM.sub('<id>', l)[:300]
 
 
 def read(path):
     text = open(path, errors='replace').read() if os.path.exists(path) else None
     if text is None:
         return None
-    fails = sorted(set(l[:300] for l in text.split('\n') if l.startswith('FAIL')))
+    fails = sorted(set(line(l) for l in text.split('\n') if l.startswith('FAIL')))
     m = TOTAL.findall(text)
     checks = (int(m[-1][0]), int(m[-1][1]), int(m[-1][2])) if m else (text.count('\nPASS ') + len(fails), text.count('\nPASS '), len(fails))
     return checks, fails, 'Traceback (most recent call last)' in text and not m

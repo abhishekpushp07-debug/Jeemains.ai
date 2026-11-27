@@ -254,11 +254,17 @@ async def run(slug: str, u=Depends(owner)):
 
 @router.put('/{slug}/analysis')
 async def show(slug: str, body: ShowChapters, u=Depends(owner)):
-    """The owner's switch: chapter names from the join in the analysis of this exam's All India papers. Off as it starts."""
+    """The owner's switch (Off as it starts): chapter names from the join in the analysis of this exam's All India papers. A press that changes nothing writes nothing."""
     await view(slug)
-    await ops().update_one({'_id': OP + slug}, {'$set': {'show_chapters': body.on, 'show_at': now(), 'show_by': u['id']}}, upsert=True)
-    _shown.clear()
-    await audit(u['id'], 'Chapter names in All India analysis ' + ('ON' if body.on else 'OFF'), OP + slug, 'Names and labels only; no score, rank, paper or attempt is changed.')
+    try:
+        done = await ops().update_one({'_id': OP + slug, 'show_chapters': {'$ne': True} if body.on else True},
+                                      {'$set': {'show_chapters': body.on, 'show_at': now(), 'show_by': u['id']}}, upsert=body.on)
+        changed = bool(done.modified_count or done.upserted_id)
+    except DuplicateKeyError:   # it is On already
+        changed = False
+    if changed:
+        _shown.clear()
+        await audit(u['id'], 'Chapter names in All India analysis ' + ('ON' if body.on else 'OFF'), OP + slug, 'Names and labels only; no score, rank, paper or attempt is changed.')
     return await view(slug)
 
 
