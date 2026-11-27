@@ -1,3 +1,8 @@
+## 2026-11-27, late evening: reply v5 for the app written (docs/app_reply_v5/WEBSITE_REPLY_V5.md). The app's answer file memory/WEBSITE_REPLY_V4_APP_ANSWER.md is NOT on its branch App yet (checked); v4 is public at raw.githubusercontent.com/abhishekpushp07-debug/Jeemains.ai/main/docs/app_reply_v4/WEBSITE_REPLY_V4.md (byte-identical).
+- Live lacks N1 (proof: live GET /api/rank/cutoff/options 404, preview 200). That explains the app's "display_name never comes on live": live sends it only when a name is saved. Fixed on preview; reaches live with the owner's deploy.
+- Student Choice: owner will send the app's logic; save it, talk first, build only on his go.
+
+
 ## 2026-11-27, evening: B1 + N2 done on the PREVIEW (not deployed). This block overrides line 4–5 below: the owner answered the colours ("Website app jaisi bane") and "App jaisa karo" (Cut off replaces Percentile se rank) — N2 and the Rank part of N3 are done.
 - NEXT, in order: Student Choice "App jaisa poora" after the owner sends the app's full logic (doors A/B/C, Super Admin pool switch, made paper `test_kind` "choice", no rank) → the rest of N3 (red Misfire card, coloured My Tests tabs) only on the owner's word → N5 class_level after live's 81-test list → N6 → N7 → Matched. N4 QA students: deferred by the owner.
 - Production: deployer could not reach the deployment ("v3 deployment not found"); the live PYQ 503 cause and the CDN cache rewrite stay unverified.
