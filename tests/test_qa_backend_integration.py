@@ -17,7 +17,7 @@ ENV_PATH = Path(__file__).parent.parent / 'backend' / '.env'
 env_values = dotenv_values(ENV_PATH)
 OWNER_EMAIL = env_values.get('ADMIN_EMAIL')
 OWNER_PASSWORD = env_values.get('ADMIN_PASSWORD')
-BASE_URL = 'https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com/api'
+BASE_URL = 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com/api'
 
 class QABackendTester:
     def __init__(self):

@@ -25,11 +25,13 @@ export const rank = {
   targetBitsat: () => call('/rank/target/bitsat'),
   compare: items => post('/rank/compare', { items }),
   compareColleges: (items, profile) => post('/rank/compare/colleges', { items, ...profile }),
+  cutoff: b => post('/rank/cutoff', b),
 };
 
 const once = load => { let p; return () => (p ||= load().catch(e => { p = null; throw e; })); };
 export const getMeta = once(() => call('/rank/meta'));
 export const getColleges = once(() => call('/rank/colleges'));
+export const getCutoffOptions = once(() => call('/rank/cutoff/options'));
 
 /** Indian grouping: 107693 -> 1,07,693. */
 export function fmt(n) {

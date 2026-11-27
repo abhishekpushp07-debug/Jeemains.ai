@@ -6,7 +6,7 @@ Test phone +12025550184 access to fixture qa75-ed384de5-896c-4d2a-abd6-ffb9cbde9
 import requests
 import sys
 
-BASE_URL = "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com"
+BASE_URL = "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
 PHONE = "+12025550184"
 FIXTURE_ID = "qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0"
 

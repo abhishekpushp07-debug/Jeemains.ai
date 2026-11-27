@@ -12,7 +12,7 @@ from .profiles import seal_profile
 from .catalog import page as catalogue_page
 from .content import summary, permitted
 from tejas_core import public_question, score_attempt, crop_png, without_source
-from tejas_storage import get_object
+from tejas_storage import get_object, StorageError
 
 from .idempotency import fingerprint, verify_start, bind_start_alias
 from .contracts import EnvelopeResponse
@@ -410,6 +410,8 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
         part = refs[offset:offset + limit]
         sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r, _ in part})}}, {"_id": 0})}
         found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources], picture_format == "webp")
+        if part and not found:
+            raise StorageError("No picture of this part could be read.")
         return Response(await run_in_threadpool(assemble, len(refs), found, True), media_type="application/octet-stream", headers={"Cache-Control": "private, no-store"})
     if a["status"] != "active":
         raise HTTPException(409, "This attempt is no longer active.")
@@ -423,6 +425,8 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
     rendered = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r, _ in part if r["file_id"] in sources), return_exceptions=True)
     # A picture that cannot render is left out; the app then loads it on its own, so one bad crop never blocks the rest.
     found = [(qid, i, b, kind) for (qid, i, _, kind), b in zip([p for p in part if p[2]["file_id"] in sources], rendered) if isinstance(b, bytes)]
+    if part and not found:
+        raise StorageError("No picture of this part could be read.")
     return Response(assemble(len(refs), found), media_type="application/octet-stream", headers={"Cache-Control": "private, no-store"})
 
 

@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 # Load credentials from .env
 load_dotenv(Path(__file__).parent.parent / 'backend' / '.env')
 
-BASE_URL = "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com"
+BASE_URL = "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
 OWNER_EMAIL = os.environ.get('ADMIN_EMAIL', '')
 OWNER_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
 

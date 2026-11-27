@@ -173,7 +173,7 @@ export function useCardViews() {
 
 export function RankSheet({ open, onClose, title, sub, testId, children }) {
   return <Sheet open={open} onOpenChange={v => { if (!v) onClose(); }}>
-    <SheetContent side="right" className="rk-sheet" data-testid={testId}>
+    <SheetContent side="right" className="rk-sheet rk-night" data-testid={testId}>
       <SheetHeader className="rk-sheet-head"><SheetTitle>{title}</SheetTitle>{sub ? <SheetDescription>{sub}</SheetDescription> : <SheetDescription className="sr-only">College details</SheetDescription>}</SheetHeader>
       <div className="rk-sheet-body">{children}</div>
     </SheetContent>

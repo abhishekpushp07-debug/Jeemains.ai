@@ -1,11 +1,13 @@
-// Rank: six jewel tools on a light page, open to everyone (no sign-in). Built on official 2026 counselling data.
+// Rank: six jewel tools on the app's black page, open to everyone (no sign-in). Built on official 2026 counselling data.
 import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowLeftRight, BarChart3, GraduationCap, LineChart, Sparkles, Target } from 'lucide-react';
+import { ArrowLeftRight, BarChart3, GraduationCap, ListChecks, Sparkles, Target } from 'lucide-react';
 import { Gem, ToolCtx } from '../components/rank/RankUi';
 import { compareColleges, shortlist, useDreams } from '../components/rank/rankStore';
 import { RankPredictor } from '../components/rank/RankPredictor';
-import { PercentileRank } from '../components/rank/PercentileRank';
+import { Cutoff } from '../components/rank/Cutoff';
+import { ProfileBar } from '../components/rank/ProfileBar';
+import { useProfileSaves } from '../components/rank/profile';
 import { TargetMarks } from '../components/rank/TargetMarks';
 import { CollegePredictor } from '../components/rank/CollegePredictor';
 import { Compare } from '../components/rank/Compare';
@@ -13,10 +15,10 @@ import { DreamPanel } from '../components/rank/DreamPanel';
 import { track } from '../lib/track';
 import '../rank.css';
 
-// Order, colours and words as the app's Rank tab: black-metal tiles in each tool's jewel; College predictor is pure blood red.
+// Order, colours and words as the app's Rank tab: each tile in its tool's own colour, the form below in that tool's accent.
 const TOOLS = [
   { key: 'rank', title: 'Rank predictor', sub: 'marks se rank', Icon: BarChart3, jewel: 'maroon', lead: 'JEE Main ya COMEDK ke marks daalo: percentile aur rank, teeno paper type ke saath.' },
-  { key: 'pct', title: 'Percentile se rank', sub: 'NTA percentile', Icon: LineChart, jewel: 'indigo', badge: 'NEW', lead: 'Scorecard ka percentile daalo: CRL, category rank aur us percentile ke marks.' },
+  { key: 'cutoff', title: 'Cut off', sub: 'college / branch', Icon: ListChecks, jewel: 'indigo', badge: 'NEW', lead: 'Ek college ya ek branch chuno: har round ka 2026 cut off. Score daalo to sirf wahi jahan aap eligible ho.' },
   { key: 'target', title: 'Target marks', sub: 'college ke liye', Icon: Target, jewel: 'teal', badge: 'NEW', lead: 'College chuno: har branch ke liye kitne marks chahiye, round by round.' },
   { key: 'college', title: 'College predictor', sub: 'colleges + cutoffs', Icon: GraduationCap, jewel: 'blood', lead: 'JEE Main, BITSAT ya COMEDK: aapki pahunch ki har seat, har round ka cutoff.' },
   { key: 'compare', title: 'College compare', sub: 'side by side', Icon: ArrowLeftRight, jewel: 'champ', badge: 'NEW', lead: '2–3 college ya saved branches ko seats, fee aur cutoff par side by side dekho.' },
@@ -40,7 +42,9 @@ function ToolGrid({ value, onChange }) {
 
 export default function Rank() {
   const [params, setParams] = useSearchParams();
-  const tool = TOOLS.some(t => t.key === params.get('tool')) ? params.get('tool') : 'rank';
+  const asked = params.get('tool') === 'pct' ? 'cutoff' : params.get('tool');  // the old Percentile tool's links open Cut off
+  const tool = TOOLS.some(t => t.key === asked) ? asked : 'rank';
+  const saves = useProfileSaves();
   const [seen, setSeen] = useState(() => new Set([tool]));
   const [handover, setHandover] = useState(null);
   const stage = useRef(null);
@@ -54,19 +58,21 @@ export default function Rank() {
   };
   const toColleges = q => { setHandover({ ...q, at: Date.now() }); pick('college'); };
   const meta = TOOLS.find(t => t.key === tool);
-  const panes = { rank: <RankPredictor onColleges={toColleges} />, pct: <PercentileRank onColleges={toColleges} />, target: <TargetMarks />,
+  const panes = { rank: <RankPredictor onColleges={toColleges} />, cutoff: <Cutoff />, target: <TargetMarks />,
     college: <CollegePredictor handover={handover} />, compare: <Compare onTool={pick} />, dream: <DreamPanel onTool={pick} /> };
-  return <div className="rk-page" data-testid="rank-page">
+  return <div className="rk-night rk-screen"><div className="rk-page" data-testid="rank-page">
     <header className="rk-hero">
       <small className="rk-kicker"><i aria-hidden="true" />JEELIVE.AI · RANK</small>
       <h1>Rank &amp; college predictor</h1>
       <p>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs <span className="rk-free">Free · bina login ke</span></p>
     </header>
+    <ProfileBar />
     <ToolGrid value={tool} onChange={pick} />
     <section ref={stage} className={`rk-stage acc-${tool}`} data-testid="rank-stage">
       <div className="rk-stage-head"><span className={`rk-stage-icon jewel-${meta.jewel}`}><meta.Icon size={20} /></span><div><h2 data-testid="rank-stage-title">{meta.title}</h2><p>{meta.lead}</p></div></div>
-      {TOOLS.map(t => (seen.has(t.key) ? <div key={t.key} hidden={t.key !== tool} className="rk-pane" data-testid={`rank-pane-${t.key}`}><ToolCtx.Provider value={t}>{panes[t.key]}</ToolCtx.Provider></div> : null))}
+      {/* After "Meri details" is saved every tool is drawn again from its freshly filled form. */}
+      {TOOLS.map(t => (seen.has(t.key) ? <div key={`${t.key}-${saves}`} hidden={t.key !== tool} className="rk-pane" data-testid={`rank-pane-${t.key}`}><ToolCtx.Provider value={t}>{panes[t.key]}</ToolCtx.Provider></div> : null))}
     </section>
     <p className="rk-foot" data-testid="rank-disclaimer">Saare numbers 2026 ke official counselling data par estimate hain, guarantee nahi. Admission ke liye hamesha official portal dekho. NTA, JoSAA, BITS ya COMEDK se affiliated nahi.</p>
-  </div>;
+  </div></div>;
 }

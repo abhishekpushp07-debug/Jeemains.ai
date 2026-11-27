@@ -1,7 +1,7 @@
 # Iteration 152: Home palette swap (JEE Main royal-blue/platinum, All India banner ruby/onyx) computed-style + regression checks.
 # Paste into browser_automation (expects `page`). Read-only route fixtures; all mutations blocked.
 import json
-BASE='https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com'
+BASE='https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
 writes=[]
 GUEST={'v':False}
 async def handler(route):

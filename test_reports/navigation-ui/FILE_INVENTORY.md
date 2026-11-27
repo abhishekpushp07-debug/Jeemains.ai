@@ -245,7 +245,7 @@ Directory structure:
 
 **Screenshot Format:** JPEG (quality=20)  
 **Test Phone:** +12025550341  
-**Base URL:** https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com
+**Base URL:** https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
 
 ---
 

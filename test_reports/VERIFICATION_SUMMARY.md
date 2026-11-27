@@ -1,7 +1,7 @@
 # Post-Cleanup Verification Summary
 
 ## Test Date: 2026-10-12
-## Base URL: https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com
+## Base URL: https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
 
 ---
 
@@ -153,7 +153,7 @@ async def qa_set_and_user():
 - Backend: FastAPI on port 8001
 - Frontend: React on port 3000
 - Database: MongoDB on localhost:27017
-- Public URL: https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com
+- Public URL: https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
 
 ---
 

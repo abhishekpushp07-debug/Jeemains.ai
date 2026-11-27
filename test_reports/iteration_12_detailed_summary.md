@@ -14,7 +14,7 @@ Comprehensive end-to-end testing of JEE/BITSAT practice platform focusing on:
 - Score accuracy
 
 ## Test Environment
-- **URL**: https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com
+- **URL**: https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
 - **Phone**: +12025550184
 - **Fixture**: qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0
 - **Expected**: 75 questions, 300 maximum score

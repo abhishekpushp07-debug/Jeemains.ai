@@ -10,6 +10,7 @@ from .db import files
 from .derivatives import render_crop
 from .packs import entry_for
 from .pictures import etag_of, webp_of, epoch, number, on_replaced
+from tejas_storage import StorageError
 
 router = APIRouter(prefix="/api")
 PART, DAY = 12, 86400
@@ -94,6 +95,8 @@ async def _build(key, pack_id, offset, limit, bonus):
     ids = list({r["file_id"] for _, _, r, _ in part})
     sources = {f["id"]: f async for f in files.find({"id": {"$in": ids}, "is_deleted": {"$ne": True}}, {"_id": 0})}
     found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources], bool(bonus & WEBP))
+    if not found:  # not one picture could be read: a 503 (never cached) lets the client retry, an empty 200 would not
+        raise StorageError("No picture of this part could be read.")
     body, complete = await run_in_threadpool(assemble, len(refs), found, bool(bonus & TAGGED)), len(found) == len(part)
     if complete:
         _parts.put(key, body)

@@ -21,7 +21,7 @@ export function CollegePredictor({ handover }) {
 }
 
 const SAVED = 'rank.college.v1';
-const DEF = { mode: 'marks', marks: '', pct: '', level: 'normal', category: 'GEN', female: false, pwd: false, state: null, branches: [] };
+const DEF = { mode: 'marks', marks: '', pct: '', rank: '', level: 'normal', category: 'GEN', female: false, pwd: false, state: null, branches: [] };
 const load = () => { try { return { ...DEF, ...JSON.parse(localStorage.getItem(SAVED) || '{}') }; } catch { return DEF; } };
 function toBody(f) {
   const profile = { level: f.level, category: f.category, female: f.female, pwd: f.pwd, state: f.state, branches: f.branches };
@@ -31,11 +31,17 @@ function toBody(f) {
     if (!Number.isInteger(n) || n < -75 || n > 300) return 'Marks −75 se 300 ke beech poore ank mein daalo.';
     return { marks: n, ...profile };
   }
+  if (f.mode === 'rank') {
+    const raw = String(f.rank || '').trim(), n = Number(raw);
+    if (!raw) return 'Rank daalo.';
+    if (!Number.isInteger(n) || n < 1 || n > 2000000) return 'JEE Main rank 1 se 20,00,000 ke beech poore ank mein daalo.';
+    return { rank: n, ...profile };
+  }
   const raw = String(f.pct).trim(), n = Number(raw);
   if (!raw || !Number.isFinite(n) || n < 0 || n > 100) return 'Percentile 0 se 100 ke beech daalo (jaise 97.4567).';
   return { percentile: n, ...profile };
 }
-const summaryOf = q => [q.marks != null ? `${q.marks} / 300 marks · ${LEVEL[q.level]} paper` : `${q.percentile} percentile`, CATEGORY_LABEL[q.category],
+const summaryOf = q => [q.marks != null ? `${q.marks} / 300 marks · ${LEVEL[q.level]} paper` : q.rank != null ? `Rank ${fmt(q.rank)} (CRL)` : `${q.percentile} percentile`, CATEGORY_LABEL[q.category],
   q.female ? 'Female' : null, q.pwd ? 'PwD' : null, q.state, q.branches.length ? `${q.branches.length} branch` : null].filter(Boolean).join(' · ');
 
 function JeeColleges({ handover }) {
@@ -74,10 +80,12 @@ function JeeColleges({ handover }) {
     ...data.items.slice(0, 5).map((s, i) => `${i + 1}. ${s.college} · ${s.branch} (closing ${fmt(s.close)})`), '', ESTIMATE, '', invite(link)].join('\n') : '';
   return <>
     {open || !query ? <Panel form title="Your score" testId="cp-input">
-      <Switch prefix="cp-mode" value={form.mode} onChange={mode => patch({ mode })} items={[{ key: 'marks', label: 'Marks se' }, { key: 'pct', label: 'Percentile se' }]} />
+      <Switch prefix="cp-mode" value={form.mode} onChange={mode => patch({ mode })} items={[{ key: 'marks', label: 'Marks se' }, { key: 'pct', label: 'Percentile se' }, { key: 'rank', label: 'Rank se' }]} />
       {form.mode === 'marks'
         ? <Field label="Marks (out of 300)" testId="cp-marks-input" inputMode="numeric" placeholder="e.g. 180" value={form.marks} onKeyDown={e => e.key === 'Enter' && run(form)}
           onChange={e => patch({ marks: e.target.value.replace(/[^0-9-]/g, '').slice(0, 4) })} />
+        : form.mode === 'rank' ? <Field label="JEE Main rank (CRL)" testId="cp-rank-input" inputMode="numeric" placeholder="e.g. 12000" value={form.rank} onKeyDown={e => e.key === 'Enter' && run(form)}
+          onChange={e => patch({ rank: e.target.value.replace(/[^0-9]/g, '').slice(0, 7) })} />
         : <Field label="NTA percentile" testId="cp-pct-input" inputMode="decimal" placeholder="e.g. 97.4567" value={form.pct} onKeyDown={e => e.key === 'Enter' && run(form)}
           onChange={e => patch({ pct: e.target.value.replace(/[^0-9.]/g, '').slice(0, 10) })} />}
       {form.mode === 'marks' ? <div className="rk-row"><span className="rk-row-label">Paper</span>{LEVELS.map(l => <Chip key={l} tone={'lvl-' + l} on={form.level === l} onClick={() => patch({ level: l })} testId={`cp-level-${l}`}>{LEVEL[l]}</Chip>)}</div> : null}
@@ -95,7 +103,7 @@ function JeeColleges({ handover }) {
     </Panel> : <Summary text={summaryOf(query)} onEdit={() => setOpen(true)} testId="cp-input-collapsed" />}
     <Err error={error} retry={() => setTries(t => t + 1)} testId="cp-error" />
     {r && query ? <div className="rk-stack rk-reveal">
-      <RankCard testId="cp-card" badge="JEE MAIN 2026" eyebrow={r.from_marks ? 'EXPECTED PERCENTILE' : 'YOUR PERCENTILE'} big={fmtPct(r.percentile)} rule={`RANK (CRL)  ${fmtRange(r.crl)}`}
+      <RankCard testId="cp-card" badge="JEE MAIN 2026" eyebrow={r.source === 'percentile' ? 'YOUR PERCENTILE' : 'EXPECTED PERCENTILE'} big={fmtPct(r.percentile)} rule={`RANK (CRL)  ${fmtRange(r.crl)}`}
         smalls={[r.cat_rank && { label: r.cat_rank.label, value: fmtRange(r.cat_rank.range), testId: 'cp-card-cat' }, r.pwd_rank && { label: r.pwd_rank.label, value: fmtRange(r.pwd_rank.range), testId: 'cp-card-pwd' }].filter(Boolean)}
         summary={r.summary} serial={fmt((r.crl[0] + r.crl[1]) / 2)} of={meta ? fmt(meta.candidates) : null} />
       <div className="rk-segs" role="tablist">{SEGMENTS.map(([k, l]) => <button key={k} type="button" role="tab" aria-selected={segment === k} className={'rk-seg' + (segment === k ? ' is-on' : '')}
