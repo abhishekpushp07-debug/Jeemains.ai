@@ -1,5 +1,5 @@
 # Rapid Fire's chapter picker in a browser (27 Nov 2026): nothing ticked for the student, PCM tab first, Select all / Clear,
-# any number of chapters, and the mode tiles always ask.
+# any number of chapters, and the mode tiles always ask. Physics, Chemistry and Maths list Class 11 first, then Class 12.
 #   python3 /app/tests/rf_picker_check.py            the app (web preview)
 #   python3 /app/tests/rf_picker_check.py arena      the browser copy of Rapid Fire (/api/arena)
 #   ... small                                        the same on a 360 x 640 phone
@@ -16,6 +16,8 @@ from dotenv import dotenv_values
 from playwright.async_api import async_playwright
 
 sys.path.insert(0, "/app/tests")
+sys.path.insert(0, "/app/backend")
+import class_levels  # noqa: E402  (which class a chapter belongs to: the server's own list)
 from shine_helpers import sign_in  # noqa: E402
 
 BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
@@ -35,11 +37,11 @@ STATE = """() => { const plain = (x) => (x || '').replace(/[\\u{F0000}-\\u{FFFFD
   const rows = [...document.querySelectorAll('[data-testid^="rf-scope-chapter-"]')];
   return { tab: [...document.querySelectorAll('[data-testid^="rf-scope-tab-"]')].filter((el) => el.getAttribute('aria-selected') === 'true').map((el) => el.getAttribute('data-testid').replace('rf-scope-tab-', '')),
     tabs: [...document.querySelectorAll('[data-testid^="rf-scope-tab-"]')].map((el) => plain(el.innerText).replace(/ · /g, ' ')),
-    rows: rows.length, on: rows.filter((el) => el.getAttribute('aria-checked') === 'true').length,
+    names: rows.map((el) => plain(el.innerText).split(' · ')[0]), rows: rows.length, on: rows.filter((el) => el.getAttribute('aria-checked') === 'true').length,
     all: q('rf-scope-select-all')?.getAttribute('aria-checked'), allText: t('rf-scope-select-all'), clearOff: off('rf-scope-clear-all'),
     empty: !!q('rf-scope-empty'), chips: [...document.querySelectorAll('[data-testid^="rf-scope-picked-"]')].map((el) => plain(el.innerText)),
     done: t('rf-scope-done'), doneOff: off('rf-scope-done'), play: t('rf-scope-play'), playOff: off('rf-scope-play'), hasPlay: !!q('rf-scope-play'),
-    heads: [...document.querySelectorAll('[data-testid="rf-scope-sheet"] div')].map((el) => el.innerText || '').filter((s) => /^[A-Z]+ · \\d+ CHAPTERS( · BITSAT 2026)?$/.test(s)).filter((s, i, a) => a.indexOf(s) === i),
+    heads: [...document.querySelectorAll('[data-testid="rf-scope-sheet"] div')].map((el) => el.innerText || '').filter((s) => /^(CLASS \\d+ · )?[A-Z]+ · \\d+ CHAPTERS( · BITSAT 2026)?$/.test(s)).filter((s, i, a) => a.indexOf(s) === i),
     y: { tabs: y('rf-scope-tabs'), all: y('rf-scope-select-all'), row: rows[0] ? Math.round(rows[0].getBoundingClientRect().top) : null, tray: y('rf-scope-tray') },
     text: (q('rf-scope-sheet')?.innerText || '') }; }"""
 FITS = """() => { const w = window.innerWidth, cut = [];
@@ -137,6 +139,11 @@ async def main():
         cat = await page.evaluate("fetch('/api/rf/catalog?exam=JEE').then((r) => r.json())")
         n = {s["name"]: len([c for c in s["chapters"] if c["count"]]) for s in cat["subjects"]}
         pcm = n["Physics"] + n["Chemistry"] + n["Mathematics"]
+        # Which class each chapter belongs to (the server's list), and the order a tab must list them in: Class 11, then Class 12.
+        level = {s["name"]: [class_levels.level_of("jee-main", s["name"], c["name"]) for c in s["chapters"]] for s in cat["subjects"]}
+        c11, c12 = {k: v.count(11) for k, v in level.items()}, {k: v.count(12) for k, v in level.items()}
+        order = {s["name"]: [c["name"] for want in (11, 12) for c, got in zip(s["chapters"], level[s["name"]]) if got == want] for s in cat["subjects"]}
+        jee = ("Physics", "Chemistry", "Mathematics")
 
         # A. Quick Play opens plain: PCM tab, nothing ticked, Select all under the tabs and above the chapters
         s = await open_sheet(page)
@@ -147,7 +154,9 @@ async def main():
         check("A4 the old Quick Mix tiles are gone", "QUICK MIX" not in s["text"] and not await page.locator('[data-testid="rf-scope-pcm"], [data-testid^="rf-scope-mixed-"]').count())
         check("A5 tabs, then Select all, then the chapters, top to bottom", s["y"]["tabs"] < s["y"]["all"] < s["y"]["row"] < s["y"]["tray"], s["y"])
         check("A6 SAVE and PLAY rest until something is ticked", s["doneOff"] and s["playOff"] and s["play"] == "PLAY · Tick chapters first", [s["done"], s["play"]])
-        check("A7 the first list is Physics, with its heading", s["heads"][:1] == [f'PHYSICS · {n["Physics"]} CHAPTERS'], s["heads"])
+        check("A7 the list begins with Class 11 of PCM, Physics' chapters first", s["heads"][:1] == [f'CLASS 11 · PCM · {sum(c11[k] for k in jee)} CHAPTERS'] and s["names"][:3] == order["Physics"][:3], [s["heads"], s["names"][:3]])
+        first_row = (await page.locator('[data-testid^="rf-scope-chapter-"]').nth(0).inner_text()).replace("\n", " · ")
+        check("A10 on the PCM tab every chapter says its subject", bool(re.search(r" · Physics · \d+ cards$", first_row)), first_row)
         check("A8 no 'up to 5' anywhere", "Up to 5" not in s["text"] and "/5" not in s["text"])
         fit = await page.evaluate(FITS)
         check("A9 everything fits the screen, and every key is in full view and at least 44 high", not fit["wide"] and not fit["cut"] and not fit["hidden"], fit)
@@ -182,7 +191,19 @@ async def main():
         # E. a subject's tab, and ticks that stay when the tab changes
         await page.click('[data-testid="rf-scope-tab-physics"]')
         s = await state(page)
-        check("E1 the Physics tab lists Physics only, nothing ticked", s["tab"] == ["physics"] and s["heads"] == [f'PHYSICS · {n["Physics"]} CHAPTERS'] and s["on"] == 0 and s["allText"] == f'Select all · Physics · {n["Physics"]} chapters', [s["heads"], s["allText"]])
+        heads = [f'CLASS 11 · PHYSICS · {c11["Physics"]} CHAPTERS', f'CLASS 12 · PHYSICS · {c12["Physics"]} CHAPTERS']
+        check("E1 the Physics tab lists Physics only, Class 11 first, nothing ticked", s["tab"] == ["physics"] and s["heads"] == heads[:len(s["heads"])] and s["heads"][:1] == heads[:1] and s["names"] == order["Physics"][:len(s["names"])]
+              and s["on"] == 0 and s["allText"] == f'Select all · Physics · {n["Physics"]} chapters', [s["heads"], s["names"][:2], s["allText"]])
+        # to the end of the list: Class 12 has its own heading, and the last chapter is the last of Class 12
+        await page.evaluate("""() => { let el = document.querySelector('[data-testid^="rf-scope-chapter-"]');
+          while (el && !(el.scrollHeight > el.clientHeight + 4 && getComputedStyle(el).overflowY !== 'visible')) el = el.parentElement;
+          if (el) el.scrollTop = el.scrollHeight; }""")
+        s = await state(page, 700)
+        check("E1b lower down: the Class 12 heading, then Class 12's chapters to the end", heads[1] in s["heads"] and s["names"][-1:] == order["Physics"][-1:]
+              and await page.locator('[data-testid="rf-scope-head-class-12"]').count() == 1, [s["heads"], s["names"][-2:]])
+        await page.click('[data-testid="rf-scope-tab-pcm"]')
+        await page.click('[data-testid="rf-scope-tab-physics"]')  # back at the top of the Physics list
+        s = await state(page)
         await page.click('[data-testid="rf-scope-select-all"]')
         await page.click('[data-testid="rf-scope-tab-chemistry"]')
         s = await state(page)

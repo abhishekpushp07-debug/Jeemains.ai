@@ -5,6 +5,7 @@ never stored in clear text: only an HMAC (for exact-number search) and the last 
 """
 import hashlib
 import hmac
+import logging
 import re
 import secrets
 import time
@@ -72,7 +73,11 @@ async def friend_code_of(db, uid: str) -> str:
 
 
 def public_name(p: dict) -> str:
-    """Account name; otherwise the phone with all but the last 4 digits hidden."""
+    """The name the student wrote for themselves (`chosen_name`: the website keeps it and checked it); otherwise the
+    account's name on the website (`display_name`, "Learner" and a code); otherwise the phone with all but the last 4
+    digits hidden."""
+    if p.get("chosen_name"):
+        return p["chosen_name"]
     if p.get("display_name"):
         return p["display_name"]
     if p.get("phone_last4"):
@@ -87,8 +92,45 @@ async def remember_identity(db, uid: str, user: dict):
     fields = {"pid": make_pid(uid), "display_name": name, "seen_ts": time.time()}
     if d:
         fields.update(phone_hash=await phone_hash(db, d), phone_last4=d[-4:])
-    fields["name"] = public_name(fields)
-    await db.rf_profiles.update_one({"uid": uid}, {"$set": fields}, upsert=True)
+    if "display_name" in user:  # the day the website's session answer says the student's own name, it is taken from there
+        fields["chosen_name"] = _plain_name(user["display_name"])
+    # The name shown is worked out from the row as it now stands, so a name the student wrote is kept when they come back.
+    p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": fields}, upsert=True, return_document=ReturnDocument.AFTER, projection=_NAME_FIELDS)
+    if p.get("name") != public_name({**p, "name": None}):
+        await db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": public_name({**p, "name": None})}})
+
+
+_NAME_FIELDS = {"_id": 0, "chosen_name": 1, "display_name": 1, "phone_last4": 1, "name": 1}
+
+
+def _plain_name(value) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()[:24]
+
+
+async def set_chosen_name(db, uid: str, kept) -> str:
+    """The name a student wrote for themselves, as the website kept it ("" or None = taken away): Rapid Fire shows the
+    same one. Only ever called with the website's own answer, never with a name the app says."""
+    p = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"chosen_name": _plain_name(kept), "pid": make_pid(uid)}}, upsert=True,
+                                                 return_document=ReturnDocument.AFTER, projection=_NAME_FIELDS)
+    shown = public_name({**p, "name": None})
+    await db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": shown}})
+    return shown
+
+
+async def name_kept(db, sid: str, answer) -> None:
+    """After the website kept or took away a student's name (PUT profile/display-name through our proxy, answered with
+    success). Whose session it is comes from the cookie jar (written from the website's own sign-in answer); the name
+    comes from the website's answer. Trouble here is only logged: the student's answer from the website is never changed."""
+    try:
+        payload = answer.json()
+        data = payload.get("data") if isinstance(payload, dict) and (payload.get("meta") or {}).get("api_version") else payload
+        if not isinstance(data, dict) or "display_name" not in data:
+            return
+        jar = await db.jl_jars.find_one({"sid": sid}, {"_id": 0, "uid": 1})
+        if jar and isinstance(jar.get("uid"), str) and jar["uid"]:
+            await set_chosen_name(db, jar["uid"], data["display_name"])
+    except Exception:  # our own note must never turn the website's "saved" into an error
+        logging.getLogger("social").warning("A saved name could not be noted for Rapid Fire", exc_info=True)
 
 
 def _online(p: dict) -> bool:
@@ -328,6 +370,12 @@ def make_router(db, rf_user):
         rows = await db.rf_feed.find({"uid": {"$in": fids}, "ts": {"$gt": time.time() - 7 * 86400}}, {"_id": 0, "at": 0}).sort("ts", -1).limit(30).to_list(30)
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": list({e["uid"] for e in rows})}}).to_list(len(rows) or 1)}
         return {"items": [{"id": e["id"], "kind": e["kind"], "data": e.get("data") or {}, "ts": e["ts"], "from": card(profs[e["uid"]])} for e in rows if e["uid"] in profs]}
+
+    @r.get("/name")
+    async def my_name(x_rf_user: str | None = Header(None)):
+        """The name the student wrote for themselves ("" = none yet), for the Account screen."""
+        p = await db.rf_profiles.find_one({"uid": rf_user(x_rf_user)}, {"_id": 0, "chosen_name": 1}) or {}
+        return {"name": p.get("chosen_name") or ""}
 
     # ---------- friends ----------
     @r.get("/friends")

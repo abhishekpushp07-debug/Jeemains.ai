@@ -338,7 +338,7 @@ def make_router(db, rf_user, public_card, award):
     async def player(uid, name=""):
         prof = await db.rf_profiles.find_one({"uid": uid}) or {}
         # Verified account name (or masked number) wins over anything the phone sends.
-        shown = public_name(prof) if (prof.get("display_name") or prof.get("phone_last4")) else (name.strip()[:24] or "Player")
+        shown = public_name(prof) if (prof.get("chosen_name") or prof.get("display_name") or prof.get("phone_last4")) else (name.strip()[:24] or "Player")
         prof = await db.rf_profiles.find_one_and_update({"uid": uid}, {"$set": {"name": shown, "pid": make_pid(uid)}}, upsert=True, return_document=True) or {}
         eq = equipped_of(prof)
         return {"uid": uid, "pid": make_pid(uid), "name": shown, "level": level_of(prof.get("xp", 0)), "wins": prof.get("wins", 0), "avatar": safe_avatar(prof.get("avatar")), "frame": eq.get("frame"), "entry": eq.get("entry"),

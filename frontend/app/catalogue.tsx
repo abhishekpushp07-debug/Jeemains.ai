@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useState } from "react";
-import { FlatList, TextInput, View } from "react-native";
+import React, { memo, useEffect, useMemo, useState } from "react";
+import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import { Redirect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
@@ -8,13 +8,24 @@ import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, Pill, ScreenHeader, StatusLine } from "@/src/components/design";
-import { colors, fonts, noOutline, radius, space } from "@/src/theme";
+import { GlossTabs, TabLook } from "@/src/components/GlossTabs";
+import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
-import { cachedExamName, cataloguePath } from "@/src/api/examCatalog";
+import { cachedExamName, catalogueAll, cataloguePath } from "@/src/api/examCatalog";
+import { ClassLevel, classOf, hasClasses, useClassBook } from "@/src/classLevel";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
-// Remember subject/search per exam+kind so Back never resets the list.
-const remembered: Record<string, { subject: string; q: string }> = {};
+// Chapter-wise, for a subject that is split into classes: All (Class 11 first, then Class 12), or one class alone.
+type ClassTab = "all" | "11" | "12";
+// Glossy tabs like My Tests', each in its own colour: All baby pink, Class 11 yellow, Class 12 sky blue.
+const CLASS_TABS: { key: ClassTab; label: string; look: TabLook }[] = [
+  { key: "all", label: "All", look: { on: [colors.custom_tabPink, colors.custom_tabPinkDeep], rest: [colors.custom_tabPinkSoft, colors.custom_tabPinkSoftDeep], edge: tabEdges.pink, glow: colors.custom_tabPinkGlow } },
+  { key: "11", label: "Class 11", look: { on: [colors.custom_tabSun, colors.custom_tabSunDeep], rest: [colors.custom_tabSunSoft, colors.custom_tabSunSoftDeep], edge: tabEdges.sun, glow: colors.custom_tabSunGlow } },
+  { key: "12", label: "Class 12", look: { on: [colors.custom_tabSky, colors.custom_tabSkyDeep], rest: [colors.custom_tabSkySoft, colors.custom_tabSkySoftDeep], edge: tabEdges.sky, glow: colors.custom_tabSkyGlow } },
+];
+const NONE: any[] = [];
+// Remember subject/search/class per exam+kind so Back never resets the list.
+const remembered: Record<string, { subject: string; q: string; cls?: ClassTab }> = {};
 
 export function attemptAction(s: any): { label: string; to: string; tone: string } {
   const a = s.attempt;
@@ -78,20 +89,36 @@ function Catalogue() {
   const [q, setQ] = useState(remembered[memKey]?.q ?? "");
   const [query, setQuery] = useState(q);
   const [page, setPage] = useState(1);
-  useEffect(() => { remembered[memKey] = { subject, q }; }, [memKey, subject, q]);
+  const [cls, setCls] = useState<ClassTab>(remembered[memKey]?.cls ?? "all");
+  useEffect(() => { remembered[memKey] = { subject, q, cls }; }, [memKey, subject, q, cls]);
   useEffect(() => {
     const t = setTimeout(() => { if (q.trim() !== query) { setPage(1); setQuery(q.trim()); } }, 300);
     return () => clearTimeout(t);
   }, [q, query]);
 
+  // The chapter-wise list of a subject that is split into classes (JEE Physics, Chemistry, Maths) is read whole and
+  // grouped here: Class 11, then Class 12. Every other list is read a page at a time, exactly as before.
+  const book = useClassBook();
+  const classy = kind === "chapters" && !section && hasClasses(slug, subject);
   const path = kind === "history"
     ? `/exam-navigation/${slug}/history?page=${page}`
-    : cataloguePath(slug, section ? "mocks" : kind!, section, kind === "chapters" ? subject : "", query, page);
+    : cataloguePath(slug, section ? "mocks" : kind!, section, kind === "chapters" ? subject : "", query, classy ? 1 : page);
   const valid = !!slug && (kind === "history" || kind === "mocks" || kind === "chapters");
-  const res = useCached<any>(user && valid ? `u.${user.id}.${path}` : null, (signal) => api(path, { signal }));
+  const fullKey = user && valid ? `u.${user.id}.${path}${classy ? "#all" : ""}` : null;
+  const res = useCached<any>(fullKey, (signal) => (classy ? catalogueAll(slug, "chapters", "", subject, query, signal) : api(path, { signal })));
   useListFocus(res.revalidate);
-  const fullKey = user && valid ? `u.${user.id}.${path}` : null;
-  const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : [];
+  const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : NONE;
+  // Each chapter's class, and the rows of the tab in view. One chapter is opened at a time, as always: a tap on a row.
+  const view = useMemo(() => {
+    const levels = classy ? items.map((s) => classOf(slug, subject, String(s.title || ""))) : [];
+    if (!levels.some((level) => level !== null)) return { grouped: false, rows: items, n: { all: items.length, "11": 0, "12": 0 } };
+    const part = (level: ClassLevel | null) => items.filter((_, i) => levels[i] === level);
+    const c11 = part(11), c12 = part(12), rest = part(null);
+    const under = (id: string, name: string, list: any[]) => (list.length ? [{ id, head: `${name} · ${list.length} chapter${list.length === 1 ? "" : "s"}` }, ...list] : []);
+    const rows = cls === "11" ? c11 : cls === "12" ? c12 : [...under("head-11", "Class 11", c11), ...under("head-12", "Class 12", c12), ...under("head-other", "Other", rest)];
+    return { grouped: true, rows, n: { all: items.length, "11": c11.length, "12": c12.length } };
+  }, [classy, items, slug, subject, cls, book]); // eslint-disable-line react-hooks/exhaustive-deps
+  const tabs = classy && (view.grouped || !items.length); // drawn from the start, so the list does not jump when it arrives
   const subjects = Object.keys(res.data?.subject_counts || {}).sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
   const subjectList = subjects.length ? subjects : ORDER;
   // An exam without Physics (or a new one) opens on its own first subject.
@@ -112,30 +139,42 @@ function Catalogue() {
           </View>
         </View>
       ) : null}
+      {tabs ? (
+        <View testID="catalogue-class-tabs" style={styles.classTabs}>
+          <GlossTabs prefix="catalogue-class" value={cls} onChange={setCls}
+            items={CLASS_TABS.map((t) => ({ ...t, sub: view.grouped ? String(view.n[t.key]) : undefined, subTestID: `catalogue-class-${t.key}-count` }))} />
+        </View>
+      ) : null}
       {kind === "chapters" ? (
         <View style={{ height: 56, justifyContent: "center" }}>
           <FlatList horizontal showsHorizontalScrollIndicator={false} data={subjectList} keyExtractor={(x) => x}
             contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
-            renderItem={({ item }) => <Chip testID={"catalogue-subject-" + item.toLowerCase()} label={item} active={subject === item} count={res.data?.subject_counts?.[item]} onPress={() => { setPage(1); setSubject(item); }} />} />
+            renderItem={({ item }) => <Chip testID={"catalogue-subject-" + item.toLowerCase()} label={item} active={subject === item} color={colors.brandPrimary} count={res.data?.subject_counts?.[item]} onPress={() => { setPage(1); setSubject(item); }} />} />
         </View>
       ) : <View style={{ height: space.md }} />}
       <FlatList
         testID="catalogue-list"
-        data={items}
+        data={view.rows}
         initialNumToRender={8} maxToRenderPerBatch={8} windowSize={7}
         refreshing={res.refreshing} onRefresh={res.reload}
         keyExtractor={(x) => x.id}
-        renderItem={({ item }) => (kind === "history" ? <HistoryRow a={item} /> : <SetRow s={item} />)}
+        renderItem={({ item }) => (item.head ? <T testID={`catalogue-${item.id}`} w="heavy" size={12} color={colors.onSurface} style={styles.classHead}>{item.head.toUpperCase()}</T>
+          : kind === "history" ? <HistoryRow a={item} /> : <SetRow s={item} />)}
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
         ListHeaderComponent={<>
           <ErrorBox error={res.error} retry={res.reload} testID="catalogue-error" />
-          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2, marginTop: kind === "chapters" ? space.sm : 0 }} testID="catalogue-count">{`${res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : own ? "papers" : "mock tests")}`.toUpperCase()}</T> : null}
+          {res.data ? <T w="bold" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2, marginTop: kind === "chapters" ? space.sm : 0 }} testID="catalogue-count">{`${view.grouped && cls !== "all" ? view.rows.length : res.data.total} ${kind === "history" ? "attempts" : "live " + (kind === "chapters" ? "chapter tests" : own ? "papers" : "mock tests")}${view.grouped && cls !== "all" ? ` · Class ${cls}` : ""}`.toUpperCase()}</T> : null}
         </>}
-        ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (
+        ListEmptyComponent={(!res.data || res.dataKey !== fullKey) && !res.error ? <View testID="catalogue-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : res.data ? (view.grouped ? (
+          // The list has chapters, none of them in the class in view (a search can do this).
+          <DCard testID="catalogue-empty-class"><Empty icon="school-outline" title={query ? `No Class ${cls} chapter matches.` : `No Class ${cls} chapter tests here yet.`}
+            body={`Look in Class ${cls === "11" ? "12" : "11"}, or see every chapter.`}
+            action={<Pill testID="catalogue-class-show-all" kind="outline" label="Show all chapters" onPress={() => setCls("all")} />} /></DCard>
+        ) : (
           <DCard testID="catalogue-empty"><Empty icon={kind === "history" ? "history" : "file-document-outline"} title={query ? "No matching tests." : kind === "history" ? "No attempts yet." : own ? "No papers in this section yet." : kind === "mocks" ? "Full-length mocks are not live yet." : "No live tests for this subject."}
             body={query ? "Try another search." : kind === "history" ? "Your attempts for this exam will appear here." : `Reviewed ${examName} papers appear here when published. Nothing fake is shown.`}
             action={kind === "mocks" && !own ? <Pill testID="catalogue-try-chapters" kind="outline" label="Try chapter-wise practice" onPress={() => router.replace(`/catalogue?slug=${slug}&kind=chapters`)} /> : undefined} /></DCard>
-        ) : undefined}
+        )) : undefined}
         ListFooterComponent={res.data?.pages > 1 ? (
           <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
             <Pill testID="catalogue-prev-page" kind="outline" label="Previous" icon="chevron-left" disabled={page <= 1} onPress={() => setPage((p) => p - 1)} style={{ flex: 1 }} />
@@ -146,3 +185,8 @@ function Catalogue() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  classTabs: { paddingHorizontal: space.lg, marginTop: space.md },
+  classHead: { letterSpacing: 1.6, marginTop: space.sm },
+});

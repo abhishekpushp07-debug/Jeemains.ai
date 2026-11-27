@@ -20,6 +20,7 @@ from later import later
 from load_guard import load
 from rf_access import trust_key
 from session_coordination import session_rotation
+from social import name_kept
 
 JEELIVE_API = os.environ['JEELIVE_API'].rstrip('/')
 SID_RE = re.compile(r"^[A-Za-z0-9-]{16,64}$")
@@ -153,6 +154,8 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
         await db.rf_trust.delete_one({"_id": trust_key(x_jl_sid, "")})  # nor can it keep playing while the website is down
     elif sets or gone:
         await save_cookie_changes(x_jl_sid, sets, gone, uid)
+    if request.method == "PUT" and path == "profile/display-name" and r.is_success:
+        await name_kept(db, x_jl_sid, r)  # the name the website just kept is the one Rapid Fire shows too
     if website_trouble(r):  # e.g. its Cloudflare "520" page: a plain line instead, and the app tries again
         return busy_website(r.headers.get("retry-after") or "5")
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}

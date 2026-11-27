@@ -1,0 +1,27 @@
+{
+  "summary": "JEELIVE.AI Iteration 151 (Class 11/12 Chapter-wise tabs + one-name rule + coloured glossy tabs + red chip). Backend: 35 of 35 pytest cases passed across test_chosen_name, test_class_levels, test_phase2_speed, test_rf_social, test_account_deletion, test_rf_free_picks; arena_web_complete 9 of 9 passed; node class_levels_check.js prints 'all passed'. Frontend: class_name_check 30 of 30 (390x844) + 30 of 30 (360x640 small) + 12 of 12 (arena); rf_picker_check 42 of 42 (app) + 42 of 42 (arena). Visual review at 390x844 confirmed: three glossy coloured class tabs (All pink, Class 11 yellow, Class 12 sky blue) at ~52 px high (>44), order (search -> tabs -> chips -> list), counts shown in badges, 'CLASS 11 . 15 CHAPTERS' heading, selected subject chip is brand red with readable white text, nothing clipped. Account 'Add your name' row 72 px tall inside screen; Rapid Fire picker opens on PCM with nothing ticked and 'CLASS 11 . PCM . 42 CHAPTERS' heading followed by Class 12 section. Public endpoints: GET /api/app/switches returns {pictures:5, matched:true, classes:1}; GET /api/app/classes returns the expected {version, exams: {'jee-main': {Physics, Chemistry, Mathematics: {plain name: 11|12}}}}. Backend origin sends 'Cache-Control: public, max-age=86400' for /api/app/classes; the preview edge (cloudflare) rewrites it to no-store on the public URL - this is a preview-environment artifact (app relies on the version in /api/app/switches, not HTTP caching, so it has no functional impact). Owner-account safety respected: QA learner signed in once per script, PUT /api/jl/profile/display-name answered by the browser only, no real name was saved on the website, no paper started/answered/submitted, no Rapid Fire real round played, no delete / drop issued by any test.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/iter151_backend.xml",
+    "/app/test_reports/pytest/iter151_arena.xml",
+    "/tmp/class_runs/",
+    "/tmp/picker_runs/"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Preview edge (cloudflare) overrides the backend's Cache-Control: public, max-age=86400 on /api/app/classes with no-store. This does not break correctness because the app uses the version in /api/app/switches to decide whether to refetch; still, if long-term CDN caching matters, consider setting Cache-Control via a route-level header on the ingress instead of the uvicorn response.",
+    "Independent regression spot-checks passed: Chapter-wise stays single-selection (no Select-all on that screen), BITSAT chapter-wise has no class tabs and still pages 12 at a time, grouping never hides a chapter (Chemistry OTHER section shows '24 Miscellaneous'), class-tab switch does not refetch the website (asked=0), and profileName heard/useCached is keyed per user id so one account's name cannot leak to another on the same device."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. test_chosen_name.py uses three fixed TEST-name-kept|noted|proxy players reset by update (no deletes). No canonical-website writes other than the one sign-in per script.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All seven required verification scripts PASS exactly as specified in the request: backend pytest (35 passed), arena_web_complete (9 passed), class_levels_check.js ('all passed'), class_name_check default/small/arena (30/30, 30/30, 12/12), rf_picker_check app/arena (42/42, 42/42). Known non-blocking items (NOT this iteration's work, carried over from main-agent handoff): /api/brand/* and /api/marketing/launch/* return 503 (object storage unreachable with this fork's key); test_iter55_transport_media.py::download_integrity fails for the same reason; test_samples_stay_home::test_the_real_doors... fails only when running in the same process immediately after test_iter55_transport_media (event-loop / Mongo client reuse). Also by design (not a bug): a name saved on the canonical website before this change is unknown to our server until it is saved once more; finished Rapid Fire matches keep the name as it was when they were played. Do not confirm account deletion with the QA learner's real PIN; never press rf-scope-done/rf-scope-play for real outside the checked scripts; never Start/Resume/Submit a paper on the QA learner."
+}

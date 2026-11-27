@@ -26,6 +26,7 @@ import app_switches
 import card_bank
 import ceo_api
 import choice
+import class_levels
 import db_setup
 import health_alerts
 import health_panel
@@ -116,6 +117,7 @@ api.include_router(health_panel.make_router(db))
 api.include_router(health_alerts.make_router(db))
 api.include_router(ceo_api.make_router(db))
 api.include_router(app_switches.router)
+api.include_router(class_levels.router)
 api.include_router(matched.make_router(db))
 api.include_router(choice.make_router(db, jl_proxy.client))
 app.include_router(api)

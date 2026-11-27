@@ -3,6 +3,7 @@
 Changing a switch here and publishing reaches every phone the next time the app is opened: no new app build."""
 from fastapi import APIRouter
 
+import class_levels
 import matched
 from database import db
 
@@ -34,4 +35,6 @@ router = APIRouter()
 
 @router.get("/app/switches")
 async def switches():
-    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD)}
+    # "classes": the number of the Class 11 / Class 12 chapter list (class_levels.py). An app that carries an older list
+    # asks for the new one (GET /api/app/classes); an app that carries this one asks for nothing.
+    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION}

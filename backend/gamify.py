@@ -379,8 +379,12 @@ def make_router(db, rf_user):
         name = str(data.get("name", "")).strip()[:24]
         if not name:
             raise HTTPException(400, "Name required.")
-        await db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": name}}, upsert=True)
-        board_cache.clear()
+        # A signed-in student has one name everywhere, the one the website keeps (social.set_chosen_name): this older
+        # door never writes over it.
+        known = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "chosen_name": 1, "display_name": 1, "phone_last4": 1}) or {}
+        if not (known.get("chosen_name") or known.get("display_name") or known.get("phone_last4")):
+            await db.rf_profiles.update_one({"uid": uid}, {"$set": {"name": name}}, upsert=True)
+            board_cache.clear()
         return {"ok": True}
 
     # Public read API so the JEELIVE.AI website (or any client) can use the same Rapid Fire bank.

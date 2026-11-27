@@ -134,5 +134,6 @@ def test_server_only_wires_things_together():
         assert path in paths, path
     # 144 after the split + the App Health page and its data (Phase 3) = 146, + the 15 of what came after (none removed,
     # compared route by route on 26 Nov 2026): app switches, the CEO page (2), Student Choice (2), Matched (3),
-    # health alerts (2), rank cutoff (3), All India misses, removing a dream mock.
-    assert len(server.app.routes) == 161
+    # health alerts (2), rank cutoff (3), All India misses, removing a dream mock. + 2 on 27 Nov 2026 (none removed, compared
+    # route by route): GET /api/app/classes (Class 11 / Class 12 list) and GET /api/rf/name (the student's own name).
+    assert len(server.app.routes) == 163

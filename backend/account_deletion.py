@@ -183,8 +183,8 @@ async def erase_companion(db, uid: str) -> dict:
     """Everything this server keeps about one player: personal rows are removed, shared matches keep only the game
     record (score and time) without the name, picture or look. Safe to run again."""
     now = time.time()
-    profile = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "name": 1, "display_name": 1, "phone_last4": 1}) or {}
-    names = {n for n in (profile.get("name"), profile.get("display_name"), "••••••" + profile["phone_last4"] if profile.get("phone_last4") else None) if n}
+    profile = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "name": 1, "display_name": 1, "chosen_name": 1, "phone_last4": 1}) or {}
+    names = {n for n in (profile.get("name"), profile.get("display_name"), profile.get("chosen_name"), "••••••" + profile["phone_last4"] if profile.get("phone_last4") else None) if n}
     anon = {f"players.$[p].{k}": v for k, v in {"name": DELETED_NAME, "avatar": None, "frame": None, "entry": None, "pid": None, "deleted": True}.items()}
     pick = [{"p.uid": uid}]
     done = {}

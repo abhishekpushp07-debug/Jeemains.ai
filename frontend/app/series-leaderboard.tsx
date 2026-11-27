@@ -26,11 +26,10 @@ import { ScreenMotion } from "@/src/motion";
 import { istDate } from "@/src/navigation";
 import { colors, fonts, noOutline, pastel, radius, space, tabEdges } from "@/src/theme";
 import { DayInfo, dayAttempt, istTime, useSeriesData } from "@/src/series";
+import { heard } from "@/src/profileName"; // the name last heard in this run of the app (and whose it is): shared with the Account screen
 
 type Part = "top" | "around" | "find";
 type Scope = "day" | "all";
-// The leaderboard name last heard from the website in this run of the app (and whose it is), so coming back to the screen shows it at once.
-const heard: { uid?: string; name?: string } = {};
 // "Har din" / "Poori series" wear My Tests' baby pink: full when open, a softer wash when not.
 const SCOPE_LOOK: TabLook = { on: [colors.custom_tabPink, colors.custom_tabPinkDeep], rest: [colors.custom_tabPinkSoft, colors.custom_tabPinkSoftDeep], edge: tabEdges.pink, glow: colors.custom_tabPinkGlow };
 // The three parts are glossy tabs, each in its own colour: yellow for the toppers, orange for your neighbours, sky blue

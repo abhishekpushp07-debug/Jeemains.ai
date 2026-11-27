@@ -8,6 +8,8 @@ import { Glyph } from "@/src/components/Glyph";
 import { DCard, DSheet, GroupList, ListRow, Pill, ScreenHeader } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
+import { NameSheet } from "@/src/components/series/NameSheet";
+import { useChosenName } from "@/src/profileName";
 
 export default function Account() {
   const insets = useSafeAreaInsets();
@@ -15,6 +17,11 @@ export default function Account() {
   const { user, signOut, pendingDraftCount, expired } = useAuth();
   const [sheet, setSheet] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
+  // The name the student wrote for themselves ("" = none yet): the one every leaderboard and Rapid Fire show.
+  const chosen = useChosenName(user?.id);
+  const [naming, setNaming] = useState(false);
+  const [kept, setKept] = useState<string>();
+  const mine = kept ?? chosen;
 
   async function begin() {
     const n = await pendingDraftCount();
@@ -36,10 +43,14 @@ export default function Account() {
         <DCard testID="account-profile" style={styles.profile}>
           <View style={styles.avatar}><Glyph name="account-outline" size={28} color={colors.onSurface} stroke={1.4} /></View>
           <View style={{ flex: 1, gap: 2 }}>
-            <T testID="account-name" w="heavy" size={18}>{user?.name || "Practice profile"}</T>
+            <T testID="account-name" w="heavy" size={18}>{mine || user?.name || "Practice profile"}</T>
             <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEELIVE profile"}</T>
           </View>
         </DCard>
+        {user && !expired ? <GroupList title="Profile" testID="account-group-profile">
+          <ListRow testID="account-name-button" icon="account-edit-outline" label={mine ? "Change your name" : "Add your name"}
+            sub={mine ? "Shown on leaderboards and in Rapid Fire" : "Leaderboards and Rapid Fire show “Learner” until you add one"} onPress={() => setNaming(true)} />
+        </GroupList> : null}
         <Notice testID="account-pin-notice">Sign in with your mobile number and 4-digit PIN. A PIN does not verify phone ownership; no OTP is sent.</Notice>
         {expired ? <Pill testID="account-reenter-button" size="lg" label="Sign in again" icon="login" onPress={() => finish("keep")} /> : null}
         <GroupList title="Security" testID="account-group-security">
@@ -63,6 +74,7 @@ export default function Account() {
         <Pill testID="signout-keep-drafts" kind="outline" label="Keep drafts & sign out" onPress={() => finish("keep")} />
         <Pill testID="signout-discard-drafts" kind="danger" label="Discard drafts & sign out" onPress={() => finish("discard")} />
       </DSheet>
+      <NameSheet visible={naming} current={mine ?? ""} onClose={() => setNaming(false)} onSaved={(name) => { setNaming(false); setKept(name); }} />
     </View>
   );
 }

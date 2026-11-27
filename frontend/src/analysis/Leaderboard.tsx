@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { ApiError, api } from "@/src/api/client";
+import { onNameSaved } from "@/src/profileName";
 import { Icon, T } from "@/src/components/ui";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { TONE, mmss, pc } from "./format";
@@ -11,6 +12,7 @@ const seen = new Map<string, { d: any; at: number }>();
 export const forgetBoard = (id: string) => { [...seen.keys()].forEach(k => { if (k.startsWith(id + "|")) seen.delete(k); }); };
 /** Forget every leaderboard: the student's name on them has just changed. */
 export const forgetBoards = () => seen.clear();
+onNameSaved(forgetBoards); // also when the name was written on the Account screen
 
 /** The whole All India series' leaderboard (every live day's Score added up) is asked through the same hook under this name. */
 export const SERIES_BOARD = "series:all-india-jee";

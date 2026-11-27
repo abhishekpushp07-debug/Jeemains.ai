@@ -38,6 +38,14 @@
   Practice Rival always open it first. Server: up to 5 picks everything is as before; more than 5 is new
   (`backend/scope.py` `CLASSIC_PICKS`, `MAX_PICKS`). The browser copy was rebuilt. Waiting for a Publish.
   Details: last section of `memory/PRD.md`; test rules: first section of `memory/test_credentials.md`.
+- **Class 11 / Class 12 + one name (27 Nov 2026, evening; preview only):** Chapter-wise has glossy tabs All | Class 11 |
+  Class 12 (JEE Physics / Chemistry / Maths; single chapter per tap as before; the subject chip in view is red); the
+  Rapid Fire picker lists Class 11 then Class 12 under small headings (no new tab). The list is
+  `backend/class_levels.json` = `frontend/src/classLevels.json` (edit both, raise `version`, Publish: apps fetch it, no
+  new build). Account has "Add / Change your name": the website keeps the name, our server notes the website's own
+  "saved" answer (`social.name_kept`, `chosen_name`) and Rapid Fire shows the same name. **Not built, owner said later:**
+  a Class 11 random mock / AITS mock from chapters. **Tests must never delete or drop in MongoDB** (owner's rule):
+  `test_chosen_name.py` shows how (fixed TEST- players, reset by update). Details: last section of `memory/PRD.md`.
 
 ---
 

@@ -8,6 +8,7 @@ import { GoldTitle, RaisedButton } from "./arena";
 import { Check } from "./parts";
 import { CardCountPicker } from "./CardCount";
 import { CardCount, CatalogSubject, PCM, Pick, SHORT, SUBJECTS, allTicked, cardCount, fitCount, getCardCount, isBitsat, picksToPlay, scopeLabel, setCardCount, tickAll, tickChapter, tickedOf } from "./scope";
+import { classOf, useClassBook } from "@/src/classLevel";
 
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", English: "alphabetical-variant", "Logical Reasoning": "puzzle-outline" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -15,8 +16,10 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const ALL_PCM = "PCM", PCM_NAMES = PCM.map((p) => p.subject), TABS = [ALL_PCM, ...SUBJECTS];
 const firstTab = (picks: Pick[]) => (picks.length && !picks.some((p) => PCM_NAMES.includes(p.subject)) ? picks[0].subject : ALL_PCM);
 const chaptersText = (n: number) => `${n} chapter${n === 1 ? "" : "s"}`;
-/** One line of the list: a subject's heading (no `name`) or one chapter. */
-type Line = { key: string; subject: string; name?: string; count: number };
+/** Rapid Fire's Physics, Chemistry and Maths chapters are the JEE ones: that list says which class each belongs to. */
+const CLASS_EXAM = "jee-main";
+/** One line of the list: a heading (no `name`; `label` = its words) or one chapter. */
+type Line = { key: string; subject: string; name?: string; count: number; label?: string };
 
 /** One chapter with its tick. Kept apart so that a tick redraws that one row, not the whole list. */
 const ChapterRow = React.memo(function ChapterRow({ subject, name, count, on, tag, onToggle }: { subject: string; name: string; count: number; on: boolean; tag: boolean; onToggle: (subject: string, name: string) => void }) {
@@ -34,7 +37,8 @@ const ChapterRow = React.memo(function ChapterRow({ subject, name, count, on, ta
 
 /**
  * Battleground picker. Nothing is ever ticked for the student: the picker opens on the PCM tab with every chapter unticked.
- * Tabs: PCM, then each subject. Under them "Select all" and "Clear" for the tab in view, then that tab's chapters.
+ * Tabs: PCM, then each subject. Under them "Select all" and "Clear" for the tab in view, then that tab's chapters:
+ * for Physics, Chemistry and Maths the Class 11 chapters first, then the Class 12 ones, each under a small heading.
  * Any number of chapters may be ticked, across subjects; a ticked chapter is unticked with one tap, also after Select all.
  */
 export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, min = 30, title = "Choose your battleground", hint, action, testID = "rf-scope-sheet" }: {
@@ -47,14 +51,23 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
   const [q, setQ] = useState("");
   const [was, setWas] = useState(false), [count, setCount] = useState<CardCount>(getCardCount()); // the 30/50/100 choice is kept on SAVE / PLAY only
   if (visible !== was) { setWas(visible); if (visible) { setDraft(value); setTab(firstTab(value)); setQ(""); setCount(getCardCount()); } }
-  const query = q.trim().toLowerCase();
+  const query = q.trim().toLowerCase(), book = useClassBook();
   // The subjects of the tab in view, and the lines under it (with a search: the chapters of every subject that match).
   const shown = useMemo(() => subjects.filter((s) => (tab === ALL_PCM ? PCM_NAMES.includes(s.name) : s.name === tab)), [subjects, tab]);
   const lines = useMemo<Line[]>(() => {
     const chapters = (s: CatalogSubject) => s.chapters.map((c) => ({ key: `${s.name}:${c.name}`, subject: s.name, name: c.name, count: c.count }));
     if (query) return subjects.flatMap((s) => chapters(s).filter((c) => c.name.toLowerCase().includes(query)));
-    return shown.flatMap((s) => [{ key: s.name, subject: s.name, count: s.chapters.length }, ...chapters(s)]);
-  }, [query, subjects, shown]);
+    const all = shown.flatMap(chapters), levels = all.map((c) => classOf(CLASS_EXAM, c.subject, c.name));
+    // A tab whose chapters have no class (English, Reasoning): each subject under its own heading, as it comes.
+    if (!levels.some((level) => level !== null)) return shown.flatMap((s) => [{ key: s.name, subject: s.name, count: s.chapters.length, label: `${SHORT[s.name].toUpperCase()} · ${s.chapters.length} CHAPTERS${isBitsat(s.name) ? " · BITSAT 2026" : ""}` }, ...chapters(s)]);
+    // Physics, Chemistry, Maths: Class 11 first, then Class 12; a chapter whose class is not known comes last. Only the order
+    // and the two headings: every tick, Select all and Clear work on the whole tab exactly as before.
+    const where = tab === ALL_PCM ? "PCM" : SHORT[tab].toUpperCase();
+    return ([11, 12, null] as const).flatMap((level) => {
+      const part = all.filter((_, i) => levels[i] === level);
+      return part.length ? [{ key: `class:${level}`, subject: "", count: part.length, label: `${level ? `CLASS ${level}` : "MORE"} · ${where} · ${part.length} CHAPTERS` }, ...part] : [];
+    });
+  }, [query, subjects, shown, tab, book]); // eslint-disable-line react-hooks/exhaustive-deps
   const ticked = useMemo(() => new Set(subjects.flatMap((s) => tickedOf(draft, s).map((c) => `${s.name}:${c}`))), [draft, subjects]);
   // What SAVE / PLAY hands over: see picksToPlay (whole subjects share evenly; with single chapters, every ticked chapter does).
   const out = useMemo(() => picksToPlay(draft, subjects), [draft, subjects]);
@@ -63,9 +76,11 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
   const done = () => { setCardCount(count); onDone(out); onClose(); return out; };
   const toggle = useCallback((subject: string, name: string) => { const s = subjects.find((x) => x.name === subject); if (s) setDraft((d) => tickChapter(d, s, name)); }, [subjects]);
   const open = (t: string) => { tap(); setTab(t); list.current?.scrollToOffset({ offset: 0, animated: false }); };
+  // On the PCM tab the three subjects' chapters stand together under each class, so every row says its subject.
+  const tagged = !!query || tab === ALL_PCM;
   const line = useCallback(({ item }: { item: Line }) => (item.name === undefined
-    ? <T w="heavy" size={11} color={arena.muted} style={styles.label}>{`${SHORT[item.subject].toUpperCase()} · ${item.count} CHAPTERS${isBitsat(item.subject) ? " · BITSAT 2026" : ""}`}</T>
-    : <ChapterRow subject={item.subject} name={item.name} count={item.count} on={ticked.has(item.key)} tag={!!query} onToggle={toggle} />), [ticked, query, toggle]);
+    ? <T testID={`rf-scope-head-${slug(item.key)}`} w="heavy" size={11} color={arena.muted} style={styles.label}>{item.label}</T>
+    : <ChapterRow subject={item.subject} name={item.name} count={item.count} on={ticked.has(item.key)} tag={tagged} onToggle={toggle} />), [ticked, tagged, toggle]);
 
   // Above the chapters of a tab: the round's size, then Select all and Clear for exactly the chapters listed below.
   const head = <View style={styles.top}>
