@@ -9,6 +9,8 @@ import type { MisfireItem } from "./api";
 // A paper without chapter names calls every question "Previous-year paper": that is not a chapter worth showing.
 const GENERIC = /^(previous-year paper|uncategorised)$/i;
 export const chapterName = (c?: string | null) => { const v = (c || "").trim(); return v && !GENERIC.test(v) ? v : ""; };
+/** A chapter as a Misfire Mock lists it: the questions of papers without chapter names under one honest name. */
+export const chapterLabel = (c?: string | null) => chapterName(c) || "PYQ papers ke sawaal (chapter tag nahi)";
 export const marks = (v?: number | null) => (v == null ? "" : String(Math.round(v * 100) / 100));
 export const OUTCOME: Record<string, [string, Tone, IconName]> = { incorrect: ["Galat", "bad", "close"], skipped: ["Chhoda tha", "warn", "minus"] };
 export const slugOf = (v: string) => (v || "all").toLowerCase().replace(/[^a-z0-9]+/g, "-");

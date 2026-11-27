@@ -43,6 +43,15 @@ export function AllTab({ uid, summary, startSubject = "", startChapter = "" }: {
     {mode !== "chapters" ? <>
       {subjects.length ? <PillRow prefix="misfire-subject" value={subject} onChange={k => { setSubject(k); setChapter(""); }}
         items={[{ key: "", label: "Sab" }, ...subjects.map(s => ({ key: s.name, label: s.name, count: s[status] }))]} /> : null}
+      {mode === "open" && (summary?.open || 0) > 0 ? <Press testID="misfire-mock-cta" onPress={() => router.push("/misfire/mock/new" as any)} scaleTo={0.99}
+        accessibilityLabel="Inhi galtiyon se mock banao" style={styles.mock}>
+        <Icon name="fire" size={18} color={colors.custom_chipBlood} />
+        <View style={{ flex: 1, minWidth: 0 }}>
+          <T w="heavy" size={14} color={colors.custom_chipBloodDeep}>Inhi galtiyon se mock banao</T>
+          <T size={11.5} color={colors.custom_softText} numberOfLines={1}>Subject, chapter aur ginti chuno · JEE Main jaisa</T>
+        </View>
+        <Icon name="arrow-right" size={18} color={colors.custom_chipBlood} />
+      </Press> : null}
       {chapters.length > 1 || chapter ? <Press testID="misfire-chapter-filter" onPress={() => setSheet(true)} accessibilityLabel={`Chapter: ${chapter || "saare"}. Badlo`} style={styles.chapter}>
         <Icon name="filter-variant" size={16} color={colors.custom_softText} />
         <T w="bold" size={13} numberOfLines={1} style={{ flex: 1 }}>{chapter || "Saare chapter"}</T>
@@ -85,6 +94,7 @@ export function AllTab({ uid, summary, startSubject = "", startChapter = "" }: {
 
 const styles = StyleSheet.create({
   chapter: { minHeight: 46, flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: space.md, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card },
+  mock: { minHeight: 56, flexDirection: "row", alignItems: "center", gap: 10, paddingHorizontal: space.md, paddingVertical: 8, borderRadius: 16, borderWidth: 1, borderColor: colors.custom_chipBlood, backgroundColor: colors.custom_chipBloodSoft },
   paper: { letterSpacing: 1.4, marginTop: space.sm },
   pick: { minHeight: 48, flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.md, borderRadius: 12, borderWidth: 1, borderColor: colors.custom_cardLine },
   pickOn: { borderColor: colors.onSurface, backgroundColor: colors.custom_cardRaised },

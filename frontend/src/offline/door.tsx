@@ -41,7 +41,8 @@ export function OfflineKeeper() {
   // A paper being attempted, or a Rapid Fire round being played (not its lobby), has the line and the phone to itself:
   // nothing is fetched in the background meanwhile.
   const pathname = usePathname();
-  useEffect(() => { holdKeeping(pathname.startsWith("/attempt/") || pathname.startsWith("/rapid/")); }, [pathname]);
+  // A paper, a Rapid Fire round or a Misfire Mock being taken: nothing is fetched in the background meanwhile.
+  useEffect(() => { holdKeeping(pathname.startsWith("/attempt/") || pathname.startsWith("/rapid/") || (pathname.startsWith("/misfire/mock/") && pathname !== "/misfire/mock/new")); }, [pathname]);
   // Rounds still waiting while the app stays open (the line dropped at the end of a sprint): tried again every 45 seconds.
   const uid = user?.id, waiting = useKeptRounds(uid);
   useEffect(() => {

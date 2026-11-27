@@ -1171,3 +1171,15 @@ iteration157_ceo_aits:
 - ErrorBox Retry (src/components/ui.tsx): hitSlop (ignored on web) replaced by padding 13/16/13/8 + matching negative margins → button 57x44, the note looks the same.
 - tests/iter158_retry_hitslop_check.py now aims from the visible word "Retry" (taps outside the word but inside the 44 px button must retry): 6/6 locally.
 - SectionGuard keyed on each answer object (answerKey WeakMap in Workspace.tsx); iter158_section_guard_check.py 32/32.
+
+
+## Iteration160 — My Tests 4 exam tabs (red) + Misfire Mock made/taken/marked on the phone (29 Nov 2026) — preview only
+iteration160_mytests_misfire_mock:
+  user_request: "My Tests: no 'All outcomes'..'Sealed' filters; only All exams, JEE Mains, BITSAT, COMEDK; selection red. Misfire mocks with aesthetic result, clean blood-red selection, subject tabs in Student Choice colours; questions/answers/solutions from already finished papers; right ones -> 'Samajh gaya' automatically; fewer available = use what there is; shows in My Tests and Misfire; subject + multi chapter + Select all; Maths 25=80, Physics 25=60, Chemistry 25=40 min. Owner gave full authority, no questions."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  frontend_files: "NEW src/components/RedTabs.tsx; app/(tabs)/tests.tsx (outcome chips removed, 4 RedTabs, mocks merged); NEW app/misfire/mock/new.tsx, app/misfire/mock/[id].tsx; NEW src/misfire/mock/{store.ts,build.ts,marking.ts,pictures.ts,Ready.tsx,Player.tsx,Result.tsx,MocksTab.tsx}; app/misfire/index.tsx (Mock tab); src/misfire/AllTab.tsx (CTA); src/misfire/parts.tsx (chapterLabel); src/offline/door.tsx (keeper paused while a mock is taken)."
+  main_checks: "tsc 0; eslint clean; tests/misfire_mock_check.py 24/24 both modes; BLOCKED []; PAGEERRORS []; right mode FAKED 4 try + 4 done."
+  read_only_rules: "QA learner is the owner's account. Never let try/done reach the website (stand-ins in tests/misfire_mock_check.py)."
+  result_iteration160: "testing agent: all features pass; bug = mock serial repeated when /misfire/mock/new opened before the list loaded -> fixed (await loadMocks() before nextNumber in build.ts; tests/misfire_mock_number_check.py 1 2 3). Also: 360 px labels shortened (player dock 'Review'/'Submit', palette 'Back', new-mock bar 'Phy 5 · Chem 5 · Maths 3'); remove asks twice; fewer-than-asked notice names asked vs found (mock.asked); solution source line no longer repeats the chapter. Re-run: misfire_mock_edge_check.py 360 -> 40/41 (only miss = no real chapter under 25 questions, cannot be tested with this account), misfire_mock_check.py 360 right 24/24, BLOCKED [] PAGEERRORS []."

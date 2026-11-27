@@ -7,17 +7,19 @@ import { useAuth } from "@/src/auth";
 import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
-import { Chip, Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
+import { Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DSheet, Pill, StatusLine } from "@/src/components/design";
 import { GlossTabs, TabLook } from "@/src/components/GlossTabs";
+import { RedTabs } from "@/src/components/RedTabs";
 import { ScreenMotion } from "@/src/motion";
 import { toneInk } from "@/src/components/PyqPaperCard";
 import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
 import { EXAMS, fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 import { useExams } from "@/src/api/examCatalog";
-
-const EXAM_FILTERS = EXAMS.map(e => ({ key: e.name, name: e.name }));
+import { timeLabel } from "@/src/choice/api";
+import { MockRow, mockOver, useMocks } from "@/src/misfire/mock/store";
+import { useSendWaiting } from "@/src/misfire/mock/marking";
 
 type Tab = "progress" | "saved" | "completed";
 const TABS: Tab[] = ["completed", "progress", "saved"];
@@ -27,21 +29,58 @@ const TAB_LOOK: Record<Tab, TabLook> = {
   progress: { on: [colors.custom_tabSun, colors.custom_tabSunDeep], rest: [colors.custom_tabSunSoft, colors.custom_tabSunSoftDeep], edge: tabEdges.sun, glow: colors.custom_tabSunGlow },
   saved: { on: [colors.custom_tabSky, colors.custom_tabSkyDeep], rest: [colors.custom_tabSkySoft, colors.custom_tabSkySoftDeep], edge: tabEdges.sky, glow: colors.custom_tabSkyGlow },
 };
-const STATUS: Record<Tab, [string, string][]> = {
-  progress: [["all", "All ongoing"]],
-  saved: [["all", "All"], ["available", "Available"], ["unavailable", "Unavailable"]],
-  completed: [["all", "All outcomes"], ["completed", "Scored"], ["expired", "Time expired"], ["grading", "Preparing"], ["embargoed", "Sealed"]],
-};
 const STATUS_LABEL: Record<string, string> = {
   active: "In progress", expired: "Time expired · finish grading", embargoed: "Result sealed", completed: "Scored", grading: "Preparing result",
 };
 // Kept at module level so returning to this tab restores the same view.
-const memo = { tab: "completed" as Tab, q: "", status: "all", exam: "" };
+const memo = { tab: "completed" as Tab, q: "", exam: "" };
+
+/** The website's list keeps its own order; each Misfire Mock (made on this phone) goes in before the first paper older than it. */
+const mockTime = (m: MockRow) => Math.round((m.submitted_at || m.started_at || m.made_at) / 1000);
+function withMocks(items: any[], mocks: MockRow[]) {
+  const left = [...mocks].sort((a, b) => mockTime(b) - mockTime(a)).map(m => ({ ...m, kind: "mock", id: "mock-" + m.id, mock: m }));
+  const out: any[] = [];
+  for (const it of items) {
+    const at = Number(it.submitted_at || it.started_at || 0);
+    while (left.length && mockTime(left[0].mock) >= at) out.push(left.shift());
+    out.push(it);
+  }
+  return [...out, ...left];
+}
 
 /** A test's card: white, as Home's four exam cards; only the tabs above carry colour. `chosen` = picked for Compare. */
 function PaperCard({ testID, chosen, faded, children }: { testID: string; chosen?: boolean; faded?: boolean; children: React.ReactNode }) {
   return <LinearGradient testID={testID} colors={[colors.custom_chipFrom, colors.custom_chipTo]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
     style={[styles.paper, chosen && styles.paperOn, faded && styles.faded]}>{children}</LinearGradient>;
+}
+
+/** A Misfire Mock, on the same white card: made from the student's own Misfire questions and kept on this phone. */
+function MockCard({ m, onOpen }: { m: MockRow; onOpen: () => void }) {
+  const over = mockOver(m), timeUp = over && m.status !== "done";
+  const label = m.status === "done" ? "Scored" : timeUp ? "Time over · result ready" : m.status === "active" ? "In progress" : "Ready to start";
+  const left = m.status === "active" && m.deadline && !over ? Math.round((m.deadline - Date.now()) / 1000) : 0;
+  const action = over ? "Open result" : m.status === "active" ? "Resume" : "Start";
+  return (
+    <PaperCard testID={`mock-container-${m.id}`}>
+      <Press testID={`mock-card-${m.id}`} onPress={onOpen} scaleTo={0.99} style={styles.attemptContent}>
+        <View style={styles.statusRow}>
+          <StatusLine testID={`mock-status-${m.id}`} label={label} color={colors.custom_chipBlood} ink={colors.custom_tabInk} />
+          <T testID={`mock-exam-${m.id}`} size={11.5} color={colors.custom_tabInkSoft}>Misfire Mock{m.exam && m.exam !== "Mixed" ? ` · ${m.exam}` : ""}</T>
+        </View>
+        <T testID={`mock-title-${m.id}`} w="heavy" size={17} color={colors.custom_tabInk}>{m.title}</T>
+        <T testID={`mock-meta-${m.id}`} size={12} color={colors.custom_tabInkSoft}>
+          {m.started_at ? "Started" : "Made"} {unixDate(Math.round((m.started_at || m.made_at) / 1000))} · {m.count} sawaal · {timeLabel(m.minutes)}{left > 0 ? ` · ${fmtClock(left)} left` : ""}
+        </T>
+        {m.score != null ? <T testID={`mock-score-${m.id}`} w="heavy" size={15} color={m.score < 0 ? colors.custom_chipBloodDeep : colors.custom_tabInk}>{m.score} / {m.maximum} marks{m.accuracy != null ? ` · ${m.accuracy}% accuracy` : ""}</T> : null}
+      </Press>
+      <View style={styles.actions}>
+        <Press testID={`mock-action-${m.id}`} onPress={onOpen} style={[styles.go, over ? styles.goOutline : { backgroundColor: colors.onSurface }]}>
+          <T w="heavy" size={12.5} color={over ? colors.custom_tabInk : colors.custom_bar}>{action}</T>
+          <Icon name="arrow-right" size={15} color={over ? colors.custom_tabInk : colors.custom_bar} />
+        </Press>
+      </View>
+    </PaperCard>
+  );
 }
 
 export default function MyTests() {
@@ -52,20 +91,19 @@ export default function MyTests() {
   const [tab, setTab] = useState<Tab>(memo.tab);
   const [q, setQ] = useState(memo.q);
   const [query, setQuery] = useState(memo.q);
-  const [status, setStatus] = useState(memo.status);
   const [exam, setExam] = useState(memo.exam);
   const [selected, setSelected] = useState<any[]>([]);
   const [cmp, setCmp] = useState<{ open: boolean; data?: any; error?: string; busy?: boolean }>({ open: false });
-  Object.assign(memo, { tab, q: query, status, exam });
+  Object.assign(memo, { tab, q: query, exam });
   // Home stat cards open this screen on a chosen tab.
   useEffect(() => {
-    if (params.tab && (TABS as string[]).includes(params.tab)) { setTab(params.tab as Tab); setStatus("all"); setSelected([]); }
+    if (params.tab && (TABS as string[]).includes(params.tab)) { setTab(params.tab as Tab); setSelected([]); }
   }, [params.tab, params.at]);
   useEffect(() => {
     const t = setTimeout(() => setQuery(q.trim()), 300);
     return () => clearTimeout(t);
   }, [q]);
-  const search = new URLSearchParams({ tab, page: "1", q: query, status, exam }).toString();
+  const search = new URLSearchParams({ tab, page: "1", q: query, status: "all", exam }).toString();
   const list = useCached<any>(user ? `u.${user.id}.tests.${search}` : null, (signal) => api("/my/tests?" + search, { signal }));
   useListFocus(list.revalidate);
   // Exam filters follow the website's exam list, so attempts of a newly added exam can be filtered too.
@@ -74,6 +112,18 @@ export default function MyTests() {
   // An exam the owner has hidden cannot stay selected: the website refuses that filter.
   const examKeys = catalog.exams?.map(e => e.key).join("|");
   useEffect(() => { if (exam && examKeys !== undefined && !examKeys.split("|").includes(exam)) setExam(""); }, [exam, examKeys]);
+  // The owner's four filters: All exams, JEE Main, BITSAT, COMEDK (an exam the website hides is left out).
+  const examTabs = [{ key: "", label: "All exams" }, ...EXAMS.flatMap(e => {
+    const live = catalog.exams?.find(x => x.slug === e.slug);
+    return live ? [{ key: live.key, label: e.name }] : catalog.exams ? [] : [{ key: e.name, label: e.name }];
+  })];
+  // Misfire Mocks live on this phone: the finished ones under Completed, the others under In progress.
+  const mocks = useMocks();
+  useSendWaiting(mocks);
+  const examName = examTabs.find(t => t.key === exam)?.label || "";
+  const mine = tab === "saved" ? [] : mocks.filter(m => (tab === "completed") === mockOver(m) && (!exam || m.exam === examName) && (!query || m.title.toLowerCase().includes(query.toLowerCase())));
+  const items = withMocks(list.data?.items ?? [], mine);
+  const local = { completed: mocks.filter(mockOver).length, progress: mocks.filter(m => !mockOver(m)).length, saved: 0 };
 
   const choose = (item: any) => setSelected((o) => (o.some((x) => x.id === item.id) ? o.filter((x) => x.id !== item.id) : o.length < 2 ? [...o, item] : o));
   async function compare() {
@@ -92,6 +142,7 @@ export default function MyTests() {
   }
 
   const renderItem = ({ item }: { item: any }) => {
+    if (item.kind === "mock") return <MockCard m={item.mock} onOpen={() => router.push(`/misfire/mock/${item.mock.id}` as any)} />;
     if (tab === "saved") {
       return (
         <PaperCard testID={"saved-paper-" + item.set_id} faded={!item.available}>
@@ -150,21 +201,17 @@ export default function MyTests() {
       <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
         <T testID="my-tests-title" w="heavy" size={28}>My Tests</T>
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.custom_eyebrow} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
-        <GlossTabs prefix="my-tests-tab" value={tab} onChange={(t) => { if (t !== tab) setSelected([]); setTab(t); setStatus("all"); }}
+        <GlossTabs prefix="my-tests-tab" value={tab} onChange={(t) => { if (t !== tab) setSelected([]); setTab(t); }}
           items={TABS.map(t => ({ key: t, label: t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed", look: TAB_LOOK[t], labelTestID: `my-tests-tab-label-${t}`,
-            sub: list.data?.counts ? String(list.data.counts[t]) : undefined, subTestID: `my-tests-count-${t}` }))} />
+            sub: list.data?.counts ? String((list.data.counts[t] || 0) + local[t]) : undefined, subTestID: `my-tests-count-${t}` }))} />
         <View style={styles.search}>
           <Icon name="magnify" size={20} color={colors.custom_eyebrow} />
           <TextInput testID="my-tests-search" value={q} onChangeText={setQ} placeholder="Search test names…" placeholderTextColor={colors.custom_dim} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
           {q ? <Press testID="my-tests-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.custom_eyebrow} /></Press> : null}
         </View>
       </View>
-      <View style={{ height: 60, justifyContent: "center" }}>
-        <FlatList horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}
-          data={[...STATUS[tab].map(([v, l]) => ({ k: "s" + v, v, l, kind: "status" })), { k: "divider", v: "", l: "", kind: "divider" }, ...[{ key: "", name: "All exams" }, ...(catalog.exams ?? EXAM_FILTERS)].map((e) => ({ k: "e" + e.key, v: e.key, l: e.name, kind: "exam" }))]}
-          keyExtractor={(x) => x.k}
-          renderItem={({ item }) => item.kind === "divider" ? <View style={styles.chipDivider} /> : <Chip testID={`my-tests-${item.kind}-${item.v || "all"}`} label={item.l} active={item.kind === "status" ? status === item.v : exam === item.v} onPress={() => { if (item.kind === "status") setStatus(item.v); else { if (item.v !== exam) setSelected([]); setExam(item.v); } }} />}
-        />
+      <View testID="my-tests-exam-filters" style={styles.filters}>
+        <RedTabs prefix="my-tests-exam" value={exam} onChange={(k) => { if (k !== exam) setSelected([]); setExam(k); }} items={examTabs} />
       </View>
       {selected.length > 0 ? (
         <View style={{ paddingHorizontal: space.lg, paddingBottom: space.sm }}>
@@ -172,7 +219,7 @@ export default function MyTests() {
         </View>
       ) : null}
       <FlatList
-        data={list.data?.items ?? []}
+        data={items}
         keyExtractor={(x) => x.id}
         renderItem={renderItem}
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, gap: space.md }}
@@ -182,7 +229,7 @@ export default function MyTests() {
           {tab === "completed" ? <T size={11} color={colors.custom_eyebrow} testID="my-tests-comparison-help">Select two attempts of the same paper and version to compare.</T> : null}
         </>}
         ListEmptyComponent={list.loading ? <View style={{ gap: space.md }}><Skeleton h={130} /><Skeleton h={130} /></View> : list.error ? <T testID="my-tests-unavailable" size={13} color={colors.muted}>Your tests could not be loaded. Your saved attempts have not been changed. Use Retry above.</T> : (
-          <PaperCard testID="my-tests-empty"><Empty icon="bookmark-outline" title={query || exam || status !== "all" ? "No tests match these filters." : tab === "saved" ? "Your next tests, kept here." : tab === "progress" ? "Ready for a fresh start?" : "Your journey starts with one attempt."} body={tab === "saved" ? "Tap Save on any paper. It won’t start an attempt." : "Existing attempts appear here automatically."} action={<Pill testID="my-tests-discover" label="Explore exams" iconRight="arrow-right" onPress={() => router.push("/(tabs)")} />} /></PaperCard>
+          <PaperCard testID="my-tests-empty"><Empty icon="bookmark-outline" title={query || exam ? "No tests match these filters." : tab === "saved" ? "Your next tests, kept here." : tab === "progress" ? "Ready for a fresh start?" : "Your journey starts with one attempt."} body={tab === "saved" ? "Tap Save on any paper. It won’t start an attempt." : "Existing attempts appear here automatically."} action={<Pill testID="my-tests-discover" label="Explore exams" iconRight="arrow-right" onPress={() => router.push("/(tabs)")} />} /></PaperCard>
         )}
       />
       <DSheet visible={cmp.open} onClose={() => setCmp({ open: false })} testID="compare-sheet" title="Attempt comparison">
@@ -221,5 +268,5 @@ const styles = StyleSheet.create({
   go: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 16, minHeight: 44, borderRadius: radius.pill },
   goOutline: { borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   search: { flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_cardRaised, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 },
-  chipDivider: { width: 1, height: 24, marginHorizontal: 4, backgroundColor: colors.custom_cardLineStrong },
+  filters: { paddingHorizontal: space.lg, paddingVertical: space.md },
 });

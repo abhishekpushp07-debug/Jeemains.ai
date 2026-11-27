@@ -1531,3 +1531,16 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - Fixtures: tests/aits_analysis_fixtures.py → tests/fixtures/aits_analysis/*.json (75 q, real chapter names, partial tags; bonus in no column like the website). Website note: memory/WEBSITE_AITS_ANALYSIS_NOTE.md (send real topic + paper levels, recalc saved analyses when tags change, PYQ has_chapters with generic name, preparing window, speed).
 - Speed: analysis answer 450–950 ms (website); answer → Overview 333–797 ms; section switch 84–275 ms (390 px).
 - Follow-up: ErrorBox Retry is now 44 px tall on every platform (padding + negative margins; web ignores hitSlop). SectionGuard resets on every new answer object. iteration_158: guard 32/32, fixtures 185/185 at 390 and 360.
+
+## My Tests 4 exam tabs + Misfire Mock (29 Nov 2026) — preview only, nothing deployed
+- Owner: "all outcomes se sealed tk filter ki jarurat nahi; All exams, JEE Main, BITSAT, COMEDK; selection red". Done: NEW src/components/RedTabs.tsx (equal tabs, chosen = blood-red gradient); app/(tabs)/tests.tsx outcome filters removed (status always "all"), 4 tabs `my-tests-exam-all|<website exam key>` (a hidden exam drops out).
+- Owner: "misfire mocks with aesthetic result, clean blood red selection, subject tabs in Student Choice colours"; correct ones go to "Samajh gaya" by themselves; fewer than asked = as many as there are; shown in My Tests and Misfire; subject + many chapters + Select all; timings Maths 25 = 80 min, Physics 25 = 60, Chemistry 25 = 40.
+- Made, taken and marked ON THE PHONE (nothing started on the website): src/misfire/mock/{store,build,marking,pictures,Ready,Player,Result,MocksTab}.tsx|ts; routes app/misfire/mock/new.tsx + [id].tsx.
+  - build: random open Misfire items (GET /my/misfire pages, per chapter shared by size), key + solution read from each paper's released result (kept copy on the phone first, else GET /attempts/{id}/results?score_version=original); bonus/dropped questions left out; at most ~12 papers first.
+  - store: account's encrypted kept store (saveKeptText), docs `mf.mocks`, `mf.mock.<id>`, `mf.mock.<id>.state`; 40 kept; cleared on sign-out/account change.
+  - marking: +4/−1/0; integer_exact rule (signs, Unicode minus, leading zeros). After submit every right answer: POST /my/misfire/{id}/try (website check) then /done → "Samajh gaya"; offline/5xx waits and is re-sent when the list/result is seen; refused = counted wrong.
+  - Clock = deadline (runs while closed); ran out while closed → marked when opened.
+- My Tests: mocks merged into Completed/In progress (website order kept), card `mock-card-<id>` → /misfire/mock/<id>. Misfire: tab `misfire-tab-mock` (MocksTab) + CTA `misfire-mock-cta` on Sab.
+- Checks: tsc 0, eslint clean; tests/misfire_mock_check.py 24/24 (wrong mode) and 24/24 (`right` mode: 4 right → 4 try + 4 done answered by the browser), BLOCKED [] PAGEERRORS [].
+
+- iteration_160 (testing agent): all pass; fixed after it: serial numbers from a cold start, 360 px labels, remove asks twice, fewer-than-asked notice shows asked vs found, solution source line. Not verified: a real phone; a moved question leaving Misfire on the real website (would write to the owner's account).

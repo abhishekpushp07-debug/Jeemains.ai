@@ -14,6 +14,7 @@ import { colors, space } from "@/src/theme";
 import { FAMILIES, MisfireSummary, getSummary, misfireKey } from "@/src/misfire/api";
 import { AllTab } from "@/src/misfire/AllTab";
 import { PapersTab } from "@/src/misfire/PapersTab";
+import { MocksTab } from "@/src/misfire/mock/MocksTab";
 import { PillRow } from "@/src/misfire/parts";
 import { misfireAccount } from "@/src/misfire/store";
 
@@ -32,7 +33,8 @@ export default function Misfire() {
   const [tab, setTab] = useState(params.chapter ? "all" : params.tab || memo.tab);
   useEffect(() => { if (params.chapter) setTab("all"); else if (params.tab) setTab(params.tab); }, [params.tab, params.chapter, params.at]);
   const family = families.find(f => f.key === tab);
-  memo.tab = family ? family.key : "all";
+  const mocks = !family && tab === "mock";
+  memo.tab = family ? family.key : mocks ? "mock" : "all";
   const summary = useCached<MisfireSummary>(user ? `${misfireKey(user.id)}.summary` : null, getSummary);
   useListFocus(summary.revalidate);
   const d = summary.data, tries = useRef(0), revalidate = summary.revalidate;
@@ -47,9 +49,9 @@ export default function Misfire() {
       onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))}
       right={d ? <View style={styles.badge}><T testID="misfire-open-count" w="bold" size={11} color={colors.brandText} style={{ letterSpacing: 1.2 }}>{d.open} OPEN</T></View> : null} />
     <View style={{ paddingHorizontal: space.lg, paddingBottom: space.md }}>
-      <PillRow prefix="misfire-tab" value={family ? family.key : "all"} onChange={setTab} items={[{ key: "all", label: "Sab" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
+      <PillRow prefix="misfire-tab" value={memo.tab} onChange={setTab} items={[{ key: "all", label: "Sab" }, { key: "mock", label: "Mock" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
     </View>
-    {!user ? null : family ? <PapersTab key={family.key} uid={user.id} family={family} />
+    {!user ? null : family ? <PapersTab key={family.key} uid={user.id} family={family} /> : mocks ? <MocksTab />
       : <AllTab key={`${params.subject || ""}|${params.chapter || ""}|${params.at || ""}`} uid={user.id} summary={d} startSubject={params.subject} startChapter={params.chapter} />}
   </View>;
 }
