@@ -15,7 +15,7 @@ from .analysis_build import build_analysis
 from .analysis_rules import RULES, VERSION, LEVELS
 from .names import names_for
 from .request_contracts import LearningsPayload
-from . import class_stats
+from . import class_stats, question_records
 from tejas_core import score_attempt
 
 router = APIRouter(prefix='/api', tags=['Analysis'])
@@ -85,13 +85,20 @@ async def load(a, u, bg, version='original'):
     tl = await timelines.find_one({'_id': a['id']}, {'_id': 0, 'count': 1}) or {}
     name = u.get('display_name') or ''
     key = a['id'] + ':' + version
-    mark = [ANALYSIS_VERSION, VERSION, klass['state'], klass.get('computed_at', 0), tl.get('count', 0), name, klass.get('included', True)]
+    # Chapter names from the join (All India papers, the owner's switch): '' while it is Off, and then nothing here differs from before.
+    jod = await question_records.names_mark(a['series_id']) if a.get('series_id') else ''
+    mark = [ANALYSIS_VERSION, VERSION, klass['state'], klass.get('computed_at', 0), tl.get('count', 0), name, klass.get('included', True)] + (['jod:' + jod] if jod else [])
     hit = await cache.find_one({'_id': key, 'user_id': u['id'], 'mark': mark}, {'_id': 0, 'z': 1})
     if hit:
         return json.loads(zlib.decompress(hit['z'])), cid, key
     stats = await class_stats.stats.find_one({'_id': cid}, {'_id': 0, 'groups': 0}) if klass['state'] == 'ready' else None
     graded = await with_grade(a, version)
     result = score_attempt(graded)
+    if jod:
+        names = await question_records.chapter_names([q['id'] for q in result['questions']])
+        for q in result['questions']:
+            if not q.get('topic') and names.get(q['id']):
+                q['topic'] = names[q['id']]  # a label for this analysis only: the paper, the answers and the score are not written
     if stats:
         above = await class_stats.entries.find_one({'cohort_id': cid, 'score': {'$gt': result['summary']['score']}},
                                                    {'_id': 0, 'handle': 1, 'score': 1, 'user_id': 1}, sort=[('score', 1), ('submitted_at', 1)])

@@ -6,6 +6,7 @@ import {api,post} from '../../lib/api';
 import {useMachineStatus,MachinePanel,lowDisk,ago} from './MachinePanel';
 import {RetryStorageButton,STORAGE_EVENT} from './UploadProgress';
 import {LegacyMove} from './LegacyMove';
+import {SourceRepaint} from './SourceRepaint';
 
 const LABEL={supabase:'Storage: Supabase',slow:'Storage: Supabase (slow)',waiting:'Storage: Supabase ka intezaar',emergent:'Storage: Emergent',down:'Storage band'};
 // The colour comes from the server's one shared record: green, yellow or red, each with its reasons.
@@ -84,6 +85,8 @@ export function StorageBadge(){
   {data?.mode==='waiting'&&<div className="storage-foot" data-testid="storage-waiting-actions"><small>Supabase ke lautne par ruka kaam apne aap chalega.</small><RetryStorageButton onDone={()=>{load();machine.load();}} testId="storage-retry-now"/></div>}
   <div className="storage-foot"><small data-testid="storage-checked">{data?.checked_at?'Jaancha: '+ago(data.checked_at):''}{set&&sb.bucket?` · bucket ${sb.bucket}`:''}</small><button type="button" onClick={()=>{load(true);machine.load();}} disabled={busy} data-testid="storage-check-now">{busy?<Loader2 size={13} className="spin"/>:<RefreshCw size={13}/>}Abhi check karo</button></div>
   {set&&<LegacyMove/>}
+  <SourceRepaint/>
+
   <MachinePanel data={machine.data} onReload={machine.load}/>
  </PopoverContent></Popover>;
 }

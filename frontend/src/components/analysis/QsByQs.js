@@ -31,7 +31,7 @@ function Card({ q, an, them, onOpen }) {
   const c = q.class, L = an.copy.levels;
   return (
     <button type="button" className={'a2-qs-card tone-' + OUT_TONE[q.outcome]} data-testid={'a2-qs-card-' + q.number} onClick={() => onOpen(q.id)}>
-      <div><b>Q{q.number}</b><span>{q.subject} · {L[q.difficulty]}</span><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{result(q)} {q.marks > 0 ? '+' : ''}{q.marks}</span></div>
+      <div><b>Q{q.number}</b><span>{q.subject}{q.topic ? ' · ' + q.topic : ''} · {L[q.difficulty]}</span><span className={'a2-out tone-' + OUT_TONE[q.outcome]}>{result(q)} {q.marks > 0 ? '+' : ''}{q.marks}</span></div>
       <p>Aapka <b>{q.response || '—'}</b> · Sahi <b>{q.answer}</b>{q.changed ? ` · badla ${q.changed}` : ''}</p>
       <p className="a2-mono">Time {mmss(q.time)} · Par {mmss(q.par)}{them ? ` · Unka ${mmss(them[q.id] || null)}` : ''}</p>
       {c && <p>Class: {pc(c.correct)} sahi · avg {mmss(c.avg_time)} · topper {mmss(c.topper_time || null)}{c.top_wrong ? ` · ${c.top_wrong.percent}% ne ${c.top_wrong.option} chuna` : ''}</p>}

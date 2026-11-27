@@ -1,3 +1,34 @@
+## 2026-11-27 (early morning) — Pocket C1b: chapter names of joined AITS questions in analysis, behind the owner's switch (preview only, NOT deployed)
+- Changed: backend/tejas/question_records.py (PUT /api/admin/links/{slug}/analysis with body model ShowChapters; `chapter_ok` and `seen` on a record; `names_from`, `names_mark`, `chapter_names`), backend/tejas/analysis_api.py (`load`: label added in memory only, one more part in the cache mark only while On), tejas/route_contracts.py + tejas/request_contracts.py (one entry each), tejas/db.py (index question_record_by_seen), frontend/src/components/master/QuestionLinks.js (the switch, `links-show-switch`).
+- Safety: no paper, pack, answer, ledger or score is written; no delete anywhere; no AI. Off = analysis byte-for-byte as before (same cache mark).
+- Also: frontend/src/components/analysis/QsByQs.js: the phone card of a question prints its chapter after the subject when it has one.
+- Tests: new tests/question_names256.py 19/19; tests/ui_links255.py + tests/links_bridge255.py got the switch (17/17); new tests/names_bridge257.py + tests/ui_names257.py 16/16; runners /root/p2/c1b_chain.sh, names_ui.sh and solo.sh (the one-at-a-time lock), copies in backend/tests/runners.
+- S1b: the full-size run tests/source_repaint_full251.py PASSED 10/10 (2,500 older pictures of the whole Chemistry book repainted in 1,220 s, fake Supabase).
+
+
+## 2026-11-26/27 (night) — Pocket C1a: "Jod: ek sawaal, ek record" (preview only, NOT deployed)
+- New: backend/tejas/question_link.py, backend/tejas/question_records.py (collection tejas_question_records; owner-only GET /api/admin/links/{slug}, POST /api/admin/links/{slug}/run), frontend/src/components/master/QuestionLinks.js.
+- Changed: server.py (router), tejas/route_contracts.py (2 entries), tejas/db.py (2 indexes on the new collection), features/admin/master/MasterType.js (the panel under an All India type), master.css (styles at the end).
+- Safety: writes only its own collection and its own row in tejas_operations; no delete anywhere; no AI.
+- Tests: tests/question_link_unit252.py 33/33, tests/question_records_build253.py 14/14, tests/question_records_iso254.py 36/36; browser bridge tests/links_bridge255.py + walk tests/ui_links255.py. tests/aits_real247.py now also saves each question's words, id and mock (for build253).
+- S1b: tests/source_repaint_full251.py renews its sign-in during the long walk and checks every "Live" press.
+
+
+## 2026-11-26 (late night) — Pocket S1b: "Line hatao" paints the printed 'Source' line out of pictures saved earlier (preview only, NOT deployed)
+- New: backend/tejas/source_repaint.py (owner-only /api/admin/pictures/source-line/status|start|stop), frontend/src/components/master/SourceRepaint.js (shown in the storage badge box, under "Purani files").
+- Changed: tejas/book_pdf_worker.py (a masked crop also answers `mask_boxes`), tejas/book_publish.py (a new picture's record says source_mask.state='cut'), tejas/pictures.py (`epoch`, `number`, `on_replaced`), tejas/media.py (parts keyed by the picture number; link name gets `v<n>-` once n > 0), tejas/cache.py (`clear`), tejas/jobs.py (resume hooks), tejas/route_contracts.py, server.py (router).
+- Safety: nothing is deleted or overwritten; a picture is switched only after three proofs (saved fingerprint, only the line differs, store reads the new bytes back); a picture that cannot be proven stays as it is and is listed.
+- Tests: tests/source_repaint250.py 41/41, tests/ui_repaint250.py 11/11. tests/source_hidden248.py `painted` got an optional `plain` argument (used by tests/source_repaint_full251.py).
+
+
+## 2026-11-26 (night) — Pockets S1 + R1: the printed address 'Source: AITS Mock NN / QNN' is hidden from students; a picture a PDF hides completely no longer holds a question (preview only, NOT deployed)
+- tejas/book_pdf_worker.py: a crop asked with mask='source' paints the heading address white (`heading_source`) and answers `masked`; `placed_images` leaves out a picture hidden completely behind a clip path (shown, partly shown or uncertain: kept). READER_VERSION stays 7 (no automatic re-read).
+- tejas/book_publish.py: source_questions asks for the mask; a published question keeps the address apart in `printed_source` (never in a student's pack) and its words go on without the line.
+- tejas_core.py: `printed_address`, `without_source`. tejas/attempts.py + tejas/misfire.py: words shown without the line (papers frozen earlier too; they are not rewritten). tejas/duplicates.py: the fingerprint ignores the line.
+- Tests: tests/source_hidden248.py 30/30, tests/hidden_picture249.py 22/22, tests/aits_real247.py a 9/9 + b 9/9 (owner's two real AITS books, all 50 mocks ready, Mock 45 included), tests/book_speed211.py both 11/11 (owner's Chemistry chapter-wise book). Whole re-run one suite at a time: 48 suites, 1,684 checks, 1,665 passed; the 19 failed lines (8 older suites) are the same lines as in the logs of 24–25 Nov, before this work.
+- Not done here: pictures of tests that were already Live before this change (pocket S1b).
+
+
 ## 2026-11-26 — Packet E step 4, second part: a built test switched on again is shown only with proven pictures (preview only, NOT deployed)
 - Name: in the order of the handoff (section 8) this is the second half of step 4 (Off → Live, Library restore). The runner and logs are called e5_chain.sh / *_step5_hold.log and the testing agent's report says "step 5": names only. Step 5 of that order (copy of old Emergent pictures to Supabase) is NOT built.
 - New backend/tejas/picture_hold.py. `ask(set_id, to, by, at, live_exam)` notes `picture_wait` on the test (it stays Off) and starts its proof as a task; `settle(tasks)` waits up to 6 s for it; `check` proves (picture_proof.prove; full read-back for a written test) and, when proven, makes the test what was asked with one update guarded by the wait's token; `again(set_id)` is "Dobara chalao"; `resume()` is the 15-minute round (jobs.maintain): a stuck proof is tried again, a proof whose server stopped is picked up once its 10-minute lease is over; `back_from_library` / `forget` for the Library; `refusal(s, so)` for the older doors (reads only, notes nothing). At most two tests are proven at a time per server process (`_gate`). A chosen time that passed while the test waited is never opened late (`state: missed`). A verified JEE Main PYQ paper and a test without pictures are never checked.

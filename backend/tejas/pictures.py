@@ -1,12 +1,12 @@
 """Lighter, faster pictures for the app: "has it changed?" answers (ETag, 304, 206), asset_revision and a lossless WebP copy.
 On for every student by default. PICTURE_PILOT_PHONES can narrow it to some mobile numbers (comma list); students outside that list then get the old answers, byte for byte."""
-import hashlib, io, json, os, re
+import hashlib, io, json, logging, os, re, time
 from collections import OrderedDict
 from threading import Lock
 from fastapi import Response
 from starlette.concurrency import run_in_threadpool
 from .cache import ByteCache
-from .db import files
+from .db import db, files
 from .derivatives import RENDER, render_crop
 
 _setting = os.environ.get('PICTURE_PILOT_PHONES', '*').strip()
@@ -18,6 +18,37 @@ _light = ByteCache(48 * 1024 * 1024)
 _light_locks = [Lock() for _ in range(16)]
 _light_tags = OrderedDict()
 _revisions = OrderedDict()
+EPOCH = 'picture-epoch'
+_epoch = {'n': 0, 'at': 0.0}
+on_replaced = []   # what else forgets its pictures on a new number (the picture parts of tejas/media.py)
+
+
+def number():
+    """The picture number this server knows now."""
+    return _epoch['n']
+
+
+def _newer(n):
+    if n > _epoch['n']:
+        _epoch['n'] = n
+        _revisions.clear()
+        for forget in on_replaced:
+            forget()
+
+
+async def epoch(proven=0):
+    """A number that only counts up, each time saved pictures were replaced (tejas/source_repaint.py). Every server looks every 5 seconds
+    and, on a newer number, forgets the picture parts and revisions it holds. proven: a link signed under that number was just shown
+    to this server, so the number is at least that: it is taken at once, without asking the database (no rush of reads at exam start)."""
+    _newer(proven)
+    t = time.monotonic()
+    if t - _epoch['at'] > 5:
+        _epoch['at'] = t
+        try:
+            _newer(int(((await db.tejas_operations.find_one({'_id': EPOCH}, {'n': 1})) or {}).get('n') or 0))
+        except Exception:  # noqa: BLE001  the database could not say: the number this server knows stays
+            logging.getLogger(__name__).warning('The picture number could not be read; the next look tries.', exc_info=True)
+    return _epoch['n']
 
 
 def pilot(u):
@@ -119,6 +150,7 @@ async def answer(request, source, ref, webp):
 async def revisions(questions, pack_id=None):
     """asset_revision per question: changes only when one of its pictures (question, piece or solution) is replaced.
     A file copied to another store keeps its revision (same hash, or the path it was first saved under)."""
+    await epoch()
     hit = _revisions.get(pack_id) if pack_id else None
     if hit is not None:
         _revisions.move_to_end(pack_id)

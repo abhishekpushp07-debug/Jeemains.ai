@@ -4,6 +4,7 @@ import hashlib, re, time
 from fastapi import APIRouter, Depends, HTTPException
 from .auth import staff
 from .db import db, sets
+from tejas_core import without_source
 
 router = APIRouter(prefix='/api/admin', tags=['Duplicates'])
 MIN_CHARS = 30
@@ -12,8 +13,9 @@ _cache = {}
 
 
 def fingerprint(text):
-    """Letters and digits of a question, without its printed number. Too short to tell apart: None."""
-    words = re.sub(r'[\W_]+', '', _LEAD.sub('', text or '', count=1).lower())
+    """Letters and digits of a question, without its printed number or its 'Source: …' heading line (a Live test no longer carries that
+    line, a waiting Draft still does). Too short to tell apart: None."""
+    words = re.sub(r'[\W_]+', '', _LEAD.sub('', without_source(text or ''), count=1).lower())
     return hashlib.sha1(words.encode()).hexdigest() if len(words) >= MIN_CHARS else None
 
 

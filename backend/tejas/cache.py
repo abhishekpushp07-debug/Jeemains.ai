@@ -37,4 +37,9 @@ class ByteCache:
             if value is not None:
                 self.size -= len(value)
 
+    def clear(self):
+        with self.lock:
+            self.data.clear()
+            self.size = 0
+
 

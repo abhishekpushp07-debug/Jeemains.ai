@@ -14,6 +14,7 @@ from .content import valid_rules, question_issues, publish_validated
 from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
 from .picture_proof import checked, unproven, remember
 from tejas_storage import put_object, configured
+from tejas_core import without_source, printed_address
 
 
 HARD=('missing or conflicting supplied key','incomplete options or key','unsupported exact-integer key','response type is unresolved','original key region required')
@@ -278,7 +279,7 @@ async def crop_ref(book,mock,crop,region,role,again=None):
         else:
             try:
                 await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
-                    **held,'kind':'rendered_png','source_sha256':book.payload['sha256'],
+                    **held,'kind':'rendered_png','source_sha256':book.payload['sha256'],'source_mask':{'state':'cut'},  # cut with the printed address already hidden
                     'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
             except DuplicateKeyError:
                 pass  # the same picture saved at the same moment by a sibling crop: one record is enough
@@ -304,7 +305,8 @@ async def source_questions(book, mock, raw, guard=None, strict=True, again=None)
     `again`: pictures (file ids) that are saved once more although their records exist."""
     rules=mock.rules;chapter=mock.chapter or {}
     wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
-    rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10,lambda:beat(book.id,'picture cut'))
+    # mask: a question's printed address ('Source: AITS Mock 04 / Q68') is never in a picture students get (the Draft keeps it in its words).
+    rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect'],'mask':'source'} for _,_,r in wanted],10,lambda:beat(book.id,'picture cut'))
     crops={}
     for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
     # New look: the question picture and one picture per option, all at the same zoom.
@@ -346,6 +348,10 @@ async def source_questions(book, mock, raw, guard=None, strict=True, again=None)
     questions,left=[],[]
     for original_q in mock.questions:
         q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None);q.pop('cut',None)
+        # Where the question was printed from stays with the paper for the Super Admin (never in a student's pack); its words go on without that line.
+        address=printed_address(q['text']);words=without_source(q['text'])
+        if words.strip():q['text']=words
+        if address:q['printed_source']=address
         q.update(render_mode='source',solution_number=q['number'],approved=True,issues=[],q_refs=[],s_refs=[],
             accessible_text=q['text'],solution_accessible_text=q['solution'],review_note='Source-mapping checks passed; supplied key preserved, not independently academically certified.',
             source_evidence={'book_sha256':book.payload['sha256'],'edition':book.payload.get('edition',''),'mock':mock.label,'regions':source},

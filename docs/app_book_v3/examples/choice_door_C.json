@@ -1,0 +1,28 @@
+{
+  "what_this_file_is": "Door C of Student Choice: POST /api/choice/papers. Two requests the app sends, the answer it needs, and a refusal it can show.",
+  "request_chosen_questions": {
+    "exam": "jee-main",
+    "request_key": "0b6f6d2e-6c1c-4c0e-9a35-0c5f4f0d9b11",
+    "mode": "pick",
+    "question_ids": ["q-4b4ff9a5-001", "q-4b4ff9a5-002", "q-c1a0mole-014", "q-m6quad-021"]
+  },
+  "request_random_mock": {
+    "exam": "jee-main",
+    "request_key": "5d2a0a6e-0e0b-4f61-8a76-2f0f3c1f7a55",
+    "mode": "random",
+    "count": 30
+  },
+  "answer_200_or_201": {
+    "set_id": "c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f"
+  },
+  "answer_in_the_envelope": {
+    "data": { "set_id": "c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f" },
+    "error": null,
+    "meta": { "api_version": "1" }
+  },
+  "refusal_422": {
+    "data": null,
+    "error": { "code": "choice_too_many", "message": "Ek paper mein 75 se zyada sawaal nahi ho sakte." },
+    "meta": { "api_version": "1" }
+  }
+}

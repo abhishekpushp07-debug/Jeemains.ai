@@ -9,7 +9,7 @@ from .cache import ByteCache
 from .db import files
 from .derivatives import render_crop
 from .packs import entry_for
-from .pictures import etag_of, webp_of
+from .pictures import etag_of, webp_of, epoch, number, on_replaced
 
 router = APIRouter(prefix="/api")
 PART, DAY = 12, 86400
@@ -18,8 +18,11 @@ TAGGED, SOLUTION, WEBP = 4, 8, 16
 CDN = os.environ.get("MEDIA_CDN_URL", "").rstrip("/")
 _KEY = hashlib.sha256(b"tejas-media-v1:" + os.environ["JWT_SECRET"].encode()).digest()
 _PACK = re.compile(r"[0-9a-f]{64}")
-_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-(\d{1,2})-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
+# "v<number>-" is there only after saved pictures were replaced (pictures.epoch): the link's address is new, so a CDN or a browser
+# never answers it with a part it kept from before. Until then a link is named exactly as it always was.
+_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-(\d{1,2})-(\d{10})-(?:v(\d{1,9})-)?([A-Za-z0-9_-]{22})\.bin")
 _parts = ByteCache(64 * 1024 * 1024)
+on_replaced.append(_parts.clear)  # saved pictures were replaced: the parts built from the old ones are forgotten
 _flights = {}
 stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0, "warmed": 0}
 _warm_at, _warming = {}, set()
@@ -47,8 +50,9 @@ def assemble(total, found, tagged=False):
     return len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b, _ in found)
 
 
-def sign(pack_id, offset, limit, bonus, exp):
-    raw = hmac.new(_KEY, f"{pack_id}.{offset}.{limit}.{bonus}.{exp}".encode(), hashlib.sha256).digest()
+def sign(pack_id, offset, limit, bonus, exp, v=0):
+    """v: the picture number the link is made under (pictures.epoch). 0, as long as no saved picture was ever replaced, signs as it always did."""
+    raw = hmac.new(_KEY, (f"{pack_id}.{offset}.{limit}.{bonus}.{exp}" + (f".{v}" if v else "")).encode(), hashlib.sha256).digest()
     return base64.urlsafe_b64encode(raw[:16]).decode().rstrip("=")
 
 
@@ -61,8 +65,10 @@ async def pack_links(a, cut=False, pack_id=None, extra=0):
     exp = (int(a["_database_now"] // DAY) + 2) * DAY
     base = f"{CDN}/api/media/pack/{pack_id}"
     stats["links"] += 1
+    v = await epoch()
+    mark = f"v{v}-" if v else ""
     return {"total": total, "limit": PART, "cdn": bool(CDN), "expires_at": exp,
-            "parts": [f"{base}/{o}-{PART}-{bonus}-{exp}-{sign(pack_id, o, PART, bonus, exp)}.bin" for o in range(0, total, PART)]}
+            "parts": [f"{base}/{o}-{PART}-{bonus}-{exp}-{mark}{sign(pack_id, o, PART, bonus, exp, v)}.bin" for o in range(0, total, PART)]}
 
 
 def _one(sources, item, webp=False):
@@ -80,7 +86,7 @@ def _render(sources, part, webp=False):
         return [x for x in pool.map(lambda item: _one(sources, item, webp), part) if x]
 
 
-async def _build(pack_id, offset, limit, bonus):
+async def _build(key, pack_id, offset, limit, bonus):
     refs = picture_refs((await entry_for(pack_id)).questions, bonus & 1, bool(bonus & 2), bool(bonus & SOLUTION))
     part = refs[offset:offset + limit]
     if not part:
@@ -90,19 +96,20 @@ async def _build(pack_id, offset, limit, bonus):
     found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources], bool(bonus & WEBP))
     body, complete = await run_in_threadpool(assemble, len(refs), found, bool(bonus & TAGGED)), len(found) == len(part)
     if complete:
-        _parts.put(f"{pack_id}.{offset}.{limit}.{bonus}", body)
+        _parts.put(key, body)
     stats["built"] += 1
     return body, complete
 
 
 async def part_bytes(pack_id, offset, limit, bonus):
-    key = f"{pack_id}.{offset}.{limit}.{bonus}"
+    # The picture number is part of the name: a part being built from the old pictures is never handed to a link made after them.
+    key = f"{pack_id}.{offset}.{limit}.{bonus}.{number()}"
     body = _parts.get(key)
     if body is not None:
         return body, True
     flight = _flights.get(key)
     if flight is None:
-        flight = _flights[key] = asyncio.ensure_future(_build(pack_id, offset, limit, bonus))
+        flight = _flights[key] = asyncio.ensure_future(_build(key, pack_id, offset, limit, bonus))
         flight.add_done_callback(lambda _: _flights.pop(key, None))
     else:
         stats["coalesced"] += 1
@@ -162,10 +169,11 @@ async def media_pack(pack_id: str, name: str):
     if not _PACK.fullmatch(pack_id) or not m:
         stats["rejected"] += 1
         raise HTTPException(404, "Picture not found.")
-    offset, limit, bonus, exp, sig = int(m[1]), int(m[2]), int(m[3]), int(m[4]), m[5]
-    if not hmac.compare_digest(sig, sign(pack_id, offset, limit, bonus, exp)) or not 1 <= limit <= 16 or bonus > 31 or not t < exp <= t + 3 * DAY:
+    offset, limit, bonus, exp, v, sig = int(m[1]), int(m[2]), int(m[3]), int(m[4]), int(m[5] or 0), m[6]
+    if not hmac.compare_digest(sig, sign(pack_id, offset, limit, bonus, exp, v)) or not 1 <= limit <= 16 or bonus > 31 or not t < exp <= t + 3 * DAY:
         stats["rejected"] += 1
         raise HTTPException(404, "This picture link is not valid. Reload the paper to get fresh links.")
+    await epoch(v)  # the signed link itself proves its number: a server that has not heard of it yet forgets its old parts first
     body, complete = await part_bytes(pack_id, offset, limit, bonus)
     if body is None:
         raise HTTPException(404, "Picture not found.")

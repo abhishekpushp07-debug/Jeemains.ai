@@ -219,6 +219,25 @@ def build_questions(
     return out
 
 
+# The same pattern as SOURCE in tejas/book_pdf_worker.py (the PDF worker runs sealed and imports nothing from here).
+_SOURCE_LINE = re.compile(r'[ \t]*Source[ \t]*:[ \t]*\S[^\n]{0,60}?\d{1,3}[ \t]*/[ \t]*Q[ \t.]*\d{1,3}[ \t]*', re.I)
+
+
+def printed_address(text):
+    """Where a question was printed from, as one of its four heading lines says it ('AITS Mock 04 / Q68'), or ''."""
+    for line in text.split('\n')[:4] if isinstance(text, str) else []:
+        if _SOURCE_LINE.fullmatch(line):
+            return re.sub(r'\s+', ' ', re.sub(r'(?i)^[ \t]*Source[ \t]*:', '', line)).strip()
+    return ''
+
+
+def without_source(text):
+    """A picture question's words without the heading line that is its printed address. Any other 'Source: …' line stays."""
+    lines = text.split('\n') if isinstance(text, str) else []
+    head = {i for i, line in enumerate(lines[:4]) if _SOURCE_LINE.fullmatch(line)}
+    return '\n'.join(line for i, line in enumerate(lines) if i not in head) if head else text
+
+
 def public_question(q):
     return {
         k: q.get(k)

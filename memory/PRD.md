@@ -1,3 +1,22 @@
+## OWNER'S 5 GOLDEN RULES (given 26 Nov 2026, 23:45 IST; they stand above every plan below)
+1. Keep what is built, and its data, safe. Nothing old is broken while building or fixing something new.
+2. Always small parts, phase by phase. The earlier part is built and checked properly before the next one starts.
+3. Architecture, database, server, caching, Redis and logging are made with 1 lakh players at the same time in mind. A capacity claim is made only on test evidence.
+4. Work does not stop. If a permission, a failing test or storage holds one part, that part is kept safe and other work goes on. Resource needs are told to the owner in time.
+5. Best effort in every piece: think deeply, no hurry, quality first. Work that is unfinished or unchecked is never called done.
+- Standing rules that stay with them: deploy only when the owner writes exactly `deploy`; frontend/src/features/LiveSeries.js is never changed; no Rapid Fire code change until the owner says so; no test writes to the owner's real account; isolated test suites run one at a time.
+
+## Status — 2026-11-26 (late night): BUILDING under the owner's full authorisation. Pockets S1, R1 and S1b are built in preview. NOTHING is deployed. Details and numbers: top of memory/ROADMAP.md.
+- S1 (done, tested): the printed address 'Source: AITS Mock NN / QNN' is hidden from students in every new picture and in the words they receive; the Super Admin's Draft keeps it; a Live question keeps it apart in `printed_source`.
+- R1 (done, tested): a picture a PDF hides completely no longer holds a question (AITS 26–50, Mock 45). Both real AITS books and the Chemistry chapter-wise book pass through the real app with every mock ready.
+- S1b (built; small suite 41/41, browser walk 11/11; whole re-run of older suites done with no new failure, 20 old failing lines unchanged; the full-size run on the whole Chemistry book PASSED 10/10 on 27 Nov: 2,500 older pictures repainted in 1,220 s with the fake Supabase, see ROADMAP): "Line hatao" in the storage badge box paints that line out of pictures saved earlier. Nothing is deleted; each switch is proven first.
+- C1a (built and tested: unit 33/33, records on both AITS halves 15/15, real app 36/36, browser walk 17/17; re-run of older suites: see ROADMAP): "Jod: ek sawaal, ek record" under All India Test Series. One record per printed address; the paper's question and the chapter test's question meet on it when kind, answer, subject and words agree; otherwise it goes to the owner's list with the reason. No AI; no paper, test or score is written; nothing is deleted.
+- C1b (built and tested: real app 19/19, student + owner browser walk 16/16 on desk and 390 px; re-run of older suites: see ROADMAP): a switch inside the "Jod" box, Off as it starts. On: a joined AITS question shows its chapter name in the student's analysis (chapter-wise table, marks lost by chapter, Qs by Qs). Names and labels only; no paper, answer, score or rank is written or changed; Off puts the analysis back exactly.
+- Not done yet (order in plan/phase_HI_guide.md section 11): C1c word search + the owner's "Wahi hai / Alag hai", the AI pockets (own keys not collected), Matched, Student Choice's three doors, storage packets F and G, a load test (no capacity claim is made).
+- The words "GUIDE ONLY, no code" in the status blocks below are older than the owner's authorisation and no longer hold.
+
+
+
 ## Status — 2026-11-26: Packet E step 4 (both parts) built and tested in preview, NOT deployed. Owner's Phase H "Matched" + Phase I "Student Choice": GUIDE ONLY, no code.
 - Guide: plan/phase_HI_guide.md (Roman Hinglish). A short copy of the owner's decisions is at the top of memory/ROADMAP.md.
 - The guide was rewritten the same day as the FINAL version after the owner's second message (10 tags per question, match at 7 or 8 of 10, AI reading of AITS papers first, Student Choice list from the question piece only, Subject Rank and Seekh Reminder dropped). His decisions are at the top of memory/ROADMAP.md.

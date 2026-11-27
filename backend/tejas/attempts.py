@@ -11,7 +11,7 @@ from .packs import hydrate, insert_attempt
 from .profiles import seal_profile
 from .catalog import page as catalogue_page
 from .content import summary, permitted
-from tejas_core import public_question, score_attempt, crop_png
+from tejas_core import public_question, score_attempt, crop_png, without_source
 from tejas_storage import get_object
 
 from .idempotency import fingerprint, verify_start, bind_start_alias
@@ -55,7 +55,10 @@ def delivered(q):
     p.pop("q_refs", None)
     # Picture questions: the picture is the question. Machine text is never sent; accessible_text is only the screen-reader label.
     if q.get("render_mode") == "source":
-        p["text"] = "" if p["asset_count"] else q.get("accessible_text", "")
+        # Where the question was printed from is the Super Admin's, never the student's (papers frozen before this still carry it).
+        if p.get("accessible_text"):
+            p["accessible_text"] = without_source(p["accessible_text"])
+        p["text"] = "" if p["asset_count"] else without_source(q.get("accessible_text", ""))
     return p
 
 
@@ -594,6 +597,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
         if q.get('render_mode') == 'written':
             q['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
         if q.get('render_mode') == 'source':
+            if q.get('accessible_text'):
+                q['accessible_text'] = without_source(q['accessible_text'])
             q['text'] = '' if q['asset_count'] else q.get('accessible_text', '')
         if q.get('c_refs'):
             q['pieces'] = pieces_of(q)

@@ -3,7 +3,7 @@ across papers. Built from graded attempts a few at a time (newest first) when th
 from fractions import Fraction
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pymongo import UpdateOne
-from tejas_core import score_attempt
+from tejas_core import score_attempt, without_source
 from .auth import current
 from .db import db, attempts, sets, now
 from .live_window import answers_sealed
@@ -91,6 +91,9 @@ def view(m):
     out = {k: m.get(k) for k in ('attempt_id', 'question_id', 'title', 'exam', 'subject', 'chapter', 'number', 'outcome', 'lost', 'your_answer', 'type',
                                  'question', 'solution_count', 'status', 'tries', 'last_correct', 'at')}
     out['id'] = m['_id']
+    shown = out.get('question') or {}
+    if shown.get('render_mode') == 'source' and shown.get('accessible_text'):  # rows kept before the 'Source' line was hidden
+        out['question'] = {**shown, 'accessible_text': without_source(shown['accessible_text'])}
     if m.get('tries'):
         out.update(answer=', '.join(m['accepted']), solution_text=m.get('solution_text', ''))
     return out

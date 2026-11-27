@@ -1,4 +1,4 @@
-import base64, codecs, json, sys, unicodedata
+import base64, codecs, json, re, sys, unicodedata
 from pathlib import Path
 import fitz
 import numpy as np
@@ -6,6 +6,16 @@ from pdf_organiser_worker import seal
 from book_cutter import cut_region, trim_region, cut_boxes, textpage, pixmap
 
 LIMIT=100*1024*1024
+SOURCE=re.compile(r'[ \t]*Source[ \t]*:[ \t]*\S[^\n]{0,60}?\d{1,3}[ \t]*/[ \t]*Q[ \t.]*\d{1,3}[ \t]*',re.I)
+
+
+def heading_source(page, clip):
+    """Boxes (page points) of a question's printed address ('Source: AITS Mock 04 / Q68') in the heading of this region: the whole line
+    is that address, and at most one row of print lies wholly above it. Any other 'Source: …' line is left alone."""
+    flags=fitz.TEXTFLAGS_DICT&~fitz.TEXT_PRESERVE_IMAGES
+    rows=[(line['bbox'],''.join(s['text'] for s in line['spans'])) for block in page.get_text('dict',textpage=textpage(page,clip,flags))['blocks'] for line in block.get('lines',[])]
+    rows=[(b,t) for b,t in rows if t.strip()]
+    return [b for b,t in rows if SOURCE.fullmatch(t) and len({round(o[3]) for o,_ in rows if o[3]<=b[1]+1})<=1]
 
 
 def visible_drawings(page):
@@ -23,6 +33,19 @@ def visible_drawings(page):
         if x1>=x0 and y1>=y0:out.append([x0,y0,x1,y1])
         if len(out)>=2000:break
     return out
+
+
+def placed_images(page):
+    """Boxes of the pictures a page places, without those a clip path hides completely: a picture stays when some part of it is left
+    after clipping. A turned page is left as it was (every placed picture)."""
+    boxes = [list(i['bbox']) for i in page.get_image_info()]
+    if not boxes or page.rotation:
+        return boxes
+    parts = [p for p in (i['bbox'] for i in textpage(page, page.rect, fitz.TEXT_PRESERVE_IMAGES | fitz.TEXT_CLIP).extractIMGINFO()) if p[2] > p[0] and p[3] > p[1]]
+    inside = lambda p, b: b[0] - .5 <= p[0] and b[1] - .5 <= p[1] and p[2] <= b[2] + .5 and p[3] <= b[3] + .5
+    if any(not any(inside(p, b) for b in boxes) for p in parts):
+        return boxes  # the two readings of the page do not agree: every placed picture counts, as before
+    return [b for b in boxes if any(inside(p, b) for p in parts)]
 
 
 def visible_images(page, images, lines, drawn):
@@ -104,7 +127,7 @@ def handle(doc, item):
                     lines.append({'text':text,'rect':[max(0,x0/w),max(0,y0/h),min(1,x1/w),min(1,y1/h)]})
         if sum(len(x['text']) for x in lines)>150000: raise ValueError('Page text exceeds safe processing budget.')
         drawn=visible_drawings(page)
-        images=visible_images(page,[list(i['bbox']) for i in page.get_image_info()],[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
+        images=visible_images(page,placed_images(page),[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
         geometry=images+drawn
         scale=lambda rows:[[max(0,r[0]/w),max(0,r[1]/h),min(1,r[2]/w),min(1,r[3]/h)] for r in rows]
         return {'lines':lines,'width':w,'height':h,'geometry':scale(geometry),'images':scale(images)}
@@ -128,9 +151,18 @@ def handle(doc, item):
     if action not in ('crop','page','thumb'): raise ValueError('Unsupported PDF action.')
     scale=min(1,820/clip.width) if action=='thumb' else min(2,1800/clip.width,2400/clip.height)
     pix=pixmap(page,matrix=fitz.Matrix(scale,scale),clip=clip,alpha=False)
+    # mask='source': a question's printed address ('Source: AITS Mock 04 / Q68') is painted out of the picture students get.
+    hidden=heading_source(page,clip) if action=='crop' and item.get('mask')=='source' else []
+    painted=[]  # where the picture was painted, in its own pixels: the proof that an older picture changes there and nowhere else
+    whole=fitz.IRect(pix.irect)
+    for b in hidden:
+        box=fitz.IRect(int(np.floor(b[0]*scale))-2,int(np.floor(b[1]*scale))-2,int(np.ceil(b[2]*scale))+2,int(np.ceil(b[3]*scale))+2)&whole
+        if not box.is_empty:
+            pix.set_rect(box,(255,255,255))
+            painted.append([box.x0-whole.x0,box.y0-whole.y0,box.x1-whole.x0,box.y1-whole.y0])
     data=pix.tobytes('png')
     if len(data)>8*1024*1024: raise ValueError('Page image exceeds safe budget.')
-    return {'image':base64.b64encode(data).decode(),'width':pix.width,'height':pix.height,'text':page.get_text(clip=clip)[:30000]}
+    return {'image':base64.b64encode(data).decode(),'width':pix.width,'height':pix.height,'text':page.get_text(clip=clip)[:30000],**({'masked':len(hidden),'mask_boxes':painted} if hidden else {})}
 
 
 def main():

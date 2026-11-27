@@ -16,6 +16,7 @@ import {UploadDialog} from '../../../components/master/UploadDialog';
 import {WriteDialog} from '../../../components/master/WriteDialog';
 import {SeriesDays} from '../../../components/master/SeriesDays';
 import {UploadProgress} from '../../../components/master/UploadProgress';
+import {QuestionLinks} from '../../../components/master/QuestionLinks';
 
 const readLine=b=>b.rereading?`dobara padhi ja rahi hai · ${b.read_pages} / ${b.pages} page`:`${b.read_pages} / ${b.pages} page padhe gaye${b.message?` · ${b.message}`:''}`;
 
@@ -68,6 +69,7 @@ function TypePage({sid}){
    <div className="admin-panel-head"><h2>Mocks</h2>{busy&&<small className="master-live-note"><Loader2 size={13} className="spin"/>Apne aap update ho raha hai</small>}</div>
    <MockList items={data.items} onChanged={refresh} onReplace={ids=>setDialog({upload:ids})}/>
   </section>}
+  {series&&<QuestionLinks exam={exam} reloadKey={reload}/>}
   <UploadDialog open={dialog?.upload!==undefined} onClose={()=>setDialog(null)} section={section} exam={exam} replace={dialog?.upload||''} onStarted={refresh}/>
   <WriteDialog open={dialog==='write'} onClose={()=>setDialog(null)} section={section} exam={exam} onCreated={id=>nav('/super-admin/write/'+id)}/>
  </div>;

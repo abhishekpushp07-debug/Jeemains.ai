@@ -238,3 +238,6 @@ async def indexes():
     await jobs.create_index([('kind', 1), ('status', 1), ('created_at', 1)], name='job_lane_fifo')
     await jobs.create_index([("kind", 1), ("status", 1), ("next_run_at", 1), ("created_at", 1)])
     await attempts.create_index([('user_id', 1), ('status', 1), ('submitted_at', -1)], name='own_released_history')
+    await db.tejas_question_records.create_index([('exam_slug', 1), ('state', 1), ('mock', 1), ('q', 1)], name='question_record_state')
+    await db.tejas_question_records.create_index([('qids', 1)], name='question_record_by_question')
+    await db.tejas_question_records.create_index([('seen', 1)], name='question_record_by_seen')

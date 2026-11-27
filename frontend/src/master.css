@@ -374,3 +374,36 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 /* Dialog close X in Super Admin: a 44 px target, the X itself stays the same size and place */
 .admin-dialog [data-testid=dialog-close],.owner-pin-reset-dialog [data-testid=dialog-close]{display:inline-flex;align-items:center;justify-content:center;min-width:var(--touch-target);min-height:var(--touch-target);right:2px;top:2px;border-radius:999px}
 .admin-dialog [data-testid=dialog-close]:hover,.owner-pin-reset-dialog [data-testid=dialog-close]:hover{background:var(--surface-alt)}
+/* Jod: one question, one record (Super Admin › All India Test Series) */
+.link-panel{display:flex;flex-direction:column;gap:16px}
+.link-panel .admin-panel-head p{max-width:76ch;font-size:14px;color:var(--text-muted);line-height:1.5;margin:4px 0 0}
+.link-counts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.link-count{display:flex;flex-direction:column;gap:2px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-card)}
+.link-count strong{font-family:var(--font-mono);font-size:22px;line-height:1.1;color:var(--ink)}
+.link-count span{font-size:13px;color:var(--ink)}
+.link-count small{font-size:12px;color:var(--text-muted);line-height:1.35}
+.link-count.is-linked:not(.is-zero){border-color:var(--success-line);background:var(--success-soft)}
+.link-count.is-review:not(.is-zero){border-color:var(--warning-line);background:var(--warning-soft)}
+.link-count.is-zero strong{color:var(--text-muted)}
+.link-block{display:flex;flex-direction:column;gap:8px}
+.link-block h3{display:flex;align-items:center;gap:6px;margin:0;font-size:14px}
+.link-mocks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.link-mock{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font-size:13px}
+.link-mock strong{font-family:var(--font-mono);font-size:12px}
+.link-mock progress{grid-column:1 / -1;width:100%;height:6px;accent-color:var(--success)}
+.link-mock small{grid-column:1 / -1;font-size:12px;color:var(--warning)}
+.link-mock.is-full{border-color:var(--success-line)}
+.link-mock.has-review{border-color:var(--warning-line)}
+.link-review,.link-books{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.link-review{max-height:420px;overflow-y:auto}
+.link-review li{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--warning-line);border-radius:10px;background:var(--warning-soft)}
+.link-review strong,.link-books strong{font-size:13px;overflow-wrap:anywhere}
+.link-review small,.link-books small{font-size:12px;color:var(--text-muted);line-height:1.45;overflow-wrap:anywhere}
+.link-review em{font-style:normal;color:var(--ink)}
+.link-books li{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:10px}
+@media (max-width:640px){
+ .link-panel .admin-actions,.link-panel .admin-actions button{width:100%}
+ .link-panel .admin-actions button{min-height:var(--touch-target)}
+ .link-counts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .link-mocks{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

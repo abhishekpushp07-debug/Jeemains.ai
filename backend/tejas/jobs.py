@@ -320,6 +320,8 @@ async def wake_storage():
     await resume()
     from .book_delete import resume as finish_deletes
     await finish_deletes()
+    from .source_repaint import resume as repaint_on
+    await repaint_on()
     return woke + await wake_uploads()
 
 
@@ -445,6 +447,8 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
         await wake_uploads(stuck=True)
         from .storage_move import resume
         await resume()
+    from .source_repaint import resume as repaint_on
+    await repaint_on()  # older pictures having their printed 'Source' line painted out: carries on after a restart (never raises)
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':
