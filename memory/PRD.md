@@ -1417,3 +1417,16 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 
 **NOT checked / not done:** production (nothing deployed); any real phone; the website's write doors (listed from code only); whether the website counts `X-Forwarded-For`; the two sides under load — **no number of students at once is claimed**; putting production's real database back (support).
 
+
+
+
+## 27 Nov 2026 — Owner's decision on the old data; deployment health check: WARN, no blockers; nothing changed, nothing deployed
+- **Owner's decision (his words, 27 Nov):** the old production data is not needed; the app is not launched for students, and the questions come from jeelive.ai. So nothing is to be restored. This lifts the reason for the "do not deploy" hold of the section above. Still open, and only for the time AFTER launch: whether a Publish from a fork replaces production's database again (support could not say). Ask support before launch; until it is answered, publish only from this job.
+- **Health check (deployment agent, read only):** status `warn`, no blocker. Supported stack; app ids, asset paths, permissions, port 8001 and the supervisor command are right; `MONGO_URL` / `DB_NAME` from the environment; the start does not delete or overwrite player or content data (writes are update / upsert / soft-retire; TTL indexes only on session, lock, heartbeat and rate-limit data); deploy logs show only the early `/health` refusal while booting and "brand asset warm-up deferred".
+  - WARN 1: the root `.gitignore` leaves out `.env` files (lines 86–88). Not new: those lines are from 25 Oct 2026 and every Publish since then worked, so the pipeline supplies the files itself. Left as it is.
+  - WARN 2: `frontend/package-lock.json` beside `frontend/yarn.lock` (both untracked, both there at the Publish of 26 Nov, which built). `package.json` last changed 18 Nov; all 43 declared packages are in `yarn.lock`. Left as it is; removing the extra lock file needs the owner's yes.
+  - INFO: test and load-test packages in `backend/requirements.txt`; harmless.
+  - The agent had no shell: it did not scan every backend file and did not compile. Done by the main agent instead: every `backend/*.py` compiles; ESLint clean on `frontend/app` and `frontend/src`; the browser copy's 186 files are all known to git, none ignored, its icon font is in it, no workspace address in it; production `/health` 200, `/api/arena` 200.
+- **Not covered by a health check:** what the platform does with the database at the next Publish; `/api/brand/*` and `/api/marketing/launch/*` still 503 (does not stop the start); any real phone; load.
+- No app code was changed in this step, so no test run was needed.
+
