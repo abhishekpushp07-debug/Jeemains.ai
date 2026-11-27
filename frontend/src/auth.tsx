@@ -15,6 +15,9 @@ const LAST_PHONE = "jl_last_phone", ENDED = "jl_session_ended";
 const shownPhone = (p: unknown) => { const n = typeof p === "string" ? p.replace(/[^\d+]/g, "") : ""; return /^\+91\d{10}$/.test(n) ? n.slice(3) : n; };
 
 export type User = { id: string; name: string; phone?: string; role: string; exam?: string; access_type?: string; pin_set?: boolean; display_name?: string | null };
+/** The name the app shows for a student: the name chosen on jeelive.ai (display_name), or "Learner" when there is none.
+ *  The website's `name` field is never shown (owner and website, 28 Nov 2026: the same rule on both sides). */
+export const nameOf = (u?: Pick<User, "display_name"> | null) => (typeof u?.display_name === "string" && u.display_name.trim()) || "Learner";
 type Ctx = {
   user: User | null; ready: boolean; expired: boolean; sessionError: string; signOutWarning: string;
   lastPhone: string; forgetPhone: () => void;

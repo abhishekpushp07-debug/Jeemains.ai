@@ -8,6 +8,11 @@
 5. Never crash; always ultra-fast.
 6. Take care of everything; do not rush; make it perfect.
 
+## Website note after v5 (28 Nov 2026, late) — name rule exact
+- Website: keep the 503 + Retry-After retry, nothing more ("koi aur jugaad mat banao"); show display_name or "Learner", never read `name`; Meri details door will be built by the website (address + example to come); Save to GitHub for APP_REPLY_V5.
+- Built: `nameOf(user)` in `src/auth.tsx` (display_name trimmed, else "Learner"); used in Home greeting, Account, Dream share card, Dream cheer, Rapid Fire duel + top strip, Mission share name, offline door / background stamp. Leaderboard rows unchanged (shown as the website sends them). tsc 0, eslint clean, `tests/iter154_followup.py` 8/8.
+- Open for the owner: website question "Learner + code on leaderboards (a) or only Learner everywhere (b)" (no app change either way); approve the website's order (Student Choice first: it must include doors A/B/C for the app).
+
 ## Website reply v5 answered + shared "Meri details" + picture retry + chosen name (28 Nov 2026, night) — PREVIEW ONLY
 - Owner: start file NOT touched ("Mat chhuo"; the agent could not be 100% sure for publish/build, and publish is frozen). Android limit stays: no background run after Android ends the app's process.
 - Answers to the website's 7 questions: `memory/APP_REPLY_V5.md` (raw auth/me + leaderboard `you` in one minute: QA learner never saved a name; relay passes unknown keys; the 81 live chapter tests with the app's class; Rank 5.1 confirmed (female/state, not gender/home_state); Dream + Mission 200 on live; avatar = our `/api/rf/profile/avatar`; Rank speed on our preview 848 predict/s, 648 cutoff/s, 150/s for a branch; no per-address limit; Forgot PIN = our owner-session reset; Matched score/matched_tags/basis ignored; previews joined only through a separate test copy). Website guide v4/v5: github.com/abhishekpushp07-debug/Jeemains.ai `docs/app_reply_v4|v5/`.

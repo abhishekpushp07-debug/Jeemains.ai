@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { Easing, Extrapolation, SharedValue, cancelAnimation, interpolate, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from "react-native-reanimated";
 import type { AudioPlayer } from "expo-audio";
 import { RF_BASE } from "@/src/api/client";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { useLowMotion } from "@/src/motion";
@@ -48,7 +48,7 @@ export function DreamCheerHost({ exam, mockId }: { exam: DreamExam; mockId?: str
     const got = claimCheer(exam, mockId);
     if (got) setWin(got);
   }, [s, focused, exam, mockId, win]);
-  return win ? <DreamCheer win={win} exam={exam} name={user?.display_name || user?.name || "Champion"} onClose={() => setWin(null)} /> : null;
+  return win ? <DreamCheer win={win} exam={exam} name={nameOf(user)} onClose={() => setWin(null)} /> : null;
 }
 
 /** One confetti piece shot from a cannon: flies up with air drag, then flutters down. */

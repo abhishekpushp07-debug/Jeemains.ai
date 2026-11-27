@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { api, rf } from "@/src/api/client";
 import { cancelPrefetch, prefetch, useCached } from "@/src/useCached";
 import { Notice, Press, T } from "@/src/components/ui";
@@ -62,8 +62,8 @@ export default function Home() {
   }, [uid]));
   const bottom = usesNativeTabs ? insets.bottom : 0;
   const s = series.data;
-  // The name the student chose (jeelive.ai's display_name); without one, the website's own word ("Learner").
-  const first = (user?.display_name || user?.name)?.trim().split(/\s+/)[0];
+  // The name the student chose on jeelive.ai, or "Learner" (src/auth.tsx nameOf).
+  const first = user ? nameOf(user).split(/\s+/)[0] : "";
   const openTests = (tab: string) => router.push({ pathname: "/(tabs)/tests", params: { tab, at: String(Date.now()) } });
   // Shortcuts to an exam disappear with it when the owner hides that exam on the website.
   const shown = (slug: string) => !catalog.exams || catalog.exams.some(e => e.slug === slug);

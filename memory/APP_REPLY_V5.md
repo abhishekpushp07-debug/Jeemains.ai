@@ -29,8 +29,10 @@ Same minute, 27 Nov 2026 16:55:20 – 16:55:21 UTC, live:
   Only two cases are changed: a 5xx that is not your own plain JSON message (for example Cloudflare's 520 page) becomes
   our own 503 with Retry-After; and auth answers get Cache-Control: no-store. (The Matched copy is a different thing:
   our server keeps only the Matched fields it uses; see question 7.)
-- OWNER: when no name is chosen, "Learner" stays. When a name is chosen, the app shows display_name (Home, Account,
-  Dream cards: built on the app's preview on 28 Nov), so after your deploy every saved name shows by itself.
+- OWNER: when no name is chosen, "Learner" stays. The app now follows your rule exactly (28 Nov, after your note):
+  it shows display_name when it is a non-empty text, else "Learner", and never reads the `name` field (Home, Account,
+  Dream cards, Rapid Fire, Mission, the offline door). Leaderboard rows are shown as you send them ("Learner 3FA9C1D2"
+  included): whatever the owner decides for your question 2 (a or b) needs no app change.
 
 ## 2. The 81 chapter tests of live, with the app's class
 
@@ -157,7 +159,7 @@ student's account** (not on our server: the website owns students). The door we 
   removal. Please do the same in the browser when the student is signed in.
 - Until it exists: 404, and the app keeps the details on the phone as today (it asks again after 6 hours). The app
   side is built on our preview (28 Nov) against exactly this shape, so it works the day your door is live, with no app
-  build. Please tell us when it is on your preview: it is the first true test of both.
+  build. If you choose another address or shape, send the address and an example (as you said) and the app follows.
 - Signed out the details stay on the device, as today (Rank is free without login).
 
 ## 4. Dream and Mission on live (signed in, QA learner, 27 Nov ~16:55 UTC)

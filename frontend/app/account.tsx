@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { Notice, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { DCard, DSheet, GroupList, ListRow, Pill, ScreenHeader } from "@/src/components/design";
@@ -47,7 +47,7 @@ export default function Account() {
         <DCard testID="account-profile" style={styles.profile}>
           <View style={styles.avatar}><Glyph name="account-outline" size={28} color={colors.onSurface} stroke={1.4} /></View>
           <View style={{ flex: 1, gap: 2 }}>
-            <T testID="account-name" w="heavy" size={18}>{mine || user?.display_name || user?.name || "Practice profile"}</T>
+            <T testID="account-name" w="heavy" size={18}>{mine || (user ? nameOf(user) : "Practice profile")}</T>
             <T testID="account-phone-summary" size={13} color={colors.muted}>{user?.phone ? "Number ending " + user.phone.slice(-4) : "Signed-in JEELIVE profile"}</T>
           </View>
         </DCard>

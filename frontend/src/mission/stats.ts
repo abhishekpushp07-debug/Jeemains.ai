@@ -3,7 +3,7 @@
 import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { BACKEND, rf } from "@/src/api/client";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
 import { caption } from "./copy";
 
@@ -21,7 +21,7 @@ export function useMissionStats() {
   const s = useCached<MissionStats>(uid ? `u.${uid}.mission` : null, () => rf<MissionStats>("/mission/me", uid!));
   useFocusEffect(useCallback(() => { s.revalidate(); }, [s.revalidate])); // eslint-disable-line react-hooks/exhaustive-deps
   return { stats: s.data, loading: s.loading && !s.data, error: s.error, reload: s.reload, refreshing: s.refreshing,
-    name: firstName(user?.name), caption: caption(linkOf(s.data)) };
+    name: firstName(user ? nameOf(user) : undefined), caption: caption(linkOf(s.data)) };
 }
 
 const linkOf = (s: MissionStats | null | undefined) => s?.code ? `${BACKEND}/api/j/${s.code}` : "https://jeelive.ai";

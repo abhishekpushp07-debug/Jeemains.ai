@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { usePathname, useRouter } from "expo-router";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { onAppSwitches } from "@/src/api/client";
 import { ARENA } from "@/src/arenaMode";
 import { Button, T } from "@/src/components/ui";
@@ -28,7 +28,7 @@ export function OfflineKeeper() {
       else void storage.getItem<boolean>("jl_signed_out", false).then((out) => { if (out) void scheduleKeeping(false); });
       return;
     }
-    void noteConfirmed({ uid: user.id, name: user.name || "" });
+    void noteConfirmed({ uid: user.id, name: nameOf(user) });
     void scheduleKeeping(true);
     // After the first screen has drawn, in the owner's order: rounds played without a line go up, Rapid Fire's cards are
     // brought up to date, then the finished papers (JEE Main first, then BITSAT) with their results and pictures.

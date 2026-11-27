@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 import { openBank, useBank } from "@/src/offline/bank";
@@ -32,7 +32,7 @@ function Home() {
   useEffect(() => {
     let alive = true;
     void openBank();
-    (async () => { const mine = user ? { uid: user.id, name: user.name } : await offlineIdentity(); if (alive) setWho(mine); })();
+    (async () => { const mine = user ? { uid: user.id, name: nameOf(user) } : await offlineIdentity(); if (alive) setWho(mine); })();
     return () => { alive = false; };
   }, [user]);
   const leave = () => router.replace(user ? HOME_ROUTE : "/entry");

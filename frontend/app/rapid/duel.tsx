@@ -4,7 +4,7 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeIn, ZoomIn, useReducedMotion } from "react-native-reanimated";
 import { RF_BASE, rapidAccess, rf, uuid } from "@/src/api/client";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { invalidate } from "@/src/useCached";
 import { CardClock } from "@/src/rapid/CardClock";
 import { Avatar, EntryShow } from "@/src/components/Entry";
@@ -51,7 +51,7 @@ function Match() {
   const p = useLocalSearchParams<Params>();
   const insets = useSafeAreaInsets(), router = useRouter(), reduced = useReducedMotion();
   const { user } = useAuth();
-  const uid = user?.id || "", name = (user?.name || "Player").slice(0, 24);
+  const uid = user?.id || "", name = nameOf(user).slice(0, 24);
   const [d, setD] = useState<any>(null);
   const [error, setError] = useState("");
   const [idx, setIdx] = useState(0);

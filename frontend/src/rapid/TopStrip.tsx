@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { T } from "@/src/components/ui";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { Avatar } from "@/src/components/Entry";
 import { useGameProfile } from "@/src/components/game";
 import { arena } from "@/src/theme";
@@ -25,7 +25,7 @@ export function TopStrip() {
         <View style={styles.level}><T testID="arena-top-level" w="heavy" size={10} color={arena.badgeInk}>{p?.level ?? 1}</T></View>
       </View>
       <View style={styles.flex}>
-        <T testID="arena-top-name" w="heavy" size={14} color={arena.text} numberOfLines={1}>{p?.name || user?.name || "Player"}</T>
+        <T testID="arena-top-name" w="heavy" size={14} color={arena.text} numberOfLines={1}>{p?.name || nameOf(user)}</T>
         <Bar value={progress} color={arena.gold} />
       </View>
     </Jelly>

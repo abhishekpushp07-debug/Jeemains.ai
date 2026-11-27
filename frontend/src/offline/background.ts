@@ -19,6 +19,7 @@ import { AppState } from "react-native";
 import * as BackgroundTask from "expo-background-task";
 import * as TaskManager from "expo-task-manager";
 import { api, appSwitches, askSwitches, getAssetAccount, setAssetAccount } from "@/src/api/client";
+import { nameOf } from "@/src/auth";
 import { flushImageDisk } from "@/src/assets/deviceCache/cache";
 import { syncBank } from "./bank";
 import { noteConfirmed, offlineIdentity } from "./identity";
@@ -38,9 +39,9 @@ async function keepWhileClosed() {
   let expiry: { remove: () => void } | null = null;
   try { expiry = BackgroundTask.addExpirationListener(stopKeeping); } catch { expiry = null; } // the listener is the iPhone's
   try {
-    const s = await api<{ user: { id: string; name?: string } | null }>("/auth/session");
+    const s = await api<{ user: { id: string; display_name?: string | null } | null }>("/auth/session");
     if (!s?.user || s.user.id !== who.uid) return;
-    await noteConfirmed({ uid: who.uid, name: s.user.name || who.name });
+    await noteConfirmed({ uid: who.uid, name: nameOf(s.user) });
     if (getAssetAccount() !== who.uid) setAssetAccount(who.uid);
     if (!appSwitches()) await askSwitches(true);
     if (Number(appSwitches()?.background ?? 1) === 0) { void scheduleKeeping(false); return; }

@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { BankCard, dealRound, handRound, takeRound } from "@/src/offline/bank";
 import { Who, offlineIdentity } from "@/src/offline/identity";
@@ -29,7 +29,7 @@ function Round() {
   useEffect(() => {
     let alive = true;
     (async () => {
-      const mine = user ? { uid: user.id, name: user.name } : await offlineIdentity();
+      const mine = user ? { uid: user.id, name: nameOf(user) } : await offlineIdentity();
       const dealt = !mine ? null : takeRound(p.again) || (picks ? await dealRound(picks, size) : null);
       if (alive) { setWho(mine); setCards(dealt); }
     })();

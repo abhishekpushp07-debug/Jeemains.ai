@@ -5,7 +5,7 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { T } from "@/src/components/ui";
-import { useAuth } from "@/src/auth";
+import { nameOf, useAuth } from "@/src/auth";
 import { gemColors, rankColors as colors } from "@/src/theme";
 import { CardRef, CardShare, shareCard } from "@/src/shareCard";
 import { useShareLink } from "@/src/mission/stats";
@@ -75,7 +75,7 @@ export function useDreamShare(d: Dream | undefined, mock: Mock | undefined) {
     finally { setBusy(false); setDrawing(false); }
   };
   const card = drawing && d && mock ? <View style={styles.offscreen} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-    <DreamCard d={d} mock={mock} name={user?.display_name || user?.name || "JEE aspirant"} cardRef={ref} />
+    <DreamCard d={d} mock={mock} name={nameOf(user)} cardRef={ref} />
   </View> : null;
   return { card, share, busy, note };
 }
