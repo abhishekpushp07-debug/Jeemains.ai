@@ -106,7 +106,7 @@ class InflightCounter:
 # strip): while packed, at most BACKGROUND_BUSY of them run at once; the others are asked to come back in a few seconds
 # (the app keeps showing what it already has).
 BACKGROUND = re.compile(r"^/api/rf/(duels/live|duels|feed|leaderboard|daily/board|league/gangwar|league/friends|history|revision|weak-topics"
-                        r"|cups/champions|badla|gangs/search|players/[^/]+(/h2h)?)/?$")
+                        r"|cups/champions|badla|gangs/search|players/[^/]+(/h2h)?|bank|bank/part)/?$")  # bank: the cards a phone keeps (rf_bank.py)
 BACKGROUND_BUSY = int(os.environ.get("RF_BUSY_BACKGROUND", "16"))
 BACKGROUND_RETRY = 10
 

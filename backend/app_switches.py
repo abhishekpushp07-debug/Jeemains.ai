@@ -30,6 +30,14 @@ PICTURES_STEP = 5
 # A phone learns the answer when the app is opened (and again when it is brought back after half an hour).
 MATCHED_CARD = "auto"
 
+# Finished papers a phone keeps for itself, so a result opens at once on a weak line and without one (frontend
+# src/offline/papers.ts): the result with its questions, answers and solutions, and its pictures in the website's parts
+# of 12 (never the one-picture route, so only while PICTURES_STEP is 4 or more). The number is how many papers a phone
+# may fetch in one run (a run: the app opened or brought back, at most once in 15 minutes; one paper every few
+# seconds). JEE Main first, then BITSAT, then the rest, newest first; a paper already kept is not fetched again.
+#   0   off: no phone fetches a paper in the background (what a phone already keeps stays readable)
+KEEP_RESULTS = 10
+
 router = APIRouter()
 
 
@@ -37,4 +45,4 @@ router = APIRouter()
 async def switches():
     # "classes": the number of the Class 11 / Class 12 chapter list (class_levels.py). An app that carries an older list
     # asks for the new one (GET /api/app/classes); an app that carries this one asks for nothing.
-    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION}
+    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION, "keep": KEEP_RESULTS}

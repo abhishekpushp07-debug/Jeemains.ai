@@ -1,4 +1,6 @@
-# Offline Solutions — parked plan (23 Nov 2026). NOT built. Do not start before the gate below.
+# Offline Solutions — parked plan (23 Nov 2026). BUILT on 27 Nov 2026 in another shape: read `OFFLINE_KEPT.md` first.
+# Changed by the owner's later words (27 Nov): papers are kept by themselves (no "Offline save" button), and the room is
+# 512 MB with the oldest-used copy giving way (no pinning). The rest below was followed.
 
 Goal: a student keeps a finished paper's questions + solutions on the phone and revises without internet.
 

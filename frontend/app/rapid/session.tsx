@@ -8,7 +8,9 @@ import { CardClock } from "@/src/rapid/CardClock";
 import { RapidDiagram as BiologyDiagram, RapidDiagramSpec as Diagram } from "@/src/rapid/Diagram";
 import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
-import { rf, uuid } from "@/src/api/client";
+import { ApiError, rf, uuid } from "@/src/api/client";
+import { bankCanDeal } from "@/src/offline/bank";
+import { keepRound, summarise } from "@/src/offline/rounds";
 import { invalidate } from "@/src/useCached";
 import { Button, Card, Empty, ErrorBox, Icon, Press, Sheet, Skeleton, Stat, T, buzz, tap, withRapid } from "@/src/rapid/ui";
 import { RapidText } from "@/src/rapid/RapidText";
@@ -22,6 +24,9 @@ import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor
 
 const LIMIT = CARD_SECONDS * 1000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
+// The server was not heard at all: no line, or a line too slow (not an answer of its own, such as "the arena is full").
+const noLine = (e: any) => !(e instanceof ApiError) || e.status === 0;
+const SLOW_MS = 4000; // a fresh sprint the server has not dealt by then is dealt from the phone's own cards
 type RCard = { id: string; exam?: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string; diagram?: Diagram };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
 
@@ -33,6 +38,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
   return (
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
       <RewardPanel reward={s.reward} historical={historical} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "What a run!" : "Sprint complete"} />
+      {s.kept ? <T testID="rf-kept-note" w="bold" size={13} color={colors.custom_neonCyan}>Internet chala gaya, par aapke answers phone par rakhe hain. Line aate hi apne aap bhej diye jayenge; coins aur XP tab judenge.</T> : null}
       {s.mode === "fresh" ? <DiamondsWon reward={s.reward} /> : null}
       <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{s.mode !== "weak_topics" && cards.length && cards.every((c) => isBitsat(c.subject)) ? "BITSAT" : s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : s.mode === "weak_topics" ? "Weak Topic Sprint" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
@@ -126,13 +132,29 @@ function RapidSessionRound() {
     if ((p.exam && p.exam !== "JEE") || p.subject === "Biology" || p.diagrams === "1") {
       return;
     }
+    // A fresh sprint on the student's own picks can also be dealt from the cards this phone keeps (src/offline/bank.ts):
+    // when the server is not heard (no line), or has not dealt in 4 seconds (a slow line), the sprint starts from there.
+    const own = !p.review && !p.ids && p.revision !== "1" && p.weak !== "1" ? picks : null;
+    const toPhone = async () => {
+      if (!alive || !own || !(await bankCanDeal(own, size)) || !alive) return false;
+      alive = false;
+      router.replace({ pathname: "/offline/rapid", params: { picks: p.picks || "", n: String(size), r: uuid() } } as any);
+      return true;
+    };
+    const slow = own ? setTimeout(() => { void toPhone(); }, SLOW_MS) : undefined;
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
       : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: p.revision === "1" || p.ids ? 30 : size, revision: p.revision === "1", weak_topics: p.weak === "1", request_id: reqId.current,
           ...(picks && !p.ids && p.revision !== "1" && p.weak !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
-          .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
-    run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else if (!seat.hold(e)) setError(e.message); });
-    return () => { alive = false; };
+          .then((s) => { clearTimeout(slow); if (!alive) return; setSession(s); setCards(s.cards); });
+    run.catch(async (e) => {
+      clearTimeout(slow);
+      if (!alive) return;
+      if (e.status === 404) setEmpty(true);
+      else if (noLine(e) && await toPhone()) return;
+      else if (alive && !seat.hold(e)) setError(e.message);
+    });
+    return () => { alive = false; clearTimeout(slow); };
   }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, p.weak, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // The clock starts only when the card is visible. One light reset per card keeps native maths views mounted between cards.
@@ -153,8 +175,15 @@ function RapidSessionRound() {
       invalidate(`u.${uid}.rfweaktopics`);
       invalidate(`u.${uid}.rfboard`);
       setDone(s);
-    } catch (e: any) { setError(e.message + " Your answers are kept — tap Retry."); }
-  }, [session, uid]);
+    } catch (e: any) {
+      // The line dropped at the end: the answers stay on this phone and go up by themselves (src/offline/rounds.ts);
+      // the result is marked here meanwhile, the same way the server marks it.
+      if (noLine(e) && session?.id && cards.length) {
+        await keepRound(uid, { request_id: reqId.current, session: session.id, card_ids: cards.map((c) => c.id), results: results.current, played_at: new Date().toISOString(), repeat: session.mode !== "fresh" });
+        setDone({ ...session, status: "completed", ...summarise(cards, results.current), reward: null, kept: true });
+      } else setError(e.message + " Your answers are kept — tap Retry.");
+    }
+  }, [session, uid, cards]);
 
   const advance = useCallback(() => {
     if (i + 1 >= cards.length) finish();

@@ -136,4 +136,6 @@ def test_server_only_wires_things_together():
     # compared route by route on 26 Nov 2026): app switches, the CEO page (2), Student Choice (2), Matched (3),
     # health alerts (2), rank cutoff (3), All India misses, removing a dream mock. + 2 on 27 Nov 2026 (none removed, compared
     # route by route): GET /api/app/classes (Class 11 / Class 12 list) and GET /api/rf/name (the student's own name).
-    assert len(server.app.routes) == 163
+    # + 3 the same day (none removed): the Rapid Fire cards a phone keeps, GET /api/rf/bank and GET /api/rf/bank/part
+    # (rf_bank.py), and a round played from them, POST /api/rf/sessions/offline (sprints.py).
+    assert len(server.app.routes) == 166

@@ -44,6 +44,18 @@ class SessionComplete(BaseModel):
     results: List[CardResult] = Field(max_length=MAX_ROUND)
 
 
+class OfflineRound(BaseModel):
+    """A Solo Sprint dealt and played on the phone from its own copy of the cards, sent up afterwards."""
+    model_config = ConfigDict(extra="forbid")
+    request_id: str = Field(min_length=8, max_length=64)
+    exam: Optional[Exam] = None
+    picks: Optional[List[Pick]] = Field(default=None, max_length=MAX_PICKS)
+    card_ids: List[str] = Field(min_length=1, max_length=MAX_ROUND)
+    results: List[CardResult] = Field(max_length=MAX_ROUND)
+    played_at: Optional[str] = Field(default=None, max_length=40)  # when the phone finished it; kept for the record only
+    repeat: bool = False  # the missed cards of an earlier round again: no diamonds, as online
+
+
 class RfSession(BaseDocument):
     id: str
     user_id: str
@@ -116,13 +128,9 @@ def make_router(db, rf_user, award):
         return {**existing.model_dump(exclude={"mongo_id", "user_id"}),
                 "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": CARD_SECONDS}
 
-    @r.post("/sessions/{sid}/complete")
-    async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] = Header(None)):
-        uid = rf_user(x_rf_user)
-        s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid, "user_id": uid}))
-        if not s:
-            raise HTTPException(404, "Session not found.")
-        resolve_exam(s.exam, s.subject)
+    async def finish(uid: str, s: RfSession, results: List[CardResult]):
+        """Closes a sprint with the student's answers and pays it once. A sprint already closed answers as it did then."""
+        sid = s.id
         if s.status == "completed":
             sm = s.summary or {}
             docs = await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(MAX_ROUND)
@@ -130,7 +138,7 @@ def make_router(db, rf_user, award):
             return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": await award(uid, "solo:" + sid, "solo", sm.get("correct", 0), sm.get("total", 0), sm.get("answered", 0), exam=s.exam)}
         cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(MAX_ROUND)}
         seen, rows = set(), []
-        for res in data.results:
+        for res in results:
             if res.card_id not in cards or res.card_id in seen:
                 continue
             seen.add(res.card_id)
@@ -163,6 +171,39 @@ def make_router(db, rf_user, award):
         gems, best = phoenix([row["outcome"] for row in s.results]) if s.mode == "fresh" else ({}, 0)
         reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam, diamonds=gems, phoenix_streak=best)
         return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
+
+    @r.post("/sessions/{sid}/complete")
+    async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] = Header(None)):
+        uid = rf_user(x_rf_user)
+        s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid, "user_id": uid}))
+        if not s:
+            raise HTTPException(404, "Session not found.")
+        resolve_exam(s.exam, s.subject)
+        return await finish(uid, s, data.results)
+
+    @r.post("/sessions/offline")
+    async def rf_offline(data: OfflineRound, x_rf_user: Optional[str] = Header(None)):
+        """A Solo Sprint the phone dealt from its own copy of the cards (rf_bank.py) and played without the server: it is
+        written and closed here in one go. The same request_id is the same sprint, so a phone may send it again until it
+        hears the answer. No arena seat is asked for: the round is already over."""
+        uid = rf_user(x_rf_user)
+        exam = require_active_exam(data.exam)
+        s = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
+        if not s:
+            ids = list(dict.fromkeys(data.card_ids))
+            found = {c["id"]: c["subject"] for c in await db.rf_cards.find({"id": {"$in": ids}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0, "id": 1, "subject": 1}).to_list(MAX_ROUND)}
+            ids = [i for i in ids if i in found]  # a card that left the bank (removed or retired) since the phone fetched it is left out
+            if not ids:
+                raise HTTPException(404, "These cards are no longer in the bank.")
+            scope = scope_fields(normalise(data.picks)) if data.picks else None
+            s = RfSession(id=str(uuid.uuid4()), user_id=uid, request_id=data.request_id, subject=scope["subject"] if scope else found[ids[0]],
+                          chapter=scope["chapter"] if scope else None, exam=exam, mode="repeat_missed" if data.repeat else "fresh", card_ids=ids,
+                          **({"picks": scope["picks"], "label": scope["label"]} if scope else {}))
+            try:
+                await db.rf_sessions.insert_one({**s.to_mongo(), "offline": True, "played_at": data.played_at})
+            except DuplicateKeyError:  # the same round sent twice at the same moment
+                s = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
+        return await finish(uid, s, data.results)
 
     @r.get("/history")
     async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):

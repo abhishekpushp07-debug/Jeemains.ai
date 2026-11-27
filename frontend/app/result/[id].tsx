@@ -32,6 +32,7 @@ import { AnalysisBar, AnalysisBody, useAnalysisNav } from "@/src/analysis/Worksp
 import { SolutionInsight } from "@/src/analysis/SolutionInsight";
 import { An, index } from "@/src/analysis/format";
 import { MatchedWith } from "@/src/matched/MatchedWith";
+import { KeptOffer } from "@/src/offline/KeptOffer";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -460,6 +461,8 @@ export default function Result() {
         onScroll={e => { if (tracking.current) kept.current = e.nativeEvent.contentOffset.y; }}
         contentContainerStyle={{ padding: space.lg, paddingTop: space.sm, paddingBottom: (bar ? 0 : insets.bottom) + space.xl, gap: space.md }}>
         <ErrorBox error={err} retry={reload} testID="result-error" />
+        {/* No answer yet (a weak line) or no line at all: the copy this phone keeps of this result is offered. */}
+        {!r ? <KeptOffer id={id!} wait={err ? 0 : 2500} /> : null}
         {!r && !err ? <><Skeleton h={160} /><Skeleton h={120} /></> : null}
         {status === 202 && r ? <Pending r={r} id={id!} reload={reload} /> : null}
         {r?.status === "embargoed" ? <Card testID="result-embargoed"><Empty icon="lock-clock" title="Submitted · result sealed" body={`For fairness, results and solutions release at ${unixDate(r.release_at)} IST. Your receipt is safe.`} /></Card> : null}

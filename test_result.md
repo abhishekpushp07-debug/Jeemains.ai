@@ -1083,3 +1083,34 @@ agent_communication_iter152:
     message: "iteration_151.json (this phase; the file number is one behind this section's): no defect, no application code changed, no retest needed. Backend 35/35 (chosen name, class levels, phase2 speed, rf social, account deletion, free picks) + arena web 9/9; node tests/class_levels_check.js all passed; class_name_check.py 30/30, small 30/30, arena 12/12; rf_picker_check.py 42/42 app and arena. Seen at 390x844: three glossy coloured class tabs, red subject chip with white words, headings in order, Account rows unchanged. Note: the preview's edge rewrites Cache-Control of /api/app/classes to no-store (the origin sends max-age=86400); the app uses the version number, not HTTP caching. The QA learner was not written to; nothing was deleted."
   - agent: main
     message: "Nothing to fix from iteration_151. Continuity files updated (PRD last section, HANDOFF 'newer' block, test_credentials first section). Nothing deployed. Not verified: a real phone, a real name save against the website, production, load."
+
+
+
+
+## Iteration153 — The phone keeps Rapid Fire's cards and the finished papers; both open without a line (27 Nov 2026) — preview only
+iteration153_kept_on_the_phone:
+  user_request: "Jo app download kare background me, sara paper download hota rahe. Sabse pehle rapid fire and jee mains ke sare chapters and aits. Fir bitsat ke. Uske sare result bhi. Offline and low internet par bhi app accha rahe, lightning fast. Owner's answers: 'Jo app akela kar sakta hai, abhi'; 'Mobile data par bhi sab'; '512 MB' (oldest gives way); Rapid Fire fully offline, without animations, answers on the phone accepted."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  priority: high
+  story: "memory/OFFLINE_KEPT.md (file by file, measured numbers, what is NOT built)."
+  backend:
+    files: "backend/rf_bank.py (NEW: GET /api/rf/bank, GET /api/rf/bank/part), backend/sprints.py (POST /api/rf/sessions/offline; finish() shared with /complete), backend/app_switches.py (KEEP_RESULTS = 10 -> 'keep'), backend/load_guard.py (bank doors are BACKGROUND), backend/server.py (router), backend/tests/test_rf_bank.py (NEW, 4), backend/tests/test_phase2_speed.py (166 routes)."
+    main_checks: "tests/test_rf_bank.py + test_phase2_speed.py + test_class_levels.py + test_arena_web_complete.py: 23 passed. New tests delete NOTHING (fixed player TEST-bank-a, fixed request ids)."
+  frontend:
+    files: "frontend/src/offline/ (NEW: bank.ts, rounds.ts, shelf.ts, shelf.web.ts, door.tsx, papers.ts, PlainRound.tsx, Shell.tsx, KeptOffer.tsx), frontend/app/offline/ (NEW: index.tsx, rapid.tsx, results.tsx, result.tsx), app/_layout.tsx, app/entry.tsx, app/account.tsx, app/rapid/session.tsx, app/result/[id].tsx (KeptOffer only), src/rapid/LobbyTab.tsx, src/arenaMode.ts, src/api/paperOpening.ts (keepOpened), src/assets/paperPack.ts (keepResultPictures), src/assets/assetGrants.ts (pictureKeys, trustKept), src/assets/deviceCache/* (512 MB, kept documents, native list written after a run). backend/arena_web rebuilt (190 files, 8.8 MB)."
+    main_checks: "tsc exit 0; ESLint clean (src/offline, app/offline, src/assets). python3 tests/offline_rapid_check.py: 33/33 app, 33/33 small, 33/33 arena. python3 tests/offline_papers_check.py: 37/37 at 390x844 and 37/37 small (each really downloads the QA learner's 11 finished papers: about 6 minutes). node tests/pictures_new_answers_tests.cjs 32, pieces_isolated_tests.cjs 16."
+  website_fault_seen: "27 Nov ~14:00 UTC: jeelive.ai gives no PYQ pictures (503 vault_unavailable on the one-picture route; part links answer 200 with an empty list after ~10 s). Not ours. The QA learner's 5 PYQ results are kept without pictures and the list says '0 / N pictures phone par'. If the website has healed when you test, those rows become whole instead: both are right."
+  not_verified: "A real phone (native store.ts / shelf.ts never run). A PYQ paper whole on the phone (website fault). A BITSAT result (the QA learner has none). Papers NOT attempted are not kept at all (the website gives questions only after Start): by design, not a defect. Downloading while the app is closed: not built. Load: no number claimed. Production: nothing deployed."
+agent_communication_iter153:
+  - agent: main
+    message: "BACKEND + FRONTEND + the served browser copy; independent verification wanted. Do NOT change app code and do NOT deploy: report instead. Read memory/test_credentials.md first (QA learner = the owner's real account: READ-ONLY; never start, answer or submit a paper, never play a real sprint / duel / cup, never save a name). Never delete or drop anything in Mongo; do not run tests/test_rf_iter19_soft_retire.py beside other Rapid Fire tests. Do not run offline_papers_check.py twice at the same time (each run downloads about 25 MB from the website's CDN)."
+
+
+
+  - agent: testing
+    message: "iteration_152.json (this phase; the file number is one behind this section's): no defect, no application code changed, no retest needed. Backend 23/23 (rf bank, phase2 speed, class levels, arena web). offline_rapid_check.py 33/33 app and 33/33 arena; offline_papers_check.py 37/37; rf_picker_check.py 42/42; class_name_check.py 30/30. 11 kept rows (6 whole, 5 PYQ rows '0 / N pictures phone par': the website's PYQ picture outage is still on), 1656 copies, about 25 MB, limit 512 MB, oldest-used giving way seen. Code read: the keeper only GETs, never starts or submits a paper; kept results are per account and gone after sign-out. The QA learner was not written to; nothing was deleted. NOT run: native store.ts / shelf.ts (web preview only)."
+  - agent: main
+    message: "Nothing to fix from iteration_152. Continuity files hold this phase (PRD last section, OFFLINE_KEPT.md, WEBSITE_OFFLINE_NOTE.md). Nothing deployed. Not verified: a real phone, downloading while the app is closed (not built), a PYQ paper whole (website fault), a BITSAT result, load."
+

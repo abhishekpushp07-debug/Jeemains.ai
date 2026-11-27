@@ -17,7 +17,8 @@ import { BadlaStrip } from "./BadlaStrip";
 import { CupNightBanner } from "./CupNight";
 import { ChampionsWall } from "./ChampionsWall";
 import { ScopeSheet } from "./ScopeSheet";
-import { CARD_SECONDS, Pick, cardCount, encodePicks, fitCount, getCardCount, scopeLabel, setScope, useCardCount, useScope } from "./scope";
+import { CARD_SECONDS, CatalogSubject, Pick, cardCount, encodePicks, fitCount, getCardCount, scopeLabel, setScope, useCardCount, useScope } from "./scope";
+import { useBank } from "@/src/offline/bank";
 import { ErrorBox, Sheet } from "./ui";
 import { Friend, GangRow, go, seenText, sendChallenge, setArenaTab, useFriends, useGangs, useInbox } from "./social";
 import { Glitter } from "./Glitter";
@@ -65,11 +66,13 @@ export function LobbyTab() {
   const { revalidate } = prof, { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs, { reload: reloadWeak } = weak, { reload: reloadDaily } = daily, { reload: reloadTopics } = weakTopics;
   useFocusEffect(useCallback(() => { revalidate(); reloadFriends(); reloadGangs(); reloadWeak(); reloadDaily(); reloadTopics(); }, [revalidate, reloadFriends, reloadGangs, reloadWeak, reloadDaily, reloadTopics]));
 
-  const available = cardCount(picks, cat.data?.subjects);
-  const chosen = useCardCount(), size = cat.data ? fitCount(chosen, available) : 0;
+  // The server's list of chapters; while it cannot be read (no line, a slow line), the chapters whose cards this phone keeps.
+  const bank = useBank(), subjects: CatalogSubject[] | undefined = cat.data?.subjects || (bank.ready ? bank.subjects : undefined);
+  const available = cardCount(picks, subjects);
+  const chosen = useCardCount(), size = subjects ? fitCount(chosen, available) : 0;
   const can = !!uid;
   const play = (mode: "random" | "ai" | "solo", on: Pick[] = picks) => {
-    const p = encodePicks(on), n = String(fitCount(getCardCount(), cardCount(on, cat.data?.subjects)));
+    const p = encodePicks(on), n = String(fitCount(getCardCount(), cardCount(on, subjects)));
     router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: p, n, r: uuid() } } : go.duel({ mode, exam: "JEE", picks: p, n, r: uuid() }));
   };
   // Nothing is ever picked for the student: a mode tile always opens the picker, with every chapter unticked, and the round starts from there.
@@ -172,7 +175,7 @@ export function LobbyTab() {
     </ScrollView>
 
     {/* The picker always opens with nothing ticked (`NONE`); what the student then picks is kept as the lobby's choice for Play Friends, cups and gang wars. */}
-    <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={cat.data?.subjects || []} value={NONE}
+    <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={subjects || []} value={NONE}
       onDone={(next) => { setScope(next); if (pending) play(pending, next); }} onPlay={uid && !pending ? quickMatch : undefined}
       action={pending === "solo" ? "START SOLO SPRINT" : pending === "ai" ? "PLAY PRACTICE RIVAL" : undefined} hint={pending ? "Pick your subjects or chapters first" : undefined} />
     <WeakSheet visible={sheet === "weak"} onClose={() => setSheet("")} chapters={weak} topics={weakTopics} />

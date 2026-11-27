@@ -55,3 +55,30 @@ export function saveImage(contentKey: string, image: SavedImage): Promise<void> 
   const job = persistImage(contentKey, image).catch(() => {}).finally(() => { if (writing.get(contentKey) === job) writing.delete(contentKey); });
   writing.set(contentKey, job); return job;
 }
+
+// ---- Small private documents (a finished paper's result, src/offline/papers.ts) kept beside the pictures: the same
+// account, the same encryption, the same room, removed with them on sign-out. Never plain text on the phone. ----
+const docId = (name: string) => imageId(`doc|${name}`);
+export async function saveKeptText(name: string, text: string): Promise<boolean> {
+  try {
+    const epoch = generation; await ready;
+    if (!scope || epoch !== generation) return false;
+    const owner = scope, id = await docId(name);
+    if (epoch !== generation) return false;
+    await deviceStore.write(owner, id, new TextEncoder().encode(text));
+    await deviceStore.flush?.(); // a document is on the list of copies at once: closing the app now does not lose it
+    return (await deviceStore.keys(owner)).has(id);
+  } catch { return false; }
+}
+/** Which of these documents are on this phone now (one may have given way to newer things). Null: no storage. */
+export const keptTexts = (names: string[]) => savedImages(names.map((name) => `doc|${name}`));
+export async function readKeptText(name: string): Promise<string | null> {
+  try {
+    const epoch = generation; await ready;
+    if (!scope || epoch !== generation) return null;
+    const owner = scope, id = await docId(name);
+    if (epoch !== generation) return null;
+    const data = await deviceStore.read(owner, id);
+    return data && epoch === generation ? new TextDecoder().decode(data) : null;
+  } catch { return null; }
+}

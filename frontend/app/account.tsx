@@ -10,6 +10,8 @@ import { colors, space } from "@/src/theme";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 import { NameSheet } from "@/src/components/series/NameSheet";
 import { useChosenName } from "@/src/profileName";
+import { useBank } from "@/src/offline/bank";
+import { useKeptResults } from "@/src/offline/papers";
 
 export default function Account() {
   const insets = useSafeAreaInsets();
@@ -22,6 +24,8 @@ export default function Account() {
   const [naming, setNaming] = useState(false);
   const [kept, setKept] = useState<string>();
   const mine = kept ?? chosen;
+  const bank = useBank(); // Rapid Fire's cards kept on this phone (src/offline/bank.ts)
+  const keptRows = useKeptResults(); // finished papers kept on this phone (src/offline/papers.ts)
 
   async function begin() {
     const n = await pendingDraftCount();
@@ -57,6 +61,16 @@ export default function Account() {
           {user?.role === "student" ? <ListRow testID="account-change-pin-button" icon="lock-reset" label="Change PIN" sub="Set a new 4-digit PIN" onPress={() => router.push("/change-pin")} /> : null}
           <ListRow testID="account-pin-help-button" icon="help-circle-outline" label="PIN & account access help" onPress={() => router.push("/forgot-pin")} />
         </GroupList>
+        {user && !expired ? <GroupList title="Bina internet" testID="account-group-offline">
+          <ListRow testID="account-offline-rapid" icon="lightning-bolt-outline" label="Rapid Fire bina internet"
+            sub={bank.ready ? `${bank.cards.toLocaleString("en-IN")} cards phone par${bank.busy ? " · aur aa rahe hain" : " · ready"}` : bank.busy ? "Cards phone par aa rahe hain…" : "Cards abhi phone par nahi aaye"}
+            onPress={() => router.push("/offline" as any)} />
+          {/* Papers and their results are not part of the browser arena. */}
+          {ARENA ? null : <ListRow testID="account-offline-results" icon="file-document-outline" label="Results bina internet"
+            sub={!keptRows.length ? "Aapke diye hue tests ke results apne aap phone par aate hain"
+              : `${keptRows.length} results phone par · ${keptRows.every((r) => r.kept >= r.pictures) ? "solutions ke saath" : `${keptRows.filter((r) => r.kept < r.pictures).length} ki pictures abhi baaki`}`}
+            onPress={() => router.push("/offline/results" as any)} />}
+        </GroupList> : null}
         <GroupList title="Privacy" testID="account-group-privacy">
           <ListRow testID="account-privacy" icon="shield-check-outline" label="Privacy policy & support" onPress={() => router.push("/privacy")} />
           {/* Papers and their images are not part of the browser arena. */}

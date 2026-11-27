@@ -1,0 +1,33 @@
+{
+  "summary": "Verified offline Rapid Fire cards + finished-paper keeper (iteration 152). Ran the two browser scripts (app + arena variants of offline_rapid_check.py and offline_papers_check.py) and the two regression scripts (rf_picker_check.py, class_name_check.py) end-to-end against the live preview with the QA learner. All four Playwright walks and the pytest set pass fully: backend 23/23, offline_rapid app 33/33, offline_rapid arena 33/33, offline_papers 37/37, rf_picker 42/42, class_name 30/30. Website's PYQ picture outage is still in effect (same as the handoff note): 6 chapter tests come whole on the phone, 5 JEE Main PYQ papers are kept WITHOUT pictures and the list honestly reads '0 / N pictures phone par'. 11 kept rows, 1656 copies, ~25 MB, store limit 512 MB, oldest-used eviction verified. No writes to the QA learner's canonical account observed in any run. No deprecated-expo-package usage found in the files under review. Code review of papers.ts, paperPack.ts, deviceCache/{cache,store.web,store}.ts, door.tsx and offline/result.tsx found no path that starts a paper, writes to the website, leaks another account's kept results, or keeps results readable after sign-out (door's STAMP + store.reset()).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/iter152_backend.xml",
+    "/tmp/t152/rapid_app.log",
+    "/tmp/t152/rapid_arena.log",
+    "/tmp/t152/papers.log",
+    "/tmp/t152/picker.log",
+    "/tmp/t152/classname.log"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "papers.ts only issues GETs (/my/tests, /attempts/{id}/results) — never POST/PUT/DELETE; no paper is started or submitted by the keeper. Confirmed by scanning for POST/PUT/DELETE/start/submit tokens in offline/papers.ts and paperPack.ts.",
+    "door.tsx scopes everything by uid and a 7-day STAMP ('kept.confirmed.v1'); another account's sign-in triggers store reset. store.web.ts reset() clears images+catalog+meta stores; confirmed by offline_papers_check G2 (0 copies after sign-out).",
+    "Backend POST /api/rf/sessions/offline enforces pass (401), idempotency by request_id, server-side marking by card key, 100-card cap, 422 on unknown fields — all covered by tests/test_rf_bank.py (passes) and by F3/G3 of offline_rapid_check.py (kept round goes up exactly once with the right reward).",
+    "Note: native store.ts (expo-file-system Paths.cache, SecureStore, expo-crypto AES) was NOT exercised in this run — web preview only, cannot validate on a real phone from this environment.",
+    "Known external condition reproduced: the website still refuses PYQ pictures (0/N pictures rows for the 5 JEE Main PYQ papers). The keeper correctly costs only 1 part per such paper and will retry after 6 hours (paper check A7, C5)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "100% (33+33+37+42+30 = 175/175 across the five Playwright scripts)"},
+  "seed_data_creation": "None. All five scripts are read-only for the QA learner's real account; writes to /api/jl were listed and shown empty (A5/J1/Z1). Backend tests use TEST-bank-a throwaway player and delete nothing.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The 5 JEE Main PYQ papers cannot be verified whole on the phone until the website restores PYQ pictures (external outage). A BITSAT result also cannot be verified — the QA learner has none. Real-phone (native) store.ts path cannot be exercised from the web-preview container. All other flows are green; do NOT run backend/tests/test_rf_iter19_soft_retire.py beside the other RF tests.",
+  "rca_of_issue": "No defect found this iteration. Numbers match the handoff claim exactly (23 backend, 33+33 rapid, 37 papers, 42 picker, 30 class/name)."
+}

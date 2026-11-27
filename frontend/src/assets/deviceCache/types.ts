@@ -1,4 +1,5 @@
-export const DISK_BUDGET = 256 * 1024 * 1024;
+// The owner's limit for what one account keeps on a phone (27 Nov 2026: 512 MB, the oldest-used copy gives way first).
+export const DISK_BUDGET = 512 * 1024 * 1024;
 export const MAX_IMAGE = 16 * 1024 * 1024;
 export type DeviceStore = {
   open: (scope: string) => Promise<void>;
@@ -8,6 +9,8 @@ export type DeviceStore = {
   /** The keys of every copy kept for this account (no picture is read). */
   keys: (scope: string) => Promise<Set<string>>;
   clear: () => Promise<void>;
+  /** Writes the list of copies now, where it is otherwise written a moment later (the phone's store). */
+  flush?: () => Promise<void>;
 };
 /** `at`: when this copy was downloaded (ms). The website sends no validator for paper images, so a recent copy is reused. */
 export type SavedImage = { mime: string; etag: string; modified: string; bytes: Uint8Array; at?: number };

@@ -13,12 +13,25 @@ const aad = (owner: string, id: string) => new TextEncoder().encode(`jeelive-ima
 
 async function reset() {
   key = null; scope = ""; index = {};
+  clearTimeout(indexTimer); indexTimer = undefined; indexDirty = false;
   const dir = root(); if (dir.exists) await dir.delete();
   await SecureStore.deleteItemAsync(KEY);
 }
 async function saveIndex() {
   const temp = new File(root(), "index.tmp"), file = new File(root(), "index.json");
   await temp.write(JSON.stringify(index)); await temp.move(file, { overwrite: true });
+}
+// The list of copies is one file; a run of new copies (a whole paper arriving) writes it once at the end of the run,
+// not once per picture. A copy whose line in the list was not written yet (the app was closed in that moment) is
+// removed when the store is next opened, and simply fetched again.
+let indexTimer: ReturnType<typeof setTimeout> | undefined, indexDirty = false;
+function saveIndexSoon() {
+  indexDirty = true;
+  if (indexTimer) return;
+  indexTimer = setTimeout(() => {
+    indexTimer = undefined;
+    void serial(async () => { if (indexDirty && scope) { indexDirty = false; await saveIndex(); } }).catch(() => {});
+  }, 1500);
 }
 async function remove(id: string) {
   const file = new File(root(), `${id}.bin`); if (file.exists) await file.delete(); delete index[id];
@@ -58,15 +71,17 @@ export const deviceStore: DeviceStore = {
     const sealed = await aesEncryptAsync(bytes, key, { additionalData: aad(owner, id) });
     const encrypted = await sealed.combined();
     let total = Object.values(index).reduce((n, v) => n + v.size, 0) - (index[id]?.size || 0);
-    for (const [old, entry] of Object.entries(index).sort((a, b) => a[1].used - b[1].used)) {
+    // Room is made only when it is needed: the oldest-used copies give way first.
+    if (total + encrypted.length > DISK_BUDGET) for (const [old, entry] of Object.entries(index).sort((a, b) => a[1].used - b[1].used)) {
       if (total + encrypted.length <= DISK_BUDGET) break;
       if (old !== id) { await remove(old); total -= entry.size; }
     }
     const temp = new File(root(), `${id}.tmp`), file = new File(root(), `${id}.bin`);
     await temp.write(encrypted); await temp.move(file, { overwrite: true });
-    index[id] = { size: encrypted.length, used: Date.now() }; await saveIndex();
+    index[id] = { size: encrypted.length, used: Date.now() }; saveIndexSoon();
   }),
   remove: (owner, id) => serial(async () => { if (owner === scope) { await remove(id); await saveIndex(); } }),
   keys: owner => serial(async () => new Set(owner === scope ? Object.keys(index) : []), 100),
   clear: () => serial(reset, 0, true),
+  flush: () => serial(async () => { if (indexDirty && scope) { indexDirty = false; await saveIndex(); } }),
 };

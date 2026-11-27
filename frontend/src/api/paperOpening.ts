@@ -2,6 +2,7 @@ import { api, apiRaw, getAssetAccount, getAssetEpoch, onAssetScopeReset, private
 import { imagePaths, questionPaths } from "@/src/assets/paperAssets";
 import { loadResultPictures } from "@/src/assets/paperPack";
 import { originalLook } from "@/src/assets/pieces";
+import { keepOpened } from "@/src/offline/papers";
 
 type Stage = { until: number; promise: Promise<any>; ctl: AbortController; timer?: ReturnType<typeof setTimeout> };
 const attempts = new Map<string, Stage>(), results = new Map<string, Stage>();
@@ -56,7 +57,10 @@ export function warmResult(id: string, version = "original"): Promise<RawResult<
     const response = await apiRaw(`/attempts/${encodeURIComponent(id)}/results?score_version=${encodeURIComponent(version)}`, { signal });
     if (getAssetAccount() !== owner || getAssetEpoch() !== epoch) throw cancelled();
     originalLook(response.data);
-    if (response.status === 200 && response.data?.summary && response.data.status !== "embargoed") prepareImages(response.data, true, version);
+    if (response.status === 200 && response.data?.summary && response.data.status !== "embargoed") {
+      prepareImages(response.data, true, version);
+      if (version === "original") void keepOpened(id, response.data); // a copy for a weak line and for no line (src/offline/papers.ts)
+    }
     return response;
   });
 }

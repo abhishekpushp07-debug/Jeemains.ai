@@ -14,6 +14,7 @@ import { isRoomPath } from "@/src/rapid/social";
 import { isMatchedPath } from "@/src/matched/api";
 import { useMatchedOn } from "@/src/matched/gate";
 import { MatchedBanner } from "@/src/matched/MatchedCard";
+import { OfflineDoor } from "@/src/offline/door";
 
 export default function Entry() {
   const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning, lastPhone, forgetPhone } = useAuth();
@@ -68,6 +69,7 @@ export default function Entry() {
       : "Aapka session khatam ho gaya. Number aur PIN daal kar wapas aao. Aapke results aur saved kaam safe hain."}</Notice> : null}
     {signOutWarning ? <Notice testID="entry-signout-warning" tone="warning">{signOutWarning}</Notice> : null}
     {sessionError ? <ErrorBox testID="entry-session-error" error={sessionError} retry={checkSession} /> : null}
+    {sessionError ? <OfflineDoor note="Internet nahi hai? Phone par rakhe cards se Rapid Fire khel sakte ho." /> : null}
     <View style={styles.tabs}>
       {(["login", "signup"] as const).map(tab => <Press testID={`entry-tab-${tab}`} key={tab} accessibilityRole="tab" accessibilityState={{ selected: mode === tab }} disabled={submit.busy} onPress={() => switchMode(tab)} style={[styles.tab, mode === tab && styles.selected]}>
         <T testID={`entry-tab-${tab}-label`} size={14} w="bold" color={mode === tab ? colors.onSurfaceInverse : colors.muted}>{tab === "login" ? "Sign in" : "Create account"}</T>

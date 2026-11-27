@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { api, apiBytes, onAssetScopeReset, privateAssets, websiteHomeUrl } from "@/src/api/client";
-import { imageGrant } from "./assetGrants";
+import { imageGrant, pictureKeys } from "./assetGrants";
 import { originalImageValue } from "./imageDownload";
 import { saveImage, savedImages } from "./deviceCache/cache";
 import { imagePaths, PaperQuestion, partLoads, questionPaths } from "./paperAssets";
@@ -18,8 +18,12 @@ const WORTH = 4;
 type Links = { total: number; limit: number; parts: string[] };
 type Item = { question_id: string; kind?: string | null; index: number; size: number; etag?: unknown };
 /** What is asked for and how it is kept. `quiet` (a result): the pictures go to the phone copy only and the image queue
- *  shows them from there, except one a screen is already waiting for. `order`: the pictures expected, in paper order. */
-type Ask = { id: string; version: string; solution: boolean; cut: boolean; webp: boolean; quiet?: boolean; order?: string[] };
+ *  shows them from there, except one a screen is already waiting for. `order`: the pictures expected, in paper order.
+ *  `keys` (a result kept in the background, no screen): path -> the key its copy is kept under; the pictures go to the
+ *  phone copy and nowhere else, and the screens' own grants and queue are not touched. `worth`: see WORTH.
+ *  `hold`: awaited before each part (a paper being attempted, or a live round, has the line to itself). */
+type Ask = { id: string; version: string; solution: boolean; cut: boolean; webp: boolean; quiet?: boolean; order?: string[]; keys?: Map<string, string>; worth?: number; written?: { bytes: number };
+  hold?: () => Promise<void> };
 
 const mimeOf = (b: Uint8Array) => b[0] === 0xff && b[1] === 0xd8 ? "image/jpeg" : b[0] === 0x52 && b[1] === 0x49 ? "image/webp" : "image/png";
 // The item's etag is the one-picture route's ETag for the same picture and format: the phone copy can be re-checked with it.
@@ -61,8 +65,20 @@ async function keepPart(a: Ask, bytes: Uint8Array, signal: AbortSignal, got: Set
   for (const item of items) {
     const size = Number(item.size) || 0;
     const path = itemPath(a, item);
-    const grant = path ? imageGrant(path) : undefined;
     if (signal.aborted) return total;
+    if (a.keys) {
+      // Kept in the background: straight to the phone copy, one picture at a time.
+      const key = path ? a.keys.get(path) : undefined;
+      if (key && !got.has(path) && size > 0 && at + size <= bytes.length) {
+        const picture = bytes.slice(at, at + size);
+        await saveImage(key, { bytes: picture, mime: mimeOf(picture), etag: etagOf(item.etag), modified: "", at: Date.now() });
+        got.add(path);
+        if (a.written) a.written.bytes += size;
+      }
+      at += size;
+      continue;
+    }
+    const grant = path ? imageGrant(path) : undefined;
     if (grant && !got.has(path) && size > 0 && at + size <= bytes.length) {
       const picture = bytes.slice(at, at + size);
       const image = { bytes: picture, mime: mimeOf(picture), etag: etagOf(item.etag), modified: "", at: Date.now() };
@@ -97,15 +113,20 @@ async function loadPack(a: Ask, got: Set<string>, signal: AbortSignal, changed: 
   const worth = (k: number) => {
     if (!a.order || total !== a.order.length) return true;
     const mine = a.order.slice(k * PART, (k + 1) * PART);
-    return mine.filter(p => !got.has(p)).length >= Math.min(WORTH, mine.length);
+    return mine.filter(p => !got.has(p)).length >= Math.min(a.worth ?? WORTH, mine.length);
   };
   const part = async (k: number) => {
     if (!worth(k)) return;
+    if (a.hold) { await a.hold(); if (signal.aborted) return; }
     let bytes: Uint8Array | null = parts?.[k] ? await cdnPart(parts[k], signal).catch(() => null) : null;
     if (signal.aborted) return;
     if (!bytes) bytes = await apiBytes(`${base}/pack?offset=${k * PART}&limit=${PART}${q ? `&${q}` : ""}`);
+    const before = got.size;
     const told = await keepPart(a, bytes, signal, got);
     if (!Number.isFinite(total)) total = told;
+    // Kept in the background: a part that was asked for because its pictures are missing, and brought none of them (the
+    // website's picture store is not answering just now), ends this kind at once. The rest is left for a later run.
+    if (a.keys && a.order && total === a.order.length && got.size === before && !signal.aborted) throw new Error("This part brought no picture");
     changed();
   };
   // Without the links answer the first part tells how many pictures there are.
@@ -165,4 +186,25 @@ export function loadResultPictures(id: string, rows: PaperQuestion[], version = 
     if (here()) privateAssets.preload(all.filter(p => !got.has(p)));
   });
   return true;
+}
+
+/** A finished paper kept in the background (src/offline/papers.ts), with no screen open on it: the pictures this phone
+ *  does not have yet come in the same parts of 12 and go straight to the phone copy. Only for a paper whose every row
+ *  carries the website's asset_revision, and only while the owner's switch allows solution parts (step 4): never the
+ *  one-picture route. Null: this phone keeps no copies. `bytes`: what was written now. */
+export async function keepResultPictures(id: string, rows: (PaperQuestion & { asset_revision?: unknown })[], webp: boolean, signal: AbortSignal, hold?: () => Promise<void>) {
+  const cut = rows.some(piecesOf), keys = new Map<string, string>();
+  for (const q of rows) for (const k of pictureKeys(id, q, true)) keys.set(k.path, k.contentKey);
+  const kinds = [false, true].map(solution => ({ solution, paths: rows.flatMap(q => solution ? imagePaths(id, q, "solution") : questionPaths(id, q)) }));
+  const all = kinds.flatMap(k => k.paths);
+  const kept = await savedImages(all.map(p => keys.get(p) || ""));
+  if (!kept) return null;
+  const got = new Set(all.filter((_, i) => kept[i])), written = { bytes: 0 };
+  for (const k of kinds) {
+    if (signal.aborted || !k.paths.some(p => !got.has(p))) continue;
+    const before = got.size;
+    await loadPack({ id, version: "original", solution: k.solution, cut: cut && !k.solution, webp, order: k.paths, keys, worth: 1, written, hold }, got, signal, () => {}, 1).catch(() => {});
+    if (got.size === before) break; // nothing came: the solutions are not asked for either in this run
+  }
+  return { total: all.length, kept: all.filter(p => got.has(p)).length, bytes: written.bytes };
 }

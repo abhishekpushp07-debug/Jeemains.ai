@@ -7,7 +7,8 @@ export const ARENA = Platform.OS === "web" && typeof window !== "undefined" && (
 /** Where "home" is: the arena lobby in the browser arena, the Home tab in the app. */
 export const HOME_ROUTE = (ARENA ? "/(tabs)/rapid" : "/(tabs)") as "/(tabs)";
 // Rapid Fire screens plus sign-in, PIN help, policies and the account page (to sign out on a shared computer).
-const ARENA_ROUTES = ["rapid", "entry", "forgot-pin", "privacy", "delete-account", "account", "change-pin"];
+// "offline": a Solo Sprint from the cards this browser keeps, when the server cannot be heard (src/offline).
+const ARENA_ROUTES = ["rapid", "entry", "forgot-pin", "privacy", "delete-account", "account", "change-pin", "offline"];
 export const arenaAllows = (segments: string[]) => !segments.length || ARENA_ROUTES.includes(segments[0]) || (segments[0] === "(tabs)" && segments[1] === "rapid");
 
 // On a laptop the arena stays a phone-wide column with the blood-red stage on both sides.

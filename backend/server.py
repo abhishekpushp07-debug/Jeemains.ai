@@ -62,6 +62,7 @@ from pin_reset import make_pin_reset
 from rank_predictor import make_router as make_rank
 from rapid_deck import selection_pool
 from revision import live_cards, make_router as make_revision
+import rf_bank
 from rf_access import install_access_guard, make_access_router, rf_user
 from rooms import make_router as make_rooms
 from social import make_router as make_social
@@ -118,6 +119,7 @@ api.include_router(health_alerts.make_router(db))
 api.include_router(ceo_api.make_router(db))
 api.include_router(app_switches.router)
 api.include_router(class_levels.router)
+api.include_router(rf_bank.make_router(db, rf_user))
 api.include_router(matched.make_router(db))
 api.include_router(choice.make_router(db, jl_proxy.client))
 app.include_router(api)

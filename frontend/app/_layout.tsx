@@ -12,10 +12,12 @@ import { AuthProvider, useAuth } from "@/src/auth";
 import { InboxPoller, isRoomPath } from "@/src/rapid/social";
 import { SmoothMode } from "@/src/analysis/smooth";
 import { MatchedGate } from "@/src/matched/gate";
-import { colors } from "@/src/theme";
+import { OfflineDoor, OfflineKeeper } from "@/src/offline/door";
+import { colors, space } from "@/src/theme";
 
 // "matched" (JEE Main questions that matched ours) is open to people who have not signed in.
-const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account", "matched"];
+// "offline" (what this phone keeps, used without a line) has its own rule of who may enter: src/offline/door.tsx.
+const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account", "matched", "offline"];
 
 LogBox.ignoreAllLogs(true);
 
@@ -44,7 +46,10 @@ export default function RootLayout() {
             <InboxPoller />
             <SmoothMode />
             <MatchedGate />
+            <OfflineKeeper />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
+              <Stack.Screen name="offline/index" options={{ animation: "none" }} />
+              <Stack.Screen name="offline/rapid" options={{ gestureEnabled: false, animation: "none" }} />
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />
               <Stack.Screen name="rapid/session" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
               <Stack.Screen name="rapid/daily" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />
@@ -86,8 +91,12 @@ function SessionBoundary({ children }: { children: React.ReactNode }) {
   // expose a private route while validating or redirecting an expired session.
   return <View style={styles.root}>
     <View style={[styles.root, blocked && styles.hidden]} pointerEvents={blocked ? "none" : "auto"} accessibilityElementsHidden={blocked} importantForAccessibility={blocked ? "no-hide-descendants" : "auto"}>{children}</View>
-    {blocked ? <View testID="session-verifying" style={styles.verifying}><ActivityIndicator testID="session-verifying-spinner" color={colors.brandPrimary} accessibilityLabel="Checking your session" /></View> : null}
+    {blocked ? <View testID="session-verifying" style={styles.verifying}>
+      <ActivityIndicator testID="session-verifying-spinner" color={colors.brandPrimary} accessibilityLabel="Checking your session" />
+      {/* The session check is still unanswered after 5 seconds (no line, or a very slow one): the phone's own cards can be played meanwhile. */}
+      {!ready ? <OfflineDoor after={5000} /> : null}
+    </View> : null}
   </View>;
 }
 
-const styles = StyleSheet.create({ root: { flex: 1 }, hidden: { opacity: 0 }, verifying: { position: "absolute", top: 0, left: 0, bottom: 0, right: 0, alignItems: "center", justifyContent: "center", backgroundColor: colors.surface } });
+const styles = StyleSheet.create({ root: { flex: 1 }, hidden: { opacity: 0 }, verifying: { position: "absolute", top: 0, left: 0, bottom: 0, right: 0, alignItems: "center", justifyContent: "center", gap: space.lg, backgroundColor: colors.surface } });
