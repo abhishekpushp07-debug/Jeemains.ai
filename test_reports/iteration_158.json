@@ -1,0 +1,29 @@
+{
+  "summary": "Final narrow retest (frontend, web preview, QA learner read only). (1) SectionGuard Retry with an UNCHANGED server_now works: iter158_section_guard_check.py 390 = 32/32. leak_null, by_subject missing, tough_solved missing and difficulty null each show a2-section-error only in place of Difficulty. The bottom bar, the pager (next to Journey, prev to Difficulty), the other 7 sections and the 4 result tabs all work, reopening remembers Difficulty, and there is no error-fallback. 'retry -> healthy_same_now' passed on the FIRST try, with 1 new GET and the table drawn, so the 2nd try with a new server_now was not needed. (2) Bonus fixture fix: iter157_aits_analysis_check.py 390 = 185/185 and 360 = 185/185. Every Difficulty cell count equals its drill count in all 4 fixtures (real_unrated 0/2/72 of 75, and aits_full tough 25 = 0/0/24 + 1 bonus), so the Chhode off-by-one is gone. (3) ErrorBox Retry hitSlop does NOTHING on web: react-native-web 0.21.4's Pressable has no hitSlop support, and the rendered <button> is still 33x18 with no slop or padding. Mouse taps at right+10, bottom+8, top-8 and left-5 px made no request, while a tap at the text centre retried (iter158_retry_hitslop_check.py 2/6). On native, hitSlop should give about 57x42, which is still under 44 high. The error note text and look are unchanged ('Yeh hissa abhi nahi khul paaya. Baaki analysis aur Solutions chalu hain.' + Retry, 84 px high). Read-only rules kept: BLOCKED [] in every run, no page errors, Solutions tab not opened, no Mongo writes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ErrorBox Retry (src/components/ui.tsx:136)", "issue": "hitSlop {top:12,bottom:12,left:8,right:16} is ignored by react-native-web 0.21.4, whose Pressable does not implement hitSlop. On the web preview and the browser copy, the tappable area is still only the 33x18 text: taps 5-10 px outside it do nothing. On native, hitSlop gives about 57x42 (still under 44 high).", "testID": "a2-section-error-retry", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Result > Analysis > Difficulty (guard note)", "issues": ["Dev-only LogBox toast 'Cannot read properties of null (r…' covers the bottom of the screen while a section is broken: SectionGuard.componentDidCatch calls console.error. It does not show in production builds, so this is information only."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/iter158_section_guard_check.py", "/app/tests/iter157_aits_analysis_check.py", "/app/tests/iter158_retry_hitslop_check.py", "/tmp/i158a.log", "/tmp/i157_390.log", "/tmp/i157_360.log", "/tmp/i158_hs.log", "/tmp/shots/i158_guard_390.jpg"],
+  "action_items": [
+    "Optional (LOW): to make the bigger touch area of ErrorBox Retry work on web too, use padding plus a negative margin on the Press instead of (or as well as) hitSlop, for example paddingVertical:12, paddingLeft:8, paddingRight:16, marginTop:-6, marginLeft:-8, marginBottom:-12. That gives 57x42+ on every platform with the same look. Then rerun iter158_retry_hitslop_check.py (the outside taps should then pass)."
+  ],
+  "critical_code_review_comments": [
+    "SectionGuard.retry calls onRetry, then setState({failed:false}). If the same broken answer is still cached, the children draw again and fail again at once (a harmless loop of one). If a new answer object arrives, the WeakMap answerKey remounts the guard. Both paths were seen working.",
+    "Workspace answerKey (a WeakMap keyed on the answer object, with a counter) is correct and leaks nothing. The drill guard is keyed the same way."
+  ],
+  "updated_files": ["/app/tests/iter158_retry_hitslop_check.py (new test, no app code changed)"],
+  "success_rate": {"backend": "not tested (not requested)", "frontend": "SectionGuard 32/32, Difficulty 370/370 (390+360), hitSlop on web 2/6 (4 outside taps fail: not supported on web)"},
+  "seed_data_creation": "None. The analysis GET for attempt c0061f81-7ae9-432b-8ca5-312c8d39d4b5 was answered in the browser only (fixtures and broken variants). Every other write under /api/jl was blocked (none happened).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The scripts need /usr/bin/chromium and take 2-4 min each. Run them with nohup setsid, or a tool timeout kills them halfway. iter158_retry_hitslop_check.py taps by mouse at points around a2-section-error-retry: 'center' must retry, the 4 outside points need padding (hitSlop does nothing on web), and the 60 px-away control must NOT retry.",
+  "rca_of_issue": "react-native-web 0.21.4's Pressable (node_modules/react-native-web/dist/exports/Pressable/index.js) has no hitSlop code, so the prop is dropped on web. In the DOM the button has only margin-top:6px and align-self:flex-start."
+}

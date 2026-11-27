@@ -23,6 +23,7 @@ import { Leaderboard } from "./Leaderboard";
 import { downloadReport, shareScorecard } from "./report";
 import { ReportCard } from "./ReportCard";
 import { Shine } from "./Shine";
+import { SectionGuard } from "./SectionGuard";
 import { ScreenMotion } from "@/src/motion";
 
 export const SECTIONS: [string, string, React.ComponentType<SectionProps>, string][] = [
@@ -39,6 +40,10 @@ const NAV_NAME: Record<string, string> = { time: "Time" };
 const known = (k?: string | null) => !!k && SECTIONS.some(s => s[0] === k);
 const VS = /^(topper|top10|average|user:[0-9a-f]{16})$/;
 const LAST = "analysis.section";
+// Each answer from the website is a new object: its number keys the section guards, so a fresh answer always draws again.
+const answers = new WeakMap<object, number>();
+let answered = 0;
+const answerKey = (an: object) => { let k = answers.get(an); if (!k) answers.set(an, (k = ++answered)); return k; };
 
 export type AnalysisNav = { key: string; compare: boolean; vs: string; open: (key: string) => void; setCompare: (on: boolean) => void; setVs: (vs: string) => void };
 
@@ -171,12 +176,16 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
     <Animated.View key={key + (nav.compare ? ":c" : "")} testID={"a2-section-" + key} entering={reduced ? undefined : FadeIn.duration(220)} style={styles.root}
       onTouchStart={start} onTouchMove={move} onTouchEnd={finish} onTouchCancel={() => { touch.current = null; }}>
       {nav.compare && !an.compare && loading ? <Skeleton h={150} /> : null}
-      {nav.compare ? <CompareBody an={an} part={key} /> : null}
-      {nav.compare && key === "overview" && an.class?.state === "ready" ? <Leaderboard id={id} value={nav.vs} onPick={nav.setVs} /> : null}
-      <Section an={an} id={id} onDrill={(title, ids) => { if (calm()) setDrill({ title, ids }); }} onOpen={qid => { if (calm()) onOpen(qid); }} go={nav.open} slot={key === "overview" ? slot : undefined} />
+      <SectionGuard key={`${key}:${nav.compare}:${answerKey(an)}`} testID="a2-section-error" onRetry={reload}>
+        {nav.compare ? <CompareBody an={an} part={key} /> : null}
+        {nav.compare && key === "overview" && an.class?.state === "ready" ? <Leaderboard id={id} value={nav.vs} onPick={nav.setVs} /> : null}
+        <Section an={an} id={id} onDrill={(title, ids) => { if (calm()) setDrill({ title, ids }); }} onOpen={qid => { if (calm()) onOpen(qid); }} go={nav.open} slot={key === "overview" ? slot : undefined} />
+      </SectionGuard>
       <Pager at={at} open={nav.open} />
     </Animated.View>
-    <DrillList drill={drill} an={an} onClose={() => setDrill(null)} onOpen={onOpen} />
+    <SectionGuard key={`drill:${answerKey(an)}`} testID="a2-drill-error">
+      <DrillList drill={drill} an={an} onClose={() => setDrill(null)} onOpen={onOpen} />
+    </SectionGuard>
   </View>;
 }
 

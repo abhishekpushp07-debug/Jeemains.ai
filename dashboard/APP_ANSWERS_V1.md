@@ -70,8 +70,10 @@ the live server (preview in brackets).
     (question 1). So they are almost certainly test fixtures too. Exactly which test made each one: **unsure**.
   - Recommended dashboard rule: count a profile as real only if `uid` is a UUID
     (`^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`) and the name does not start with `TEST`.
-- **Important:**
-  - `/api/ceo/overview` and `/api/ceo/users` do **not** filter test profiles today. For example, live
+- **Update, 28 Nov 2026 (preview; live after the next app publish):** both CEO routes now count **real students
+  only** with exactly that rule. The overview also returns `test_profiles_left_out`.
+- **Before that update:**
+  - `/api/ceo/overview` and `/api/ceo/users` did **not** filter test profiles. For example, live
     `app_users = 640`, `active.last_30_days = 155`, `rapid_fire_players = 155` all include test profiles.
   - Live and preview numbers are almost identical. The live database appears to hold the preview test data. Why: **unsure**.
 
@@ -309,7 +311,9 @@ Other written data you may want:
 - `db.rf_profiles.find(query).sort("last_day", -1).skip(...).limit(...)` (`backend/ceo_api.py`, about line 99).
 - It sorts by `last_day` descending **only**. There is **no `uid` tie-break**, so profiles with the same `last_day` can
   change order between pages.
-- Not changed. To get the order the dashboard needs, `.sort([("last_day", -1), ("uid", 1)])` would have to be added.
+- **Update, 28 Nov 2026 (preview; live after the next app publish):** it now sorts
+  `.sort([("last_day", -1), ("uid", 1)])`, backed by a new index `rf_profiles [(last_day,-1),(uid,1)]`, so the order is
+  stable.
 
 **17. Live base URL and token.**
 - **Confirmed:** `https://jeelive-mobile.emergent.host/api`.

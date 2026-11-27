@@ -65,13 +65,16 @@ Headline numbers for the app.
 }
 ```
 
-- `app_users` = app profiles that exist (anyone who used a profile-creating feature).
+- `app_users` = **real students only** (28 Nov 2026): profiles whose `uid` is a website account id (a UUID) and whose
+  name does not start with `TEST`. Every other profile was made by automated tests and is left out of every number;
+  `test_profiles_left_out` says how many.
 - `active.*` = profiles whose last active day (`last_day`, IST) falls in that window → **DAU / WAU / MAU**.
 - `on_streak` = profiles with a current streak > 0.
 - `rapid_fire_players` = profiles that have played Rapid Fire at least once (a solo session, a duel or a rival game).
 
 ### `GET /api/ceo/users`
-The app's student directory, most-recently-active first. Paginated.
+The app's student directory (real students only, same rule as above), most-recently-active first, then `uid` A→Z, so
+paging never repeats or skips a student. Paginated.
 
 Query: `page` (default 1), `limit` (default 100, max 500), `active_since=YYYY-MM-DD` (only users active on/after this
 day), `q` (search name or player code).

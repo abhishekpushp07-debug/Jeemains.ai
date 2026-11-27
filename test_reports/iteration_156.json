@@ -1,0 +1,49 @@
+{
+  "summary": "CEO API: 12/12 pytest pass. Overview numbers match a direct read-only Mongo count (3 real profiles, 636 test ones left out). Paging with limit=1 and limit=2 returns every real uid exactly once. Order is last_active desc, then uid. q=TEST gives 0, the index exists, no/wrong token gives 401. AITS analysis (browser fixtures, 390 and 360 wide): 136/137 checks pass for each width. All 8 sections open for all 4 fixtures with no crash and no blank section. 1 real bug: Difficulty 'Tough · Sahi' shows 1 but the cell is disabled. The cause is that the summary counts a bonus question as correct while the drill picks only outcome=='correct'. Robustness gap: a missing or null field in the difficulty block crashes the WHOLE app through the root ErrorBoundary. Speed is well under 500 ms: section switch 88-275 ms, answer to overview 339-789 ms. No write was attempted (BLOCKED=[]). Mongo was not written. No deprecated Expo packages were checked or found in this scope.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/ceo/overview", "issue": "on_streak counts stale streaks. A real profile last active 2026-10-26 still has streak=3, so on_streak=3 while active.last_7_days=1. Consider adding last_day >= yesterday (IST) to on_streak."},
+      {"endpoint": "GET /api/ceo/overview + /users", "issue": "The TEST name rule is case-sensitive (^TEST). 1 profile with a UUID uid has a name starting with mixed/lower-case 'test' and is counted as a real student. Owner should confirm whether that is a real student (the name was not printed)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Difficulty table cell", "issue": "aits_full: the 'Tough · Sahi' cell shows '1 / 25' but is disabled (looks faded, tapping does nothing). The aits_partial Tough cell looks the same. Cause: Difficulty.tsx:14 ids() picks only q.outcome==='correct', while difficulty.all.tough.correct=1 comes from the bonus question Q39 (outcome 'bonus'). The fixture builder buckets bonus as correct (tests/aits_analysis_fixtures.py:36). The REAL website answer does not: real_unrated unrated = 0/2/72 of 75, so the bonus is in no column. Either the fixture is wrong, or the app is fragile to the website counting bonus as correct. Q39 (bonus) is also listed under 'Tough sawaal jo aapne nikale'.", "testID": "a2-difficulty-tough-correct", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "AITS analysis from server answer alone (no app update possible)", "issue": "No per-section error boundary. Browser-only degraded answers (difficulty.leak=null with Easy>0, difficulty.by_subject missing, difficulty.tough_solved missing, difficulty=null) each throw ('Cannot read properties of null (reading wrong)' / 'undefined (reading map)' / 'reading length' / 'null (reading all)'). The throw hits the root ErrorBoundary: 'Something went wrong. Reload app' replaces the whole app. Later loads of the same result crashed before the bottom bar appeared. An unknown level string or topic=null is handled fine.", "affected_testIDs": ["a2-section-difficulty", "analysis2"]}
+    ],
+    "design_issues": [
+      {"screen": "Performance (chapters)", "issues": ["All fixtures (and the real PYQ) have q.topic='Previous-year paper' for all 75 questions. The chapter table shows one 'chapter' per subject named 'Previous-year paper' (tagged Kamzor, -102). Multi-chapter layout, Mazboot/Kamzor labels and drill-by-chapter with real chapter names were NOT exercised by these fixtures."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter157_ceo_real_profiles.py",
+    "/app/tests/iter157_aits_analysis_check.py",
+    "/app/test_reports/pytest/iter157_ceo.xml"
+  ],
+  "action_items": [
+    "Difficulty.tsx:14: make the drill pick the same questions the server counted. For example, for o==='correct' include q.outcome==='bonus' when levels[l].correct exceeds the plain-correct pick. Or decide with the website whether bonus counts as Sahi per level, and fix tests/aits_analysis_fixtures.py bucket() to match the real website (the real answer leaves bonus out). Also exclude bonus from tough_solved if the website does.",
+    "Workspace.tsx: wrap each section (SECTIONS[k] component) in its own error boundary with an in-section fallback, so one bad field cannot replace the whole app before JEE Main. Add defensive defaults in Difficulty.tsx: d = an.difficulty || {}; d.by_subject || []; d.tough_solved || []; leak?.wrong || []; and the same pattern in Performance (P.weak, g.chapters, g.types).",
+    "Ask the website for (or build) a fixture with real chapter names in q.topic plus the server-computed performance.subjects[].chapters/weak, so multi-chapter rows and chapter drills (q.topic === c.name, exact string match) are verified before the 9th.",
+    "Optional CEO: on_streak should count only streaks that are still alive (last_day >= yesterday IST). Confirm the case rule for 'TEST' names (1 UUID profile with a mixed-case 'test…' name is counted)."
+  ],
+  "critical_code_review_comments": [
+    "ceo_api.py: REAL filter, everyone − real, sort [(last_day,-1),(uid,1)] with skip/limit and the db_setup index are correct. limit is clamped to 1..500, page<1 is set to 1, page=abc gives 422, q is regex-escaped. Ties: real profiles have no last_day ties today, so the tie rule was verified from code plus the response order only (no writes).",
+    "Performance.tsx:45 chapter drill uses q.topic === c.name (exact). If the website's chapter list and per-question topic ever differ in case or whitespace, the drill opens empty with no message.",
+    "useAnalysis saves the fixture answer to storage analysis.last.<uid> (browser only, expected)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter157_ceo_real_profiles.py (new)", "/app/tests/iter157_aits_analysis_check.py (new)"],
+  "success_rate": {"backend": "100% (12/12)", "frontend": "99% (136/137 at 390 and 136/137 at 360)"},
+  "seed_data_creation": "None. Mongo was only read. QA learner: no writes (every non-GET under /api/jl outside /auth was stopped; none happened). Solutions tab was never opened.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "CEO_API_TOKEN is not in backend/.env. It is in the backend uvicorn process env, and the pytest reads it from /proc/<pid>/environ with sudo (never printed). The browser script runs with: cd /app/tests && python3 iter157_aits_analysis_check.py 390|360 (~3 min). It uses /usr/bin/chromium and shine_helpers.sign_in. Bottom bar ids are a2-nav-*. Pills ids are a2-pill-<id>-<slug>. Drill close is a2-drill-backdrop. Wait ~600 ms after a DSheet opens before tapping its options (slide-in), or Playwright reports 'outside of the viewport'.",
+  "speed_numbers_ms": {
+    "390": {"answer_to_overview": [756, 750, 379, 343], "section_switch_range": "92-275 (overview return ~260-273, qs ~205-215)"},
+    "360": {"answer_to_overview": [789, 748, 477, 339], "section_switch_range": "88-271"}
+  },
+  "rca_of_issue": "Tough·Sahi disabled cell. Repro: aits_full fixture, open Difficulty; the Tough row shows Sahi 1/25 but aria-disabled=true. difficulty.all.tough.correct=1 comes from Q39 (outcome 'bonus', +4) because the fixture bucket() maps bonus to correct. The app builds the drill list with q.outcome==='correct' and gets 0 ids, so Press is disabled. Fix: align the pick with the server's bucketing, or fix the fixture to match the real website."
+}

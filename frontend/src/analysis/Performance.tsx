@@ -4,6 +4,7 @@ import { T } from "@/src/components/ui";
 import { colors } from "@/src/theme";
 import { An, Drill, SectionProps, TONE, Tone, mmss, pc, pick, slug } from "./format";
 import { Block, EmptyLine, Meter, Pills, StatRow, Tile, Tiles, ToneTag } from "./parts";
+import { chapterName } from "@/src/misfire/parts";
 
 const HAAL: Record<string, [string, Tone]> = { strong: ["Mazboot", "good"], steady: ["Theek", "info"], weak: ["Kamzor", "bad"] };
 const neg = (v: number) => (v ? "−" + v : "0");
@@ -26,6 +27,8 @@ function AllSubjects({ subjects, setName }: { subjects: any[]; setName: (name: s
 
 function OneSubject({ an, g, onDrill }: { an: An; g: any; onDrill: Drill }) {
   const ids = (test: (q: any) => boolean) => pick(an, q => q.subject === g.name && test(q));
+  // "Previous-year paper" / "Uncategorised" name the paper, not a chapter: they are never listed as one (same rule as Misfire).
+  const chapters = g.chapters.filter((c: any) => chapterName(c.name));
   return <>
     <Block id="performance" kicker="SUBJECT" title={g.name} note="Is subject mein aapka poora hisaab. Tile par tap karo, sawaal khulenge.">
       <Tiles>
@@ -40,9 +43,9 @@ function OneSubject({ an, g, onDrill }: { an: An; g: any; onDrill: Drill }) {
           sub={`${d.correct} sahi · ${d.incorrect} galat · ${d.skipped} chhode · Accuracy ${pc(d.accuracy)}`} />)}
       </View>
     </Block>
-    {g.chapters.length > 0 ? <Block id="chapters" kicker="CHAPTER-WISE" title={`${g.name} ke chapters`} note="3 se kam sawaal wale chapter par Mazboot / Kamzor nahi likha jaata. Chapter par tap karo, uske sawaal khulenge.">
+    {chapters.length > 0 ? <Block id="chapters" kicker="CHAPTER-WISE" title={`${g.name} ke chapters`} note="3 se kam sawaal wale chapter par Mazboot / Kamzor nahi likha jaata. Chapter par tap karo, uske sawaal khulenge.">
       <View testID="a2-chapter-table" style={styles.list}>
-        {g.chapters.map((c: any) => <StatRow key={c.name} testID={"a2-chapter-row-" + slug(c.name)} title={c.name} onPress={() => onDrill(`${g.name} · ${c.name}`, ids(q => q.topic === c.name))}
+        {chapters.map((c: any) => <StatRow key={c.name} testID={"a2-chapter-row-" + slug(c.name)} title={c.name} onPress={() => onDrill(`${g.name} · ${c.name}`, ids(q => q.topic === c.name))}
           tag={c.label && HAAL[c.label] ? <ToneTag label={HAAL[c.label][0]} tone={HAAL[c.label][1]} /> : undefined}
           sub={`${c.count} sawaal · ${c.correct} sahi · ${c.incorrect} galat · ${c.skipped} chhode`}>
           <View style={styles.pair}>
@@ -85,12 +88,14 @@ export function Performance({ an, onDrill }: SectionProps) {
   const [name, setName] = useState("all");
   const g = subjects.find(s => s.name === name);
   if (!subjects.length) return null;
+  const weak = P.weak.filter((w: any) => chapterName(w.name));
+  const tagged = P.has_chapters && subjects.some(s => s.chapters.some((c: any) => chapterName(c.name)));
   return <>
     <Pills id="perf-subject" value={g ? name : "all"} onChange={setName} items={[["all", "Sab subjects"], ...subjects.map(s => [s.name, s.name] as [string, string])]} />
     {g ? <OneSubject an={an} g={g} onDrill={onDrill} /> : <AllSubjects subjects={subjects} setName={setName} />}
-    <Weak weak={g ? P.weak.filter((w: any) => w.subject === g.name) : P.weak} onDrill={onDrill} />
+    <Weak weak={g ? weak.filter((w: any) => w.subject === g.name) : weak} onDrill={onDrill} />
     {!g && P.sections ? <Sections s={P.sections} /> : null}
-    {!P.has_chapters ? <EmptyLine testID="a2-no-chapters">Is paper ke sawaalon par chapter ka tag nahi hai, isliye chapter-wise hisaab nahi bana.</EmptyLine> : null}
+    {!tagged ? <EmptyLine testID="a2-no-chapters">Is paper ke sawaalon par chapter ka tag nahi hai, isliye chapter-wise hisaab nahi bana.</EmptyLine> : null}
   </>;
 }
 

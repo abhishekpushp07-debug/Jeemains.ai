@@ -5,6 +5,7 @@ import { DSheet, Pill } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 import { An, Open, OUT_ICON, OUT_TONE, Q, RESULT, SectionProps, TONE, mmss, pc } from "./format";
 import { B, Block, ChipButton, EmptyLine, Pills, TagChip, ToneTag } from "./parts";
+import { chapterName } from "@/src/misfire/parts";
 
 const FILTERS: [string, string][] = [["all", "Sab"], ["wrong", "Galat"], ["skipped", "Chhode"], ["careless", "Careless"], ["overtime", "Overtime"], ["confused", "Confused"], ["marked", "Marked"], ["changed", "Jawab badla"]];
 const TEST: Record<string, (q: Q) => boolean> = {
@@ -26,7 +27,7 @@ function Card({ q, an, them, label, onOpen }: { q: Q; an: An; them: Record<strin
       <T size={12} color={colors.muted} numberOfLines={2} style={{ flex: 1 }}>{q.subject} · {L[q.difficulty] || "—"}</T>
       <ToneTag label={`${RESULT[q.outcome]} ${q.marks > 0 ? "+" : ""}${q.marks}`} tone={tone} icon={OUT_ICON[q.outcome]} />
     </View>
-    {an.performance.has_chapters && q.topic ? <T size={11.5} color={colors.muted} numberOfLines={1}>{q.topic}</T> : null}
+    {an.performance.has_chapters && chapterName(q.topic) ? <T size={11.5} color={colors.muted} numberOfLines={1}>{q.topic}</T> : null}
     <T size={12.5} color={colors.custom_softText}>Aapka <B>{q.response || "—"}</B> · Sahi <B>{q.answer}</B>{q.changed ? ` · badla ${q.changed}` : ""}</T>
     <T size={12} color={colors.custom_softText}>Time <T w="mono" size={12}>{mmss(q.time)}</T> · Par <T w="monoRegular" size={12}>{mmss(q.par)}</T>{them ? ` · ${label} ${mmss(them[q.id] || null)}` : ""}{q.visits != null ? ` · ${q.visits} baar dekha` : ""}</T>
     {c ? <T size={12} color={colors.muted}>Class: {pc(c.correct)} sahi · avg {mmss(c.avg_time)}{c.topper_time > 0 ? ` · Topper ${mmss(c.topper_time)}` : ""}{c.top_wrong ? ` · ${c.top_wrong.percent}% ne ${c.top_wrong.option} chuna` : ""}</T> : null}

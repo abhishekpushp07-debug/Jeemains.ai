@@ -133,7 +133,8 @@ export function ErrorBox({ error, retry, testID = "error-box" }: { error?: strin
     <Notice tone="error" testID={testID}>
       <T size={13} w="medium" color={colors.error}>{error}</T>
       {retry ? (
-        <Press testID={testID + "-retry"} onPress={retry} style={{ marginTop: 6, alignSelf: "flex-start" }}>
+        // 44 px tall to the thumb on every platform (web ignores hitSlop); the negative margins keep the note's look.
+        <Press testID={testID + "-retry"} onPress={retry} style={{ marginTop: -7, marginBottom: -13, marginLeft: -8, paddingVertical: 13, paddingLeft: 8, paddingRight: 16, alignSelf: "flex-start" }}>
           <T w="bold" size={13} color={colors.brandText}>Retry</T>
         </Press>
       ) : null}

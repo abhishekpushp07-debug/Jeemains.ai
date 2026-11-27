@@ -1,0 +1,128 @@
+{
+ "analysis_version": 3,
+ "rules_version": 2,
+ "rules": {
+  "version": 2,
+  "stretch_cap": 900,
+  "par": {
+   "min_solvers": 30,
+   "floor": 30,
+   "ceiling_x_average": 2,
+   "type_factor": {
+    "mcq": 0.85,
+    "integer": 1.35
+   },
+   "share_of_duration": 0.9
+  },
+  "quality": {
+   "perfect_x": 1.25,
+   "wasted_x": 0.5,
+   "gap_x": 1.5,
+   "confused_x": 0.5
+  },
+  "difficulty": {
+   "min_attempted": 50,
+   "early_attempted": 10,
+   "easy": 65,
+   "tough": 35
+  },
+  "extra": {
+   "lucky_x": 0.25,
+   "last_share": 0.2,
+   "last_min": 5
+  },
+  "potential": {
+   "guard_solved_below": 25
+  },
+  "compare": {
+   "min_finishers": 10
+  },
+  "block": {
+   "long": 1800,
+   "short": 900,
+   "short_upto_minutes": 60,
+   "most": 12
+  }
+ },
+ "tags": [
+  "perfect",
+  "slow_correct",
+  "wasted",
+  "concept_gap",
+  "costly_overtime",
+  "confused",
+  "smart_skip",
+  "not_seen",
+  "no_score"
+ ],
+ "levels": [
+  "easy",
+  "moderate",
+  "tough",
+  "unrated"
+ ],
+ "copy": {
+  "tags": {
+   "perfect": [
+    "Perfect",
+    "Sahi jawab, sahi time mein."
+   ],
+   "slow_correct": [
+    "Slow-correct",
+    "Jawab sahi, lekin Par time se zyada laga."
+   ],
+   "wasted": [
+    "Careless galti",
+    "Bahut jaldi mein galat. Ek baar dobara padhte to bach jaata."
+   ],
+   "concept_gap": [
+    "Concept gap",
+    "Poora time diya, phir bhi galat. Concept dobara dekho."
+   ],
+   "costly_overtime": [
+    "Mehnga overtime",
+    "Bahut zyada time laga aur jawab bhi galat."
+   ],
+   "confused": [
+    "Confused",
+    "Time lagaya, lekin jawab nahi diya."
+   ],
+   "smart_skip": [
+    "Smart skip",
+    "Dekha aur jaldi chhod diya. Time bacha."
+   ],
+   "not_seen": [
+    "Dekha hi nahi",
+    "Yeh sawaal khula hi nahi."
+   ],
+   "no_score": [
+    "Score se bahar",
+    "Dropped ya sabko bonus mila: tag nahi lagta."
+   ]
+  },
+  "levels": {
+   "easy": "Easy",
+   "moderate": "Moderate",
+   "tough": "Tough",
+   "unrated": "Not rated"
+  },
+  "time_label": "Time = sawaal screen par kitni der khula raha (time on screen).",
+  "level_sources": {
+   "students": "students ke result se",
+   "early": "shuruaati result se",
+   "paper": "paper ke tag se",
+   "none": "abhi Not rated"
+  }
+ },
+ "question_filters": [
+  "wrong",
+  "skipped",
+  "correct",
+  "careless",
+  "overtime",
+  "confused",
+  "marked",
+  "changed"
+ ],
+ "pace_points": 20
+}

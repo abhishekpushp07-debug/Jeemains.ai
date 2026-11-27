@@ -56,10 +56,12 @@ export function Difficulty({ an, onDrill, onOpen }: SectionProps) {
   const tough: string[] = name === "all" ? d.tough_solved : d.tough_solved.filter((i: string) => byId[i]?.subject === name);
   const from: Record<string, string> = an.copy.level_sources || {};
   const sources = Object.entries(d.sources || {}).map(([k, n]) => `${n} sawaal ${from[k] || k}`).join(", ");
+  // The Easy-marks leak is only told when the paper has Easy questions (an all "Not rated" paper has nothing to praise).
+  const easy = (d.all?.easy?.count || 0) > 0;
   return <>
     <Pills id="difficulty-subject" value={name} onChange={setName} items={[["all", "Sab subjects"], ...d.by_subject.map((s: any) => [s.name, s.name] as [string, string])]} />
-    <Leak leak={d.leak} onDrill={onDrill} />
-    <Block id="difficulty" kicker="EASY · MODERATE · TOUGH" title="Difficulty ke hisaab se" note={`Level kahan se aaya: ${sources}. Jahan data kam hai wahan Not rated likha hai, andaaza nahi lagaya.`}>
+    {easy ? <Leak leak={d.leak} onDrill={onDrill} /> : null}
+    <Block id="difficulty" kicker="EASY · MODERATE · TOUGH" title="Difficulty ke hisaab se" note={`${sources ? `Level kahan se aaya: ${sources}. ` : ""}Jahan data kam hai wahan Not rated likha hai, andaaza nahi lagaya.`}>
       <Table an={an} name={name} levels={levels} onDrill={onDrill} />
       {d.unlock ? <Foot testID="a2-difficulty-unlock">{d.unlock.unrated} sawaal abhi Not rated hain. Jaise-jaise aur students yeh paper denge, unka level students ke result se pakka hota jaayega.</Foot> : null}
     </Block>

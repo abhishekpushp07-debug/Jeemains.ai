@@ -20,6 +20,11 @@ from fastapi import APIRouter, Header, HTTPException
 from fastapi.responses import JSONResponse
 
 IST = timezone(timedelta(hours=5, minutes=30))
+# Real students only. A real profile is made only after the website verified the session (rf_access.py), so its uid is
+# the website's account id: a UUID (`tejas_phone_profiles.id`). Every other id (TEST-…, TESTUSER…, qa…, ms-…, tester-…)
+# and every name starting TEST was made by this project's automated tests and is left out of every number here.
+WEBSITE_ID = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+REAL = {"uid": {"$regex": WEBSITE_ID, "$options": "i"}, "name": {"$not": {"$regex": "^TEST"}}}
 NO_STORE = {"Cache-Control": "no-store", "Referrer-Policy": "no-referrer"}
 CONTACTS_NOTE = ("Signup phone numbers are not on this app server. The app stores only an HMAC hash and the last four "
                  "digits for friend-search. Read full contacts from the jeelive.ai website backend and join on `uid`.")
@@ -60,20 +65,21 @@ def make_router(db) -> APIRouter:
     async def overview(authorization: str = Header(default="")):
         _auth(authorization)
         profiles = db.rf_profiles
-        total = await profiles.count_documents({})
+        everyone, total = await profiles.count_documents({}), await profiles.count_documents(REAL)
         active = {
-            "today": await profiles.count_documents({"last_day": _ist_day(0)}),
-            "last_7_days": await profiles.count_documents({"last_day": {"$gte": _ist_day(6)}}),
-            "last_30_days": await profiles.count_documents({"last_day": {"$gte": _ist_day(29)}}),
+            "today": await profiles.count_documents({**REAL, "last_day": _ist_day(0)}),
+            "last_7_days": await profiles.count_documents({**REAL, "last_day": {"$gte": _ist_day(6)}}),
+            "last_30_days": await profiles.count_documents({**REAL, "last_day": {"$gte": _ist_day(29)}}),
         }
-        on_streak = await profiles.count_documents({"streak": {"$gt": 0}})
+        on_streak = await profiles.count_documents({**REAL, "streak": {"$gt": 0}})
         # Played Rapid Fire at least once: a solo session, a duel or a rival game (a win is not needed).
         rapid_fire_players = await profiles.count_documents(
-            {"$or": [{"sessions": {"$gt": 0}}, {"duels": {"$gt": 0}}, {"rival_games": {"$gt": 0}}]})
-        best = await profiles.find({}, {"_id": 0, "best_streak": 1}).sort("best_streak", -1).limit(1).to_list(1)
+            {**REAL, "$or": [{"sessions": {"$gt": 0}}, {"duels": {"$gt": 0}}, {"rival_games": {"$gt": 0}}]})
+        best = await profiles.find(REAL, {"_id": 0, "best_streak": 1}).sort("best_streak", -1).limit(1).to_list(1)
         return JSONResponse({
             "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "app_users": total,
+            "test_profiles_left_out": everyone - total,
             "active": active,
             "on_streak": on_streak,
             "rapid_fire_players": rapid_fire_players,
@@ -87,7 +93,7 @@ def make_router(db) -> APIRouter:
         _auth(authorization)
         page = max(1, page)
         limit = max(1, min(500, limit))
-        query: dict = {}
+        query: dict = dict(REAL)
         if active_since:
             query["last_day"] = {"$gte": active_since[:10]}
         if q.strip():
@@ -96,7 +102,8 @@ def make_router(db) -> APIRouter:
         total = await db.rf_profiles.count_documents(query)
         cursor = db.rf_profiles.find(query, {"_id": 0, "uid": 1, "name": 1, "pid": 1, "coins": 1, "diamonds": 1,
                                              "streak": 1, "best_streak": 1, "last_day": 1, "phone_last4": 1})
-        docs = await cursor.sort("last_day", -1).skip((page - 1) * limit).limit(limit).to_list(limit)
+        # Most recently active first; the same day is ordered by uid, so a page never repeats or skips a student.
+        docs = await cursor.sort([("last_day", -1), ("uid", 1)]).skip((page - 1) * limit).limit(limit).to_list(limit)
         return JSONResponse({
             "total": total, "page": page, "pages": (total + limit - 1) // limit, "limit": limit,
             "items": [_row(d) for d in docs], "contacts": CONTACTS_NOTE,

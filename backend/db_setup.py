@@ -184,6 +184,7 @@ async def setup_database(db, cups):
     await db.rf_duels.create_index([("exam", 1), ("scope_key", 1), ("cards_n", 1), ("created_ts", 1)], name="quick_match_waiting",
                                    partialFilterExpression={"status": "waiting", "mode": "random"})
     await db.rf_profiles.create_index("name")  # a rank counts QA players (TEST…) out without reading every profile above
+    await db.rf_profiles.create_index([("last_day", -1), ("uid", 1)])  # CEO dashboard student list: most recent first, then id (a stable page order)
     # Closing a gang cancels its open challenges; only challenges made inside a gang are in this index, so it stays small.
     await db.rf_challenges.create_index([("gang_id", 1), ("status", 1)], name="gang_challenges", partialFilterExpression={"gang_id": {"$type": "string"}})
     await daily_indexes(db)

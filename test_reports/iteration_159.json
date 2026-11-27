@@ -1,0 +1,21 @@
+{
+  "summary": "Short retest of the ErrorBox Retry touch target (iter158 low-priority finding). FIXED: hitSlop removed, Retry Press is now 57x44 on web (visible word 33x18). iter158_retry_hitslop_check.py 6/6 (center, right+10, bottom+8, top-8, left-5 taps retry with a new GET; tap 60px away does not). New iter159_entry_errorbox_check.py on sign-in screen (/auth/session answered 403 in browser only) 10/10: 'Couldn't check your session...' Notice renders, Retry word sits under the message left-aligned (x=54 both), no overlap/clipping, Notice height 84px, next element (Sign in/Create account switch) not overlapped, taps 8px below / 10px right of the word retry the session check, tap 60px right does not. Regression iter158_section_guard_check.py 32/32. No blocked writes, no page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "ErrorBox (all uses)", "issues": ["Cosmetic only: because of marginTop -7 the 44px Retry hit box overlaps the bottom ~7px of the message's last line (msg y226-262, button y255-299) and goes 1px past the Notice bottom (298). A tap on the very bottom of the message's last line triggers Retry. Harmless for a retry action; no change required."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/iter158_retry_hitslop_check.py", "/app/tests/iter159_entry_errorbox_check.py", "/app/tests/iter158_section_guard_check.py"],
+  "action_items": [],
+  "critical_code_review_comments": ["src/components/ui.tsx:137 ErrorBox Retry uses padding + negative margins instead of hitSlop, giving a real 57x44 target on web and native. Correct approach."],
+  "updated_files": ["/app/tests/iter159_entry_errorbox_check.py (new test file only)"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100% (6/6 + 10/10 + 32/32)"},
+  "seed_data_creation": "None. Read-only: analysis GET and /auth/session answered in the browser only; non-GET /api/jl requests blocked (none attempted).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Entry-screen ErrorBox can be forced by fulfilling GET /api/jl/auth/session with 403 (non-transient, so no 37s retry backoff). In Playwright, register the session route AFTER the generic guard route (last registered wins). Tests use EXPO_PUBLIC_BACKEND_URL from frontend/.env."
+}
