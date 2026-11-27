@@ -21,7 +21,7 @@ from client_ip import client_ip
 from exam_groups import resolve_exam
 from load_guard import arena_gate, busy
 from mission_links import BOTS
-from scope import CARD_SECONDS, Pick, label_for, normalise, scope_fields, scope_of
+from scope import CARD_SECONDS, MAX_PICKS, Pick, label_for, normalise, scope_fields, scope_of
 from social import blocked_between, blocked_uids, card, find_player, make_friends, make_pid, public_name
 
 ROOM_SECONDS = 180
@@ -38,7 +38,7 @@ class RoomCreate(BaseModel):
     gang_id: Optional[str] = Field(default=None, max_length=16)
     subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
-    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
+    picks: Optional[List[Pick]] = Field(default=None, max_length=MAX_PICKS)  # whole subjects or chapters; wins over subject and chapter
     count: Literal[30, 50, 100] = 30  # cards in the match (rule R2)
     rematch_of: Optional[str] = Field(default=None, max_length=64)
     # Gang Battle: my gang (gang_id) against this gang, as two teams of up to 5.

@@ -22,7 +22,7 @@ from pymongo.errors import DuplicateKeyError
 from exam_groups import resolve_exam
 from load_guard import arena_gate
 from gamify import crown_of, pay_once
-from scope import Pick, normalise, scope_fields, scope_of
+from scope import MAX_PICKS, Pick, normalise, scope_fields, scope_of
 from shop import rival_profile
 from social import blocked_uids, card, find_player
 
@@ -77,7 +77,7 @@ class CupCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     kind: Literal["open", "private"]
     size: Literal[4, 8, 16] = 4
-    picks: Optional[List[Pick]] = Field(default=None, max_length=5)
+    picks: Optional[List[Pick]] = Field(default=None, max_length=MAX_PICKS)
     pids: List[str] = Field(default_factory=list, max_length=15)
     gang_id: Optional[str] = Field(default=None, max_length=16)
 

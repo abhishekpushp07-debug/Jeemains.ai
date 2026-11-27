@@ -27,6 +27,18 @@
 - The table of §1 below is from 26 Nov and is **older than this block**: everything it marks "NO (needs Publish)" up
   to the Student Choice colours went live with that Publish; production's browser copy is the one of 26 Nov.
 
+## NEWER THAN THE BLOCK ABOVE (27 Nov 2026, later)
+
+- **Owner's decision:** the old production data is NOT needed (the app is not launched for students; questions come
+  from jeelive.ai). Nothing is to be restored, so the "do not deploy" hold above is lifted. Still open for the time
+  after launch: whether a Publish from a fork replaces production's database again. Publish only when the owner asks.
+  `/api/brand/*` and `/api/marketing/launch/*` still answer 503 (object storage); not repaired, not asked for.
+- **Rapid Fire chapter picker (done on the preview, testing agent `test_reports/iteration_150.json`: fixed):** the
+  picker opens on the PCM tab with nothing ticked; Select all / Clear per tab; any number of chapters; Solo Sprint and
+  Practice Rival always open it first. Server: up to 5 picks everything is as before; more than 5 is new
+  (`backend/scope.py` `CLASSIC_PICKS`, `MAX_PICKS`). The browser copy was rebuilt. Waiting for a Publish.
+  Details: last section of `memory/PRD.md`; test rules: first section of `memory/test_credentials.md`.
+
 ---
 
 ---

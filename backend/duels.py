@@ -21,7 +21,7 @@ from load_guard import arena_gate, load
 from rapid_deck import fresh_deck
 from gamify import level_of, phoenix
 from social import make_pid, public_name, team_line, team_scores
-from scope import CARD_COUNTS, CARD_SECONDS, Pick, label_for, normalise, scope_fields, scope_of
+from scope import CARD_COUNTS, CARD_SECONDS, MAX_PICKS, Pick, label_for, normalise, scope_fields, scope_of
 from leagues import record_battle
 
 DUEL_CARDS = 30
@@ -52,7 +52,7 @@ class DuelCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
-    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
+    picks: Optional[List[Pick]] = Field(default=None, max_length=MAX_PICKS)  # whole subjects or chapters; wins over subject and chapter
     mode: Literal["random", "invite"]
     name: str = Field(min_length=1, max_length=24)
     request_id: str = Field(min_length=8, max_length=64)

@@ -15,14 +15,14 @@ from gamify import phoenix
 from load_guard import arena_gate
 from rapid_deck import fresh_deck, seen_cards
 from revision import record_learning, weak_chapters, weak_topic_deck
-from scope import CARD_SECONDS, Pick, normalise, scope_fields
+from scope import CARD_SECONDS, MAX_PICKS, Pick, normalise, scope_fields
 
 
 class SessionCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
-    picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters for a fresh sprint
+    picks: Optional[List[Pick]] = Field(default=None, max_length=MAX_PICKS)  # whole subjects or chapters for a fresh sprint
     count: int = Field(default=30, ge=1, le=MAX_ROUND)  # a fresh sprint is 30, 50 or 100 cards
     card_ids: Optional[List[str]] = Field(default=None, max_length=MAX_ROUND)
     request_id: str = Field(min_length=8, max_length=64)

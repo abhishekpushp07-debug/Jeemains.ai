@@ -27,6 +27,8 @@ import { WeakSprintStrip, useWeakTopics } from "./WeakSprint";
 import { WeakChapters, WeakSheet } from "./WeakSheet";
 import { useArenaFrameWatch } from "@/src/motion";
 
+const NONE: Pick[] = [];
+
 function Sticker({ icon, label, badge, onPress, testID, delay, narrow }: { icon: GameIconName; label: string; badge: number; onPress: () => void; testID: string; delay: number; narrow?: boolean }) {
   return <Jelly testID={testID} onPress={onPress} accessibilityLabel={badge ? `${label}, ${badge}` : label} style={[styles.sticker, narrow && styles.stickerNarrow]}>
     <Alive kind="wiggle" delay={delay}><GameIcon name={icon} size={narrow ? 48 : 56} /></Alive>
@@ -65,13 +67,13 @@ export function LobbyTab() {
 
   const available = cardCount(picks, cat.data?.subjects);
   const chosen = useCardCount(), size = cat.data ? fitCount(chosen, available) : 0;
-  const can = !!uid && (!picks.length || size > 0);
+  const can = !!uid;
   const play = (mode: "random" | "ai" | "solo", on: Pick[] = picks) => {
     const p = encodePicks(on), n = String(fitCount(getCardCount(), cardCount(on, cat.data?.subjects)));
     router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: p, n, r: uuid() } } : go.duel({ mode, exam: "JEE", picks: p, n, r: uuid() }));
   };
-  // No subject is picked until the student picks: a mode tile then opens Subjects first, and the round starts right after.
-  const start = (mode: "ai" | "solo") => { if (picks.length) play(mode); else { setPending(mode); setSheet("chapters"); } };
+  // Nothing is ever picked for the student: a mode tile always opens the picker, with every chapter unticked, and the round starts from there.
+  const start = (mode: "ai" | "solo") => { setPending(mode); setSheet("chapters"); };
   // Quick Match starts from the Subjects sheet, right where the subject or chapter is chosen.
   const quickMatch = (next: Pick[]) => play("random", next);
   const challenge = async (body: { pids?: string[]; gang_id?: string }) => {
@@ -108,7 +110,7 @@ export function LobbyTab() {
       <View style={styles.tiles}>
         <Tile testID="rf-play-friends" icon="friends" label="Play Friends" sub={online ? `${online} online` : "Gang or friends"} badge={online} delay={300} narrow={narrow} onPress={() => router.push(go.challenge())} />
         <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => start("ai")} />
-        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => start("solo")} />
+        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => start("solo")} />
       </View>
 
       {/* All India Rapid: the big square right below the three mode tiles. The whole card opens today’s 45 PCM cards. */}
@@ -169,7 +171,8 @@ export function LobbyTab() {
       <T testID="rf-practice-note" size={10} color={arena.faint} style={styles.center}>Practice, not exam marks. Coins and diamonds are earned only by playing.</T>
     </ScrollView>
 
-    <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={cat.data?.subjects || []} value={picks}
+    {/* The picker always opens with nothing ticked (`NONE`); what the student then picks is kept as the lobby's choice for Play Friends, cups and gang wars. */}
+    <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={cat.data?.subjects || []} value={NONE}
       onDone={(next) => { setScope(next); if (pending) play(pending, next); }} onPlay={uid && !pending ? quickMatch : undefined}
       action={pending === "solo" ? "START SOLO SPRINT" : pending === "ai" ? "PLAY PRACTICE RIVAL" : undefined} hint={pending ? "Pick your subjects or chapters first" : undefined} />
     <WeakSheet visible={sheet === "weak"} onClose={() => setSheet("")} chapters={weak} topics={weakTopics} />

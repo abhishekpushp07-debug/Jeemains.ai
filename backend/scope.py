@@ -1,4 +1,6 @@
-"""What a round is played on: up to 5 picks, each a whole subject or one chapter. "PCM Mixed" is the three whole subjects."""
+"""What a round is played on: picks, each a whole subject or one chapter. "PCM Mixed" is the three whole subjects.
+Since 27 Nov 2026 a student may tick any number of chapters; a list of up to 5 picks is stored, named and matched exactly as before."""
+import hashlib
 from typing import Literal, Optional
 
 from fastapi import HTTPException
@@ -6,7 +8,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 ORDER = ("Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning")
 SHORT = {"Physics": "Physics", "Chemistry": "Chemistry", "Mathematics": "Maths", "English": "English", "Logical Reasoning": "Reasoning"}
-MAX_PICKS = 5
+CLASSIC_PICKS = 5  # the longest list before chapters could be ticked freely: up to here nothing changed
+MAX_PICKS = 150  # a ceiling on the size of a request (the bank has 110 chapters), not a rule of the game
 Subject = Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"]
 CARD_COUNTS = (30, 50, 100)  # what a student can choose for one round
 CARD_SECONDS = 20  # rule R1: 20 seconds per card in every mode
@@ -39,14 +42,20 @@ def label_of(picks: list) -> str:
     if not chapters:
         return "PCM Mixed" if whole == ["Physics", "Chemistry", "Maths"] else "Mixed " + " + ".join(whole)
     if not whole:
+        if len(chapters) > CLASSIC_PICKS:  # many chapters ticked one by one: "33 chapters · Physics + Chemistry"
+            names = list(dict.fromkeys(SHORT.get(p["subject"], p["subject"]) for p in picks))
+            return f"{len(chapters)} chapters · " + ("PCM" if names == ["Physics", "Chemistry", "Maths"] else " + ".join(names))
         return chapters[0] if len(chapters) == 1 else f"{chapters[0]} +{len(chapters) - 1} more"
     return f"Mixed {whole[0]} +{len(picks) - 1} more"
 
 
 def scope_fields(picks: list) -> dict:
     """The fields every sprint, match, room and cup stores. `subject` and `chapter` stay for older readers."""
+    key = "|".join(f"{p['subject']}:{p['chapter'] or '*'}" for p in picks)
+    if len(picks) > CLASSIC_PICKS:  # a long list is matched by its digest: the same lists still pair up, and the index stays small
+        key = "#" + hashlib.sha256(key.encode()).hexdigest()[:40]
     return {"picks": picks, "label": label_of(picks), "subject": picks[0]["subject"], "chapter": picks[0]["chapter"] if len(picks) == 1 else None,
-            "scope_key": "|".join(f"{p['subject']}:{p['chapter'] or '*'}" for p in picks)}
+            "scope_key": key}
 
 
 def scope_of(doc: dict) -> list:

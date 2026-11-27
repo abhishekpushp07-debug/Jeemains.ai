@@ -72,7 +72,7 @@ async def main():
         try:
             await page.locator('[data-testid="rf-start-button"]').first.click(force=True)
             await page.wait_for_timeout(800)
-            await page.locator('[data-testid="rf-scope-pcm"]').first.click(force=True)
+            await page.locator('[data-testid="rf-scope-select-all"]').first.click(force=True)  # the picker opens on PCM with nothing ticked (27 Nov 2026)
             await page.wait_for_timeout(400)
             await page.locator('[data-testid="rf-scope-done"]').first.click(force=True)
         except Exception as e:

@@ -4,6 +4,7 @@ import random
 import re
 from fastapi import HTTPException
 from metadata_cache import metadata_cache
+from scope import CLASSIC_PICKS
 
 KINDS = {'ydse', 'ellipse', 'charged_ring'}
 
@@ -45,6 +46,8 @@ def choose(pools, picks, count, avoid=frozenset()):
         keys = [k for k in ([p['chapter']] if p['chapter'] else groups) if groups.get(k)]
         random.shuffle(keys)
         lanes.append({'groups': groups, 'keys': keys, 'turn': 0, 'left': {}})
+    if len(lanes) > CLASSIC_PICKS:  # many chapters ticked one by one: which of them get a card must not follow the alphabet
+        random.shuffle(lanes)
 
     def draw(lane, key):
         """One more card of this chapter, in random order, unseen cards first. None once the chapter is used up."""
@@ -84,7 +87,7 @@ def choose(pools, picks, count, avoid=frozenset()):
 
 
 async def fresh_deck(db, exam, subject, chapter=None, count=30, picks=None, uid=None):
-    """`picks` (up to 5 subjects or chapters) wins over the single subject and chapter. With `uid`, unseen cards come first."""
+    """`picks` (whole subjects or chapters) wins over the single subject and chapter. With `uid`, unseen cards come first."""
     picks = picks or [{'subject': subject, 'chapter': chapter}]
     subjects = list(dict.fromkeys(p['subject'] for p in picks))
     avoid = await seen_cards(db, uid, exam) if uid else frozenset()

@@ -21,26 +21,30 @@ __d(function(g,r,i,a,m,e,d){"use strict";var t,o=Object.create,n=Object.definePr
 __d(function(g,r,i,a,m,e,d){"use strict";var n,t=Object.create,o=Object.defineProperty,u=Object.getOwnPropertyDescriptor,s=Object.getOwnPropertyNames,c=Object.getPrototypeOf,l=Object.prototype.hasOwnProperty,f=(n,t,c,f)=>{if(t&&"object"==typeof t||"function"==typeof t)for(let p of s(t))l.call(n,p)||p===c||o(n,p,{get:()=>t[p],enumerable:!(f=u(t,p))||f.enumerable});return n},p=(n,u,s)=>(s=null!=n?t(c(n)):{},f(!u&&n&&n.__esModule?s:o(s,"default",{value:n,enumerable:!0}),n)),O={};((n,t)=>{for(var u in t)o(n,u,{get:t[u],enumerable:!0})})(O,{Presence:()=>b,Root:()=>U}),m.exports=(n=O,f(o({},"__esModule",{value:!0}),n));var N=p(r(d[0])),y=r(d[1]),M=r(d[2]),v=p(r(d[0]));function T(n,t){return v.useReducer((n,o)=>t[n][o]??n,n)}var b=n=>{const{present:t,children:o}=n,u=E(t),s="function"==typeof o?o({present:u.isPresent}):N.Children.only(o),c=(0,y.useComposedRefs)(u.ref,w(s));return"function"==typeof o||u.isPresent?N.cloneElement(s,{ref:c}):null};function E(n){const[t,o]=N.useState(),u=N.useRef(null),s=N.useRef(n),c=N.useRef("none"),l=n?"mounted":"unmounted",[f,p]=T(l,{mounted:{UNMOUNT:"unmounted",ANIMATION_OUT:"unmountSuspended"},unmountSuspended:{MOUNT:"mounted",ANIMATION_END:"unmounted"},unmounted:{MOUNT:"mounted"}});return N.useEffect(()=>{const n=P(u.current);c.current="mounted"===f?n:"none"},[f]),(0,M.useLayoutEffect)(()=>{const t=u.current,o=s.current;if(o!==n){const u=c.current,l=P(t);if(n)p("MOUNT");else if("none"===l||"none"===t?.display)p("UNMOUNT");else{p(o&&u!==l?"ANIMATION_OUT":"UNMOUNT")}s.current=n}},[n,p]),(0,M.useLayoutEffect)(()=>{if(t){let n;const o=t.ownerDocument.defaultView??window,l=c=>{const l=P(u.current).includes(CSS.escape(c.animationName));if(c.target===t&&l&&(p("ANIMATION_END"),!s.current)){const u=t.style.animationFillMode;t.style.animationFillMode="forwards",n=o.setTimeout(()=>{"forwards"===t.style.animationFillMode&&(t.style.animationFillMode=u)})}},f=n=>{n.target===t&&(c.current=P(u.current))};return t.addEventListener("animationstart",f),t.addEventListener("animationcancel",l),t.addEventListener("animationend",l),()=>{o.clearTimeout(n),t.removeEventListener("animationstart",f),t.removeEventListener("animationcancel",l),t.removeEventListener("animationend",l)}}p("ANIMATION_END")},[t,p]),{isPresent:["mounted","unmountSuspended"].includes(f),ref:N.useCallback(n=>{u.current=n?getComputedStyle(n):null,o(n)},[])}}function P(n){return n?.animationName||"none"}function w(n){let t=Object.getOwnPropertyDescriptor(n.props,"ref")?.get,o=t&&"isReactWarning"in t&&t.isReactWarning;return o?n.ref:(t=Object.getOwnPropertyDescriptor(n,"ref")?.get,o=t&&"isReactWarning"in t&&t.isReactWarning,o?n.props.ref:n.props.ref||n.ref)}b.displayName="Presence";var U=b},829,[12,820,823]);
 __d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, exports, dependencyMap) {
   module.exports = Object.assign({
-    "navigationMenuTrigger": "EFtDwW_navigationMenuTrigger",
     "emptyTabBadge": "EFtDwW_emptyTabBadge",
-    "tabBadge": "EFtDwW_tabBadge",
+    "navigationMenuTrigger": "EFtDwW_navigationMenuTrigger",
+    "navigationMenuRoot": "EFtDwW_navigationMenuRoot",
+    "nativeTabsContainer": "EFtDwW_nativeTabsContainer",
     "tabText": "EFtDwW_tabText",
     "tabContent": "EFtDwW_tabContent",
-    "navigationMenuRoot": "EFtDwW_navigationMenuRoot",
-    "nativeTabsContainer": "EFtDwW_nativeTabsContainer"
+    "tabBadge": "EFtDwW_tabBadge"
   }, {
     unstable_styles: {
-      "navigationMenuTrigger": {
-        "$$css": true,
-        "_": "EFtDwW_navigationMenuTrigger"
-      },
       "emptyTabBadge": {
         "$$css": true,
         "_": "EFtDwW_emptyTabBadge"
       },
-      "tabBadge": {
+      "navigationMenuTrigger": {
         "$$css": true,
-        "_": "EFtDwW_tabBadge"
+        "_": "EFtDwW_navigationMenuTrigger"
+      },
+      "navigationMenuRoot": {
+        "$$css": true,
+        "_": "EFtDwW_navigationMenuRoot"
+      },
+      "nativeTabsContainer": {
+        "$$css": true,
+        "_": "EFtDwW_nativeTabsContainer"
       },
       "tabText": {
         "$$css": true,
@@ -50,13 +54,9 @@ __d(function (global, require, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, expor
         "$$css": true,
         "_": "EFtDwW_tabContent"
       },
-      "navigationMenuRoot": {
+      "tabBadge": {
         "$$css": true,
-        "_": "EFtDwW_navigationMenuRoot"
-      },
-      "nativeTabsContainer": {
-        "$$css": true,
-        "_": "EFtDwW_nativeTabsContainer"
+        "_": "EFtDwW_tabBadge"
       }
     }
   }, {});

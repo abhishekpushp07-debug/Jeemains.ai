@@ -157,7 +157,11 @@ async def _picks(db, api, u, tag):
     # a whole subject and one chapter of another share the round half and half
     s = (await sprint({"picks": [{"subject": "Mathematics"}, {"subject": "Chemistry", "chapter": top["Chemistry"]}]})).json()
     assert s["label"] == "Mixed Maths +1 more" and Counter(c["subject"] for c in s["cards"]) == {"Chemistry": 15, "Mathematics": 15}
-    assert (await sprint({"picks": [{"subject": "Physics", "chapter": c["name"]} for c in chapters["Physics"][:6]]})).status_code == 422  # 5 at most
+    # since 27 Nov 2026 any number of chapters may be ticked: six of them share the round evenly (5 was the most before)
+    six = [c["name"] for c in chapters["Physics"][:6]]
+    s = (await sprint({"picks": [{"subject": "Physics", "chapter": c} for c in six]})).json()
+    assert s["label"] == "6 chapters · Physics" and Counter(c["chapter"] for c in s["cards"]) == {c: 5 for c in six}
+    assert (await sprint({"picks": [{"subject": "Physics", "chapter": f"No such chapter {k}"} for k in range(151)]})).status_code == 422  # the ceiling of one request
     # older apps send one subject and one chapter: unchanged
     s = (await sprint({"subject": "Chemistry", "chapter": top["Chemistry"]})).json()
     assert (s["label"], s["subject"], s["chapter"]) == (top["Chemistry"], "Chemistry", top["Chemistry"]) and {c["chapter"] for c in s["cards"]} == {top["Chemistry"]}

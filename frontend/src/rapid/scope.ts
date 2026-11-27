@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-/** What a round is played on: up to 5 picks, each a whole subject (chapter null) or one chapter. Mirrors backend/scope.py. */
+/** What a round is played on: picks, each a whole subject (chapter null) or one chapter. Mirrors backend/scope.py. */
 export type Pick = { subject: string; chapter?: string | null };
 export type CatalogSubject = { name: string; total: number; chapters: { name: string; count: number }[] };
 
@@ -9,7 +9,10 @@ export const SUBJECTS = ["Physics", "Chemistry", "Mathematics", "English", "Logi
 /** BITSAT's two extra sections live in the same arena (cards follow the BITSAT 2026 syllabus). */
 export const BITSAT_SUBJECTS = ["English", "Logical Reasoning"] as const;
 export const isBitsat = (s?: string) => (BITSAT_SUBJECTS as readonly string[]).includes(s || "");
-export const MAX_PICKS = 5;
+/** Up to 5 picks a list is named and carried exactly as before chapters could be ticked freely (27 Nov 2026). */
+export const CLASSIC_PICKS = 5;
+/** A ceiling on one request (the bank has 110 chapters), not a rule of the game. The same number as the server's. */
+export const MAX_PICKS = 150;
 export const PCM: Pick[] = SUBJECTS.slice(0, 3).map((subject) => ({ subject, chapter: null }));
 export const SHORT: Record<string, string> = { Physics: "Physics", Chemistry: "Chemistry", Mathematics: "Maths", English: "English", "Logical Reasoning": "Reasoning" };
 const order = (s: string) => { const i = (SUBJECTS as readonly string[]).indexOf(s); return i < 0 ? 9 : i; };
@@ -30,12 +33,16 @@ export function normalise(picks: Pick[]): Pick[] {
   return out.sort((a, b) => order(a.subject) - order(b.subject) || (a.chapter || "").localeCompare(b.chapter || ""));
 }
 
-/** The same short name the server gives a round: "PCM Mixed", "Mixed Physics + Chemistry", "Optics +2 more". */
+/** The same short name the server gives a round: "PCM Mixed", "Mixed Physics + Chemistry", "Optics +2 more", "33 chapters · Physics + Chemistry". */
 export function scopeLabel(picks: Pick[]): string {
   const whole = picks.filter((p) => !p.chapter).map((p) => SHORT[p.subject] || p.subject);
   const chapters = picks.filter((p) => p.chapter).map((p) => p.chapter as string);
   if (!picks.length) return "Pick a subject";
   if (!chapters.length) return isPCM(picks) ? "PCM Mixed" : `Mixed ${whole.join(" + ")}`;
+  if (!whole.length && chapters.length > CLASSIC_PICKS) {
+    const names = [...new Set(normalise(picks).map((p) => SHORT[p.subject] || p.subject))];
+    return `${chapters.length} chapters · ${names.join("+") === "Physics+Chemistry+Maths" ? "PCM" : names.join(" + ")}`;
+  }
   if (!whole.length) return chapters.length === 1 ? chapters[0] : `${chapters[0]} +${chapters.length - 1} more`;
   return `Mixed ${whole[0]} +${picks.length - 1} more`;
 }
@@ -48,14 +55,57 @@ export function cardCount(picks: Pick[], subjects?: CatalogSubject[]): number {
   }, 0);
 }
 
+// ---- Ticking chapters in the picker. A subject whose every chapter is ticked is kept as one whole subject. ----
+/** The chapters of a subject that have cards. */
+const playable = (s?: CatalogSubject) => (s?.chapters || []).filter((c) => c.count > 0).map((c) => c.name);
+/** The ticked chapters of one subject, by name. */
+export const tickedOf = (picks: Pick[], s: CatalogSubject) =>
+  isWhole(picks, s.name) ? playable(s) : picks.filter((p) => p.subject === s.name && p.chapter).map((p) => p.chapter as string);
+/** Is every chapter of this subject ticked? */
+export const allTicked = (picks: Pick[], s: CatalogSubject) => { const all = playable(s), on = tickedOf(picks, s); return all.length > 0 && all.every((c) => on.includes(c)); };
+
+/** Ticks or unticks one chapter. Unticking one chapter of a whole subject leaves all its other chapters ticked. */
+export function tickChapter(picks: Pick[], s: CatalogSubject, chapter: string): Pick[] {
+  const now = tickedOf(picks, s), next = now.includes(chapter) ? now.filter((c) => c !== chapter) : [...now, chapter];
+  const all = playable(s), whole = all.length > 0 && all.every((c) => next.includes(c));
+  return normalise([...picks.filter((p) => p.subject !== s.name), ...(whole ? [{ subject: s.name, chapter: null }] : next.map((c) => ({ subject: s.name, chapter: c })))]);
+}
+
+/** Select all (`on`) or Clear for these subjects. The other subjects keep their ticks. */
+export const tickAll = (picks: Pick[], subjects: CatalogSubject[], on: boolean): Pick[] =>
+  normalise([...picks.filter((p) => !subjects.some((s) => s.name === p.subject)), ...(on ? subjects.filter((s) => playable(s).length).map((s) => ({ subject: s.name, chapter: null })) : [])]);
+
+/**
+ * The list a round is started on.
+ * Whole subjects alone go as they are: each subject gets an even share ("PCM Mixed" is 10 + 10 + 10 of 30 cards).
+ * Once any chapter is ticked on its own, every ticked chapter gets an even share, so a whole subject goes as its chapters.
+ */
+export function picksToPlay(picks: Pick[], subjects: CatalogSubject[]): Pick[] {
+  const tidy = normalise(subjects.reduce((list, s) => (!isWhole(list, s.name) && allTicked(list, s) ? [...list.filter((p) => p.subject !== s.name), { subject: s.name, chapter: null }] : list), picks));
+  if (!tidy.some((p) => p.chapter) || !tidy.some((p) => !p.chapter)) return tidy;
+  return normalise(tidy.flatMap((p) => {
+    const all = p.chapter ? [] : playable(subjects.find((s) => s.name === p.subject));
+    return all.length ? all.map((chapter) => ({ subject: p.subject, chapter })) : [p];
+  }));
+}
+
 /** Subjects that take part, short names, in order ("Physics · Maths"). */
 export const scopeSubjects = (picks: Pick[]) => [...new Set(picks.map((p) => p.subject))].sort((a, b) => order(a) - order(b)).map((s) => SHORT[s] || s).join(" · ");
 
-// Picks travel between screens as one route param.
-export const encodePicks = (picks: Pick[]) => JSON.stringify(normalise(picks));
+// Picks travel between screens as one route param. A long list (many chapters ticked one by one) travels grouped by subject,
+// {"Physics":["Optics","Waves"],"Chemistry":0}, a third of the size; a list of up to 5 travels as it always did.
+export const encodePicks = (picks: Pick[]) => {
+  const list = normalise(picks);
+  if (list.length <= CLASSIC_PICKS) return JSON.stringify(list);
+  const by: Record<string, string[] | 0> = {};
+  for (const p of list) { if (!p.chapter) by[p.subject] = 0; else ((by[p.subject] ||= []) as string[]).push(p.chapter); }
+  return JSON.stringify(by);
+};
 export function decodePicks(raw?: string | string[] | null): Pick[] | null {
   try {
-    const v = JSON.parse(Array.isArray(raw) ? raw[0] : raw || "");
+    const got = JSON.parse(Array.isArray(raw) ? raw[0] : raw || "");
+    const v = Array.isArray(got) || !got || typeof got !== "object" ? got
+      : Object.entries(got).flatMap(([subject, c]) => (Array.isArray(c) ? c.map((chapter) => ({ subject, chapter })) : [{ subject, chapter: null }]));
     const ok = Array.isArray(v) && v.length > 0 && v.length <= MAX_PICKS && v.every((p) => p && (SUBJECTS as readonly string[]).includes(p.subject));
     return ok ? normalise(v) : null;
   } catch { return null; }
