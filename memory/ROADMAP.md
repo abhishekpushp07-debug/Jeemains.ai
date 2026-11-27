@@ -1,3 +1,8 @@
+## 2026-11-27, evening: B1 + N2 done on the PREVIEW (not deployed). This block overrides line 4–5 below: the owner answered the colours ("Website app jaisi bane") and "App jaisa karo" (Cut off replaces Percentile se rank) — N2 and the Rank part of N3 are done.
+- NEXT, in order: Student Choice "App jaisa poora" after the owner sends the app's full logic (doors A/B/C, Super Admin pool switch, made paper `test_kind` "choice", no rank) → the rest of N3 (red Misfire card, coloured My Tests tabs) only on the owner's word → N5 class_level after live's 81-test list → N6 → N7 → Matched. N4 QA students: deferred by the owner.
+- Production: deployer could not reach the deployment ("v3 deployment not found"); the live PYQ 503 cause and the CDN cache rewrite stay unverified.
+
+
 ## 2026-11-27, afternoon: packet N1 is on the PREVIEW only; reply v4 written. Read this block first; it is newer than the "midday" block below (whose Rapid Fire line is now old: the marks open Google Play on the preview).
 - DONE on preview, tested (iteration_233, no issue): `display_name` always in a student's answer; catalogue `per_page` (1..100, default 12); Rank relay lets `cutoff/options`, `cutoff`, `pdf/cutoff` through; Rapid Fire marks → Google Play. Live has none of it until the owner writes `deploy`.
 - GUIDE: docs/app_reply_v4/WEBSITE_REPLY_V4.md (status table of the app's 27 Nov note, the name contract, catalogue, the app's Cut off doors as read, the ten pictures compared, load numbers, questions). Kept out of frontend/public.

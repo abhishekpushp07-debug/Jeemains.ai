@@ -80,7 +80,7 @@ function Row({ r, by, metric, n, testId, near }) {
       <small>{c.label}{c.crl && c.close ? ' · CRL' : ''}</small><b>{c.close ? fmt(c.close) : '—'}</b></span>)}</div>
     <p className="rk-cut-final" data-testid={testId + '-final'}>{final}</p>
     {r.gap ? <p className="rk-college-gap" data-testid={testId + '-gap'}>{r.gap}</p> : null}
-    <footer>{r.trend ? <span className={'rk-trend t-' + r.trend.dir} data-testid={testId + '-trend'}>{r.trend.dir === 'tough' ? <ArrowUp size={13} /> : r.trend.dir === 'easy' ? <ArrowDown size={13} /> : null}{r.trend.label}</span> : <span />}
+    <footer>{r.trend ? <span className={'rk-cut-trend t-' + r.trend.dir} data-testid={testId + '-trend'}>{r.trend.dir === 'tough' ? <ArrowUp size={13} /> : r.trend.dir === 'easy' ? <ArrowDown size={13} /> : null}{r.trend.label}</span> : <span />}
       <button type="button" className={'rk-act cmp' + (saved ? ' is-on' : '')} aria-pressed={saved} onClick={() => shortlist.toggle(r.save)} data-testid={testId + '-save'}>
         {saved ? <Check size={15} /> : <Plus size={15} />}{saved ? 'Compare mein' : 'Compare'}</button></footer>
   </article>;

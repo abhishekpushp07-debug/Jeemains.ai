@@ -83,7 +83,7 @@ function useCutoff(q) {
 const squash = t => String(t || '').toLowerCase().replace(/[.\-,()&/]/g, ' ').replace(/\s+/g, ' ');
 function OptionSheet({ open, title, options, hint, none, onPick, onClose }) {
   const [text, setText] = useState('');
-  const index = useMemo(() => options.map(o => [o, squash(`${o.title} ${o.sub} ${o.find || ''}`)]), [options]);
+  const index = useMemo(() => options.map(o => { const h = squash(`${o.title} ${o.sub} ${o.find || ''}`); return [o, h + ' ' + h.replace(/ /g, '')]; }), [options]);
   const words = squash(text).trim().split(' ').filter(Boolean);
   const hits = index.filter(([, hay]) => words.every(w => hay.includes(w))).slice(0, 60).map(([o]) => o);
   return <RankSheet open={open} onClose={onClose} title={title} sub={`${options.length} mein se chuno`} testId="cut-pick-sheet">

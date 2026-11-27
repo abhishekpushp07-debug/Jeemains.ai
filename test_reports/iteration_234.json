@@ -1,0 +1,37 @@
+{
+  "summary": "Packet N2 (Rank page parity with app), frontend only, preview only, no login, no DB writes, nothing deployed. I ran 13 Playwright runs at 1920 and 390 px, in light and dark theme. Every /api/rank relay call from the browser returned 200: meta, cutoff/options, cutoff, pdf/cutoff, predict, estimate, colleges, target/jee, target/bitsat, compare, compare/colleges. No console errors or page errors. Working: black page with hero, pink Meri details bar and six tiles in both themes, no rank-tool-pct tile, no dark text on black, no horizontal overflow at 390, chosen tile glows. ?tool=cutoff and ?tool=pct both open Cut off. Cut off JEE: 'iiest' -> IIEST Shibpur, 13 rows with R1..R5, CSAB 1, CSAB 2 and 2025 R6. Category, Female, PwD and home state (West Bengal -> Home state seats) all change the rows. Branch se 'Computer Science' gives Top 100 of 123 with 'Aur dikhao'. Score box: marks, percentile and rank all work. 400 marks, empty, 120 percentile and rank 0 each show cut-score-error. Eligible counts and green/amber boxes show, cut-clear works, Compare on a row reaches the Compare tool, and cut-pdf downloads a PDF. BITSAT: campus list, 18 programs, score 280 -> 15/18 eligible, 500 rejected. COMEDK: courses list, marks 110 and rank 4500 work, 190/200 rejected, Branch se works. Meri details: form, all invalid values show rpf-error, save, summary line, saved message, localStorage rank.profile.v1, survives reload, rpf-close works. Prefill in the same session: Rank predictor, College predictor, Cut off and Target marks all filled, and changing a tool leaves the profile alone. College predictor Rank se 12000 gives results, empty and 0 show errors, letters cannot be typed; Marks and Percentile modes still work. Regression: Rank predictor (180 marks), Target marks (NIT Trichy), College compare (branches and colleges) work. Home page in light theme is unchanged. Bugs found: (1) the trend arrow in Cut off rows is drawn huge, (2) Target marks, Compare and Dream lose the saved category/female/state after a page reload, (3) on short panes a band of page background shows between the black page and the footer.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CutoffList Row trend chip", "issue": "The trend arrow in every Cut off row is about 100px big inside a grey padded rounded box, and its label ('is saal thoda aasaan') breaks onto 3 lines. Seen on desktop and at 390 px. Cause: a CSS class clash in rank.css. The new chip reuses .rk-trend, but older rules at lines 420-421 (.rk-trend {padding:12px; border-radius:18px; background:var(--rk-alt)} and .rk-trend svg {width:100%; height:auto}) are meant for the Dream/Target chart figure, and they also hit the new chip. Fix: rename the row chip (e.g. .rk-cut-trend) or scope the old rules to figure.rk-trend.", "selector": "[data-testid=cut-row-0-trend]", "priority": "HIGH"}
+    ],
+    "integration_issues": [
+      {"flow": "Meri details -> Target marks / College compare / Dream after reload", "issue": "Right after saving, Target marks shows OBC-NCL + Female + West Bengal. After a page reload it is back to General, not Female, no state, even though rank.profile.v1 still holds the profile and the bar still shows it. Cause: rankStore.js line 118 starts jeeProfile in memory as GEN. profile.js only calls setJeeProfile inside saveProfile(), never at load. TargetMarks (getJeeProfile), the Compare college marks and the Dream target (rankStore line 128) all read that value. Fix: when the page loads, seed jeeProfile from the stored rank.profile.v1 (category, female, pwd, state) if it has been saved (at > 0). Rank predictor, College predictor and Cut off keep the profile because they read their own localStorage keys.", "affected_selectors": ["tm-cat-OBC-NCL", "tm-female", "tm-state"]}
+    ],
+    "design_issues": [
+      {"screen": "/rank with a short pane (Dream college signed out, Compare empty) at 1920x1080", "issues": ["The black .rk-screen ends about 127px above the footer (screen bottom 958, footer top 1085, because main has min-height 1008). In light theme a white/page-colour band shows between the black page and the footer, so the page is not black all the way down. Fix: give .rk-screen min-height:100% (or flex:1), or paint main black on /rank."]},
+      {"screen": "Cut off accent", "issues": ["The Cut off tile is indigo, but its stage icon, form header and Go button are teal/turquoise, close to the Target marks tile colour. Please check this against the app's Cut off accent."]},
+      {"screen": "Cut off option sheet search", "issues": ["Searching 'rv' in COMEDK finds nothing because the title is 'R V College of Engineering'. You could also match the text with spaces and dots removed."]},
+      {"screen": "Cut off branch option label", "issues": ["The JEE 'Computer Science' option says '125 college-branch', but the list for General says 'Top 100 of 123'. This is a small mismatch, probably because the option count covers every category."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix the .rk-trend CSS clash so the Cut off row trend chip is a small inline arrow with its label (rank.css lines 420-421 vs 547-548).",
+    "Seed rankStore's jeeProfile from the stored rank.profile.v1 when the page loads, so Target marks, College compare (college marks) and the Dream target keep category/female/pwd/state after a reload.",
+    "Make the black .rk-screen fill the main area (min-height) so no band of page background shows above the footer on short panes.",
+    "Optional: check the Cut off accent colour against the app; let the option search match 'rv' to 'R V'."
+  ],
+  "critical_code_review_comments": [
+    "profile.js: saveProfile() calls setJeeProfile(), but nothing calls it from the stored profile when the module loads, so this in-memory value disagrees with localStorage after a reload.",
+    "rank.css: one class name, .rk-trend, is used by two different components (the chart figure and the row chip). Keep class names unique to each component.",
+    "Cutoff.js useCutoff: keeps the old data while a new request is on the way and filters stale data with a key check. This is correct, and no flicker of wrong data was seen.",
+    "CutoffList: two buttons have data-testid 'cut-clear' in different branches. Only one is rendered at a time, so this is fine."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested); all relay calls from the browser returned 200", "frontend": "~92% (1 UI bug, 1 integration bug after reload, 1 layout band)"},
+  "seed_data_creation": "None. Only browser localStorage was used, in throwaway Playwright sessions. No DB writes, no sign-in.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Each browser_automation run starts with empty localStorage. The Dream college tool needs sign-in, so its prefill and the home-page Dream meter could not be checked visually; the code shows the dark colours are scoped under .rk-night, so home is not affected. Retest: the size of cut-row-*-trend, the Target marks profile after saving and reloading (tm-cat-OBC-NCL / tm-female / tm-state), and the band below .rk-screen on ?tool=dream at 1920x1080. Never deploy."
+}

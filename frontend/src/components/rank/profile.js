@@ -41,6 +41,7 @@ function loadProfile() {
 }
 
 let state = { profile: loadProfile(), saves: 0 };
+if (state.profile.at) { const j = state.profile.jee; setJeeProfile({ category: j.category, female: j.female, pwd: j.pwd, state: j.state }); }
 const subs = new Set();
 const subscribe = f => { subs.add(f); return () => subs.delete(f); };
 const snap = () => state;

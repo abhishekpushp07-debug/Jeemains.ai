@@ -485,7 +485,7 @@
 .rk-night .rk-dream.is-in { background: rgb(242 193 78 / .08); }
 
 /* Base colours of the black page (the app's Rank palette) */
-.rk-screen { background: #000; color: #E6E8EE; color-scheme: dark; box-shadow: 0 0 0 100vmax #000; clip-path: inset(0 -100vmax); }
+.rk-screen { min-height: calc(100dvh - 64px); background: #000; color: #E6E8EE; color-scheme: dark; box-shadow: 0 0 0 100vmax #000; clip-path: inset(0 -100vmax); }
 .rk-night .rk-page, .rk-sheet.rk-night { --rk-card: #121218; --rk-alt: #1A1A23; --rk-line: #30303E; --rk-text: #E6E8EE; --rk-muted: #8F92A3; --text-muted-2: #6E6E7A;
   --brand-text: #F4A3AE; --danger: #FCA5A5; --danger-soft: #3A1418; --danger-line: #5C1F27; }
 .rk-sheet.rk-night { background: #0A0A0E; color: #E6E8EE; border-color: #30303E; }
@@ -544,6 +544,7 @@
 .rk-round.is-edge { background: #33270C; border-color: #FCD34D; } .rk-round.is-edge b { color: #FCD34D; }
 .rk-cut-final { margin: 0; font-size: 12px; line-height: 1.5; color: #C3C6D0; }
 .rk-cut-row footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.rk-trend { display: inline-flex; align-items: center; gap: 4px; min-width: 0; font-size: 11.5px; color: var(--rk-muted); }
-.rk-trend.t-tough { color: #FCA5A5; } .rk-trend.t-easy { color: #6EE7B7; }
+.rk-cut-trend { display: inline-flex; align-items: center; gap: 4px; min-width: 0; font-size: 11.5px; color: var(--rk-muted); }
+.rk-cut-trend svg { flex: none; }
+.rk-cut-trend.t-tough { color: #FCA5A5; } .rk-cut-trend.t-easy { color: #6EE7B7; }
 @media (prefers-reduced-motion: reduce) { .rk-tile-edge, .rk-tile-face::after, .rk-profile-rim, .rk-profile-glint { animation: none; } }
