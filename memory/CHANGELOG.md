@@ -1,3 +1,10 @@
+## 2026-11-27 (midday) — Talk-only turn after the owner's deploy to jeelive.ai: no application file changed
+- Added (test only): backend/tests/one_account259.py: the website and the app are one account, both ways. 35/35 on 27 Nov 11:01 UTC under /root/p2/solo.sh (disposable database; log /root/p2/one259.log, copy test_reports/one_account259.log; record test_reports/iteration_232.json, run by the builder, not the testing agent).
+- Added (document): docs/app_reply_v3/WEBSITE_REPLY_V3.md, the website's reply to app book v3, for the app agent. Not placed under frontend/public.
+- Found, not changed: the per-address sign-in limits would be shared by all app students behind one app-server address (not known whether live is so); the app's book does not know the public Forgot PIN door.
+- Live was read signed out only; nothing written. Memory: PRD status block and ROADMAP top block.
+
+
 ## 2026-11-27 (early morning) — Pocket C1b: chapter names of joined AITS questions in analysis, behind the owner's switch (preview only, NOT deployed)
 - Changed: backend/tejas/question_records.py (PUT /api/admin/links/{slug}/analysis with body model ShowChapters; `chapter_ok` and `seen` on a record; `names_from`, `names_mark`, `chapter_names`), backend/tejas/analysis_api.py (`load`: label added in memory only, one more part in the cache mark only while On), tejas/route_contracts.py + tejas/request_contracts.py (one entry each), tejas/db.py (index question_record_by_seen), frontend/src/components/master/QuestionLinks.js (the switch, `links-show-switch`).
 - Safety: no paper, pack, answer, ledger or score is written; no delete anywhere; no AI. Off = analysis byte-for-byte as before (same cache mark).

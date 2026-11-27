@@ -1,0 +1,39 @@
+{
+  "summary": "Talk-only turn after the owner's deploy to jeelive.ai. No application file was changed. One test-only suite was added and run: website and app are one account, both ways.",
+  "run_by": "the main agent (builder), NOT the testing agent",
+  "when_utc": "2026-11-27 11:01",
+  "suite": "backend/tests/one_account259.py",
+  "command": "cd /app/backend && bash /root/p2/solo.sh python -u tests/one_account259.py",
+  "log": ["/root/p2/one259.log", "/app/test_reports/one_account259.log"],
+  "totals": {"checks": 35, "pass": 35, "fail": 0},
+  "what_it_is": "The real website server code against a disposable database (made and dropped by the suite itself; storage mocked; no AI; no network). 'The app' is an httpx client with no Origin, no Sec-Fetch header and its own cookie jar per phone, as app book v3 Part 6 describes the app's server.",
+  "what_it_is_not": ["the real app server", "a phone", "anything on live", "a run by the testing agent"],
+  "proven": [
+    "sign-up on either side signs in on the other with the same id",
+    "a second sign-up with a number that has an account is refused (409); the number typed four ways is one account",
+    "a display name saved on one side is read on the other",
+    "one attempt across both sides: start twice = the same attempt, answers both ways, one result, My Tests, Misfire ids <attempt id>:<question id>, try and done",
+    "PIN change and Forgot PIN keep the id and end the other sessions; refresh; sign-out per device",
+    "a write with a foreign Origin is refused (403 origin_denied); no Origin is let in",
+    "wrong PINs for a number are counted together from both sides; a right PIN clears the count"
+  ],
+  "as_built_and_worth_knowing": [
+    "Per address (the hop left of Cloudflare in X-Forwarded-For): 60 sign-ups + PIN changes + Forgot PINs together per clock quarter hour; 100 wrong PINs within 15 minutes make that address wait 15 minutes, right PINs too. With every app request arriving from one address the 61st sign-up got 429 and, after 100 wrong PINs, a right PIN got 429. Whether the app's production server reaches the website from one address is NOT known.",
+    "App book v3 Part 6.2 says the website has no public Forgot PIN and the app uses the owner's reset. POST /api/auth/pin/reset exists since 15 Nov 2026 and answers on live."
+  ],
+  "post_run_safety_check": {
+    "app_preview_database_before": {"tejas_phone_profiles": 2, "tejas_sessions": 6, "tejas_attempts": 8, "tejas_question_records": 0, "tejas_operations": 4, "tejas_misfire": 0, "tejas_sets": 252},
+    "app_preview_database_after": {"tejas_phone_profiles": 2, "tejas_sessions": 6, "tejas_attempts": 8, "tejas_question_records": 0, "tejas_operations": 4, "tejas_misfire": 0, "tejas_sets": 252},
+    "isolated_databases_left": ["tejas_isolated_book170_19f082e9", "tejas_isolated_window177_66e69d"],
+    "note": "The two isolated databases were there before this run and were not touched. No suite is running."
+  },
+  "live_read_only_checks_utc_11_00_to_11_15": {
+    "written": "nothing; signed out only",
+    "there": ["GET /api/health 200", "GET /api/auth/session 200 user null", "405 on GET for auth/phone, auth/phone/signup, auth/pin, auth/pin/reset, auth/refresh, auth/logout, profile/display-name", "401 for admin/links/jee-main and admin/pictures/source-line/status", "page files hold the name row, Jod banao, the chapter-names switch and Line hatao"],
+    "not_built": ["404 /api/choice/bank", "404 /api/choice/papers", "404 /api/matched", "404 /api/arena/ticket"],
+    "caution": "The public series answer hides ready / set_id of a day that is not visible, so it does not say whether the AITS books are uploaded on live."
+  },
+  "document": "/app/docs/app_reply_v3/WEBSITE_REPLY_V3.md",
+  "retest_needed": false,
+  "previous_report": "/app/test_reports/iteration_231.json"
+}

@@ -10,7 +10,9 @@ const TABS=[
  {id:'mission',to:'/mission',label:'Mission',Icon:Compass,match:p=>p.startsWith('/mission')},
 ];
 
-export const RapidFireMark=({className='',testId})=><div className={'rapid-fire-mark '+className} role="img" aria-label="Rapid Fire, coming soon on the app" title="Rapid Fire · coming soon" data-testid={testId}><img src="/brand/rapid-fire.png" alt="" width="177" height="300" decoding="async"/><span>Rapid Fire</span></div>;
+export const PLAY_STORE='https://play.google.com/store/apps/details?id=com.emergent.jeelivemobile.kt2g15';
+
+export const RapidFireMark=({className='',testId})=><a href={PLAY_STORE} target="_blank" rel="noopener noreferrer" className={'rapid-fire-mark '+className} aria-label="Rapid Fire: JEELIVE.AI app on Google Play" title="Rapid Fire · app on Google Play" data-testid={testId}><img src="/brand/rapid-fire.png" alt="" width="177" height="300" decoding="async"/><span>Rapid Fire</span></a>;
 
 export const BottomTabs=()=>{
  const {pathname}=useLocation();

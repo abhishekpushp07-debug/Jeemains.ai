@@ -45,7 +45,7 @@ class NavigationHistory(BaseModel):
 @router.get('/{slug}/catalogue', response_model=NavigationCatalogue)
 async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', section: str = Query('', max_length=60),
                     subject: str = Query('', max_length=100), q: str = Query('', max_length=100),
-                    page: int = Query(1, ge=1, le=10000), user=Depends(current)):
+                    page: int = Query(1, ge=1, le=10000), per_page: int = Query(PAGE_SIZE, ge=1, le=100), user=Depends(current)):
     await visibility()
     exam = await exam_doc(slug, user)
     found = await section_by_slug(slug, section or kind, user)
@@ -54,7 +54,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', 
     if subject:
         query['$and'].append({'$or': [{'chapter_subject': subject}, {'questions.subject': subject}]})
     total = await sets.count_documents(query)
-    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(([('pyq_year', -1)] if found['kind'] == 'pyq' else []) + ORDER).skip((page - 1) * PAGE_SIZE).limit(PAGE_SIZE).to_list(PAGE_SIZE)
+    rows = await sets.find(query, {**PROJECT, 'test_kind': 1, 'full_length': 1}).sort(([('pyq_year', -1)] if found['kind'] == 'pyq' else []) + ORDER).skip((page - 1) * per_page).limit(per_page).to_list(per_page)
     subjects = []
     if kind == 'chapters':
         subjects = await sets.aggregate([
@@ -75,7 +75,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', 
             {'$group': {'_id': '$set_id', 'item': {'$first': {
                 'id': '$id', 'status': '$status', 'deadline': '$deadline', '_database_now': EPOCH_NOW,
             }}}},
-        ]).to_list(PAGE_SIZE)
+        ]).to_list(per_page)
         for a in history:
             value = a['item']
             t = value.pop('_database_now')
@@ -84,7 +84,7 @@ async def catalogue(slug: str, kind: Literal['mocks', 'chapters'] = 'chapters', 
             latest[a['_id']] = value
     saved_ids = {d['set_id'] async for d in db.tejas_saved_tests.find({'user_id': user['id'], 'set_id': {'$in': [s['id'] for s in rows]}}, {'_id': 0, 'set_id': 1})} if rows else set()
     return NavigationCatalogue(exam=exam['name'], kind=kind, section=section_view(found), total=total, page=page,
-        pages=max(1, (total + PAGE_SIZE - 1) // PAGE_SIZE),
+        pages=max(1, (total + per_page - 1) // per_page),
         subject_counts={s['_id']: s['count'] for s in subjects if s['_id']},
         items=[{**summary(s), 'test_kind': classify_set(s), 'attempt': latest.get(s['id']), 'saved': s['id'] in saved_ids} for s in rows])
 

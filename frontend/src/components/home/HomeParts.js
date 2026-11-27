@@ -5,6 +5,7 @@ import {api} from '../../lib/api';
 import {useAuth} from '../../lib/auth';
 import {useExamList} from '../../lib/catalog';
 import {SERIES_PATH} from '../LiveSeriesBanner';
+import {PLAY_STORE} from '../BottomTabs';
 import {JEE_SERIES_DAYS,JEE_SERIES_DATES_SHORT,JEE_SERIES_START_SHORT} from '../../lib/exams';
 
 const dayPart=h=>h<5?'good night':h<12?'good morning':h<17?'good afternoon':h<21?'good evening':'good night';
@@ -66,6 +67,6 @@ export function ForYou(){
  const items=[['progress','in progress',Clock3,counts?.progress?counts.progress+' OPEN':null],['saved','saved papers',Bookmark,counts?.saved?counts.saved+' SAVED':null],['completed','my results',BarChart3,counts?.completed?counts.completed+' DONE':null]];
  return <div className="for-you" data-testid="home-for-you">
   {items.map(([tab,label,Icon,badge])=><Link key={tab} to={'/profile?tab='+tab} className="fy-item" data-testid={'home-for-you-'+tab}><span className="fy-icon"><Icon size={26} strokeWidth={1.6}/>{badge&&<b data-testid={'home-for-you-badge-'+tab}>{badge}</b>}</span><span>{label}</span></Link>)}
-  <div className="fy-item is-soon" role="img" aria-label="Rapid Fire, coming soon on the app" data-testid="home-for-you-rapid-fire"><span className="fy-icon"><Zap size={26} strokeWidth={1.6}/><b>DUEL</b></span><span>rapid fire</span></div>
+  <a href={PLAY_STORE} target="_blank" rel="noopener noreferrer" className="fy-item" aria-label="Rapid Fire: JEELIVE.AI app on Google Play" data-testid="home-for-you-rapid-fire"><span className="fy-icon"><Zap size={26} strokeWidth={1.6}/><b>DUEL</b></span><span>rapid fire</span></a>
  </div>;
 }

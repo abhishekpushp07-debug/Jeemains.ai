@@ -71,7 +71,7 @@ def test_signup_normalizes_bcrypt_no_leak_and_cookies():
             r = await signup(c, raw, p)
             assert r.status_code == 200, r.text
             u = J(r)
-            assert set(u) <= {'id', 'name', 'phone', 'role', 'exam', 'access_type', 'pin_configured'}, u
+            assert set(u) <= {'id', 'name', 'phone', 'role', 'exam', 'access_type', 'pin_configured', 'display_name'} and u['display_name'] is None, u
             assert u['phone'] == '+91' + raw[1:] and u['role'] == 'student' and u['pin_configured'] is True
             assert 'pin' not in r.text.replace('pin_configured', '') and p not in r.text
             sc = r.headers.get_list('set-cookie')

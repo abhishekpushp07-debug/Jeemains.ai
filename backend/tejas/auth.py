@@ -32,6 +32,7 @@ def view(u):
     result = {k: u[k] for k in ["id", "name", "email", "phone", "role", "exam", "access_type", "display_name"] if k in u}
     if u.get('access_type') == 'unverified_phone':
         result['pin_configured'] = u.get('pin_version', 0) > 0
+        result['display_name'] = u.get('display_name') or None  # always in a student's answer (the app reads it); null = no name chosen
     return result
 
 

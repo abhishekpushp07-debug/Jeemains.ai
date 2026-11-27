@@ -27,10 +27,10 @@ SHARE_LINK_BASE = (os.environ.get("JEELIVE_SHARE_LINK_BASE") or f"{APP_API}/j").
 SITE = os.environ["JEELIVE_SITE_URL"]
 SESSION_COOKIE = "access_token"
 
-RANK_GET = {"meta", "colleges", "target/bitsat"}
+RANK_GET = {"meta", "colleges", "target/bitsat", "cutoff/options"}
 RANK_POST = {"estimate", "percentile", "predict", "college", "bitsat", "comedk", "comedk/college",
-             "target/jee", "target/comedk", "compare", "compare/colleges"}
-RANK_PDF = {"pdf/jee", "pdf/comedk", "pdf/bitsat", "pdf/target/jee", "pdf/target/comedk", "pdf/target/bitsat", "pdf/saved"}
+             "target/jee", "target/comedk", "compare", "compare/colleges", "cutoff"}
+RANK_PDF = {"pdf/jee", "pdf/comedk", "pdf/bitsat", "pdf/target/jee", "pdf/target/comedk", "pdf/target/bitsat", "pdf/saved", "pdf/cutoff"}
 
 STATIC_TTL = 600
 MAX_BODY = 16 * 1024
