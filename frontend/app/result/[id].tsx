@@ -33,6 +33,7 @@ import { SolutionInsight } from "@/src/analysis/SolutionInsight";
 import { An, index } from "@/src/analysis/format";
 import { MatchedWith } from "@/src/matched/MatchedWith";
 import { KeptOffer } from "@/src/offline/KeptOffer";
+import { keepAiCopy } from "@/src/offline/papers";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -163,6 +164,8 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
   // AI step-by-step solutions generated on the JEELIVE backend (more arrive over time; refetched on open).
   const ai = useCached<any>(`ai.${id}`, (signal) => api(`/attempts/${id}/ai-solutions`, { signal }), false);
   const aiBy = useMemo(() => Object.fromEntries((ai.data?.items || []).map((x: any) => [x.question_id, x])), [ai.data]);
+  // A paper the phone keeps gets the solutions just read, for reading without a line (src/offline/papers.ts).
+  useEffect(() => { if (ai.data) void keepAiCopy(id, ai.data); }, [id, ai.data]);
 
   useEffect(() => {
     const i = list.findIndex((x) => x.id === q?.id);

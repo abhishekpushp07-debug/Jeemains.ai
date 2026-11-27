@@ -1,6 +1,7 @@
 // A finished paper read from the copy this phone keeps (src/offline/papers.ts): the score, every question with the
-// student's answer and the key, and the supplied solution. Nothing here asks the server for anything, so it opens
-// without a line; what needs the server (full analysis, rank, AI solutions, reports, notes) is not on this screen.
+// student's answer and the key, the supplied solution, and the website's AI step-by-step solution where one was ready
+// when the paper was kept. Nothing here asks the server for anything, so it opens without a line; what needs the
+// server (full analysis, rank, reports, notes) is not on this screen.
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FlatList, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,6 +13,7 @@ import { trustKept } from "@/src/assets/assetGrants";
 import { imagePaths, subjectOf } from "@/src/assets/paperAssets";
 import { piecesOf } from "@/src/assets/pieces";
 import { AssetImage } from "@/src/components/AssetImage";
+import { AiSolution } from "@/src/components/AiSolution";
 import { DCard as Card, ScreenHeader } from "@/src/components/design";
 import { LearningStat } from "@/src/components/LearningTheme";
 import { MathText } from "@/src/components/MathText";
@@ -20,8 +22,8 @@ import { SubjectTabs } from "@/src/components/player/SubjectNavigation";
 import { Empty, Icon, IconName, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { isResultLocked } from "@/src/mission/gate";
 import { fmtSpent } from "@/src/navigation";
-import { offlineIdentity } from "@/src/offline/door";
-import { keptResult } from "@/src/offline/papers";
+import { offlineIdentity } from "@/src/offline/identity";
+import { keptAi, keptResult } from "@/src/offline/papers";
 import { colors, radius, space } from "@/src/theme";
 
 const OUT: Record<string, [string, IconName]> = { correct: [colors.success, "check"], incorrect: [colors.error, "close"], skipped: [colors.muted, "minus"], dropped: [colors.muted, "cancel"], bonus: [colors.custom_amber, "star"] };
@@ -32,19 +34,21 @@ export default function KeptResult() {
   const router = useRouter(), insets = useSafeAreaInsets(), { width } = useWindowDimensions();
   // undefined = being read; null = not on this phone (or this phone may not read it now); "locked" = not opened once yet.
   const [r, setR] = useState<any | null | undefined | "locked">(undefined);
+  const [ai, setAi] = useState<Awaited<ReturnType<typeof keptAi>>>(null);
   useEffect(() => {
     let alive = true;
     (async () => {
       const who = expired ? null : user ? { uid: user.id } : await offlineIdentity(); // a session the server ended opens nothing
       if (!who || !id) { if (alive) setR(null); return; }
       if (!user) setAssetAccount(who.uid); // the kept store of the account last confirmed on this phone; nothing is asked of the server
-      const [kept, locked] = await Promise.all([keptResult(id), isResultLocked(id)]);
+      const [kept, locked, solutions] = await Promise.all([keptResult(id), isResultLocked(id), keptAi(id)]);
       if (!alive) return;
       if (kept && !locked) {
         // The pictures kept with this result are its pictures: they are drawn from the phone, never asked for again here.
         registerAssetManifest(id, kept.questions, true, "original", true);
         privateAssets.selectGroup(id);
         trustKept(id);
+        setAi(solutions);
       }
       setR(kept ? (locked ? "locked" : kept) : null);
     })();
@@ -59,13 +63,16 @@ export default function KeptResult() {
       {r === undefined ? <><Skeleton h={160} /><Skeleton h={120} /></> : null}
       {r === null ? <Card testID="kept-result-missing"><Empty icon="cloud-off-outline" title="Yeh result phone par nahi hai" body="Internet ke saath app kholo: aapke results apne aap phone par aa jaate hain." /></Card> : null}
       {r === "locked" ? <Card testID="kept-result-locked"><Empty icon="lock-outline" title="Pehle ek baar internet ke saath kholo" body="Is result ko pehli baar app mein internet ke saath kholna hai. Uske baad yeh bina internet bhi khulega." /></Card> : null}
-      {data ? <Paper r={data} id={id!} width={width} /> : null}
+      {data ? <Paper r={data} id={id!} width={width} ai={ai} /> : null}
     </ScrollView>
   </View>;
 }
 
-function Paper({ r, id, width }: { r: any; id: string; width: number }) {
+function Paper({ r, id, width, ai }: { r: any; id: string; width: number; ai: Awaited<ReturnType<typeof keptAi>> }) {
   const s = r.summary, rows: any[] = r.questions;
+  // Only the solutions that were ready are shown: one still being made has nothing to read without a line.
+  const aiBy = useMemo(() => Object.fromEntries((ai?.items || []).filter((x) => x.state === "ready" && x.solution).map((x) => [x.question_id, x])), [ai]);
+  const aiCount = Object.keys(aiBy).length;
   const subjects = useMemo(() => [...new Set(rows.map(subjectOf))], [rows]);
   const [subject, setSubject] = useState(subjects[0]);
   const list = useMemo(() => rows.filter((q) => subjectOf(q) === subject), [rows, subject]);
@@ -79,7 +86,9 @@ function Paper({ r, id, width }: { r: any; id: string; width: number }) {
   }, [q?.id, list]);
 
   return <>
-    <Notice testID="kept-result-note" tone="info">Yeh phone par rakhi copy hai. Poora analysis, rank aur AI solution internet ke saath app mein milte hain.</Notice>
+    <Notice testID="kept-result-note" tone="info">{aiCount
+      ? `Yeh phone par rakhi copy hai: ${aiCount === 1 ? "1 sawaal ka AI step-by-step solution bhi saath hai" : `${aiCount} sawaalon ke AI step-by-step solution bhi saath hain`}. Poora analysis aur rank internet ke saath app mein milte hain.`
+      : "Yeh phone par rakhi copy hai. Poora analysis, rank aur AI solution internet ke saath app mein milte hain."}</Notice>
     <LinearGradient testID="kept-result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.score}>
       <T w="bold" size={11} color={colors.custom_whiteA70} style={styles.spaced}>YOUR SCORE</T>
       <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="kept-result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
@@ -126,8 +135,9 @@ function Paper({ r, id, width }: { r: any; id: string; width: number }) {
       </View>
       <T w="bold" size={11} color={colors.muted} style={styles.spaced}>{q.solution_kind === "answer_key_only" ? "SUPPLIED ANSWER KEY" : "SUPPLIED SOLUTION"}</T>
       {q.solution_kind !== "answer_key_only" && q.solution ? <MathText size={14} testID="kept-solution-text" text={q.solution} /> : null}
-      {q.solution_kind === "answer_key_only" || (!q.solution && !q.solution_asset_count) ? <T testID="kept-no-solution" size={13} color={colors.muted}>Is sawaal ka likha hua solution nahi diya gaya. Answer key upar hai.</T> : null}
+      {q.solution_kind === "answer_key_only" || (!q.solution && !q.solution_asset_count) ? <T testID="kept-no-solution" size={13} color={colors.muted}>{aiBy[q.id] ? "Is sawaal ka likha hua solution nahi diya gaya. AI ka step-by-step solution neeche hai." : "Is sawaal ka likha hua solution nahi diya gaya. Answer key upar hai."}</T> : null}
       {imagePaths(id, q, "solution").map((path, i) => <AssetImage key={path} testID={`kept-simage-${q.number}-${i}`} path={path} label={`Solution ${q.number}`} />)}
+      {aiBy[q.id] ? <View testID={`kept-ai-${q.number}`}><AiSolution item={aiBy[q.id]} number={q.number} disclosure={ai?.disclosure} /></View> : null}
     </View> : null}
   </>;
 }

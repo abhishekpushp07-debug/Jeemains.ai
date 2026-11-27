@@ -8,7 +8,7 @@ import { useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 import { openBank, useBank } from "@/src/offline/bank";
-import { Who, offlineIdentity } from "@/src/offline/door";
+import { Who, offlineIdentity } from "@/src/offline/identity";
 import { useKeptRounds } from "@/src/offline/rounds";
 import { OfflineShell } from "@/src/offline/Shell";
 import { GoldTitle } from "@/src/rapid/arena";

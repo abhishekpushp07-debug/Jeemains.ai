@@ -81,7 +81,7 @@ async def run_test(page, output_dir, page_url):
             await route.continue_()
 
         await page.route('**/*', route_handler)
-        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/pyq')
+        await page.goto('https://revise-offline--6pwtbzuy.preview.emergentagent.com/pyq')
         await page.wait_for_selector('[data-testid="pyq-paper-fixture-new"]', timeout=12000)
 
         assert await page.locator('[data-testid="pyq-start-button-fixture-new"]').count() > 0

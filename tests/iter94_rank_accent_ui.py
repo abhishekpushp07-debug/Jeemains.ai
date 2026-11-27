@@ -1,6 +1,6 @@
 # Iteration 94 — Rank tab tool colours + College Predictor cards (run via browser_automation; body of async fn with `page`).
 # Login: type phone/PIN with keyboard (page.fill on entry fields does not enable submit reliably).
-BASE = "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com"
+BASE = "https://revise-offline--6pwtbzuy.preview.emergentagent.com"
 EXPECT = {"rank": ("rp-input", "rp-show", "rgb(176, 28, 79)"), "pct": ("pr-input", "pr-show", "rgb(45, 225, 194)"),
           "target": ("tm-profile", None, "rgb(181, 242, 61)"), "college": ("rank-input", "rank-show", "rgb(255, 79, 174)"),
           "compare": ("cmp-empty", "cmp-go-college", "rgb(76, 195, 255)")}

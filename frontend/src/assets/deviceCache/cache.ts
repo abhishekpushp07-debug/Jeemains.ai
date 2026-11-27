@@ -17,6 +17,10 @@ export function configureImageDisk(account: string, origin: string) {
   scope = ""; hashes.clear();
   ready = (async () => { const next = await hash(`${origin}|${account}`); if (epoch !== generation) return; scope = next; await deviceStore.open(next); })().catch(() => { if (epoch === generation) scope = ""; });
 }
+/** Writes the list of copies now (it is otherwise written a moment after a run of pictures). */
+export async function flushImageDisk() {
+  try { await ready; await deviceStore.flush?.(); } catch { /* the copies not on the list are fetched again later */ }
+}
 export function purgeImageDisk() {
   generation++; scope = ""; writing.clear(); hashes.clear();
   ready = deviceStore.clear().catch(() => {});

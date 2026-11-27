@@ -1114,3 +1114,19 @@ agent_communication_iter153:
   - agent: main
     message: "Nothing to fix from iteration_152. Continuity files hold this phase (PRD last section, OFFLINE_KEPT.md, WEBSITE_OFFLINE_NOTE.md). Nothing deployed. Not verified: a real phone, downloading while the app is closed (not built), a PYQ paper whole (website fault), a BITSAT result, load."
 
+
+
+## Iteration154 — Background keeping while the app is closed + AI solutions kept for offline + chapter list per_page (28 Nov 2026) — preview only
+iteration154_background_ai_perpage:
+  user_request: "Owner picked: 'App band hone par bhi download' + 'Offline solutions'; 'iPhone lock ho tab bhi download chale: Haan'. Website packet N1 (preview only on the website): display_name always in auth answers, chapter list per_page up to 100. Owner: Class 11/12 division stays exactly as built."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  priority: high
+  frontend:
+    files: "NEW src/offline/background.ts (expo-background-task + expo-task-manager, native only) + background.web.ts (no-op); NEW src/offline/identity.ts (offlineIdentity / noteConfirmed / forgetConfirmed moved out of door.tsx); src/offline/door.tsx (registers / unregisters the background run); src/offline/papers.ts (AI solutions kept: keepAi, keptAi, keepAiCopy; stopKeeping, keepingHeld; row.ai); app/offline/result.tsx (AI step-by-step solutions shown when ready; testID kept-ai-<number>); app/offline/results.tsx (kept-row-ai-<id> line when some are ready); app/result/[id].tsx (keepAiCopy when the AI answer arrives); src/api/examCatalog.ts (catalogueAll sends per_page=100, still walks pages if ignored); src/api/client.ts (session handle never created while AppState is background; Keychain AFTER_FIRST_UNLOCK migration; askSwitches returns a promise); src/utils/storage/index.ts (secureSet AFTER_FIRST_UNLOCK); src/assets/deviceCache/cache.ts (flushImageDisk); app.json plugin expo-background-task; package.json expo-background-task ~58.0.13, expo-task-manager ~58.0.14."
+  backend:
+    files: "backend/app_switches.py: KEEP_BACKGROUND = 1 -> 'background' in GET /api/app/switches."
+  main_checks: "tsc 0; eslint clean; android bundle builds (200, includes the task); backend tests class_levels + matched + samples_stay_home + rf_bank 22 passed; /api/app/switches -> {pictures 5, matched, classes 1, keep 10, background 1}."
+  live_facts: "27 Nov ~15:45 UTC LIVE jeelive.ai: every AI solution item of the QA learner's 11 finished papers is 'pending' (0 ready); catalogue per_page=100 ignored (Physics 30 total, pages 3, 12 rows); auth/me has no display_name key."
+  not_verifiable_here: "The background run itself (needs a real Android / iPhone build; not Expo Go, not web)."

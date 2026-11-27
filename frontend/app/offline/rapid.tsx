@@ -6,7 +6,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { BankCard, dealRound, handRound, takeRound } from "@/src/offline/bank";
-import { Who, offlineIdentity } from "@/src/offline/door";
+import { Who, offlineIdentity } from "@/src/offline/identity";
 import { PlainRound } from "@/src/offline/PlainRound";
 import { OfflineShell } from "@/src/offline/Shell";
 import { Button, Card, Empty, Skeleton } from "@/src/rapid/ui";

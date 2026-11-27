@@ -9,7 +9,7 @@ import { setAssetAccount } from "@/src/api/client";
 import { DCard as Card, ScreenHeader } from "@/src/components/design";
 import { Empty, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { unixDate } from "@/src/navigation";
-import { offlineIdentity } from "@/src/offline/door";
+import { offlineIdentity } from "@/src/offline/identity";
 import { KeptRow, keptResults, useKeptResults } from "@/src/offline/papers";
 import { colors, space } from "@/src/theme";
 
@@ -50,6 +50,7 @@ function Row({ row, onPress }: { row: KeptRow; onPress: () => void }) {
         <T size={12} color={colors.muted} numberOfLines={1}>{[row.exam, row.submitted_at ? unixDate(row.submitted_at) : ""].filter(Boolean).join(" · ")}</T>
         <T testID={`kept-row-pictures-${row.id}`} size={11.5} w="bold" color={whole ? colors.success : colors.warning}>
           {whole ? "Solutions aur pictures phone par" : row.at ? `${row.kept} / ${row.pictures} pictures phone par` : "Pictures phone par aa rahi hain"}</T>
+        {row.ai?.ready ? <T testID={`kept-row-ai-${row.id}`} size={11.5} w="bold" color={colors.brandText}>{`${row.ai.ready} / ${row.ai.total} AI solutions phone par`}</T> : null}
       </View>
       <View style={styles.right}>
         <T testID={`kept-row-score-${row.id}`} w="heavy" size={18}>{row.score ?? "—"}<T size={12} color={colors.muted}> / {row.maximum ?? "—"}</T></T>

@@ -1,0 +1,43 @@
+{
+  "summary": "Frontend-only web-preview check of: AI solutions kept for offline, the offline reader, the Class 11/12 per_page=100 view, /api/app/switches, and an offline Rapid Fire smoke, plus a code read of background.ts and client.ts sessionHandle. New script /app/tests/iter153_ai_offline_check.py: 17 of 18 checks pass. The one failure comes from the stub's shape, not the app (see minor). offline_rapid_check.py small: 33/33. The account was used READ-ONLY: no write touched attempts, start or profile; no Solutions tab was opened; no Start was tapped. BLOCKER FOUND AND CLEARED (environment, not app code): the Metro cache /app/frontend/.metro-cache held an OLD backendUrl (https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com) baked into the expo-constants manifest. So the preview bundle called the old domain, CORS blocked every /api call and sign-in was impossible. I moved the cache to /tmp/metro-cache-stale-iter153; after Expo restarted, the bundle uses EXPO_PUBLIC_BACKEND_URL (revise-offline--6pwtbzuy) and everything works. No deprecated Expo packages found (no expo-av, expo-barcode-scanner or expo-background-fetch; the app uses expo-background-task ~58.0.13 and expo-task-manager).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "kept-row-ai-<attempt>", "issue": "The total in 'n / N AI solutions phone par' is items.length, not the website's data.total (papers.ts saveAi: total: items.length). With a stub of 1 ready item and total=68 the row says '1 / 1'. Live today returns one item for every question (68 pending = total 68), so real data shows the right N. It only goes wrong if the website ever leaves pending items out of the list.", "testID": "kept-row-ai-91e7b6bf-4067-41f8-9e0f-730086159307", "priority": "LOW"},
+      {"component": "kept-result-note", "issue": "Hindi copy for a single AI solution reads '1 sawaalon ke AI step-by-step solution' (plural with 1). Use '1 sawaal ka' when aiCount === 1. Reference: app/offline/result.tsx:90", "testID": "kept-result-note", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "verified": [
+    "1 Sign-in -> Home, no red screen, no non-network console errors. background.web.ts is a no-op; nothing errors on web.",
+    "2 Fresh context, keep stubbed to 3 in the browser: the keeper started by itself (~80 s), asked for results and then ai-solutions for 3 JEE Main papers. The faked paper's row shows 'kept-row-ai-91e7b6bf… = 1 / 1 AI solutions phone par'. The reader note says '…AI step-by-step solution bhi saath hain…'. kept-ai-1 shows the AI solution: CONCEPT 'Test concept', GIVEN, STEP-BY-STEP (1 Step one / Because a+b), FINAL ANSWER Option A ✓ matches the official key, plus the disclosure. Question 2 shows no AI block.",
+    "2 NO LINE (/api/(jl|rf|app) and the picture CDN cut): session-verifying -> offline-door-button -> offline-results-open -> the same row AI line and the same kept-ai-1 block. No ai-solutions request was made.",
+    "3 Papers with the live (all pending) answer: no kept-row-ai line, and the old note text exactly. kept-row-pictures = 'Solutions aur pictures phone par'; score 0 / 272; subject tabs and the question rail are present.",
+    "4 Catalogue jee-main chapters: /exam-navigation/jee-main/catalogue?kind=chapters&subject=Physics&q=&page=1|2|3&per_page=100. All 8 catalogue requests carry per_page=100. Physics All 30 / 11:15 / 12:15; Chemistry All 24 / 11:11 / 12:12 + OTHER · 1 CHAPTER; Maths All 27 / 11:17 / 12:10. The live website still ignores per_page (read_only_peek: per_page=None, pages=3).",
+    "5 GET /api/app/switches (localhost:8001) = {pictures:5, matched:true, classes:1, keep:10, background:1}",
+    "6 offline_rapid_check.py small: 33/33 (door, offline round, kept round, sign-out shut)."
+  ],
+  "test_report_links": ["/app/tests/iter153_ai_offline_check.py", "/tmp/iter153.log", "/tmp/iter153b.log", "/tmp/iter153_rapid.log", "/tmp/iter153_reader_ai.jpeg", "/tmp/iter153_rows.jpeg", "/tmp/iter153_offline_ai.jpeg"],
+  "action_items": [
+    "ENV: after a fork or a preview-domain change, the Metro cache keeps the old EXPO_PUBLIC_BACKEND_URL inside app.config extra.backendUrl, which breaks sign-in on the preview (CORS). Clear /app/frontend/.metro-cache (or start Expo with --clear) when the domain changes. Check the production build uses the correct URL.",
+    "LOW: papers.ts saveAi: use Number(data.total) || items.length for `total`.",
+    "LOW: app/offline/result.tsx:90: use the singular wording when aiCount === 1.",
+    "RISK (code read): client.ts sessionHandle refuses to make a new handle only when AppState === 'background'. A locked iPhone or a headless launch can report 'inactive' or 'unknown' (background.ts already treats everything except 'active' as closed). Use `AppState.currentState !== 'active'` so a refused Keychain read can never mint a new handle and sign the phone out.",
+    "RISK (code read): background.ts awaits syncBank(who.uid) without .catch. A bank sync failure throws, so that run skips keepResults (papers) entirely. Consider `.catch(() => {})` as sendRounds already has.",
+    "RISK (code read): catalogueAll caps pages at 10. While the website ignores per_page (12 a page), a subject with more than 120 chapters would be cut silently. Fine today (max 30)."
+  ],
+  "critical_code_review_comments": [
+    "background.ts is correct on the points asked. It returns when AppState is 'active'. It needs offlineIdentity (7-day stamp, not signed out) AND /auth/session with the same uid; a user:null or different uid fetches nothing. It makes only GETs plus sendRounds. An 8-minute timer and the iOS expiration listener call stopKeeping (an AbortController). Switch background=0 calls scheduleKeeping(false), which unregisters the task.",
+    "noteConfirmed in the background run renews the 7-day stamp without the student opening the app. This is by design (the server confirmed it), but it means the 7 days count from the last background confirmation, not the last time the app was opened.",
+    "scheduleKeeping(true) does not unregister an already-registered task when the switch is 0 while the app is open. The unregister happens only at the next background run. This matches the documented 'at its next run'."
+  ],
+  "updated_files": ["/app/tests/iter153_ai_offline_check.py (new)", "/app/frontend/.metro-cache moved to /tmp/metro-cache-stale-iter153 (stale cache, environment only; no app code changed)"],
+  "success_rate": {"backend": "100% (1/1 switches GET)", "frontend": "17/18 new checks (the failure is the stub shape, LOW) + 33/33 offline rapid"},
+  "seed_data_creation": "None. Nothing written to Mongo or to the QA learner's account; offline_rapid_check's round upload is answered by the browser.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run python3 /app/tests/iter153_ai_offline_check.py (~4 min; fresh context; keep stubbed to 3; ai-solutions stubbed for the first attempt the keeper asks about). If sign-in times out, check the console for CORS to an old preview domain: that is a stale .metro-cache. Live AI is all pending (68/68 etc).",
+  "rca_of_issue": "Sign-in failing on the preview: the transformed expo-constants manifest in .metro-cache (file f8/db5578…) embedded extra.backendUrl from the previous preview domain. Metro's cache key did not change with the env value, so the bundle kept calling jeelive-feature-book--3o05z2vs and CORS rejected it. Fix: clear the Metro cache and restart Expo."
+}

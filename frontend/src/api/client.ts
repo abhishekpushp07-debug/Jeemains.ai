@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { AppState, Platform } from "react-native";
 import * as Crypto from "expo-crypto";
 import Constants from "expo-constants";
 import { storage } from "@/src/utils/storage";
@@ -41,15 +41,33 @@ export class ApiError extends Error {
 }
 
 // The handle unlocks this device's cookie jar, so on a phone it lives in the Keychain.
-const SID_KEY = "jl_sid";
+const SID_KEY = "jl_sid", SID_AFTER_UNLOCK = "jl_sid_after_unlock";
 let sid: string | null = null;
 let sidFlight: Promise<string> | null = null;
+// A handle written by an older build could be read only while the iPhone is unlocked: written once more while the app is
+// on screen, it can be read after the phone's first unlock too, so the background run (src/offline/background.ts) works
+// with the phone locked (owner, 28 Nov 2026). Only a handle that really is in the Keychain is written again.
+async function keepHandleReadableLocked(found: string) {
+  if (await storage.getItem<boolean>(SID_AFTER_UNLOCK, false) || await storage.secureGet<string | null>(SID_KEY, null) !== found) return;
+  if (await storage.secureSet(SID_KEY, found)) await storage.setItem(SID_AFTER_UNLOCK, true);
+}
 async function sessionHandle() {
   if (sid) return sid;
   if (!sidFlight) sidFlight = (async () => {
     // A phone whose Keychain refuses the write keeps it in app storage, so it is not signed out on every launch.
-    sid = (WEB ? null : await storage.secureGet<string | null>(SID_KEY, null)) || await storage.getItem<string | null>(SID_KEY, null);
-    if (!sid) { sid = uuid(); if (WEB || !await storage.secureSet(SID_KEY, sid)) await storage.setItem(SID_KEY, sid); }
+    const found = (WEB ? null : await storage.secureGet<string | null>(SID_KEY, null)) || await storage.getItem<string | null>(SID_KEY, null);
+    if (!found) {
+      // Off screen (the phone's background run, a locked iPhone) the Keychain may refuse to be read: a new handle made
+      // then would sign this phone out. A handle is made only while the app is on screen (a first launch simply retries).
+      if (!WEB && AppState.currentState !== "active") throw offline("Connection interrupted. Please try again.");
+      sid = uuid(); if (WEB || !await storage.secureSet(SID_KEY, sid)) await storage.setItem(SID_KEY, sid);
+      return sid;
+    }
+    sid = found;
+    if (!WEB) {
+      if (AppState.currentState === "active") void keepHandleReadableLocked(found);
+      else { const seen = AppState.addEventListener("change", state => { if (state === "active") { seen.remove(); void keepHandleReadableLocked(found); } }); }
+    }
     return sid;
   })().finally(() => { sidFlight = null; });
   return sidFlight;
@@ -330,17 +348,18 @@ export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resou
 // How much of the website's new picture way is used (0 = none; steps 2 to 5, see backend/app_switches.py) is said by
 // our own server: the owner's switch, changed without a new app build. Until its answer arrives, and whenever it
 // cannot be read, pictures load exactly as they always have.
-let pictureStep = 0, switchesAsked = false;
+let pictureStep = 0, switchesAsked = false, switchFlight: Promise<void> = Promise.resolve();
 // The whole answer, for a part of the app that has a switch of its own (src/matched/gate.tsx): null until it arrives.
 let switches: Record<string, unknown> | null = null;
 const switchListeners = new Set<() => void>();
 export const appSwitches = () => switches;
 export const onAppSwitches = (listener: () => void) => { switchListeners.add(listener); return () => { switchListeners.delete(listener); }; };
-/** `again` = ask once more although it was already answered (an app that stayed open for a long time). */
-export function askSwitches(again = false) {
-  if ((switchesAsked && !again) || !BACKEND) return;
+/** `again` = ask once more although it was already answered (an app that stayed open for a long time). The promise
+ *  settles when the answer has arrived or could not be had (it never rejects). */
+export function askSwitches(again = false): Promise<void> {
+  if ((switchesAsked && !again) || !BACKEND) return switchFlight;
   switchesAsked = true;
-  fetch(`${BACKEND}/api/app/switches`).then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+  return switchFlight = fetch(`${BACKEND}/api/app/switches`).then(r => (r.ok ? r.json() : Promise.reject(r.status)))
     .then(s => {
       const step = Number(s?.pictures); pictureStep = Number.isInteger(step) && step >= 2 ? step : 0;
       if (s && typeof s === "object") { switches = s; switchListeners.forEach(listener => { try { listener(); } catch { /* a listener's trouble is its own */ } }); }

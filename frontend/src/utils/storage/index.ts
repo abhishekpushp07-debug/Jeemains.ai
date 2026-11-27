@@ -87,7 +87,9 @@ export class Storage extends StorageBase {
     value: Value,
   ): Promise<boolean> {
     try {
-      await SecureStore.setItemAsync(key, JSON.stringify(value));
+      // Readable after the phone's first unlock (not only while unlocked), so the app's background run
+      // (src/offline/background.ts) can use the session handle with the iPhone locked. Owner's choice, 28 Nov 2026.
+      await SecureStore.setItemAsync(key, JSON.stringify(value), { keychainAccessible: SecureStore.AFTER_FIRST_UNLOCK });
       return true;
     } catch (e) {
       this.warn("secureSet", key, e);

@@ -29,22 +29,27 @@ export type KeptRow = {
   /** The keys of a few of its pictures (the first ones: the first to give way when the phone is full). A run looks
    *  whether they are still here, and counts the paper again when one is not. */
   probe?: string[];
+  /** The website's AI step-by-step solutions of this paper: how many are ready of all, when they were last asked for,
+   *  and the room their copy takes. They are made over time, so a paper with some not ready is asked again later. */
+  ai?: { ready: number; total: number; at: number; bytes: number };
 };
 const probeOf = (keys: { contentKey: string }[]) => [...new Set([0, 1, Math.floor(keys.length / 2), keys.length - 1].filter((i) => i >= 0 && i < keys.length))].map((i) => keys[i].contentKey);
 type Index = { v: 1; rows: KeptRow[]; listed: number };
 type Listed = { id: string; set_id?: string; title?: string; exam?: string; status?: string; submitted_at?: number; version?: number; result_available?: boolean; resumable?: boolean };
 
-const INDEX = "results.index", docOf = (id: string) => `result.${id}`;
+const INDEX = "results.index", docOf = (id: string) => `result.${id}`, aiOf = (id: string) => `ai.${id}`;
 const ROOM = DISK_BUDGET * 0.8;      // the rest stays free for the paper being read or written right now
 const ESTIMATE = 12 * 1024 * 1024;   // a paper not fetched yet is counted as this much
 const PER_PICTURE = 50 * 1024;       // a picture that was already on the phone is counted as this much
-const RUN_GAP = 15 * 60 * 1000, PAPER_GAP = 4000, PAGE_GAP = 800, MAX_PAGES = 6, TRY_AGAIN = 6 * 3600 * 1000;
+const RUN_GAP = 15 * 60 * 1000, PAPER_GAP = 4000, PAGE_GAP = 800, MAX_PAGES = 6, TRY_AGAIN = 6 * 3600 * 1000, AI_AGAIN = 12 * 3600 * 1000;
 const pause = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const rank = (exam?: string) => (/jee/i.test(exam || "") ? 0 : /bitsat/i.test(exam || "") ? 1 : 2);
 /** Nothing more to fetch for this paper now: every picture is here, or what is missing was tried within the last 6 hours. */
 const settled = (row?: KeptRow) => !!row && (row.kept >= row.pictures || Date.now() - row.at < TRY_AGAIN);
+/** Its AI solutions are worth asking for again: never asked, or some were not ready (or not answered) 12 hours ago. */
+const aiDue = (row: KeptRow) => !row.ai || (row.ai.ready < row.ai.total && Date.now() - row.ai.at > AI_AGAIN);
 
-let running: Promise<void> | null = null, lastRun = 0, held = false;
+let running: Promise<void> | null = null, lastRun = 0, held = false, stop: (() => void) | null = null;
 let rows: KeptRow[] | null = null, owner: string | null = null;
 const listeners = new Set<() => void>();
 const publish = (next: KeptRow[] | null, uid: string | null) => { rows = next; owner = uid; listeners.forEach((f) => f()); };
@@ -88,6 +93,48 @@ export async function keptResult(id: string): Promise<any | null> {
 /** While a paper is being attempted, or a Rapid Fire round is being played, nothing is fetched in the background: the
  *  line and the phone belong to it. Checked before every paper and before every part of 12 pictures. */
 export const holdKeeping = (on: boolean) => { held = on; };
+export const keepingHeld = () => held;
+/** Ends the run now (the phone's background time is over): what came is kept, the rest waits for the next run. */
+export const stopKeeping = () => { stop?.(); };
+
+// ---- The website's AI step-by-step solutions (GET /attempts/{id}/ai-solutions, the call the result screen makes) ----
+const aiItems = (data: any): any[] | null => (data && Array.isArray(data.items) ? data.items.filter((x: any) => x && typeof x.question_id === "string") : null);
+const readyOf = (items: any[]) => items.filter((x) => x.state === "ready" && x.solution).length;
+type AiKept = NonNullable<KeptRow["ai"]>;
+/** Keeps the copy when at least one solution is ready (pending ones are nothing to read). */
+async function saveAi(id: string, data: any, before?: AiKept): Promise<AiKept | undefined> {
+  const items = aiItems(data);
+  if (!items) return before ? { ...before, at: Date.now() } : undefined;
+  const ready = readyOf(items), text = ready ? JSON.stringify({ v: 1, at: Date.now(), data: { items, disclosure: data.disclosure } }) : "";
+  if (ready && !(await saveKeptText(aiOf(id), text))) return before ? { ...before, at: Date.now() } : undefined;
+  // The website's own count of the paper's solutions when it gives one (it may send fewer items than that).
+  return { ready, total: Math.max(items.length, Number(data.total) || 0), at: Date.now(), bytes: ready ? text.length : before?.bytes || 0 };
+}
+async function keepAi(id: string, signal: AbortSignal, before?: AiKept): Promise<AiKept> {
+  const data = await api<any>(`/attempts/${encodeURIComponent(id)}/ai-solutions`, { signal }).catch(() => null);
+  // Not answered: asked again after 12 hours (counted as one not ready).
+  return (data && (await saveAi(id, data, before))) || (before ? { ...before, at: Date.now() } : { ready: 0, total: 1, at: Date.now(), bytes: 0 });
+}
+/** A kept paper's AI solutions that were ready when they were kept: `items` by question, as the website gave them. */
+export async function keptAi(id: string): Promise<{ items: any[]; disclosure?: string } | null> {
+  try {
+    const got = JSON.parse((await readKeptText(aiOf(id))) || "null");
+    const items = got?.v === 1 ? aiItems(got.data) : null;
+    return items ? { items, disclosure: typeof got.data.disclosure === "string" ? got.data.disclosure : undefined } : null;
+  } catch { return null; }
+}
+/** The result screen has just read a kept paper's AI solutions: the phone's copy follows, with no call of its own. */
+export async function keepAiCopy(id: string, data: any): Promise<void> {
+  try {
+    const uid = getAssetAccount();
+    if (ARENA || !uid || running || !aiItems(data)) return;
+    const have = await keptResults(), row = have.find((r) => r.id === id);
+    if (!row || getAssetAccount() !== uid || running || (row.ai && row.ai.ready >= readyOf(aiItems(data)!) && row.ai.total === Math.max(aiItems(data)!.length, Number(data.total) || 0))) return;
+    const ai = await saveAi(id, data, row.ai);
+    if (!ai || getAssetAccount() !== uid || running) return;
+    await writeIndex(have.map((r) => (r.id === id ? { ...r, ai, bytes: r.bytes - (r.ai?.bytes || 0) + ai.bytes } : r)), uid);
+  } catch { /* keeping a copy is never the result screen's trouble */ }
+}
 
 async function finished(signal: AbortSignal): Promise<Listed[] | null> {
   const out: Listed[] = [];
@@ -109,6 +156,7 @@ async function keepOne(t: Listed, signal: AbortSignal, hold: () => Promise<void>
   if (res.status !== 200 || !data?.summary || data.status === "embargoed" || !Array.isArray(data.questions)) return null;
   const text = JSON.stringify({ v: 1, at: Date.now(), data });
   if (!(await saveKeptText(docOf(t.id), text))) return null;
+  const ai = await keepAi(t.id, signal);
   const questions = originalLook(data).questions as any[], step = Number((appSwitches() as any)?.pictures) || 0;
   const keys = questions.flatMap((q) => pictureKeys(t.id, q, true));
   let kept = 0, bytes = 0;
@@ -120,10 +168,10 @@ async function keepOne(t: Listed, signal: AbortSignal, hold: () => Promise<void>
   const s = data.summary;
   return { id: t.id, set_id: data.set_id || t.set_id, title: String(data.title || t.title || "Result"), exam: String(data.exam || t.exam || ""), kind: data.test_kind || undefined,
     submitted_at: Number(data.submitted_at ?? t.submitted_at) || undefined, version: t.version, score: s.score, maximum: s.maximum, correct: s.correct, incorrect: s.incorrect, skipped: s.skipped,
-    count: Number(data.count) || questions.length, pictures: keys.length, kept, bytes: text.length + Math.max(bytes, kept * PER_PICTURE),
+    count: Number(data.count) || questions.length, pictures: keys.length, kept, bytes: text.length + Math.max(bytes, kept * PER_PICTURE) + ai.bytes,
     // Some pictures came and then it stopped (the app was put away, the line dropped): the next run goes on. Nothing came
     // at all (the website is not giving this paper's pictures just now): tried again after 6 hours.
-    at: kept < keys.length && bytes > 0 ? 0 : Date.now(), probe: probeOf(keys) };
+    at: kept < keys.length && bytes > 0 ? 0 : Date.now(), probe: probeOf(keys), ai };
 }
 
 /** A paper whose pictures were not all here: counted again from the phone (a result opened on screen brings its own
@@ -146,6 +194,7 @@ export function keepResults(uid: string, force = false): Promise<void> {
   if (ARENA || !uid || !limit || getAssetAccount() !== uid || (!force && Date.now() - lastRun < RUN_GAP)) return Promise.resolve();
   lastRun = Date.now();
   const ctl = new AbortController(), forget = onAssetScopeReset(() => ctl.abort());
+  stop = () => ctl.abort();
   const mine = () => !ctl.signal.aborted && getAssetAccount() === uid;
   const hold = async () => { while (held && mine()) await pause(5000); };
   running = (async () => {
@@ -161,7 +210,7 @@ export function keepResults(uid: string, force = false): Promise<void> {
     const listed = await finished(ctl.signal);
     if (!listed || !mine()) return;
     const next: KeptRow[] = [];
-    let room = ROOM, fetched = 0;
+    let room = ROOM, fetched = 0, asked = 0;
     for (let i = 0; i < listed.length && mine(); i++) {
       const t = listed[i], was = old.get(t.id);
       const cost = was?.bytes || ESTIMATE;
@@ -178,11 +227,20 @@ export function keepResults(uid: string, force = false): Promise<void> {
         if (!mine()) return;
         if (row) await writeIndex([...next, row, ...listed.slice(i + 1).map((x) => old.get(x.id)).filter((r): r is KeptRow => !!r)], uid); // kept so far, should the app be closed now
         await pause(PAPER_GAP);
+      } else if (row && aiDue(row) && asked < limit) {
+        // A paper already kept: only its AI solutions are asked for again (one small answer, no pictures).
+        await hold();
+        if (!mine()) return;
+        asked++;
+        const ai = await keepAi(row.id, ctl.signal, row.ai);
+        if (!mine()) return;
+        row = { ...row, ai, bytes: row.bytes - (row.ai?.bytes || 0) + ai.bytes };
+        await pause(PAGE_GAP);
       }
       if (row) { next.push(row); room -= row.bytes || ESTIMATE; }
     }
     if (mine()) await writeIndex(next, uid);
-  })().catch(() => {}).finally(() => { forget(); running = null; });
+  })().catch(() => {}).finally(() => { forget(); running = null; stop = null; });
   return running;
 }
 /**

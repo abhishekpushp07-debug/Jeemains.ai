@@ -3,7 +3,7 @@
 # Used after each picture step (backend/app_switches.py) to see the step working on jeelive.ai.
 import re
 import time
-BASE = "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com"
+BASE = "https://revise-offline--6pwtbzuy.preview.emergentagent.com"
 ATT = "1ea510f2-1d2a-41f7-9bb4-a8b28c16f98f"
 await page.set_viewport_size({"width": 390, "height": 844})
 log = []

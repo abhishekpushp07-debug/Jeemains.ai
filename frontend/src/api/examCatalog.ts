@@ -45,16 +45,18 @@ export function useExam(slug?: string) {
  *  (checked against the live website: kind=mocks&section=chapters returns the chapter list; kind=chapters&section=mocks is refused). */
 export const catalogueKind = (s: Pick<ExamSection, "layout">) => (s.layout === "chapters" ? "chapters" : "mocks");
 export const sectionParam = (s: Pick<ExamSection, "slug" | "layout">) => (s.slug === catalogueKind(s) ? "" : s.slug);
-export const cataloguePath = (slug: string, kind: string, section: string, subject: string, q: string, page: number) =>
-  `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind, ...(section ? { section } : {}), subject, q, page: String(page) })}`;
+export const cataloguePath = (slug: string, kind: string, section: string, subject: string, q: string, page: number, perPage = 0) =>
+  `/exam-navigation/${slug}/catalogue?${new URLSearchParams({ kind, ...(section ? { section } : {}), subject, q, page: String(page), ...(perPage ? { per_page: String(perPage) } : {}) })}`;
 
-/** One list whole, for a screen that regroups it on the phone (Class 11 / Class 12): the website gives 12 a page and
- *  has no way to ask for all, so the first page says how many pages there are and the others are asked for together. */
+/** One list whole, for a screen that regroups it on the phone (Class 11 / Class 12). Asked for with per_page=100: a
+ *  website that honours it (its packet N1, 28 Nov 2026) answers in one page; one that does not gives 12 a page as
+ *  before, and the first page says how many pages there are, so the others are asked for together. Either way the
+ *  student sees the same list, grouped by the app's own Class 11 / Class 12 list (src/classLevel.ts). */
 export async function catalogueAll(slug: string, kind: string, section: string, subject: string, q: string, signal?: AbortSignal) {
-  const first = await api<any>(cataloguePath(slug, kind, section, subject, q, 1), { signal });
+  const first = await api<any>(cataloguePath(slug, kind, section, subject, q, 1, 100), { signal });
   const pages = Math.min(Number(first?.pages) || 1, 10);
   if (pages <= 1) return first;
-  const rest = await Promise.all(Array.from({ length: pages - 1 }, (_, i) => api<any>(cataloguePath(slug, kind, section, subject, q, i + 2), { signal })));
+  const rest = await Promise.all(Array.from({ length: pages - 1 }, (_, i) => api<any>(cataloguePath(slug, kind, section, subject, q, i + 2, 100), { signal })));
   const ids = new Set<string>(); // a test published between two pages must not be listed twice
   const items = [first, ...rest].flatMap(p => p?.items || []).filter(s => s?.id && !ids.has(s.id) && ids.add(s.id));
   return { ...first, items, page: 1, pages: 1 };

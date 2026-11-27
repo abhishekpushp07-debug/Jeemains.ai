@@ -23,7 +23,7 @@ Rapid Fire is deliberately not part of this pack.
 | | |
 |---|---|
 | Live app server | `https://jeelive-mobile.emergent.host/api` |
-| Development server | `https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work, such as Cut off before it is published) |
+| Development server | `https://revise-offline--6pwtbzuy.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work, such as Cut off before it is published) |
 | Data (served live) | JEE Main 2026 (JoSAA, CSAB, JAC Delhi), COMEDK UGET 2026, BITSAT 2022–2026 |
 | Verified on the day of this build | development server: all 29 public checks pass (`CONNECT/connect_check.py`). Live server: the 21 earlier checks pass; the 8 new ones (Cut off, scorecard rank) say `WAIT` until the app project's next publish |
 | Is Cut off on the live server yet? | `MANIFEST.json` → `cut_off_on_live` (the day of this build); run `connect_check.py` for today |

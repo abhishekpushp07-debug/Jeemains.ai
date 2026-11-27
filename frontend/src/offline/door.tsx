@@ -1,5 +1,6 @@
-// Who may use the phone's kept things without a line: the account whose session the server last confirmed on this
-// phone, for 7 days after that confirmation (the owner's rule). Signing out, or a session the server ended, closes it.
+// The phone's kept things while the app is open (OfflineKeeper), and the way in without a line (OfflineDoor).
+// Who may come in: ./identity.ts. While the app is closed the phone's own background run does the same keeping:
+// ./background.ts.
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { usePathname, useRouter } from "expo-router";
@@ -9,31 +10,26 @@ import { ARENA } from "@/src/arenaMode";
 import { Button, T } from "@/src/components/ui";
 import { storage } from "@/src/utils/storage";
 import { colors, space } from "@/src/theme";
+import { scheduleKeeping } from "./background";
 import { bankView, openBank, syncBank } from "./bank";
+import { forgetConfirmed, noteConfirmed, offlineIdentity } from "./identity";
 import { holdKeeping, keepResults } from "./papers";
 import { sendRounds, useKeptRounds } from "./rounds";
-
-const STAMP = "kept.confirmed.v1", DAYS = 7;
-export type Who = { uid: string; name: string };
-
-/** The account that may play from the phone without a line, or null. */
-export async function offlineIdentity(): Promise<Who | null> {
-  try {
-    if (await storage.getItem<boolean>("jl_signed_out", false)) return null;
-    const stamp = JSON.parse((await storage.getItem<string | null>(STAMP, null)) || "null");
-    const age = Date.now() - Number(stamp?.at);
-    // A phone whose clock was set back does not get more days out of it.
-    return stamp && typeof stamp.uid === "string" && stamp.uid && age > -86400000 && age < DAYS * 86400000 ? { uid: stamp.uid, name: typeof stamp.name === "string" ? stamp.name : "" } : null;
-  } catch { return null; }
-}
 
 /** Mounted once, beside the other background helpers: notes each confirmed session, and keeps the phone's copy fresh. */
 export function OfflineKeeper() {
   const { user, ready, expired } = useAuth();
   useEffect(() => {
     if (!ready) return;
-    if (!user) { if (expired) void storage.removeItem(STAMP); return; } // the server ended the session: nothing opens without a line
-    void storage.setItem(STAMP, JSON.stringify({ uid: user.id, name: user.name || "", at: Date.now() }));
+    if (!user) {
+      // The server ended the session: nothing opens without a line, and the phone stops its background run. Signed out
+      // on purpose: the same. No line at all (no user, nothing ended): the background run stays, it is meant for that.
+      if (expired) { void forgetConfirmed(); void scheduleKeeping(false); }
+      else void storage.getItem<boolean>("jl_signed_out", false).then((out) => { if (out) void scheduleKeeping(false); });
+      return;
+    }
+    void noteConfirmed({ uid: user.id, name: user.name || "" });
+    void scheduleKeeping(true);
     // After the first screen has drawn, in the owner's order: rounds played without a line go up, Rapid Fire's cards are
     // brought up to date, then the finished papers (JEE Main first, then BITSAT) with their results and pictures.
     const fetchAll = () => sendRounds(user.id).catch(() => {}).then(() => syncBank(user.id)).then(() => keepResults(user.id));

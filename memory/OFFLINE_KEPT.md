@@ -100,11 +100,47 @@ Not built, because the app cannot do it alone (section 6): the QUESTIONS of a pa
   paper on the phone the website must offer a sealed copy that opens at Start (asked in `WEBSITE_OFFLINE_NOTE.md`).
 - **Starting or submitting a paper without a line**: the website owns the clock and the submission.
 - **Analysis, rank, AI solutions, reports, notes** of a result without a line.
-- **Downloading while the app is closed** (the phone's own background jobs): not built. Everything here runs while
-  the app is open, without the student doing anything.
+- **Downloading while the app is closed**: BUILT on 28 Nov 2026 (section 7), but it can only be seen in a real app build:
+  never run here (web preview and Expo Go cannot run it).
 - **A real phone.** Only the web preview was run. On a phone the store is `store.ts` (files in the app's cache folder,
   AES key in SecureStore) and `shelf.ts` (documents folder): the same logic, never run by this check. The cache folder
   may be emptied by the phone itself when it is short of space; the papers then come again.
 - **BITSAT results**: the QA learner has none; the order is checked by rule, not by a BITSAT paper.
 - **Load**: one new phone asks for up to 10 results and about 20 to 30 CDN parts each in its first two minutes. No
   number of phones was measured. If the website or our server feels it: lower `KEEP_RESULTS`, publish.
+
+## 7. While the app is closed + AI solutions (28 Nov 2026) — preview only, NOT published
+
+Owner (28 Nov): picked "App band hone par bhi download" and "Offline solutions"; "iPhone lock ho tab bhi download chale?"
+→ "Haan, lock par bhi". He refused a storage meter ("Banana hi nahi hai").
+
+- **Background run** `src/offline/background.ts` (native; `background.web.ts` does nothing): `expo-background-task` +
+  `expo-task-manager` (app.json plugin `expo-background-task`: iOS `UIBackgroundModes: processing` + the permitted
+  identifier). Registered after every confirmed session (`door.tsx` → `scheduleKeeping(true)`), every 30 minutes at the
+  soonest (Android WorkManager, network required, Wi-Fi or mobile data); iPhone runs it when iOS chooses (mostly at
+  night). Unregistered after signing out and after a session the server ended.
+  One run: nothing if the app is on screen → `offlineIdentity()` (7-day stamp, not signed out) → `GET /auth/session` must
+  give the same uid (else nothing) → stamp renewed → switches → rounds go up → cards → finished papers (`keepResults`,
+  skipped while a paper or round was open) → the picture list is written (`flushImageDisk`). Stops after 8 minutes or
+  at iOS expiry (`stopKeeping`): what came is kept. Owner's switch `background` (backend/app_switches.py
+  `KEEP_BACKGROUND = 1`): 0 stops it on every phone at its next run.
+- **Known limit (Android)**: the task is defined when the root layout loads. iPhone wakes the whole app, so it is always
+  defined there. Android runs it while the app's process is still alive; when Android has ended the process (often at
+  night) the run is skipped. Making it run then needs a custom entry file (package.json "main"), a protected file:
+  NOT done; asked of the owner.
+- **Locked iPhone**: the session handle `jl_sid` is now written with `keychainAccessible: AFTER_FIRST_UNLOCK`
+  (`src/utils/storage/index.ts secureSet`); a handle written by an older build is written once more when the app is on
+  screen (`client.ts keepHandleReadableLocked`, flag `jl_sid_after_unlock`). A new handle is never made while the app is
+  not on screen (it would sign the phone out when the Keychain refuses a read). The picture store's key was already
+  AFTER_FIRST_UNLOCK_THIS_DEVICE_ONLY.
+- **AI solutions** (`papers.ts`): with each kept paper `GET /attempts/{id}/ai-solutions` (the result screen's call); a
+  copy `ai.<id>` beside the result, in the same encrypted store, only when at least one is ready. `row.ai = {ready, total,
+  at, bytes}`; a paper with some not ready is asked again after 12 hours (a light answer, ~10 KB; up to `keep` papers a
+  run). The result screen's own answer is kept too (`keepAiCopy`, no extra call). Reader: `kept-ai-<number>`; list:
+  `kept-row-ai-<attempt>`. **Live on 27 Nov: all items of all 11 QA papers "pending"**: nothing to show yet.
+- **Chapter list**: `catalogueAll` sends `per_page=100` (website packet N1, preview only on the website); live still gives
+  12 a page and the app reads all pages as before. Class 11 / Class 12 unchanged (owner: "wo rhega").
+- Checked: tsc 0, eslint clean, Android bundle builds; testing agent iteration_153 (web preview): AI kept and read
+  without a line (mocked ready item in the test browser only), per_page on all 8 requests with identical class counts,
+  switches, offline Rapid Fire 33/33. Two small findings fixed after it (AI total from `data.total`; "1 sawaal ka").
+- NOT checked: the background run on a real phone (needs a new Android + iOS build after Publish).

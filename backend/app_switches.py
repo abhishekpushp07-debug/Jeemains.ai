@@ -38,6 +38,12 @@ MATCHED_CARD = "auto"
 #   0   off: no phone fetches a paper in the background (what a phone already keeps stays readable)
 KEEP_RESULTS = 10
 
+# The phone's own background run while the app is closed (frontend src/offline/background.ts, a real app build only):
+# the same keeping as above (Rapid Fire's cards, rounds played without a line, finished papers), started by the phone
+# itself now and then, on Wi-Fi or mobile data. 1 = on. 0 = every phone stops it at its next run (and does not start it
+# again); what is kept stays, and the app keeps things while it is open as before.
+KEEP_BACKGROUND = 1
+
 router = APIRouter()
 
 
@@ -45,4 +51,5 @@ router = APIRouter()
 async def switches():
     # "classes": the number of the Class 11 / Class 12 chapter list (class_levels.py). An app that carries an older list
     # asks for the new one (GET /api/app/classes); an app that carries this one asks for nothing.
-    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION, "keep": KEEP_RESULTS}
+    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION, "keep": KEEP_RESULTS,
+            "background": KEEP_BACKGROUND}

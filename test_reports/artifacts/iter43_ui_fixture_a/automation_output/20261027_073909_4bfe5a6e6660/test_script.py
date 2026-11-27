@@ -26,7 +26,7 @@ async def run_test(page, output_dir, page_url):
         await page.route('**/*', handle_route)
         await page.set_viewport_size({"width": 390, "height": 844})
         print('Step 1: Open app')
-        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
+        await page.goto('https://revise-offline--6pwtbzuy.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
         await page.wait_for_selector('[data-testid="tab-rapid"]', timeout=30000)
         await page.click('[data-testid="tab-rapid"]', force=True)
         await page.wait_for_selector('[data-testid="rapid-fire-home"]', timeout=30000)
