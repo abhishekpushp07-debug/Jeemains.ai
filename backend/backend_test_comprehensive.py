@@ -17,7 +17,7 @@ load_dotenv(Path(__file__).parent / '.env')
 import requests
 
 # Use HTTPS preview URL
-BASE_URL = os.environ.get('FRONTEND_URL', 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com')
+BASE_URL = os.environ.get('FRONTEND_URL', 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com')
 OWNER_EMAIL = os.environ.get('ADMIN_EMAIL', 'owner@tejas-platform.com')
 OWNER_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'L3eAGpSD0nQjrK80hMcIcZ1V')
 

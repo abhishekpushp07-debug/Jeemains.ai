@@ -17,7 +17,7 @@ if os.environ.get('BOOK_LANES'):
     book_pdf.LANES = int(os.environ['BOOK_LANES'])
 if os.environ.get('BOOK_PAGES'):
     book_worker.PAGES_PER_STEP = int(os.environ['BOOK_PAGES'])
-ORIGIN = 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
+ORIGIN = 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'
 T0 = time.time()
 LOG = {'probe': [], 'part1': [], 'part2': []}
 EVENTS = []

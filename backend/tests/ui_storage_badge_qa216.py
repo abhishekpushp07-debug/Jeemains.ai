@@ -3,7 +3,7 @@ Run: python tests/ui_storage_badge_qa216.py"""
 import asyncio, json, time
 from playwright.async_api import async_playwright
 
-BASE = 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
+BASE = 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'
 API = 'http://127.0.0.1:8770'
 B = json.load(open('/tmp/uibridge/bridge.json'))
 R = []

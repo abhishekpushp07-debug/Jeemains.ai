@@ -23,7 +23,7 @@ import fitz
 import openpyxl
 
 # Base URL for testing
-BASE_URL = "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
+BASE_URL = "https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com"
 
 from dotenv import dotenv_values
 _env = dotenv_values("/app/backend/.env")

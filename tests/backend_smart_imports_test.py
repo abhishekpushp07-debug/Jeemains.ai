@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / 'backend' / '.env')
 
 # Test configuration
-BASE_URL = "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
+BASE_URL = "https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com"
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'abhishek@billpe.com')
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '55241878')
 STUDENT_PHONE = "+12025550884"

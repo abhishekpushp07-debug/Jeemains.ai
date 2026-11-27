@@ -9,7 +9,7 @@ from pathlib import Path
 import httpx
 from playwright.async_api import async_playwright
 
-ORIGIN = 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
+ORIGIN = 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'
 BUILD = Path('/tmp/fe164_build'); BRIDGE = 'http://127.0.0.1:8797'
 CREDS = json.load(open('/tmp/perf163_creds.json'))
 SHOTS = Path('/app/test_reports/iter164_shots'); SHOTS.mkdir(exist_ok=True)

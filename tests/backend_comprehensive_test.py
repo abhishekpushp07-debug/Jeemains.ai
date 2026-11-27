@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / 'backend' / '.env')
 
 # Use HTTPS preview URL as per requirements
-BASE_URL = "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
+BASE_URL = "https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com"
 
 # Load credentials from environment
 OWNER_EMAIL = os.environ.get('ADMIN_EMAIL', '')

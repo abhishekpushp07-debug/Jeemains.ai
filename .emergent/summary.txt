@@ -1,157 +1,129 @@
-<analysis>**original_problem_statement**: The user is overseeing an 11-phase deep re-audit of the Super Admin panel and PDF pipeline. Phase 1 deliverables include: 100MB upload constraints, lossless PDF PNG screenshot compression (via ), owner login rate limits, student block/unblock, rules prompt suppression, re-read progress indicators, machine status panel, and a Roman Hinglish UI with specific mobile-friendly CSS standards (44px tap targets, 390px max-width no side-scroll). 
-*New major requirement (Route 2 picture routing)*: Implement a lighter and faster picture routing system gated strictly to test phone number . This includes serving strong ETags, 304/206 caching, ,  and , and WebP lossless formats with PNG fallback.
-PRODUCT REQUIREMENTS: The user has a strict **Zero Questions Policy**. The agent must take independent technical decisions without asking for confirmation.
+<analysis>Here is the handoff summary based on the provided LLM message history:
 
-**User's preferred language**: Roman Hinglish
-INSTRUCT: The next agent MUST automatically respond to the user and document the final audit report () strictly in Roman Hinglish. Do NOT use standard English for user-facing responses or the audit doc.
+**original_problem_statement**: Inspect the existing website for its integration with the separate CEO dashboard (“JLive Command”), and answer 20 numbered questions precisely. Say unsure wherever evidence is insufficient. This is strictly an inspection/documentation task. **Do NOT change any code, data or settings. Only inspect and answer.** Write  with the answers, and then reply “done”.
+PRODUCT REQUIREMENTS: 
+- Answer 20 specific questions regarding production endpoints, keys, exclusion phones, student/contact lists, cache times, frontend routing maps, event triggers, security headers/CSP, GA/PostHog trackers, UTM captures, app redirects, marketing consent, AITS dates, staff counts, account deletion behavior, preview vs production separation, and DNS management.
+- Preserve the exact document name:  inside folder .
+- Talk only, do not code. Protect the production-sensitive work.
 
-**what currently exists?**: A React + FastAPI + MongoDB platform. Phase 1 backend and the new Route 2 picture routing logic have been coded (). The backend  endpoint exists. **CRITICAL DISCOVERY:** The agent audited the frontend and found that the Phase 1 UI components (Machine Status panel, Student Block/Unblock, Roman Hinglish text translation) DO NOT EXIST yet. The previous assumption that they were partially updated was incorrect.
+**User's preferred language**: Hindi / Hinglish. (INSTRUCT NEXT AGENT: You MUST respond and converse in Hindi/Hinglish only, just as the previous agent was doing).
+
+**what currently exists?**: The application is a React frontend + FastAPI backend + MongoDB project. The CEO integration backend logic lives in  exposing  endpoints. The agent has run extensive read-only bash scripts (greps, file views, curl checks, DNS lookups) to gather factual evidence required to answer the 20 questions. The output directory  has been created. 
 
 **Last working item**:
-    - Last item agent was working: Gathering context and auditing the codebase via bash/grep. Verified that the Phase 1 UI is completely missing from the frontend and needs to be built from scratch.
-    - Status: NOT STARTED (Agent just finished auditing, implementation needs to begin)
-    - Agent Testing Done: N
-    - Which testing method agent to use? testing_agent
-    - User Testing Done: N
+    - Last item agent was working: Extracting configuration details, live HTTP headers, DNS lookups, CORS rules, routing configurations, and preview/production counts to compile the answers for the 20 specific questions.
+    - Status: IN PROGRESS (Data gathering is almost/fully complete, but the actual markdown file is yet to be authored).
+    - Agent Testing Done: N/A
+    - Which testing method agent to use? NA (Read-only documentation task).
+    - User Testing Done: N/A
 
 **All Pending/In progress Issue list**:
-  Issue 1: Build & Verify Phase 1 UI Components (Priority P0)
-     - Attempted fixes: Agent verified these are missing via grep.
-     - Next debug checklist: 
-        1. Build Block/Unblock in .
-        2. Build the Machine Status panel.
-        3. Update upload limit (50->100MB) in  and  (and translate error messages to Roman Hinglish).
-        4. Add read progress UI (dobara padhi ja rahi hai · X/Y page).
-        5. Translate Super Admin text to Roman Hinglish.
-        6. Ensure 44px tap targets, disabled/hover states, and 390px max-width without side-scroll.
-        7. Ensure admin/login pages are hidden from Google (robots.txt / noIndex).
-     - Why fix this issue and what will be achieved with the fix? Fulfills the user's explicit Phase 1 UI requirements.
-     - Status: NOT STARTED
-     - Is recurring issue? N
-     - Should Test frontend/backend/both after fix? Both (Testing agent)
-     - Blocked on other issue: None
-
-  Issue 2: Verify Picture Route 2 (Priority P0)
-     - Attempted fixes: Code exists in , gated to .
-     - Next debug checklist: Verify ETag logic ( matching  from bytes). Ensure fallback for non-pilot phones is byte-for-byte identical. Review  to decide if lossy WebP needs to be added (currently only lossless exists). Run .
-     - Why fix this issue and what will be achieved with the fix? Performance feature for picture serving.
-     - Status: TESTING PENDING
-     - Is recurring issue? N
-     - Should Test frontend/backend/both after fix? Backend
-     - Blocked on other issue: None
-
-  Issue 3: 409 Book-lock Contention (Reported as Supabase 500 issue) (Priority P1)
-     - Attempted fixes: RCA completed previously ().
-     - Next debug checklist: Read RCA doc. Add retry/backoff mechanism in  and  to handle concurrent background job failures safely.
-     - Why fix this issue and what will be achieved with the fix? Fixes background job failures.
-     - Status: NOT STARTED
-     - Is recurring issue? Y
-     - Should Test frontend/backend/both after fix? Backend
-     - Blocked on other issue: None
-
-  Issue 4: Write Audit Report & Documentation (Priority P2)
-     - Attempted fixes: None yet this session.
-     - Next debug checklist: Write  strictly in Roman Hinglish. Update  and .
-     - Why fix this issue and what will be achieved with the fix? Required deliverable for user.
-     - Status: IN PROGRESS
-     - Is recurring issue? N
-     - Should Test frontend/backend/both after fix? NA
-     - Blocked on other issue: Completion of Phase 1 code.
+  None. This is an inspection/documentation request, not a bug fix or feature implementation request.
 
 **In progress Task List**:
-  *(Covered under the Issues list above)*
+  Task 1: Write the CEO Dashboard inspection report.
+     - Where to resume: Review the collected bash evidence in your context, and draft the 20-point answer document.
+     - What will be achieved with this? Fulfills the user's explicit documentation request.
+     - Status: IN PROGRESS
+     - Should Test frontend/backend/both after fix? NA
+     - Blocked on something: None.
 
-**Upcoming and Future Tasks**
-Phase 2:
-- P1: Public SEO pages, SEO metadata, accessible non-JS pages.
-- P1: Free tools landing page.
-- P1: External uptime monitoring integration.
-- P1: AITS numerical questions batch confirmation.
-- P2: Deferred PDF Engine backlog.
+**Upcoming and Future Tasks**:
+    Upcoming Tasks:
+    - P0: Author the file exactly at . Format it clearly with the 20 numbered points. If the evidence for any point is missing or ambiguous, explicitly write unsure (never guess).
+    - P0: After writing the file, reply to the user with done (in Hindi/Hinglish) and instruct them to use the Save to Github feature. 
+    
+    Future Tasks:
+    - P1: Student Choice Phase 1 implementation (Currently paused/deferred by the user. DO NOT start this without explicit user instruction).
 
-Phase 3:
-- P2: Read all mocks incremental AI parser.
-- P2: AI Doubt Solver library.
-- P2: 100k concurrent student load test.
-- P2: Super Admin granular audit logging.
+**Completed work in this session**:
+- Created the output directory: 
+- Successfully gathered read-only metrics and configurations:
+  - Validated preview and production endpoint responses ().
+  - Found PostHog tracking in .
+  - Extracted security headers, CSP, and CORS validation logic.
+  - Checked  schema and preview variables.
+  - Read frontend routing architectures and tracked event mappings (, ).
 
-**Completed work in this session**
-- Agent ran a comprehensive bash/grep audit of the project.
-- Discovered that previous agent hallucinated/assumed the UI was partially built; confirmed that Phase 1 UI components must be built from scratch.
-- Confirmed that missing files (, ) ARE actually tracked in Git, the live deployment just needs a fresh build.
-- Provided a status report summary to the user in Roman Hinglish.
+**Earlier issues found/mentioned but not fixed**:
+  None relevant to the current scope. (Historical issues like PYQ 404 and N2 cutoff fonts are documented in the prompt but are explicitly out of scope for this read-only task).
 
-**Earlier issues found/mentioned but not fixed**
-  None unaddressed in the current priority list.
+**Known issue recurrence from previous fork**:
+  - Issue recurrence in previous fork: None.
+  - Recurrence count: 0
+  - Status: NA
 
-**Known issue recurrence from previous fork**
-  - Issue recurrence in previous fork: Agent used  for confirmation, violating the user's strict Zero Questions Policy. 
-  - Recurrence count: 3 (Happened again at the start of this session, greatly angering the user).
-  - Status: RESOLVED (Do not do it again).
-  Note: **DO NOT USE .** Take independent technical decisions. The user explicitly stated: I completely trust you. Take your own decisions.
+**Code Architecture**:
+- Frontend: React application under 
+- Backend: FastAPI application under 
+- Database: MongoDB
 
-**Code Architecture**
-- : React frontend. Admin routes under .
-- : FastAPI backend routes (, , , , ).
+**Key Technical Concepts**:
+React, FastAPI, MongoDB, Supervisor, PostHog Analytics, JWT Authentication, Craco.
 
-**Key Technical Concepts**
-React, FastAPI, MongoDB, ETag HTTP Caching (304 Not Modified, 206 Partial Content), WebP image encoding, concurrent database locking.
+**key DB schema**:
+  - : {staff roles, access_types}
+  - : {phone, pin_hash}
+  - : {test attempt records}
+  - : {AITS exam schedules}
+  - : {invitation contacts}
 
-**key DB schema**
-  - tejas_attempts: {user_id, questions, status}
-  - tejas_books: {payload, state, owner_id}
+**changes in tech stack**:
+  - None
 
-**changes in tech stack**
-  -  pinned to .
+**All files of reference**:
+  -  (Documentation of the CEO API contract)
+  -  (API logic for CEO dashboard)
+  -  (Created directory for output)
 
-**All files of reference**
+**Areas that need refactoring**:
+  None (Out of scope).
+
+**key api endpoints**:
   - 
   - 
   - 
   - 
-  - 
-  - 
 
-**Areas that need refactoring**
--  (Line 72) / : Requires refactoring for better MongoDB lock management (retry/backoff) to prevent the 409 contention errors.
+**Critical Info for New Agent**:
+- **STRICTLY READ-ONLY**: Do NOT write or modify any , , config, or  files. Do NOT drop databases. Do NOT deploy.
+- **Answer Format Constraint**: Write the file exactly at . Base all answers strictly on the gathered bash evidence. If the answer is unprovable, literally write unsure (e.g., DNS registrar might be unsure).
+- **Communication Constraint**: Talk only in Hindi/Hinglish.
+- **Git Constraint**: Do not perform git commits or pushes. Simply direct the user to Save to Github once the file is ready.
 
-**key api endpoints**
-- 
-- 
-- 
-- 
+**documents and test reports created in this job**:
+  - Output expected (pending): 
 
-**Critical Info for New Agent**
-- **LANGUAGE REQUIREMENT**: You MUST converse with the user and write the final audit doc strictly in **Roman Hinglish**.
-- **ZERO QUESTIONS POLICY**: Never use . The user has pre-approved the plan: Haan, poora plan isi order mein chalao. Start executing Issue 1 immediately.
-- **TESTING ENVIRONMENT**: Do NOT test on preview or live databases. Use disposable isolated DBs only (check ).
-- **PILOT GATE**:  must remain . Do not change this to .
-- **CSS RULES**: Do not write bare  selectors or open  rules in CSS/Tailwind, as dev plugins wrap text dynamically and will break styling.
+**Last 10 User Messages and any pending HUMAN messages**:
+ 1. [Execution paused by user] (Pending: Create the markdown file)
+ 2. Tool result showing creation of  directory and Posthog host.
+ 3. Tool result for admission workload, LIVE index.html third-party scripts, and .
+ 4. Tool result for auth.py limits, React backend URL, and track.js.
+ 5. Tool result for  seeders, DNS DO-HTTPS resolutions, and AITS endpoints.
+ 6. System compaction continuity message.
+ 7. Tool result checking  commit history, preview secrets, and API responses.
+ 8. Tool result for  and  configurations.
+ 9. Tool result displaying multiple environment secrets and configurations.
+ 10. Massive initial context containing the 20 questions, and the strict instruction to only read and answer in a markdown file.
 
-**documents and test reports created in this job**
-- None created in this session, but  is expected to be written.
+**Project Health Check**:
+Healthy. Current state is purely analytical and observational.
 
-**Last 10 User Messages and any pending HUMAN messages** 
- - User instructed the agent to use  to confirm the plan.
- - The agent triggered .
- - User responded in extreme frustration, pasting their Zero Questions Policy 6 times, but confirmed: Haan, poora plan isi order mein chalao (Yes, run the plan in this order).
- - User paused execution and asked for a comprehensive handoff summary in Roman Hinglish without writing any code, so they could fork.
+**3rd Party Integrations**:
+ - PostHog (Analytics - hardcoded in )
 
-**Project Health Check:**
-- Broken:  locking mechanism (causing 409 contention). 
-- Mocked: None.
-
-**3rd Party Integrations**
-- Supabase (Storage) — requires User API Key
-
-**Testing status**
-  - Testing agent used after significant changes: NO (Pending implementation completion)
+**Testing status**:
+  - Testing agent used after significant changes: NO (NA)
   - Troubleshoot agent used after agent stuck in loop: NO
-  - Test files created: None this session.
-  - Known regressions: None.
+  - Test files created: None
+  - Known regressions: None
 
-**Credentials to test flow:**
-Refer to 
+**Credentials to test flow**:
+  Not applicable for this read-only inspection.
 
-**What agent forgot to execute**
-The agent was intentionally stopped by the user to create this handoff. The actual implementation of the Phase 1 UI components, the 409 lock fix, and the subsequent  verification need to be executed immediately.</analysis>
+**What agent forgot to execute**:
+The agent gathered all the necessary data via Bash but was paused before it could execute the  tool to actually write the  document.
+
+<TESTING METHOD>
+NA (This task requires no testing as it is strictly a read-only codebase inspection and documentation task).
+</TESTING METHOD></analysis>

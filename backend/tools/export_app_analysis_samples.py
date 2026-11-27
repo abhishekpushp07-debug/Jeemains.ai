@@ -4,7 +4,7 @@ import json, os, sys
 import requests
 
 B = os.environ.get('BRIDGE', 'http://127.0.0.1:8773')
-ORIGIN = os.environ.get('BRIDGE_ORIGIN', 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com')
+ORIGIN = os.environ.get('BRIDGE_ORIGIN', 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com')
 CFG = json.load(open(os.environ.get('BRIDGE_JSON', '/tmp/uibridge196/bridge.json')))
 OUT = sys.argv[1]
 os.makedirs(OUT, exist_ok=True)

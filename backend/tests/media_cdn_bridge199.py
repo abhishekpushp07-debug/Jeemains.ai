@@ -5,7 +5,7 @@ import json, uuid, pytest, requests
 B = 'http://127.0.0.1:8770'
 CFG = json.load(open('/tmp/uibridge/bridge.json'))
 F = CFG['f']
-ORIGIN = 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
+ORIGIN = 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'
 
 
 def sess(cookies=None):

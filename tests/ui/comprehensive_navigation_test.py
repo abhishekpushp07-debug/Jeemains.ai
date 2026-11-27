@@ -18,7 +18,7 @@ def read_base_url():
         for line in f:
             if line.startswith('REACT_APP_BACKEND_URL='):
                 return line.split('=', 1)[1].strip()
-    return "https://rank-predictor-11--5rzs66bc.preview.emergentagent.com"
+    return "https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com"
 
 BASE_URL = read_base_url()
 QA_PHONE_DEFAULT = "+12025550341"

@@ -75,8 +75,8 @@ async def mkstaff(role, tag):
 
 
 def client():
-    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app), base_url='https://rank-predictor-11--5rzs66bc.preview.emergentagent.com', timeout=120,
-                             headers={'Origin': 'https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'})
+    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app), base_url='https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com', timeout=120,
+                             headers={'Origin': 'https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'})
 
 
 async def upload(c, raw, title, edition='', parts=None, **extra):

@@ -1,6 +1,6 @@
 # Iteration 153: REAL guest root '/' (no API mocks) lossless pixel contrast for All India banner + JEE/BITSAT/COMEDK cards (static, forced glare, hover).
 import json, base64
-BASE='https://rank-predictor-11--5rzs66bc.preview.emergentagent.com'
+BASE='https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com'
 
 CSS = """html{scroll-behavior:auto!important}
 html.qa-m [data-qa-scope], html.qa-m [data-qa-scope] *{transition:none!important}

@@ -245,7 +245,7 @@ Directory structure:
 
 **Screenshot Format:** JPEG (quality=20)  
 **Test Phone:** +12025550341  
-**Base URL:** https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
+**Base URL:** https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com
 
 ---
 

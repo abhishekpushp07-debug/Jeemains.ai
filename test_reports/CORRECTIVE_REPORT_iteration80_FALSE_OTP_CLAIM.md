@@ -3,7 +3,7 @@
 **Date:** October 17, 2026  
 **Testing Agent:** T1  
 **Review Request:** Correct baseline report iteration80 false OTP claim  
-**Preview URL:** https://rank-predictor-11--5rzs66bc.preview.emergentagent.com
+**Preview URL:** https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com
 
 ---
 
@@ -92,7 +92,7 @@ async def access(data: PhoneInput, response: Response):
 #### Test: POST /api/auth/phone
 ```bash
 Request:
-POST https://rank-predictor-11--5rzs66bc.preview.emergentagent.com/api/auth/phone
+POST https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com/api/auth/phone
 Content-Type: application/json
 {"phone": "+12025550184"}
 

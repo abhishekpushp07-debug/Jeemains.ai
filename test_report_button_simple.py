@@ -76,7 +76,7 @@ async def inject_failed_job():
     print(f"\n=== Setup complete ===")
     print(f"Attempt ID: {attempt_id}")
     print(f"Job ID: {job_id}")
-    print(f"Results URL: https://rank-predictor-11--5rzs66bc.preview.emergentagent.com/results/{attempt_id}")
+    print(f"Results URL: https://jlive-ceo-inspect--0x57uoje.preview.emergentagent.com/results/{attempt_id}")
     print(f"\nNext: Open browser to results page and click Download button")
     print(f"Expected: ReportButton should call POST /jobs/{{id}}/retry, then download PDF")
     
