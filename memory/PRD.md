@@ -1519,3 +1519,8 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - Chapter-wise list already subject-wise: subject chips × All / Class 11 / Class 12 tabs, per_page=100 (live website still caps rows at 12 and pages; app walks pages).
 - Matched dummy shifts: preview samples soft-hidden (published False, sample True, nothing deleted); production list empty and the 3 sample ids 404.
 - Tests: testing agent iteration_155.json 42/42 + backend 4/4; label cut-off fixed (short labels) → tests/iter156_store_label_widths.py no cut at 320–480 px.
+
+## 28 Nov 2026 (night) — CEO dashboard ("JLive Command") questions answered — read only, no code change
+- `/app/dashboard/APP_ANSWERS_V1.md` (+ README.md): 17 answers (uid = website user.id via POST /api/rf/access → website /auth/me; no own accounts; screens; tests only on website; events → award()/pay_once in gamify.py, rf_sessions/rf_duels/rf_daily_plays; rank + PDF write nothing; no analytics/push; scheme `frontend`, no universal links; contacts: phone_hash/last4 (2 profiles), pin_resets SHA-256, account_deletions full phone until done; no consent field; CEO /users sorts last_day only (no uid tie-break, not changed); live CEO token set (401 without, 200 with)).
+- Live counts (CEO API, 28 Nov ~01:40 IST): 640 profiles, 588 test by TEST rule, 4 website-format (UUID) ids, 48 other test-fixture ids → real = 4. CEO API does not filter test profiles. Live ≈ preview numbers.
+- Reaches GitHub only when the owner presses Save to GitHub.
