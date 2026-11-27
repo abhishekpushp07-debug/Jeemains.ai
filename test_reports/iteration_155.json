@@ -1,0 +1,27 @@
+{
+  "summary": "Tested the browser copy's 'PLAY IN THE APP' card (GetTheApp.tsx) and GET /api/app/switches. Backend: 4/4 passed (stores = {android: Play URL, ios: ''}; pictures/matched/classes/keep/background all still there). Frontend: 42/42 checks passed in /app/tests/iter156_get_app_card.py, using the QA learner (read only; the finished duel was answered in the browser; 0 writes stopped). Finished match review at /api/arena/rapid/duel?review=<id>: the gold card 'arena-get-app' is the LAST item of the result scroll, after 'duel-practice-note'. It has the title 'PLAY IN THE APP' and 3 tick lines. Desktop user agent: Google Play button plus 'iPhone app coming soon.'. iPhone: no Play button, plus the long 'coming soon… play right here in the browser.' note. Android: Play button, no iPhone note. With stores.ios answered in the browser: iPhone sees 'arena-get-app-ios' (opens the apple URL), Android does not. Pressing 'arena-get-app-android' opens the Play URL with id=com.emergent.jeelivemobile.kt2g15 in a new tab. The All India daily result shows the card just before 'rf-daily-back'. In the app preview (root URL, desktop and Android user agents) the same review has NO 'arena-get-app'. Scores 3–5, BADLA LO, Done and the practice note are unchanged. ONE UI BUG: the store button label is cut off with an ellipsis ('GET IT ON GOOGL…' / 'GET IT ON THE AP…') at every phone width from 320 to 430px. Only the 480px laptop column shows it in full. No deprecated Expo packages were added in the files reviewed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "GetTheApp store buttons (RaisedButton height=60)", "issue": "The label is cut off with an ellipsis in the browser copy at 320/360/375/390/412/430px wide. Measured with the Android and iPhone user agents: label needs 330px (Play) / 350px (App Store) at 24px with letterSpacing 2, but gets 190–300px. It fits only in the 480px column. Cause: RaisedButton's big label (size 24, numberOfLines=1) relies on adjustsFontSizeToFit/minimumFontScale, which react-native-web ignores. The browser copy is web only, so every phone friend sees 'GET IT ON GOOGL…'. Ref: /app/frontend/src/rapid/GetTheApp.tsx:51-52, /app/frontend/src/rapid/arena.tsx:106,117", "testID": "arena-get-app-android, arena-get-app-ios", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_app_switches_stores.py", "/app/tests/iter156_get_app_card.py", "/app/tests/iter156_store_label_widths.py", "/app/test_reports/pytest/iter156_switches.xml"],
+  "action_items": [
+    "Fix the cut-off store button labels in GetTheApp: e.g. a shorter label ('GOOGLE PLAY' / 'APP STORE' with sub 'Get it on … · Android phones'), a height below 60 (16px label), or a smaller label size / letterSpacing for this button on web. Then check at 320–430px that scrollWidth <= clientWidth (python3 /app/tests/iter156_store_label_widths.py prints this). The browser copy must be rebuilt (scripts/build_arena_web.sh) for the fix to show at /api/arena."
+  ],
+  "critical_code_review_comments": [
+    "If GET /api/app/switches fails, a desktop browser shows two notes at once ('iPhone app coming soon.' and 'The app link is on its way…'). This is minor and was not run live.",
+    "RaisedButton's adjustsFontSizeToFit has no effect on web, so any other long label at height>=60 in the browser copy can be cut off the same way."
+  ],
+  "updated_files": ["/app/backend/tests/test_app_switches_stores.py (new)", "/app/tests/iter156_get_app_card.py (new)", "/app/tests/iter156_store_label_widths.py (new)"],
+  "success_rate": {"backend": "100%", "frontend": "100% functional (42/42); 1 visual bug"},
+  "seed_data_creation": "None. The finished duel (id TEST-duel-getapp-156), the daily result and stores.ios were answered in the browser only. The QA learner signed in (auth plus the app's own /api/rf/access grant) and nothing was written.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run python3 /app/tests/iter156_get_app_card.py (about 2 minutes; signs in once, reuses storage_state for the iPhone/Android/app-preview contexts) and iter156_store_label_widths.py for the label cut-off. The Play/App Store hosts are answered by the browser, so Google and Apple are never loaded.",
+  "rca_of_issue": "The cut-off label comes from RaisedButton: height>=60 gives a 24px label with letterSpacing 2 and numberOfLines=1, and it relies on adjustsFontSizeToFit, which react-native-web does not support. So on web the text overflows and is cut off with an ellipsis."
+}

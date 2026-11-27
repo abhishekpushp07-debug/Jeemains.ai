@@ -12,6 +12,7 @@ import { Confetti, Twinkles } from "./juice";
 import { Face, NameLine, Note } from "./parts";
 import { TROPHY } from "./AllIndiaCard";
 import { BattleVictory } from "./BattleVictory";
+import { GetTheApp } from "./GetTheApp";
 import { DailyShare } from "./DailyShare";
 import { DailyMisses } from "./DailyMisses";
 import { Sheet } from "./ui";
@@ -75,6 +76,7 @@ export function DailyResultView({ result, uid, onBack, fresh }: { result: DailyR
     {result.reward ? <RewardPanel reward={result.reward} historical={!fresh} title={top ? "Top 10 in India!" : battle ? "Top 100 in India!" : "All India round done"} /> : null}
     {board.data ? <DailyBoardList items={board.data.items} total={board.data.total} /> : null}
     <T w="bold" size={12} color={arena.muted} style={styles.center}>{result.total} new PCM cards at midnight. Same cards for everyone, one try.</T>
+    <GetTheApp />
     <RaisedButton testID="rf-daily-back" label="BACK TO RAPID FIRE" height={56} onPress={onBack} />
     <Sheet visible={sharing} onClose={() => setSharing(false)} testID="rf-daily-share-sheet"><DailyShare result={result} onBack={() => setSharing(false)} /></Sheet>
     </ScrollView>

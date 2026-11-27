@@ -44,6 +44,11 @@ KEEP_RESULTS = 10
 # again); what is kept stays, and the app keeps things while it is open as before.
 KEEP_BACKGROUND = 1
 
+# Where the browser copy of Rapid Fire (/api/arena: for a friend who opened a match link without the app) sends that
+# friend at the end of a result (frontend src/rapid/GetTheApp.tsx): the store of their own phone. "" = no button for
+# that store yet (the iPhone app is not in the App Store yet: put its https address here when it is; no new build).
+STORES = {"android": "https://play.google.com/store/apps/details?id=com.emergent.jeelivemobile.kt2g15", "ios": ""}
+
 router = APIRouter()
 
 
@@ -52,4 +57,4 @@ async def switches():
     # "classes": the number of the Class 11 / Class 12 chapter list (class_levels.py). An app that carries an older list
     # asks for the new one (GET /api/app/classes); an app that carries this one asks for nothing.
     return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD), "classes": class_levels.VERSION, "keep": KEEP_RESULTS,
-            "background": KEEP_BACKGROUND}
+            "background": KEEP_BACKGROUND, "stores": STORES}

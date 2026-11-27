@@ -1141,3 +1141,14 @@ iteration155_v5:
   frontend_files: "src/rank/profileSync.ts (NEW: GET/PUT /api/jl/profile/rank-details; 404 -> 'rank.details.door' timestamp, asked again after 6 h; newer `at` wins; another account's local profile never pushed; pre-login profile pushed only to an empty copy then stamped); src/rank/profile.ts (readProfile, profileReady, currentProfile, takeProfile, stampProfile, uid/clearedAt on the profile; saveProfile/clearProfile stamp the signed-in uid); src/rank/ProfileBar.tsx (syncProfile on mount, after save and after 'Meri details hatao'); src/assets/paperPack.ts (a part answered 503 with Retry-After <= 20 s is asked once more after that wait; CDN then our server); app/(tabs)/index.tsx, app/account.tsx, src/dream/DreamShare.tsx, src/dream/DreamCheer.tsx (display_name before name)."
   live_facts: "27 Nov ~16:55 UTC live: /api/profile/rank-details does not exist (404 expected); QA learner has no saved name (leaderboard named:false)."
   result_iteration154: "testing agent: all pass except B3 (a save lost when the account copy's at is ahead of the phone's clock) -> fixed (own change always goes up with at = max(local, remote + 1), marked rank.details.own until sent); re-run tests/iter154_followup.py 8/8."
+
+
+## Iteration156 — Friend browser copy: big "Get the app" card at the end of the result + website look kit (28 Nov 2026) — preview only
+iteration156_arena_get_app:
+  user_request: "Owner: Rapid Fire is app only; the browser copy (/api/arena) is only for friends without the app who open a match link. 'Browser copy update bna do' (edits only, not from scratch); 'app download krne ka just at the end with result bda card me' (app-like). Also: website_look_kit folder for the website; chapter list stays subject-wise (100 per request) with Class tabs; preview dummy Matched shifts hidden."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  frontend_files: "NEW src/rapid/GetTheApp.tsx (only when ARENA; gold Panel testID arena-get-app, title arena-get-app-title 'PLAY IN THE APP', buttons arena-get-app-android (Google Play, not on iPhone) / arena-get-app-ios (only when stores.ios is set, not on Android), notes arena-get-app-ios-soon / arena-get-app-soon); src/rapid/MatchResult.tsx (card is the last item of the result scroll, after duel-practice-note); src/rapid/DailyParts.tsx (DailyResultView: card before rf-daily-back). Re-exported browser copy: scripts/build_arena_web.sh -> backend/arena_web (old copy backed up by the script)."
+  backend_files: "backend/app_switches.py: STORES {android: Play URL for com.emergent.jeelivemobile.kt2g15, ios: ''} -> 'stores' in GET /api/app/switches."
+  other: "NEW /app/website_look_kit (README.md, LOOK_GUIDE.md, 21 screenshots, reference_code copies). Preview Matched samples soft-hidden (published False, sample True; /api/matched list empty); production list empty and the 3 sample ids 404."

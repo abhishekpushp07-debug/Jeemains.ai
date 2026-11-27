@@ -18,6 +18,7 @@ import { ErrorBox } from "./ui";
 import { go, ordinal, sendChallenge, useFriends } from "./social";
 import { encodePicks } from "./scope";
 import { useBadla } from "./HeadToHead";
+import { GetTheApp } from "./GetTheApp";
 
 const MISS: Record<string, string> = { timed_out: "Timed out", skipped: "Skipped" };
 
@@ -114,6 +115,7 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
         {c.explain ? <RapidText testID={`duel-review-explain-${k}`} size={11} w="regular" color={arena.muted} text={c.explain} /> : null}
       </View>) : null}
       <Note testID="duel-practice-note">Practice match. It never changes exam marks, ranks or your series streak.</Note>
+      <GetTheApp />
     </ScrollView>
 
     <View style={styles.dock}>
