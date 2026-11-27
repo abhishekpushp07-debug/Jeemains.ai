@@ -4,7 +4,7 @@
 
 ## Owner ke liye, chhote mein (Hinglish)
 
-- **Part A** = website ko **app ke liye** kya banana hai: 15 kaam. Inme se zyada tar bante hi app mein **apne aap**
+- **Part A** = website ko **app ke liye** kya banana hai: 16 kaam. Inme se zyada tar bante hi app mein **apne aap**
   dikhne lagenge, naye build ke bina.
 - **Part B** = website ko **apni website par** test dene wale students ke liye kya banana hai: 6 kaam.
 - **Part C** = **aapke faisle**. Jab tak aap nahi batate, website yeh nahi banayegi.
@@ -24,8 +24,7 @@
 - "N1" = your packet N1 of 28 Nov (preview only, per your own summary).
 - Full shapes of every door are in the notes you already have (book version 3, the Student Choice note, the Matched
   note, the note of 27 Nov). The short shape is repeated here so this list can be built from on its own.
-- Your guide `WEBSITE_REPLY_V4.md` never reached the app project (it lives in your project). Its **7 questions to the
-  app agent are not answered yet**: paste them as text into the app's chat.
+- Your 7 questions are answered in the app's `memory/APP_REPLY_V5.md` (branch App, after the owner's "Save to GitHub").
 
 ---
 
@@ -37,7 +36,7 @@
 | 2 | Student Choice **door B** `GET /api/choice/chapters/<chapter test id>/questions?page=1` | 404 | lists a chapter's questions without options |
 | 3 | Student Choice **door C** `POST /api/choice/papers` | not built | makes the student's paper and opens it |
 | 4 | The 81 chapter-wise tests: **time by the ratio, 180 min at most** | every test 60 min | shows the new time by itself |
-| 5 | **display_name** in auth answers | key absent (N1: preview only) | right name everywhere, by itself |
+| 5 | **display_name** in auth answers | key absent: live sends it only for a saved name (N1 = always, preview only) | right name everywhere, by itself |
 | 6 | **class_level** on every chapter row, following the APP's list (point A6 below) | absent | small app change to read it |
 | 7 | **per_page=100** on the chapter list (and on `/my/tests`) | ignored on the chapter list (N1: preview only) | already sends it; nothing to change |
 | 8 | **Matched**: `GET /api/matched`, `GET /api/matched/<shift>`, one paper a shift, super admin page, the matching machine | 404 | Matched fills up by itself |
@@ -45,9 +44,10 @@
 | 10 | Optional: `GET /api/series/all-india-jee/my-days`, and one handle per student (or `.../compare?with=<handle>`) | 404 | lighter Rank graph; friend compare day by day |
 | 11 | **test_kind** on every row of `GET /api/my/tests`, and `"choice"` / `"matched"` on those papers | absent on rows | fewer reads on a new phone; own Misfire tabs later |
 | 12 | **Account deletion** call (any shape: the student's own request with the PIN, or a server call) | none | Play Store / App Store need it; the owner deletes by hand today |
-| 13 | **PYQ pictures**: `503 vault_unavailable` and empty `200` parts (seen 27 Nov) | to be checked by you | pictures come back by themselves |
+| 13 | **PYQ pictures**: `503 vault_unavailable` and empty `200` parts (seen 27 Nov) | fixed on your preview (B1), not live | pictures come back by themselves |
 | 14 | **Two test students** (phone + PIN, kept out of leaderboards/exports), given to the owner | not given | the app can finally test writes (names, papers) for real |
 | 15 | **Load answers** (rate limit by address? requests a second tested? where/when may a load test run?) | not answered | the app can measure for 1 lakh students at once |
+| 16 | **"Meri details" kept with the account**: `GET` / `PUT /api/profile/rank-details` (OWNER 28 Nov: one per account, phone and browser, kept by the website) | not built | the app (built on its preview) syncs by itself, no new build |
 
 ### A1–A3. Student Choice doors (short shape)
 - **A** `GET /api/choice/bank?exam=jee-main` → `{ "pick": true, "random": true, "max_questions": 75, "max_per_subject": null,
@@ -101,6 +101,10 @@ Whole-series leaderboard: same envelope and rows as the day leaderboard + `days_
 Only live attempts of released days, first attempt per day, same tie-break, display name or "Learner XXXXXXXX", never a
 phone number. The series runs 9 Dec 2026 to 27 Jan 2027 (live 28 Nov), so this is needed by 9 Dec.
 
+### A16. "Meri details" (shape and rules: the app's reply v5, part 3d)
+`GET /api/profile/rank-details` -> `{ "rank_details": <rank.profile.v1 shape> | null, "at": <ms> }`; `PUT` the same
+body -> the same answer. null + at = removed. Newer `at` wins; a student's own change always goes up. 404 until built.
+
 ### A13. PYQ pictures
 An empty part should not be a `200` (a `503` lets a client stop and retry) and should never be cached at the edge.
 
@@ -110,7 +114,7 @@ An empty part should not be a `200` (a `503` lets a client stop and retry) and s
 
 | # | What | Where it stands |
 |---|------|-----------------|
-| B1 | **Rank page like the app's**: Cut off tool, "Meri details", search by rank | your next packet (per your N1 summary) |
+| B1 | **Rank page like the app's**: Cut off tool, "Meri details", rank entry | done on your preview (N2), not live |
 | B2 | **The differences in the owner's 10 screenshots** (app vs website) | listed in YOUR guide; not known to the app project |
 | B3 | **Chapter-wise time by the ratio, 180 at most** (A4): the same sets, so website students get it too | not done (all 60 min) |
 | B4 | **PYQ pictures** (A13): the website's own result pages use the same routes | to be checked |

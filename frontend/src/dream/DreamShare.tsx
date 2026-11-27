@@ -75,7 +75,7 @@ export function useDreamShare(d: Dream | undefined, mock: Mock | undefined) {
     finally { setBusy(false); setDrawing(false); }
   };
   const card = drawing && d && mock ? <View style={styles.offscreen} pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-    <DreamCard d={d} mock={mock} name={user?.name || "JEE aspirant"} cardRef={ref} />
+    <DreamCard d={d} mock={mock} name={user?.display_name || user?.name || "JEE aspirant"} cardRef={ref} />
   </View> : null;
   return { card, share, busy, note };
 }

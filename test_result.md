@@ -1130,3 +1130,14 @@ iteration154_background_ai_perpage:
   main_checks: "tsc 0; eslint clean; android bundle builds (200, includes the task); backend tests class_levels + matched + samples_stay_home + rf_bank 22 passed; /api/app/switches -> {pictures 5, matched, classes 1, keep 10, background 1}."
   live_facts: "27 Nov ~15:45 UTC LIVE jeelive.ai: every AI solution item of the QA learner's 11 finished papers is 'pending' (0 ready); catalogue per_page=100 ignored (Physics 30 total, pages 3, 12 rows); auth/me has no display_name key."
   not_verifiable_here: "The background run itself (needs a real Android / iPhone build; not Expo Go, not web)."
+
+
+## Iteration155 — Website reply v5: shared "Meri details" (dormant until the website door), picture parts retried after Retry-After, display_name shown when chosen (28 Nov 2026) — preview only
+iteration155_v5:
+  user_request: "Owner: start file NOT touched ('Mat chhuo'). Answer the website's 7 questions (read-only) -> memory/APP_REPLY_V5.md. Pictures: 'aisa banao ki busy na ho'. Name: 'naam nahi toh learner rhega'. Meri details: 'Haan, dono jagah ek', kept by the WEBSITE ('website se kyu call nahi kr skte')."
+  implemented: true
+  working: NA
+  needs_retesting: true
+  frontend_files: "src/rank/profileSync.ts (NEW: GET/PUT /api/jl/profile/rank-details; 404 -> 'rank.details.door' timestamp, asked again after 6 h; newer `at` wins; another account's local profile never pushed; pre-login profile pushed only to an empty copy then stamped); src/rank/profile.ts (readProfile, profileReady, currentProfile, takeProfile, stampProfile, uid/clearedAt on the profile; saveProfile/clearProfile stamp the signed-in uid); src/rank/ProfileBar.tsx (syncProfile on mount, after save and after 'Meri details hatao'); src/assets/paperPack.ts (a part answered 503 with Retry-After <= 20 s is asked once more after that wait; CDN then our server); app/(tabs)/index.tsx, app/account.tsx, src/dream/DreamShare.tsx, src/dream/DreamCheer.tsx (display_name before name)."
+  live_facts: "27 Nov ~16:55 UTC live: /api/profile/rank-details does not exist (404 expected); QA learner has no saved name (leaderboard named:false)."
+  result_iteration154: "testing agent: all pass except B3 (a save lost when the account copy's at is ahead of the phone's clock) -> fixed (own change always goes up with at = max(local, remote + 1), marked rank.details.own until sent); re-run tests/iter154_followup.py 8/8."

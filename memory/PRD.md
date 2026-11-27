@@ -8,6 +8,13 @@
 5. Never crash; always ultra-fast.
 6. Take care of everything; do not rush; make it perfect.
 
+## Website reply v5 answered + shared "Meri details" + picture retry + chosen name (28 Nov 2026, night) — PREVIEW ONLY
+- Owner: start file NOT touched ("Mat chhuo"; the agent could not be 100% sure for publish/build, and publish is frozen). Android limit stays: no background run after Android ends the app's process.
+- Answers to the website's 7 questions: `memory/APP_REPLY_V5.md` (raw auth/me + leaderboard `you` in one minute: QA learner never saved a name; relay passes unknown keys; the 81 live chapter tests with the app's class; Rank 5.1 confirmed (female/state, not gender/home_state); Dream + Mission 200 on live; avatar = our `/api/rf/profile/avatar`; Rank speed on our preview 848 predict/s, 648 cutoff/s, 150/s for a branch; no per-address limit; Forgot PIN = our owner-session reset; Matched score/matched_tags/basis ignored; previews joined only through a separate test copy). Website guide v4/v5: github.com/abhishekpushp07-debug/Jeemains.ai `docs/app_reply_v4|v5/`.
+- Owner decisions: no name chosen -> "Learner" stays; chosen display_name now shown (Home greeting, Account, Dream cards). "Meri details": one per account, kept by the WEBSITE (`GET/PUT /api/profile/rank-details`, contract in APP_REPLY_V5 part 3d); app side built dormant in `src/rank/profileSync.ts` (404 -> asked again after 6 h; newer `at` wins; the student's own change always goes up, `rank.details.own`). Pictures: a part answered 503 + Retry-After <= 20 s is asked once more (`src/assets/paperPack.ts`).
+- Work list updated (A16 rank-details door; statuses from the website's v5) and a new download link issued (the old one died with the new bytes).
+- Checked: testing agent iteration_154 (web; name, door B1-B7, pictures busy retry 2 s / 60 s, offline RF 33/33, kept reader 37/37, class tabs 30/30); its one bug (a save lost when the copy's clock is ahead) fixed and re-run `tests/iter154_followup.py` 8/8.
+
 ## One place for all website work + Student Choice status (28 Nov 2026, later)
 - Owner: "list ab 100 ek saath maangti hai - ha ye acha hai aise hi banao"; asked whether Student Choice is 100% done, and for ONE place listing what the website must build for the app and for its own test-taking students.
 - Built: `handoff/website_work/JEELIVE_Website_Work_List.md` (Part A: 15 items for the app with live status of 28 Nov; Part B: 6 items for website students; Part C: 8 owner decisions). Owner download type `website-work-list-md` in `backend/owner_downloads.py` (link issued, 7 days; never written into files). `src/offline/papers.ts` now also sends `per_page=100` on `/my/tests?tab=completed` (harmless when ignored).

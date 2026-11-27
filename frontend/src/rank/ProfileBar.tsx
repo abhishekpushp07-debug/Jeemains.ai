@@ -1,7 +1,7 @@
 // "Meri details" at the top of the Rank tab: marks, percentile, rank and category, typed once (all optional).
 // Closed it is one baby pink bar ("Add details" + Click, or the saved line + Edit) with a row of lights running round it;
 // open it is a small form per exam. Save fills every Rank tool with these values.
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
@@ -13,6 +13,7 @@ import { CATEGORY_LABEL, LEVEL } from "./tones";
 import { NumberField, Picker, RemoveButton, Strip, Switch, Toggle } from "./controls";
 import { FormButton } from "./accent";
 import { clearProfile, RankProfile, readScore, saveProfile, SCORE, useRankProfile } from "./profile";
+import { syncProfile } from "./profileSync";
 
 const LEVELS: Level[] = ["tough", "normal", "easy"];
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
@@ -41,6 +42,7 @@ export function ProfileBar({ states }: { states: string[] }) {
   const profile = useRankProfile();
   const [open, setOpen] = useState(false);
   const [saved, setSaved] = useState(false);
+  useEffect(() => { void syncProfile(); }, []); // signed in: the account's copy on jeelive.ai (./profileSync.ts)
   if (open) return <ProfileForm start={profile} states={states} onClose={done => { setOpen(false); setSaved(done); }} />;
   const filled = profile.at > 0;
   return <Press testID="rank-profile" onPress={() => { setSaved(false); setOpen(true); }} scaleTo={0.99} style={styles.press} accessibilityRole="button"
@@ -76,6 +78,7 @@ function ProfileForm({ start, states, onClose }: { start: RankProfile; states: s
     if (bad) { setExam(bad.exam); setProblem(bad.text); return; }
     setBusy(true);
     await saveProfile(p);
+    void syncProfile(true);
     onClose(true);
   };
   const box = (testID: string, e: CutoffExam, kind: ScoreKind, value: string, onChange: (v: string) => void) => {
@@ -122,7 +125,7 @@ function ProfileForm({ start, states, onClose }: { start: RankProfile; states: s
     </>}
     {problem ? <T testID="rpf-error" w="semibold" size={13} color={colors.error}>{problem}</T> : null}
     <FormButton testID="rpf-save" label="Save karo" busy={busy} onPress={save} />
-    {start.at ? <Press testID="rpf-clear" onPress={async () => { await clearProfile(); onClose(false); }} style={styles.link} accessibilityRole="button">
+    {start.at ? <Press testID="rpf-clear" onPress={async () => { await clearProfile(); void syncProfile(true); onClose(false); }} style={styles.link} accessibilityRole="button">
       <T w="bold" size={13} color={colors.custom_softText}>Meri details hatao</T>
     </Press> : null}
     <Picker visible={picker} title="Home state" options={states} value={p.jee.state ? [p.jee.state] : []} allLabel="No home state"

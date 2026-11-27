@@ -52,10 +52,25 @@ async function cdnPart(url: string, signal: AbortSignal) {
   const timer = setTimeout(stop, 20000);
   try {
     const res = await fetch(url.startsWith("/") ? new URL(url, websiteHomeUrl()).href : url, { credentials: "omit", signal: ctl.signal });
-    if (!res.ok) throw new Error("Paper part " + res.status);
+    if (!res.ok) throw Object.assign(new Error("Paper part " + res.status), { status: res.status, retryAfterMs: waitOf(res.headers.get("retry-after")) });
     return new Uint8Array(await res.arrayBuffer());
   } finally { clearTimeout(timer); signal.removeEventListener("abort", stop); }
 }
+
+// The website's picture store busy for a moment (its packet B1: a part it cannot fill now answers 503 with Retry-After,
+// never an empty 200): the part is asked for once more after the wait it gives, when that wait is 20 seconds or less.
+// A longer wait, or a second "busy", leaves the part as before (on screen: one by one; in the background: a later run).
+const BUSY_WAIT_MAX = 20000;
+function waitOf(header: string | null) {
+  if (!header) return 0;
+  const n = Number(header), ms = Number.isFinite(n) ? n * 1000 : Date.parse(header) - Date.now();
+  return Number.isFinite(ms) ? Math.max(0, ms) : 0;
+}
+const busyWait = (e: any) => (e?.status === 503 && Number(e?.retryAfterMs) > 0 && e.retryAfterMs <= BUSY_WAIT_MAX ? Number(e.retryAfterMs) : 0);
+const pause = (ms: number, signal: AbortSignal) => new Promise<void>(done => {
+  const timer = setTimeout(done, ms);
+  signal.addEventListener("abort", () => { clearTimeout(timer); done(); }, { once: true });
+});
 
 /** Every picture of the part goes into the private image cache (and the encrypted phone copy), as if downloaded one by one. */
 async function keepPart(a: Ask, bytes: Uint8Array, signal: AbortSignal, got: Set<string>) {
@@ -118,9 +133,20 @@ async function loadPack(a: Ask, got: Set<string>, signal: AbortSignal, changed: 
   const part = async (k: number) => {
     if (!worth(k)) return;
     if (a.hold) { await a.hold(); if (signal.aborted) return; }
-    let bytes: Uint8Array | null = parts?.[k] ? await cdnPart(parts[k], signal).catch(() => null) : null;
-    if (signal.aborted) return;
-    if (!bytes) bytes = await apiBytes(`${base}/pack?offset=${k * PART}&limit=${PART}${q ? `&${q}` : ""}`);
+    let cdnBusy = 0;
+    const fetchPart = async () => {
+      const cdn = parts?.[k] ? await cdnPart(parts[k], signal).catch(e => { cdnBusy = busyWait(e); return null; }) : null;
+      return cdn || signal.aborted ? cdn : apiBytes(`${base}/pack?offset=${k * PART}&limit=${PART}${q ? `&${q}` : ""}`);
+    };
+    let bytes: Uint8Array | null;
+    try { bytes = await fetchPart(); } catch (e) {
+      const wait = busyWait(e) || cdnBusy;
+      if (!wait || signal.aborted) throw e;
+      await pause(wait, signal);
+      if (signal.aborted) return;
+      bytes = await fetchPart();
+    }
+    if (signal.aborted || !bytes) return;
     const before = got.size;
     const told = await keepPart(a, bytes, signal, got);
     if (!Number.isFinite(total)) total = told;

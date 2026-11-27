@@ -48,7 +48,7 @@ export function DreamCheerHost({ exam, mockId }: { exam: DreamExam; mockId?: str
     const got = claimCheer(exam, mockId);
     if (got) setWin(got);
   }, [s, focused, exam, mockId, win]);
-  return win ? <DreamCheer win={win} exam={exam} name={user?.name || "Champion"} onClose={() => setWin(null)} /> : null;
+  return win ? <DreamCheer win={win} exam={exam} name={user?.display_name || user?.name || "Champion"} onClose={() => setWin(null)} /> : null;
 }
 
 /** One confetti piece shot from a cannon: flies up with air drag, then flutters down. */

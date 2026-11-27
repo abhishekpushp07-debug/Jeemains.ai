@@ -2,6 +2,7 @@
 // every Rank tool's saved form as that tool's starting values. After that each tool is edited on its own: the edit stays
 // in that tool and the profile is not touched, until the student saves the profile again.
 import { useEffect, useSyncExternalStore } from "react";
+import { getAssetAccount } from "@/src/api/client";
 import { storage } from "@/src/utils/storage";
 import type { Category, CutoffExam, Level, ScoreKind } from "./api";
 
@@ -10,6 +11,10 @@ export type RankProfile = {
   jee: { marks: string; pct: string; rank: string; level: Level; category: Category; female: boolean; pwd: boolean; state: string | null };
   comedk: { marks: string; rank: string };
   bitsat: { score: string };
+  /** The account it belongs to, when it was saved signed in or came from the account's copy (./profileSync.ts). */
+  uid?: string;
+  /** When "Meri details hatao" was pressed (the profile is then empty): so the account's older copy does not bring it back. */
+  clearedAt?: number;
 };
 export const EMPTY_PROFILE: RankProfile = {
   at: 0, jee: { marks: "", pct: "", rank: "", level: "normal", category: "GEN", female: false, pwd: false, state: null },
@@ -49,25 +54,42 @@ export function readScore(exam: CutoffExam, kind: ScoreKind, text: string): numb
 
 // `saves` counts profile saves since the app opened: a tool re-reads its saved form each time it goes up.
 let state: { profile: RankProfile; saves: number } = { profile: EMPTY_PROFILE, saves: 0 };
-let loaded = false;
+let loading: Promise<void> | null = null;
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach(f => f());
 const subscribe = (f: () => void) => { listeners.add(f); return () => { listeners.delete(f); }; };
 const read = () => state;
 
+const text = (v: unknown, max = 12) => (typeof v === "string" ? v.slice(0, max) : typeof v === "number" && Number.isFinite(v) ? String(v) : "");
+const LEVELS = ["tough", "normal", "easy"], CATEGORIES = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
+/** A profile as it is kept (on the phone, or the account's copy on the website), in the app's shape; null if it is not one. */
+export function readProfile(p: any): RankProfile | null {
+  if (!p || typeof p !== "object" || typeof p.jee !== "object" || !p.jee) return null;
+  const j = p.jee, c = p.comedk && typeof p.comedk === "object" ? p.comedk : {}, b = p.bitsat && typeof p.bitsat === "object" ? p.bitsat : {};
+  return {
+    at: Number(p.at) || 0,
+    jee: { marks: text(j.marks), pct: text(j.pct), rank: text(j.rank), level: LEVELS.includes(j.level) ? j.level : "normal",
+      category: CATEGORIES.includes(j.category) ? j.category : "GEN", female: j.female === true, pwd: j.pwd === true,
+      state: typeof j.state === "string" && j.state ? j.state.slice(0, 60) : null },
+    comedk: { marks: text(c.marks), rank: text(c.rank) }, bitsat: { score: text(b.score) },
+    ...(typeof p.uid === "string" && p.uid ? { uid: p.uid } : {}), ...(Number(p.clearedAt) > 0 ? { clearedAt: Number(p.clearedAt) } : {}),
+  };
+}
+
 async function load() {
-  loaded = true;
   const raw = await storage.getItem<string | null>(SAVED.profile, null);
   if (!raw || state.saves) return;
   try {
-    const p = JSON.parse(raw);
-    state = { ...state, profile: { at: Number(p.at) || 0, jee: { ...EMPTY_PROFILE.jee, ...p.jee }, comedk: { ...EMPTY_PROFILE.comedk, ...p.comedk }, bitsat: { ...EMPTY_PROFILE.bitsat, ...p.bitsat } } };
-    emit();
+    const p = readProfile(JSON.parse(raw));
+    if (p) { state = { ...state, profile: p }; emit(); }
   } catch { /* start empty */ }
 }
+/** Read from the phone once; later calls wait for the same read. */
+export const profileReady = () => (loading ||= load());
+export const currentProfile = () => state.profile;
 
 export function useRankProfile() {
-  useEffect(() => { if (!loaded) load(); }, []);
+  useEffect(() => { void profileReady(); }, []);
   return useSyncExternalStore(subscribe, read, read).profile;
 }
 export const useProfileSaves = () => useSyncExternalStore(subscribe, read, read).saves;
@@ -80,10 +102,15 @@ async function patch(key: string, change: (old: Record<string, any>) => Record<s
 }
 
 /** Saves the profile and fills every tool's saved form with it. A score the profile leaves empty does not wipe the
- *  tool's own; when several JEE scores are given the Cut off tool starts from the most exact (rank, percentile, marks). */
+ *  tool's own; when several JEE scores are given the Cut off tool starts from the most exact (rank, percentile, marks).
+ *  Signed in, it belongs to that account (and goes to the account's copy: ./profileSync.ts). */
 export async function saveProfile(p: Omit<RankProfile, "at">) {
-  const profile: RankProfile = { ...p, at: Date.now() };
-  const j = p.jee, c = p.comedk, b = p.bitsat.score;
+  const uid = getAssetAccount();
+  await keep({ jee: p.jee, comedk: p.comedk, bitsat: p.bitsat, at: Date.now(), ...(uid ? { uid } : {}) });
+}
+
+async function keep(profile: RankProfile) {
+  const j = profile.jee, c = profile.comedk, b = profile.bitsat.score;
   const who = { category: j.category, female: j.female, pwd: j.pwd, state: j.state };
   const jee = !!(j.marks || j.pct || j.rank), comedk = !!(c.marks || c.rank);
   const start = (old: object | undefined, kind: ScoreKind, text: string) => ({ ...old, kind, text, score: null });
@@ -105,9 +132,28 @@ export async function saveProfile(p: Omit<RankProfile, "at">) {
   emit();
 }
 
-/** Forgets the profile. The tools keep whatever they hold. */
+/** Forgets the profile. The tools keep whatever they hold. Signed in, the account's copy is emptied too. */
 export async function clearProfile() {
-  await storage.setItem(SAVED.profile, JSON.stringify(EMPTY_PROFILE));
-  state = { ...state, profile: EMPTY_PROFILE };
+  const uid = getAssetAccount();
+  await forget({ ...EMPTY_PROFILE, clearedAt: Date.now(), ...(uid ? { uid } : {}) });
+}
+
+async function forget(profile: RankProfile) {
+  await storage.setItem(SAVED.profile, JSON.stringify(profile));
+  state = { ...state, profile };
   emit();
+}
+
+/** The account's copy (./profileSync.ts) is newer than the phone's: kept here as if it had been saved on this phone
+ *  (every tool filled), or, when it was emptied on the other side, forgotten here too. */
+export async function takeProfile(remote: RankProfile | null, at: number, uid: string) {
+  if (remote) await keep({ jee: remote.jee, comedk: remote.comedk, bitsat: remote.bitsat, at, uid });
+  else await forget({ ...EMPTY_PROFILE, clearedAt: at, uid });
+}
+
+/** A profile has just been sent up to the account (`at`: the time both sides now hold): only the owner (and that time)
+ *  are noted on the phone; the tools are not touched. */
+export async function stampProfile(uid: string, at?: number) {
+  const p = state.profile;
+  await forget({ ...p, uid, ...(at ? (p.at ? { at } : { clearedAt: at }) : {}) });
 }
