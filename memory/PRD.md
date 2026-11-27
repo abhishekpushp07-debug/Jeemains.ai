@@ -617,3 +617,14 @@ UseAndroidhandoffv1.1verified133(54operations/36files),notold49-operationcopy;us
 - ⚠ Production AITS: 0 papers ready, day 1 = 2026-12-09.
 - Student Choice Phase 1 guide + app agent notes saved in `memory/STUDENT_CHOICE_AND_APP_NOTES_2026-11-28.md` (not started; wait for the owner).
 
+
+
+## 2026-11-27 — Student Choice (JEE Main) built, website side (preview only, NOT deployed, both switches Off)
+- Owner's words: "Right now, the real focus is student choice … keep building till you are in 100% sync with app and 100% compatible … Do not stop to ask me questions … No shortcuts."
+- Backend `tejas/choice.py`: door A `GET /api/choice/bank`, door B `GET /api/choice/chapters/{id}/questions`, door C `POST /api/choice/papers` (exact app book Part 1.6 contract), signed cookie-free picture route `/api/media/choice/...`, website page data `GET /api/choice/home`, owner `GET/PUT /api/admin/choice/{exam}`. Made papers live in `tejas_choice_papers` (never `tejas_sets`), daily slots in `tejas_choice_days`, settings in `tejas_choice_settings` (missing = both Off).
+- Paper: only its maker opens it (my/sets, preflight, start); frozen on first Start with a fresh liveness read; `test_kind: choice`; +4/−1/0; P→C→M, MCQ first; minutes = ceil(Σ count×minutes), no 180 cap; 5 a student a IST day; same request_key = same paper.
+- Exclusions: no class stats, no cohort rank ("Is test par Rank nahi banta."), not comparable, never a Dream full mock (chapter tests also excluded per the owner's book rule), reports and AI solutions map to the source chapter question. `my/tests` items now carry `test_kind`.
+- Frontend: `/choice` (start, chapters, questions, tests steps, random dialog), Home card (only while a way is open), Super Admin › Student Choice, SetDetail/Results/History labels.
+- Tests: tests/choice_iso229.py 91/91, tests/choice_adversarial_t1_232.py 80/80, UI walks ui229 35/35 + ui232 24/24, regression suites green (get_ready_iso188 1 inherited fail). Report: test_reports/iteration_235.json.
+- App-team note: memory/APP_NOTE_STUDENT_CHOICE_WEBSITE.md (two new sentences not in the book; Misfire Mock not built, not in the book).
+- Next: owner turns a switch on in Super Admin when ready; the app team runs its real phone flow with a test student first. Deploy only on the owner's word "deploy".

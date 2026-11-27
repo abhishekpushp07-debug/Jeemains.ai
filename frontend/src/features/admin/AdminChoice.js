@@ -1,5 +1,5 @@
 // Super Admin › Student Choice: the two switches (both Off by default), the paper's limits and each subject's minutes,
-// with today's numbers and the chapters students can choose from. The website follows at once; the app within 2–4 minutes.
+// with today's numbers and the chapters students can choose from. The website follows within 15 s; the app within 2–4 minutes.
 import React,{useEffect,useState} from 'react';
 import {Loader2,Save} from 'lucide-react';
 import {toast} from 'sonner';

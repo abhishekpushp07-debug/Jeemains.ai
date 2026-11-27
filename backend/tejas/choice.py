@@ -424,6 +424,8 @@ async def make_paper(data: ChoicePaperPayload, u=Depends(current)):
             raise HTTPException(422, GONE)
         if n < len(present):
             raise HTTPException(422, RANGE.format(n=top))
+        if cap and n > cap * len(present):
+            raise HTTPException(422, TOO_MANY.format(n=cap * len(present)))
         items = draw(live, split_of(n, present), cap)
     items = ordered(items)
     counts = {x: sum(i['subject'] == x for i in items) for x in SUBJECTS}
@@ -443,6 +445,10 @@ async def make_paper(data: ChoicePaperPayload, u=Depends(current)):
         await papers.insert_one(doc)
     except DuplicateKeyError:
         pass
+    except Exception:
+        # the paper was not saved: give today's slot back, so a retry with the same key is counted once
+        await days.update_one({'_id': f"{u['id']}:{doc['day']}", 'keys': data.request_key}, {'$inc': {'count': -1}, '$pull': {'keys': data.request_key}})
+        raise
     return {'set_id': pid}
 
 
@@ -475,13 +481,14 @@ async def paper_page(id, u):
 
 
 async def build_questions(p):
-    """The paper's questions, copied from its chapter tests: each keeps its subject, pieces, key and solution."""
-    live = await pool()
+    """The paper's questions, copied from its chapter tests: each keeps its subject, pieces, key and solution.
+    Liveness is read fresh here (not from the 30 s pool), so a paper never freezes a chapter the owner has just taken off."""
     wanted = {i['set_id'] for i in p['items']}
-    if any(sid not in live['chapters'] for sid in wanted):
+    if wanted - await live_now(wanted):
         raise HTTPException(409, STALE)
     docs = {s['id']: s async for s in sets.find({'id': {'$in': list(wanted)}, 'status': 'published'},
-                                                 {'_id': 0, 'id': 1, 'version': 1, 'rights_report': 1, 'questions': 1})}
+                                                 {'_id': 0, 'id': 1, 'version': 1, 'rights_report': 1, 'questions': 1, 'title': 1,
+                                                  'display_title': 1, 'chapter_number': 1})}
     out, rights = [], True
     for n, it in enumerate(p['items'], 1):
         s = docs.get(it['set_id'])
@@ -493,11 +500,27 @@ async def build_questions(p):
         for k in ('ai_solution', 'scoring', 'bonus'):
             c.pop(k, None)
         c.update(id=it['token'], number=n, subject=it['subject'], section=it['subject'],
-                 topic=q.get('topic') or live['chapters'][it['set_id']]['title'], disposition='standard',
+                 topic=q.get('topic') or chapter_title(s), disposition='standard',
                  source_set_id=s['id'], source_question_id=q['id'], source_number=q.get('number'), source_version=s.get('version', 1),
                  source_section=q.get('section'))
         out.append(c)
     return out, rights
+
+
+async def live_now(ids):
+    """Which of these chapter tests are live for every student right now, read without any cache."""
+    from .exam_navigation import classify_set
+    from .structure import exam_doc, live_query, section_by_slug, visibility
+    await visibility()
+    try:
+        exam = await exam_doc('jee-main')
+        section = await section_by_slug('jee-main', 'chapters', None)
+    except HTTPException:
+        return set()
+    query = {**live_query(None, exam, section), 'id': {'$in': list(ids)}}
+    fields = {'_id': 0, 'id': 1, 'chapter_book_id': 1, 'test_kind': 1, 'full_length': 1, 'chapter_subject': 1, 'status': 1, 'live_enabled': 1}
+    return {s['id'] async for s in sets.find(query, fields)
+            if classify_set(s) == 'chapter' and s.get('chapter_subject') in SUBJECTS and s.get('live_enabled') is not False}
 
 
 async def frozen(p):
@@ -660,4 +683,4 @@ async def owner_save(exam: str, data: ChoiceSettingsPayload, u=Depends(owner)):
     _settings.pop(exam, None)
     await audit(u['id'], 'Student Choice settings saved', exam,
                 ', '.join(f'{k}={v}' for k, v in value.items())[:900])
-    return {'message': 'Saved. The website follows at once; the app within 2 to 4 minutes.', 'settings': await settings_of(exam)}
+    return {'message': 'Saved. The website follows within 15 seconds; the app within 2 to 4 minutes.', 'settings': await settings_of(exam)}

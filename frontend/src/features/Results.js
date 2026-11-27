@@ -48,6 +48,7 @@ import { SolutionInsight } from '../components/analysis/SolutionInsight';
 import { ShareGate } from '../components/mission/ShareGate';
 import { isResultLocked, unlockResult } from '../components/mission/gate';
 import { ResultSparkle } from '../components/results/ResultSparkle';
+import '../choice.css';
 export default function Results() {
   const { id } = useParams();
   return <ResultsGate key={id} id={id} />;

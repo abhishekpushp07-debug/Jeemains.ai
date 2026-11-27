@@ -306,9 +306,9 @@ async def main():
     check('second start reuses the frozen copy', r.status_code == 200 and again['id'] != st['id'] and
           [q['text'] for q in again['questions']] == [q['text'] for q in qs], r.text[:200])
     await T.tejas_sets.update_one({'id': 'TEST_C1'}, {'$set': {'live_enabled': False}})
-    choice.reset()
     r = await riya.post(f"/api/sets/{p10['id']}/start", json={'start_key': 'TEST' + uuid.uuid4().hex})
-    check('un-started paper with a gone chapter -> 409 sentence', r.status_code == 409 and err(r) == choice.STALE, (r.status_code, err(r)))
+    check('un-started paper with a gone chapter -> 409 sentence (fresh read, no cache reset)', r.status_code == 409 and err(r) == choice.STALE, (r.status_code, err(r)))
+    choice.reset()
     r = await riya.post(f"/api/sets/{p10['id']}/preflight", json={})
     check('preflight says the same', r.status_code == 409 and err(r) == choice.STALE, (r.status_code, err(r)))
     await T.tejas_sets.update_one({'id': 'TEST_C1'}, {'$set': {'live_enabled': True}})
@@ -328,6 +328,11 @@ async def main():
     stt = r.json()['stats']
     check('owner stats: 10 papers, 2 creators', stt['total'] == 10 and stt['creators'] == 2 and stt['today'] == 10 and stt['pick'] == 1, stt)
     check('catalogue never lists a made paper', sid not in json.dumps((await riya.get('/api/my/sets')).json()))
+    await owner.put('/api/admin/choice/jee-main', json={**body, 'expected_revision': 3, 'max_per_subject': 5})
+    neha = await student('9811122904')
+    r = await neha.post('/api/choice/papers', json={'exam': 'jee-main', 'request_key': str(uuid.uuid4()), 'mode': 'random', 'count': 20})
+    check('random over the owner per-subject top -> its own sentence', r.status_code == 422 and err(r) == choice.TOO_MANY.format(n=15), (r.status_code, err(r)))
+    check('no slot used by a refused paper', (await neha.get('/api/choice/home')).json()['made_today'] == 0)
     check('no real DB handle touched', not H.leftover_real_handles())
 
 

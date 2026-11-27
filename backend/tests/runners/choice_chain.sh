@@ -3,7 +3,7 @@
 cd /app/backend || exit 1
 OUT=/root/p2/choice_chain.log
 : > "$OUT"
-for t in choice_iso229 db_audit_iso194; do
+for t in choice_iso229 choice_adversarial_t1_232 db_audit_iso194; do
   echo "=== $t $(date -u +%T)" >> "$OUT"
   timeout 420 python -u "tests/$t.py" > "/root/p2/choice_$t.log" 2>&1
   echo "exit $? :: $(grep -E '^TOTAL [0-9]' "/root/p2/choice_$t.log" | tail -n 1)" >> "$OUT"

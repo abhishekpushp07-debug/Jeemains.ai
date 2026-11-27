@@ -5,6 +5,7 @@ import {HomeDream} from '../components/home/HomeDream';
 import {MisfireCard} from '../components/home/MisfireCard';
 import {ChoiceCard} from '../components/home/ChoiceCard';
 import '../misfire.css';
+import '../choice.css';
 
 export default function Home(){
  const series=useSeriesSchedule();

@@ -1,0 +1,55 @@
+{
+  "summary": "Student Choice (JEE Main): I tested the backend and the frontend, only on disposable tejas_isolated_* DBs, running one suite at a time through tests/runners/solo.sh. choice_iso229 passed 89/89. I wrote a new adversarial and contract suite, tests/choice_adversarial_t1_232.py, which passed 80/80. It covers: strict types; request_key length 8..100; page 0 and page 7 on a 320-question chapter that is capped at 6 pages; picture links with an expired exp, a wrong index, an exp too far ahead and another set id, all with VALID signatures, all 404; another student's paper giving 404 on my/sets, preflight, start and results; max_per_subject (pick 422, random 15 = 5+5+5); max_questions 10; daily_limit 2 (third paper 429 with the exact sentence); stale and future expected_revision 409; reviewer 403 on GET and PUT; door A has exactly 5 keys; door B item keys and stem w/h both-or-neither; minutes 10+10+10=72, 25 Maths=80, 75 Maths=240; 6 racing requests with the same key make 1 paper and use 1 slot; a 48 KB body gives 413; my/sets and start work without an Origin header; my/tests carries test_kind; the cohort reason. Regression was as expected: chapters_iso182 58/58, analysis_iso195 62/62, test_integrity176 32/32, db_audit_iso194 71/71, master_iso181 124/124, library_aits_iso180 125/125, pictures_iso220 66/66, get_ready_iso188 35/36 (the known 'book-mock set built :: held' failure). UI: the main walk ui229 passed 35/35 (desktop and mobile). My new extra walk, tests/ui_choice_t1_232.py, passed 24/24. It covers: the paper page eyebrow 'JEE MAIN · STUDENT CHOICE', no Save button, and back to /choice; results ?view=rank shows result-choice-no-rank; the history badge 'Student Choice'; random-only mode (step=tests goes Start -> Resume, and step=questions falls back to tests); a normal chapter SetDetail is unchanged; no sideways overflow at 390 px. I only READ the real preview DB: tejas_choice_settings is empty (both switches Off) and there are 0 papers. No writes there and no sign-ups on the preview URL. Found: one real UI styling bug (the rank notice has no styles) and one minor backend cache window.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/choice/papers + POST /api/sets/{id}/start", "issue": "choice.pool() is cached for 30 s per process, and nothing clears it when the owner sets a chapter test to live_enabled=False or archives it. Reproduced: I listed TEST_M2, set it live_enabled False, then picked inside the cache window. The paper was made (200) and its first Start also gave 200, freezing the un-live chapter's questions into the paper. Once the cache expired, pick gave 422 GONE as designed. Unpublishing IS caught, because build_questions checks status 'published'. The window is at most 30 s."},
+      {"endpoint": "POST /api/choice/papers (random with max_per_subject)", "issue": "With max_per_subject=5 and count=20, the 422 says 'Abhi Physics ke sirf 5 sawaal hain. Kam ginti likho.' (the FEW sentence), but Physics has hundreds of questions. The limit comes from the owner's cap, not a shortage of questions. The message misleads."},
+      {"endpoint": "POST /api/choice/papers", "issue": "A signed-out call with an invalid body returns 422, because body validation runs before auth. With a valid body it returns 401. Harmless; noted for the app's error mapping."},
+      {"endpoint": "make_paper reserve()", "issue": "The daily slot is reserved before papers.insert_one. If the insert fails for a reason other than a duplicate, that slot is lost. A retry with the same key still works. Low risk."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Results.js rank tab (result-choice-no-rank)", "issue": "The .result-choice-no-rank rules are in src/choice.css, which only StudentChoice.js and AdminChoice.js import. Opening /results/<id>?view=rank directly, or from My Tests or history (the normal path), shows the notice with no styles: no card, a small cramped heading, and the icon on its own line above the heading. Screenshot: /app/.screenshots/ui232/desk_results_rank.jpeg. The Home rule .choice-card .mf-title has the same cause: it only applies after /choice has been visited.", "selector": "[data-testid=result-choice-no-rank]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/choice?step=tests (random-only)", "issues": ["Ticked chapters are saved in localStorage, so each browser keeps its own. On a new device step=tests shows 'Pehle chapters tick karo' (choice-tests-none). This works as built; noted for information."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/choice_iso229.py",
+    "/app/backend/tests/choice_adversarial_t1_232.py",
+    "/app/backend/tests/ui_choice_t1_232.py",
+    "/root/p2/t1_ui232.sh",
+    "/root/p2/t1_regress.sh",
+    "/root/p2/t1_regress.log",
+    "/root/p2/ui229.log",
+    "/root/p2/ui232.log"
+  ],
+  "action_items": [
+    "Style the Student Choice rank notice on the Results page: either add import '../choice.css' to Results.js, or move the 3 .result-choice-no-rank rules into a stylesheet that Results already loads.",
+    "Optional: clear choice._pool (for example with choice.reset()) when a JEE Main chapter test is made un-live, archived or edited. This stops a paper being made and started from it during the 30 s window.",
+    "Optional: give the 422 its own sentence when a random count is more than max_per_subject x subjects, and/or limit the random range shown to 3..min(max_questions, cap x subjects)."
+  ],
+  "critical_code_review_comments": [
+    "choice.py is 663 lines, close to the 700-line split limit.",
+    "The settings cache (15 s) and pool cache (30 s) are per process. With several workers, switching a way off can take up to 15 s to reach the other workers. The owner page says 'The website follows at once'.",
+    "The strict pydantic Payload correctly refuses a float, bool or string count and extra keys. The request_key pattern is checked in the handler and gives 422 BAD_KEY.",
+    "The picture route signs (set, token, index, exp) and only accepts exp between now and 3 days ahead. Tampered, expired, wrong-index and other-set links all gave 404."
+  ],
+  "updated_files": [
+    "/app/backend/tests/choice_adversarial_t1_232.py (new, test-only)",
+    "/app/backend/tests/ui_choice_t1_232.py (new, test-only)",
+    "/root/p2/t1_ui232.sh (new runner)",
+    "/root/p2/t1_regress.sh (new runner)"
+  ],
+  "success_rate": {"backend": "100% (89/89 + 80/80; regressions as expected, 1 known older failure)", "frontend": "Functional 59/59 (35/35 + 24/24); 1 styling bug"},
+  "test_credentials": "None. All accounts were throw-away ones inside tejas_isolated_* DBs; nothing was created on the preview URL.",
+  "seed_data_creation": "Only inside isolated DBs, which were dropped at the end (TEST_* chapter sets, including TEST_PX with 320 Physics questions and TEST_MX with 80 Maths questions). Two leftover isolated DBs from older book_publishing_iso170 runs were seen and left alone: tejas_isolated_book170_19f082e9 and tejas_isolated_window177_66e69d.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Adversarial suite: cd /app/backend && bash tests/runners/solo.sh python -u tests/choice_adversarial_t1_232.py (80 checks, about 15 s). Extra UI walk: bash tests/runners/solo.sh bash /root/p2/t1_ui232.sh -> /root/p2/ui232.log (24). Main UI walk: bash tests/runners/solo.sh bash /root/p2/choice_ui.sh desk mob -> /root/p2/ui229.log (35). Regression chain: setsid nohup bash tests/runners/solo.sh bash /root/p2/t1_regress.sh & -> /root/p2/t1_regress.log (about 5 min). The real preview DB's tejas_choice_settings is empty (both Off).",
+  "rca of the issue": "Unstyled rank notice: Results.js uses the class result-choice-no-rank, but its rules are in src/choice.css. That file is loaded only by the lazy StudentChoice and AdminChoice chunks, so a direct visit to /results never has them."
+}
