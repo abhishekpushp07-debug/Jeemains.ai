@@ -1,3 +1,6 @@
+## 2026-11-27, night (owner, talk only): Student Choice is to be built TODAY ("App jaisa poora"), Matched later. Wait for the owner's logic text, talk the plan through, build only on his go. Misfire checked by reading the app code: the app reads the website's own /api/my/misfire, /my/misfire/summary, /my/chapters through its pass-through proxy (/api/jl), so one account = one Misfire (not tested on a phone).
+
+
 ## 2026-11-27, late evening: reply v5 for the app written (docs/app_reply_v5/WEBSITE_REPLY_V5.md). The app's answer file memory/WEBSITE_REPLY_V4_APP_ANSWER.md is NOT on its branch App yet (checked); v4 is public at raw.githubusercontent.com/abhishekpushp07-debug/Jeemains.ai/main/docs/app_reply_v4/WEBSITE_REPLY_V4.md (byte-identical).
 - Live lacks N1 (proof: live GET /api/rank/cutoff/options 404, preview 200). That explains the app's "display_name never comes on live": live sends it only when a name is saved. Fixed on preview; reaches live with the owner's deploy.
 - Student Choice: owner will send the app's logic; save it, talk first, build only on his go.
