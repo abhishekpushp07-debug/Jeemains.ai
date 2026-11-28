@@ -35,6 +35,12 @@ Pocket 3 adjusts the app to the website's exact reply. While the switch is not `
   `"misfire": { "understood": 3, "total": 15 }` = how many of its questions went to "Samajh gaya" (the website moves
   every right one). Without `misfire` the result says the general sentence instead.
 
+## 5. The website's two decisions (28 Nov) — both fine for the app, no app change needed
+- A Misfire Mock's result is **not counted** in Misfire's chapter report (one question is never counted twice).
+- A question already "Samajh gaya" before the mock and wrong in the mock **stays "Samajh gaya"**.
+- Please also keep: a question wrong or left in the mock does **not** become a second Misfire item; it stays open
+  under its first id `<attempt id>:<question id>`. `misfire.understood` counts only the questions this mock moved.
+
 ## App files
 `src/misfire/web.ts`, `src/misfire/web/WebMocksTab.tsx`, `src/misfire/web/Understood.tsx`, `app/misfire/index.tsx`
 (tab), `app/misfire/mock/new.tsx` (`?web=1`), `backend/choice.py` (`misfire_on`). Check: `tests/misfire_web_check.py`.
