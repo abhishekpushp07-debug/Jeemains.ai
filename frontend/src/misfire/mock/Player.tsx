@@ -21,7 +21,9 @@ import { colors, fonts, radius, space } from "@/src/theme";
 import { fmtClock } from "@/src/navigation";
 import { SHORT, SUBJECTS, Subject } from "@/src/choice/api";
 import { SUBJECT_LOOK } from "@/src/choice/looks";
+import { useAuth } from "@/src/auth";
 import { useMockPictures } from "./pictures";
+import { useMockPaths } from "./offline";
 import { submit } from "./marking";
 import { Answer, MARKS, Mock, latest, saveState } from "./store";
 
@@ -32,6 +34,8 @@ const key = (s: Subject) => s.toLowerCase();
 
 export function MockPlayer({ mock }: { mock: Mock }) {
   const router = useRouter();
+  const paths = useMockPaths();
+  const signedIn = !!useAuth().user; // behind the offline door the right answers wait for the line and the session
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const column = Math.max(1, Math.min(width, 760) - 2 * space.lg);
@@ -53,8 +57,8 @@ export function MockPlayer({ mock }: { mock: Mock }) {
   const finish = useCallback(() => {
     if (ended.current) return;
     ended.current = true;
-    submit(saveState(latest(mock), { answers: mine.current.answers, visited: mine.current.visited }));
-  }, [mock]);
+    submit(saveState(latest(mock), { answers: mine.current.answers, visited: mine.current.visited }), Date.now(), signedIn);
+  }, [mock, signedIn]);
   const seconds = Math.max(0, Math.ceil(((mock.deadline || 0) - now) / 1000));
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 1000);
@@ -259,7 +263,7 @@ export function MockPlayer({ mock }: { mock: Mock }) {
     <DSheet visible={sheet === "exit"} onClose={() => setSheet(null)} testID="mock-exit-sheet" title="Leave this mock?">
       <T size={13} color={colors.muted}>Kuch submit nahi hoga. Timer chalta rahega; My Tests ya Misfire se isi mock par wapas aa sakte ho. Aapke jawab phone par safe hain.</T>
       <Pill testID="mock-exit-stay" label="Stay" onPress={() => setSheet(null)} />
-      <Pill testID="mock-exit-confirm" kind="outline" label="Leave (keep mock)" onPress={() => { setSheet(null); if (router.canGoBack()) router.back(); else router.replace({ pathname: "/misfire", params: { tab: "mock" } } as any); }} />
+      <Pill testID="mock-exit-confirm" kind="outline" label="Leave (keep mock)" onPress={() => { setSheet(null); if (router.canGoBack()) router.back(); else router.replace(paths.list); }} />
     </DSheet>
   </View>;
 }

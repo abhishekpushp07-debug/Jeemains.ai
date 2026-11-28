@@ -38,7 +38,8 @@ export type MockState = {
   status: "ready" | "active" | "done"; started_at?: number; deadline?: number; submitted_at?: number;
   answers: Record<string, Answer>; visited: string[]; result?: Marked; sync?: Sync;
 };
-export type MockPaper = { v: 1; id: string; uid: string; n: number; title: string; made_at: number; exam: string; counts: Counts; asked?: Counts; minutes: number; questions: MockQ[] };
+/** `source`: where its questions were chosen from: the website's open Misfire list, or (without a line) the papers kept on this phone. */
+export type MockPaper = { v: 1; id: string; uid: string; n: number; title: string; made_at: number; exam: string; counts: Counts; asked?: Counts; minutes: number; questions: MockQ[]; source?: "website" | "phone" };
 export type Mock = MockPaper & MockState;
 export type MockRow = {
   id: string; n: number; title: string; exam: string; made_at: number; count: number; minutes: number; counts: Counts;
@@ -63,6 +64,8 @@ let chain: Promise<unknown> = Promise.resolve();
 const queued = (work: () => Promise<unknown>) => { chain = chain.then(work, work); return chain; };
 
 const read = async <T>(name: string): Promise<T | null> => { try { return JSON.parse((await readKeptText(name)) || "null"); } catch { return null; } };
+/** Every mock made on this phone is an "Offline Misfire" (the first ones were named "Misfire Mock #n"). */
+const named = <T extends { n: number; title: string }>(m: T): T => (/^Misfire Mock #\d+$/.test(m.title) ? { ...m, title: `Offline Misfire #${m.n}` } : m);
 
 export function rowOf(m: Mock): MockRow {
   const r = m.result;
@@ -84,7 +87,7 @@ export function loadMocks(): Promise<MockRow[]> {
   owner = uid;
   loading = (async () => {
     const got = await read<{ v: 1; rows: MockRow[] }>(INDEX);
-    const list = got?.v === 1 && Array.isArray(got.rows) ? got.rows.filter((r) => r && typeof r.id === "string") : [];
+    const list = got?.v === 1 && Array.isArray(got.rows) ? got.rows.filter((r) => r && typeof r.id === "string").map(named) : [];
     if (getAssetAccount() === uid) { rows = list; changed(); }
     return list;
   })().finally(() => { loading = null; });
@@ -105,7 +108,7 @@ export async function getMock(id: string): Promise<Mock | null> {
   if (known && known.uid === uid) return known;
   const [paper, state] = await Promise.all([read<MockPaper>(paperDoc(id)), read<MockState>(stateDoc(id))]);
   if (!paper || paper.v !== 1 || paper.uid !== uid || !Array.isArray(paper.questions) || !state?.status || getAssetAccount() !== uid) return null;
-  const mock: Mock = { ...paper, ...state, answers: state.answers || {}, visited: state.visited || [] };
+  const mock: Mock = named({ ...paper, ...state, answers: state.answers || {}, visited: state.visited || [] });
   mocks.set(id, mock);
   return mock;
 }

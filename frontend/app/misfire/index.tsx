@@ -49,7 +49,7 @@ export default function Misfire() {
       onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))}
       right={d ? <View style={styles.badge}><T testID="misfire-open-count" w="bold" size={11} color={colors.brandText} style={{ letterSpacing: 1.2 }}>{d.open} OPEN</T></View> : null} />
     <View style={{ paddingHorizontal: space.lg, paddingBottom: space.md }}>
-      <PillRow prefix="misfire-tab" value={memo.tab} onChange={setTab} items={[{ key: "all", label: "Sab" }, { key: "mock", label: "Mock" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
+      <PillRow prefix="misfire-tab" value={memo.tab} onChange={setTab} items={[{ key: "all", label: "Sab" }, { key: "mock", label: "Offline Misfire" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
     </View>
     {!user ? null : family ? <PapersTab key={family.key} uid={user.id} family={family} /> : mocks ? <MocksTab />
       : <AllTab key={`${params.subject || ""}|${params.chapter || ""}|${params.at || ""}`} uid={user.id} summary={d} startSubject={params.subject} startChapter={params.chapter} />}

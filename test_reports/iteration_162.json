@@ -1,0 +1,33 @@
+{
+  "summary": "Offline Misfire (Pocket 1) frontend-only test at 390x844, QA learner READ-ONLY (every write outside /auth stopped with 418 and listed: none; try/done faked in the browser). Main agent's tests/offline_misfire_check.py rerun independently: 30/30. New tests/iter_offline_misfire_extra.py: 23/23 (a WRONG offline answer is never sent; a right answer the website REFUSES shows as refused, gets no /done and is marked wrong again (correct 3->2); the 7-day rule (confirmed stamp aged 8 days -> mock-closed on the list and the mock itself, reopens when the stamp is fresh); My Tests card title 'Offline Misfire #1' matches the ready screen; read-only regression of /misfire (Sab + Samajh gaya pill), /choice, /tests, /pyq, /catalogue, /mission). New tests/iter_offline_misfire_extra2.py: 8/8 (cold load of /misfire/mock/new with a line never shows the phone notice; list 503 -> notice + retry pill (358x44); retry with the list back -> website list; AITS /series-analysis and /series-leaderboard open with no errors). Regression spot checks: misfire_mock_check.py 390 right 24/24, misfire_mock_sync_check.py 4/4. No page errors, no blocked writes, no POST to /my/misfire while offline or signed out. No deprecated Expo packages (expo-av, expo-barcode-scanner, expo-background-fetch) and no react-native SafeAreaView in the files I touched.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Signed in, line drops while right answers are being sent", "issue": "If the line drops during sendRight, the waiting answers are only sent again when the mock list, the mock result or a new session (door.tsx fetchAll on a user change) is opened. Unlike the kept Rapid Fire rounds (45 s interval in door.tsx:56-60) there is no timer to retry. The answers wait correctly, they are just sent later than they could be. Reference: /app/frontend/src/misfire/mock/marking.ts:118-124, /app/frontend/src/offline/door.tsx:38", "affected_testIDs": ["mock-result-waiting"]}
+    ],
+    "design_issues": [
+      {"screen": "Offline Misfire setup", "issues": ["Notice reads 'Sirf phone par rakhe 1 papers se' when there is one paper. This follows the owner's wording, but the singular would be '1 paper' (cosmetic)."]},
+      {"screen": "Offline home (/offline)", "issues": ["Header subtitle still says 'Phone par rakha hua · Rapid Fire aur results' and does not mention Offline Misfire, which now has its own card (cosmetic)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/offline_misfire_check.py", "/app/tests/iter_offline_misfire_extra.py", "/app/tests/iter_offline_misfire_extra2.py", "/app/tests/misfire_mock_check.py", "/app/tests/misfire_mock_sync_check.py", "/app/test_reports/artifacts/offline_misfire/", "/app/test_reports/artifacts/offline_misfire_extra/"],
+  "action_items": [
+    "(minor) Retry waiting Offline Misfire right answers on a timer while signed in, or when the app comes back online, like sendRounds does.",
+    "(minor) phonePool's memo key uses fixed.size only (src/misfire/mock/offline.ts:83). If one id becomes fixed and another becomes open in the same update, or replaceKnown(complete) swaps ids without changing the count, the old pool is reused. Add a counter that changes on every change in known.ts, or a hash of the ids.",
+    "(cosmetic) Make the paper count singular when it is 1, and add Misfire to the offline home subtitle."
+  ],
+  "critical_code_review_comments": [
+    "offline.ts:83 memo signature `#${fixed.size}`: a stale pool is possible when the known-fixed set changes but its size does not (noteStatus and replaceKnown change the Set in place).",
+    "marking.ts sendRight: sends only answers that are right on the phone, three at a time, and stops at the first error that should be retried later. Refused answers are marked again. Correct and confirmed by the tests.",
+    "useMockAccess (offline.ts:33-48) waits for auth `ready` inside the app and uses offlineIdentity only behind /offline. jl_signed_out and the 7-day stamp are respected (tested)."
+  ],
+  "updated_files": ["/app/tests/iter_offline_misfire_extra.py", "/app/tests/iter_offline_misfire_extra2.py"],
+  "success_rate": {"backend": "N/A (not in scope)", "frontend": "100% (30/30 + 23/23 + 8/8 + 24/24 + 4/4)"},
+  "seed_data_creation": "None. Mocks live only in each throwaway browser context. Nothing was written to the website (BLOCKED lists empty, all try/done faked).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "QA learner has ONE finished paper (1ea510f2-…, 25/25/25 untagged). The keeper finishes about 38 s after sign-in. The phone pool is 75 questions (Physics 25). The confirmed stamp is localStorage 'kept.confirmed.v1' (JSON {uid,name,at}). Age it past 7 days to test the closed state. Use /usr/bin/chromium.",
+  "rca_of_issue": ""
+}

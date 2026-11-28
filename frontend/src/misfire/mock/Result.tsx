@@ -17,9 +17,11 @@ import { ScoreRing } from "@/src/analysis/charts";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 import { SHORT, SUBJECTS, Subject } from "@/src/choice/api";
 import { ChoiceHero, ON_HERO, SUBJECT_LOOK, heroStyles } from "@/src/choice/looks";
+import { useAuth } from "@/src/auth";
 import { chapterLabel, chapterName } from "../parts";
 import { useMockPictures } from "./pictures";
 import { sendRight } from "./marking";
+import { useMockPaths } from "./offline";
 import { MARKS, Mock, Outcome } from "./store";
 
 const OUT: Record<Outcome, { label: string; tone: string; icon: IconName }> = {
@@ -33,6 +35,7 @@ const key = (s: Subject) => s.toLowerCase();
 
 export function MockResult({ mock, onBack }: { mock: Mock; onBack: () => void }) {
   const router = useRouter();
+  const paths = useMockPaths(), signedIn = !!useAuth().user;
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const reading = Math.max(1, Math.min(width, 760) - 4 * space.lg - 2);
@@ -57,10 +60,10 @@ export function MockResult({ mock, onBack }: { mock: Mock; onBack: () => void })
   const marks = outcome === "correct" ? MARKS.correct : outcome === "incorrect" ? MARKS.wrong : 0;
 
   return <View testID="mock-result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-    <ScreenHeader testID="mock-result-header" title={mock.title} eyebrow="Misfire Mock · Result" backTestID="mock-result-back" onBack={onBack} />
+    <ScreenHeader testID="mock-result-header" title={mock.title} eyebrow="Offline Misfire · Result" backTestID="mock-result-back" onBack={onBack} />
     <ScrollView contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xxl, gap: space.md }} showsVerticalScrollIndicator={false}>
       <ChoiceHero testID="mock-result-hero">
-        <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>{`MISFIRE MOCK #${mock.n} · RESULT`}</T>
+        <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>{`OFFLINE MISFIRE #${mock.n} · RESULT`}</T>
         <View style={styles.ring}><ScoreRing percentage={pct} score={r.score} maximum={r.maximum} /></View>
         <T testID="mock-result-line" w="semibold" size={13} color={ON_HERO.soft} style={styles.center}>
           Accuracy {r.accuracy != null ? `${r.accuracy}%` : "—"} · {usedLabel(r.used)} lage · {mock.questions.length} sawaal
@@ -78,12 +81,12 @@ export function MockResult({ mock, onBack }: { mock: Mock; onBack: () => void })
           <T testID="mock-result-moved" w="heavy" size={14} color={colors.success} style={{ flex: 1 }}>{sync.moved.length} sawaal “Samajh gaya” mein chale gaye</T></View> : null}
         {sync.todo.length ? <View style={styles.line}><Icon name="cloud-upload-outline" size={20} color={colors.custom_softText} />
           <T testID="mock-result-waiting" w="bold" size={13.5} style={{ flex: 1 }}>{sync.todo.length} sahi sawaal “Samajh gaya” mein ja rahe hain. Internet aate hi pahunch jayenge.</T>
-          <Pill testID="mock-result-send" kind="outline" size="sm" label="Abhi bhejo" onPress={() => void sendRight(mock.id)} /></View> : null}
+          {signedIn ? <Pill testID="mock-result-send" kind="outline" size="sm" label="Abhi bhejo" onPress={() => void sendRight(mock.id)} /> : null}</View> : null}
         {sync.refused.length ? <T testID="mock-result-refused" size={12.5} color={colors.muted}>{sync.refused.length} jawab website ki jaanch mein sahi nahi maane gaye, isliye galat gine gaye.</T> : null}
         {!r.correct ? <T testID="mock-result-none" size={13} color={colors.custom_softText}>Is baar koi sahi nahi hua. Neeche har sawaal ka solution dekho, phir naya mock do.</T> : null}
-        <Press testID="mock-result-misfire" onPress={() => router.push("/misfire" as any)} style={styles.link}>
+        {!paths.offline ? <Press testID="mock-result-misfire" onPress={() => router.push("/misfire" as any)} style={styles.link}>
           <T w="heavy" size={13} color={colors.brandText}>Misfire kholo</T><Icon name="arrow-right" size={15} color={colors.brandText} />
-        </Press>
+        </Press> : null}
       </DCard>
 
       <DCard testID="mock-result-subjects" style={{ gap: space.md }}>
@@ -148,14 +151,14 @@ export function MockResult({ mock, onBack }: { mock: Mock; onBack: () => void })
           : q.solution ? <MathText testID="mock-solution-text" size={14} text={q.solution} /> : null}
         {q.solution_kind !== "answer_key_only" ? imagePaths(q.attempt_id, q, "solution").map((path, i) => <AssetImage key={path} testID={`mock-solution-simage-${i}`} path={path} label={`Solution ${q.number}`} />) : null}
         {q.solution_kind !== "answer_key_only" && !q.solution && !q.solution_asset_count ? <T testID="mock-solution-none" size={13} color={colors.muted}>Likha hua solution nahi hai; upar answer key hai.</T> : null}
-        <Press testID="mock-solution-paper" onPress={() => router.push(`/result/${q.attempt_id}` as any)} style={styles.link}>
+        <Press testID="mock-solution-paper" onPress={() => router.push(paths.paper(q.attempt_id))} style={styles.link}>
           <T w="heavy" size={13} color={colors.custom_softText}>Asli paper ka result</T><Icon name="arrow-right" size={15} color={colors.custom_softText} />
         </Press>
       </View> : null}
 
       <View style={{ gap: space.sm, marginTop: space.sm }}>
-        <Pill testID="mock-result-new" kind="brand" size="lg" icon="fire" label="Naya mock banao" onPress={() => router.push("/misfire/mock/new" as any)} />
-        <Pill testID="mock-result-all" kind="outline" label="Saare mocks" onPress={() => router.push({ pathname: "/misfire", params: { tab: "mock" } } as any)} />
+        <Pill testID="mock-result-new" kind="brand" size="lg" icon="fire" label="Naya mock banao" onPress={() => router.push(paths.make)} />
+        <Pill testID="mock-result-all" kind="outline" label="Saare mocks" onPress={() => router.push(paths.list)} />
       </View>
     </ScrollView>
   </View>;

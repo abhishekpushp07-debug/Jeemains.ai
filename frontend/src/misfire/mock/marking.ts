@@ -7,7 +7,7 @@ import { invalidate } from "@/src/useCached";
 import { SUBJECTS } from "@/src/choice/api";
 import { markDone, misfireKey, tryAgain } from "../api";
 import { patchMisfire } from "../store";
-import { MARKS, Marked, Mock, MockQ, MockRow, Outcome, Sync, getMock, latest, saveState } from "./store";
+import { MARKS, Marked, Mock, MockQ, MockRow, Outcome, Sync, getMock, latest, loadMocks, saveState } from "./store";
 
 const MINUS = /[\u2212\u2010-\u2015\uFE63\uFF0D]/g;
 const INTEGER = /^[+-]?\d{1,20}$/;
@@ -51,20 +51,21 @@ export function mark(m: Mock, submittedAt: number, refused: string[] = []): Mark
   };
 }
 
-/** Ends the mock (the student's Submit, or the clock ran out): marked, and its right answers lined up for the website. */
-export function submit(m: Mock, at = Date.now()): Mock {
+/** Ends the mock (the student's Submit, or the clock ran out): marked, and its right answers lined up for the website.
+ *  `send`: signed in, so they go at once; behind the offline door they wait for the line and the session. */
+export function submit(m: Mock, at = Date.now(), send = true): Mock {
   const now = latest(m);
   if (now.status === "done") return now;
   const result = mark(now, at);
   const sync: Sync = { todo: now.questions.filter((q) => result.outcomes[q.id] === "correct").map((q) => q.id), moved: [], refused: [], gone: [] };
   const done = saveState(now, { status: "done", submitted_at: at, result, sync });
-  void sendRight(done.id);
+  if (send) void sendRight(done.id);
   return done;
 }
 
 /** A mock whose clock ran out while the app was closed is submitted when it is next seen. */
-export function settle(m: Mock): Mock {
-  return m.status === "active" && m.deadline && Date.now() >= m.deadline ? submit(m, m.deadline) : m;
+export function settle(m: Mock, send = true): Mock {
+  return m.status === "active" && m.deadline && Date.now() >= m.deadline ? submit(m, m.deadline, send) : m;
 }
 
 const later = (e: unknown) => !(e instanceof ApiError) || e.status === 0 || e.status === 401 || e.status === 403 || e.status === 408 || e.status === 429 || e.status >= 500;
@@ -107,8 +108,17 @@ export function sendRight(id: string): Promise<void> {
   return work;
 }
 
-/** Sends the right answers of every finished mock still waiting (a list of mocks on screen asks for it). */
-export function useSendWaiting(rows: MockRow[]) {
-  const waiting = rows.filter((r) => r.status === "done" && r.waiting).map((r) => r.id).join("|");
+/** Sends the right answers of every finished mock still waiting (a list of mocks on screen asks for it). `online`:
+ *  signed in; behind the offline door without a session nothing is sent (it waits for the line and the sign-in). */
+export function useSendWaiting(rows: MockRow[], online = true) {
+  const waiting = online ? rows.filter((r) => r.status === "done" && r.waiting).map((r) => r.id).join("|") : "";
   useEffect(() => { if (waiting) waiting.split("|").forEach((id) => { void sendRight(id); }); }, [waiting]);
+}
+
+/** The line is back and the session confirmed (src/offline/door.tsx): every finished mock's right answers still
+ *  waiting go to the website, one mock after another, without opening Misfire. */
+export async function sendAllWaiting(): Promise<void> {
+  try {
+    for (const r of await loadMocks()) if (r.status === "done" && r.waiting) await sendRight(r.id);
+  } catch { /* the next confirmed session tries again */ }
 }

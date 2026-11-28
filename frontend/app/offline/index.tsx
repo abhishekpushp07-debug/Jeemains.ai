@@ -47,7 +47,7 @@ function Home() {
       <Press testID="offline-back" onPress={leave} accessibilityLabel="Back" style={styles.close}><Icon name="arrow-left" size={22} color={colors.onSurface} /></Press>
       <View style={styles.flex}>
         <GoldTitle size={22} testID="offline-title">{ARENA ? "RAPID FIRE" : "BINA INTERNET"}</GoldTitle>
-        <T testID="offline-sub" w="bold" size={12} color={arena.aqua}>{ARENA ? "Bina internet · Solo Sprint" : "Phone par rakha hua · Rapid Fire aur results"}</T>
+        <T testID="offline-sub" w="bold" size={12} color={arena.aqua}>{ARENA ? "Bina internet · Solo Sprint" : "Phone par rakha hua · Rapid Fire, results aur Misfire"}</T>
       </View>
     </View>
     <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
@@ -76,6 +76,12 @@ function Home() {
         <T w="heavy" size={16}>Mere results</T>
         <T size={13} color={colors.muted}>Jo tests aap de chuke ho, unke score, answers aur solutions phone par rakhe hain.</T>
         <Button testID="offline-results-open" kind="secondary" icon="file-document-outline" label="Results dekho" onPress={() => router.push("/offline/results" as any)} />
+      </Card> : null}
+      {/* Offline Misfire: a JEE Main-style mock from the wrong and left questions of those kept papers (src/misfire/mock/offline.ts). */}
+      {who && !ARENA ? <Card testID="offline-misfire" style={styles.card}>
+        <T w="heavy" size={16}>Offline Misfire</T>
+        <T size={13} color={colors.muted}>Apni galtiyon se JEE Main jaisa mock, bina internet. Jo sahi karoge, internet aate hi “Samajh gaya” ho jayenge.</T>
+        <Button testID="offline-misfire-open" kind="secondary" icon="fire" label="Offline Misfire kholo" onPress={() => router.push("/offline/misfire" as any)} />
       </Card> : null}
       {who && waiting ? <Card testID="offline-waiting" style={styles.card}>
         <T w="heavy" size={15}>{`${waiting} round phone par rakhe hain`}</T>

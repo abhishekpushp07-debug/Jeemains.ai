@@ -16,9 +16,10 @@ import { MARKS, Mock, removeMock, saveState } from "./store";
 const RULES = [
   ["timer-outline", "Timer “Shuru karo” dabate hi chalega, aur app band karne par bhi chalta rahega."],
   ["fire", "Saare sawaal aapke Misfire se hain: jo pehle galat hue ya chhoot gaye."],
-  ["check-decagram-outline", "Jo sahi karoge, woh apne aap “Samajh gaya” mein chale jayenge."],
+  ["check-decagram-outline", "Jo sahi karoge, woh apne aap “Samajh gaya” mein chale jayenge (bina internet diya ho to internet aate hi)."],
   ["book-open-variant", "Submit karte hi result aur har sawaal ka solution. My Tests aur Misfire dono mein milega."],
 ] as const;
+const PHONE_RULE = ["cloud-off-outline", "Phone par rakhe papers se bana: internet ke bina bhi poora chalega."] as const;
 
 export function MockReady({ mock, short, onBack }: { mock: Mock; short: boolean; onBack: () => void }) {
   const insets = useSafeAreaInsets();
@@ -38,10 +39,10 @@ export function MockReady({ mock, short, onBack }: { mock: Mock; short: boolean;
   const fewer = SUBJECTS.filter((s) => mock.asked && mock.asked[s] > mock.counts[s]).map((s) => `${SHORT[s]}: ${mock.asked![s]} maange, ${mock.counts[s]} mile`);
 
   return <View testID="mock-ready-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-    <ScreenHeader testID="mock-ready-header" title={mock.title} eyebrow="Misfire Mock · taiyaar" backTestID="mock-ready-back" onBack={onBack} />
+    <ScreenHeader testID="mock-ready-header" title={mock.title} eyebrow="Offline Misfire · taiyaar" backTestID="mock-ready-back" onBack={onBack} />
     <ScrollView contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: space.xl, gap: space.md }}>
       <ChoiceHero testID="mock-ready-hero">
-        <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>{`MISFIRE MOCK #${mock.n}`}</T>
+        <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>{`OFFLINE MISFIRE #${mock.n}`}</T>
         <T testID="mock-ready-size" w="heavy" size={26} color={ON_HERO.ink}>{count} sawaal · {timeLabel(mock.minutes)}</T>
         <T size={13} color={ON_HERO.soft}>Poore {count * MARKS.correct} marks · Sahi +{MARKS.correct} · Galat −{Math.abs(MARKS.wrong)} · Chhoda 0</T>
         <View style={heroStyles.counts}>
@@ -53,7 +54,7 @@ export function MockReady({ mock, short, onBack }: { mock: Mock; short: boolean;
       </ChoiceHero>
       {fewer.length || short ? <Notice tone="warning" testID="mock-ready-short">{fewer.length ? `Utne sawaal nahi mile jitne maange the (${fewer.join(" · ")}); jitne mile, utne liye hain.` : "Kuch subjects mein utne sawaal nahi mile jitne maange the; jitne mile, utne liye hain."}</Notice> : null}
       <DCard testID="mock-ready-rules" style={{ gap: space.md }}>
-        {RULES.map(([icon, line]) => <View key={icon} style={styles.rule}>
+        {(mock.source === "phone" ? [PHONE_RULE, ...RULES] : RULES).map(([icon, line]) => <View key={icon} style={styles.rule}>
           <Icon name={icon} size={18} color={colors.custom_chipBlood} />
           <T size={13.5} color={colors.custom_softText} style={{ flex: 1 }}>{line}</T>
         </View>)}

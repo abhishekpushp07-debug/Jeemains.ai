@@ -3,6 +3,7 @@
 // and without losing its place.
 import { useSyncExternalStore } from "react";
 import type { MisfireItem } from "./api";
+import { noteStatus } from "./known";
 
 type Patch = Partial<Pick<MisfireItem, "status" | "tries" | "answer" | "solution_text" | "last_correct" | "solution_count">>;
 let owner = "", version = 0;
@@ -20,6 +21,7 @@ export function misfireAccount(uid: string) {
 }
 export function patchMisfire(id: string, patch: Patch) {
   patches.set(id, { ...patches.get(id), ...patch });
+  if (patch.status) noteStatus([{ id, status: patch.status }]);
   version++;
   listeners.forEach(fn => fn());
 }

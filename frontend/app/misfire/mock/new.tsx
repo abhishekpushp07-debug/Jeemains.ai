@@ -1,13 +1,15 @@
-// Misfire Mock, the choosing step: subject by subject, how many questions (up to 25, JEE Main's count) and from which
+// Offline Misfire, the choosing step: subject by subject, how many questions (up to 25, JEE Main's count) and from which
 // chapters of the student's own open Misfire. The questions themselves are not shown. "Mock banao" draws them and opens
-// the mock; its clock starts only on "Shuru karo" there.
+// the mock; its clock starts only on "Shuru karo" there. With a line they come from the website's open list; without
+// one (or when that list does not come), from the finished papers kept on this phone (src/misfire/mock/offline.ts).
+// The same screen behind the offline door (/offline/misfire/new).
 import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
-import { Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
+import { Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, DSheet, Pill, ScreenHeader } from "@/src/components/design";
 import { RedTabs } from "@/src/components/RedTabs";
 import { ScreenMotion } from "@/src/motion";
@@ -20,6 +22,8 @@ import { chapterLabel, chapterName } from "@/src/misfire/parts";
 import { misfireAccount } from "@/src/misfire/store";
 import { MARKS } from "@/src/misfire/mock/store";
 import { MAX_PER_SUBJECT, PER_QUESTION, Step, buildMock } from "@/src/misfire/mock/build";
+import { NO_POOL, useMockAccess, useMockPaths, usePhonePool } from "@/src/misfire/mock/offline";
+import { MockChecking, MockClosed } from "@/src/misfire/mock/Closed";
 
 type Chapter = { name: string; count: number };
 type Pool = Record<Subject, { total: number; chapters: Chapter[] }>;
@@ -49,8 +53,14 @@ export default function NewMisfireMock() {
   const router = useRouter();
   const { user } = useAuth();
   if (user) misfireAccount(user.id);
-  const pool = useCached<Pool>(user ? `${misfireKey(user.id)}.mockpool` : null, loadPool, false);
-  const p = pool.data;
+  const access = useMockAccess(), paths = useMockPaths();
+  const uid = access.state === "open" ? access.uid : "";
+  const online = access.state === "open" && access.online;
+  const pool = useCached<Pool>(online ? `${misfireKey(uid)}.mockpool` : null, loadPool, false);
+  // Without a line, or when the website's list does not come: the finished papers kept on this phone.
+  const fromPhone = access.state === "open" && (!online || (!!pool.error && !pool.data));
+  const phone = usePhonePool(fromPhone);
+  const p: Pool | null = fromPhone ? phone?.subjects ?? null : pool.data;
   const [subject, setSubject] = useState<Subject>("Physics");
   const [counts, setCounts] = useState<Counts>({ ...NONE });
   // `null`: every chapter of the subject; otherwise the chapters ticked.
@@ -78,17 +88,22 @@ export default function NewMisfireMock() {
   const setCount = (s: Subject, n: number) => setCounts((c) => ({ ...c, [s]: Math.max(0, Math.min(most(s), n)) }));
 
   async function make() {
-    if (!user || !p || !total) return;
+    if (!uid || !p || !total) return;
     stop.current?.abort();
     const ctl = new AbortController(); stop.current = ctl;
     setMaking({ step: { step: "pick", done: 0, total: 1 } });
     try {
       const sizes = Object.fromEntries(SUBJECTS.map((s) => [s, Object.fromEntries(p[s].chapters.map((c) => [c.name, c.count]))])) as Record<Subject, Record<string, number>>;
-      const { mock, short } = await buildMock(user.id, { counts, chapters: picked, sizes }, (step) => { if (!ctl.signal.aborted) setMaking({ step }); }, ctl.signal);
+      const { mock, short } = await buildMock(uid, { counts, chapters: picked, sizes }, (step) => { if (!ctl.signal.aborted) setMaking({ step }); }, ctl.signal,
+        fromPhone ? (phone || NO_POOL).items : undefined);
       if (ctl.signal.aborted) return;
-      if (!mock.questions.length) { setMaking({ error: "Chune hue chapters ke sawaal abhi nahi mil paaye. Thodi der mein dobara try karo, ya doosre chapter chuno." }); return; }
+      if (!mock.questions.length) {
+        setMaking({ error: fromPhone ? "Chune hue chapters ke sawaal phone par nahi mil paaye. Doosre chapter chuno, ya internet ke saath dobara try karo."
+          : "Chune hue chapters ke sawaal abhi nahi mil paaye. Thodi der mein dobara try karo, ya doosre chapter chuno." });
+        return;
+      }
       setMaking(null);
-      router.replace({ pathname: "/misfire/mock/[id]", params: { id: mock.id, short: short.length ? "1" : "" } } as any);
+      router.replace(paths.one(mock.id, short.length > 0));
     } catch (e: any) {
       if (e?.name === "AbortError" || ctl.signal.aborted) return;
       setMaking({ error: e?.message || "Mock abhi nahi ban paaya. Internet dekh kar dobara try karo." });
@@ -97,15 +112,16 @@ export default function NewMisfireMock() {
 
   const empty = p && !SUBJECTS.some((s) => p[s].total > 0);
   const step = making?.step;
+  const onPhone = fromPhone && p ? SUBJECTS.reduce((n, s) => n + p[s].total, 0) : 0;
   return <ScreenMotion>
     <View testID="mock-new-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader testID="mock-new-header" title="Misfire Mock banao" eyebrow="Apni galtiyon se mock" backTestID="mock-new-back"
-        onBack={() => (router.canGoBack() ? router.back() : router.replace("/misfire" as any))} />
+      <ScreenHeader testID="mock-new-header" title="Offline Misfire banao" eyebrow="Apni galtiyon se mock" backTestID="mock-new-back"
+        onBack={() => (router.canGoBack() ? router.back() : router.replace(paths.list))} />
       <ScrollView contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: space.xl, gap: space.md }} showsVerticalScrollIndicator={false}>
         <ChoiceHero testID="mock-new-hero">
-          <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>MISFIRE MOCK</T>
+          <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>OFFLINE MISFIRE</T>
           <T w="heavy" size={22} color={ON_HERO.ink}>Apni galtiyon ka JEE Main mock</T>
-          <T size={13} color={ON_HERO.soft}>Sirf woh sawaal jo aapse galat hue ya chhoot gaye. Har subject ke 25 tak: Physics 60, Chemistry 40, Maths 80 min.</T>
+          <T size={13} color={ON_HERO.soft}>Sirf woh sawaal jo aapse galat hue ya chhoot gaye. Internet na ho to phone par rakhe papers se. Har subject ke 25 tak: Physics 60, Chemistry 40, Maths 80 min.</T>
           {p ? <View style={heroStyles.counts}>
             {SUBJECTS.map((s, i) => <View key={s} style={[heroStyles.count, i > 0 && heroStyles.countLine]}>
               <T testID={`mock-new-open-${s.toLowerCase()}`} w="heavy" size={18} color={ON_HERO.ink}>{p[s].total}</T>
@@ -113,9 +129,17 @@ export default function NewMisfireMock() {
             </View>)}
           </View> : null}
         </ChoiceHero>
-        <ErrorBox testID="mock-new-error" error={pool.error && !p ? pool.error : ""} retry={pool.reload} />
-        {!p && !pool.error ? <View testID="mock-new-loading" style={{ gap: space.sm }}><Skeleton h={52} /><Skeleton h={96} /><Skeleton h={64} /><Skeleton h={64} /></View> : null}
-        {empty ? <DCard testID="mock-new-empty"><Empty icon="check-circle-outline" title="Misfire khaali hai." body="Koi galat ya chhoda sawaal nahi bacha. Agla paper do; jo galat ya chhoot jaye, yahan se mock ban jayega." /></DCard> : null}
+        {access.state === "closed" ? <MockClosed /> : access.state === "checking" ? <MockChecking /> : null}
+        {fromPhone && p ? <Notice tone="info" testID="mock-new-phone">{`${online ? "Website se list abhi nahi aa paayi. " : ""}Sirf phone par rakhe ${phone?.papers || 0} ${phone?.papers === 1 ? "paper" : "papers"} se · ${onPhone} sawaal mile. Jo pehle “Samajh gaya” ho chuke, woh nahi liye.`}</Notice> : null}
+        {fromPhone && online ? <Pill testID="mock-new-web-retry" kind="outline" size="sm" icon="refresh" label="Website se dobara laao" onPress={pool.reload} /> : null}
+        <ErrorBox testID="mock-new-error" error={!fromPhone && pool.error && !p ? pool.error : ""} retry={pool.reload} />
+        {access.state === "open" && !p && (fromPhone || !pool.error) ? <View testID="mock-new-loading" style={{ gap: space.sm }}>
+          {fromPhone ? <T testID="mock-new-reading" size={12.5} color={colors.muted}>Phone par rakhe papers dekh rahe hain…</T> : null}
+          <Skeleton h={52} /><Skeleton h={96} /><Skeleton h={64} /><Skeleton h={64} />
+        </View> : null}
+        {empty ? <DCard testID="mock-new-empty">{fromPhone
+          ? <Empty icon="cloud-off-outline" title="Phone par abhi galtiyon wale papers nahi hain." body="Internet ke saath app kholo: aapke diye hue papers apne aap phone par aa jaate hain, phir unki galtiyon se bina internet bhi mock ban jayega." />
+          : <Empty icon="check-circle-outline" title="Misfire khaali hai." body="Koi galat ya chhoda sawaal nahi bacha. Agla paper do; jo galat ya chhoot jaye, yahan se mock ban jayega." />}</DCard> : null}
         {p && !empty ? <>
           <SubjectTabs prefix="mock-subject" value={subject} onChange={setSubject} items={SUBJECTS.map((s) => ({ subject: s, count: counts[s] }))} />
 
@@ -169,10 +193,10 @@ export default function NewMisfireMock() {
         </> : <View testID="mock-making-progress" style={{ gap: space.md }}>
           <View style={styles.progressRow}>
             <Icon name={step?.step === "keys" ? "key-variant" : "shuffle-variant"} size={20} color={colors.custom_chipBlood} />
-            <T testID="mock-making-step" w="bold" size={14} style={{ flex: 1 }}>{step?.step === "keys" ? `Answer key aur solutions aa rahe hain · ${step.done}/${step.total} papers` : "Aapke Misfire se sawaal chun rahe hain…"}</T>
+            <T testID="mock-making-step" w="bold" size={14} style={{ flex: 1 }}>{step?.step === "keys" ? `Answer key aur solutions ${fromPhone ? "phone se " : ""}aa rahe hain · ${step.done}/${step.total} papers` : fromPhone ? "Phone par rakhe papers se sawaal chun rahe hain…" : "Aapke Misfire se sawaal chun rahe hain…"}</T>
           </View>
           <View style={styles.track}><View style={[styles.fill, { width: `${step?.step === "keys" ? 20 + (80 * step.done) / Math.max(1, step.total) : 12}%` }]} /></View>
-          <T size={12} color={colors.muted}>Jin papers ka result phone par rakha hai, woh wahin se aate hain. Website par kuch shuru nahi hota.</T>
+          <T size={12} color={colors.muted}>{fromPhone ? "Sab kuch phone par hi banta hai, bina internet. Website par kuch shuru nahi hota." : "Jin papers ka result phone par rakha hai, woh wahin se aate hain. Website par kuch shuru nahi hota."}</T>
         </View>}
         <Pill testID="mock-making-cancel" kind="outline" label={making?.error ? "Band karo" : "Ruko, wapas jao"} onPress={() => { stop.current?.abort(); setMaking(null); }} />
       </DSheet>

@@ -2,7 +2,9 @@
 // each paper's questions of this mock are named to the picture loader under that paper (as Misfire's solve screen does).
 import { useCallback, useLayoutEffect, useMemo } from "react";
 import { useFocusEffect } from "expo-router";
+import { useAuth } from "@/src/auth";
 import { privateAssets, registerAssetManifest } from "@/src/api/client";
+import { trustKept } from "@/src/assets/assetGrants";
 import { imagePaths, questionPaths } from "@/src/assets/paperAssets";
 import type { MockQ } from "./store";
 
@@ -16,7 +18,12 @@ export function useMockPictures(questions: MockQ[], current?: string, solutions 
     for (const q of questions) by.set(q.attempt_id, [...(by.get(q.attempt_id) || []), q]);
     return by;
   }, [questions]);
-  useLayoutEffect(() => { for (const [attempt, rows] of groups) registerAssetManifest(attempt, rows, solutions); }, [groups, solutions]);
+  // Behind the offline door (no session): the pictures kept on this phone are the pictures, as a kept result's are
+  // (app/offline/result.tsx); nothing can be asked of the server.
+  const signedIn = !!useAuth().user;
+  useLayoutEffect(() => {
+    for (const [attempt, rows] of groups) { registerAssetManifest(attempt, rows, solutions); if (!signedIn) trustKept(attempt); }
+  }, [groups, solutions, signedIn]);
   useFocusEffect(useCallback(() => {
     if (!questions.length) return;
     privateAssets.selectGroup("misfire-mock");

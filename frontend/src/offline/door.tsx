@@ -15,6 +15,8 @@ import { bankView, openBank, syncBank } from "./bank";
 import { forgetConfirmed, noteConfirmed, offlineIdentity } from "./identity";
 import { holdKeeping, keepResults } from "./papers";
 import { sendRounds, useKeptRounds } from "./rounds";
+import { sendAllWaiting } from "@/src/misfire/mock/marking";
+import { refreshKnown } from "@/src/misfire/mock/offline";
 
 /** Mounted once, beside the other background helpers: notes each confirmed session, and keeps the phone's copy fresh. */
 export function OfflineKeeper() {
@@ -30,9 +32,11 @@ export function OfflineKeeper() {
     }
     void noteConfirmed({ uid: user.id, name: nameOf(user) });
     void scheduleKeeping(true);
-    // After the first screen has drawn, in the owner's order: rounds played without a line go up, Rapid Fire's cards are
-    // brought up to date, then the finished papers (JEE Main first, then BITSAT) with their results and pictures.
-    const fetchAll = () => sendRounds(user.id).catch(() => {}).then(() => syncBank(user.id)).then(() => keepResults(user.id));
+    // After the first screen has drawn, in the owner's order: rounds played without a line go up (and the right answers
+    // of Offline Misfires given without one), Rapid Fire's cards are brought up to date, then the finished papers (JEE
+    // Main first, then BITSAT) with their results and pictures, then what Misfire last said is understood.
+    const fetchAll = () => sendRounds(user.id).catch(() => {}).then(() => sendAllWaiting()).then(() => syncBank(user.id)).then(() => keepResults(user.id))
+      .then(() => refreshKnown(user.id));
     const timer = setTimeout(() => { void fetchAll(); }, 4000);
     // The owner's switch for kept papers arrives a moment after sign-in; if it came late, the papers start then.
     const heard = onAppSwitches(() => { void syncBank(user.id).then(() => keepResults(user.id)); });
@@ -42,7 +46,10 @@ export function OfflineKeeper() {
   // nothing is fetched in the background meanwhile.
   const pathname = usePathname();
   // A paper, a Rapid Fire round or a Misfire Mock being taken: nothing is fetched in the background meanwhile.
-  useEffect(() => { holdKeeping(pathname.startsWith("/attempt/") || pathname.startsWith("/rapid/") || (pathname.startsWith("/misfire/mock/") && pathname !== "/misfire/mock/new")); }, [pathname]);
+  useEffect(() => {
+    holdKeeping(pathname.startsWith("/attempt/") || pathname.startsWith("/rapid/") || (pathname.startsWith("/misfire/mock/") && pathname !== "/misfire/mock/new")
+      || (pathname.startsWith("/offline/misfire/") && pathname !== "/offline/misfire/new"));
+  }, [pathname]);
   // Rounds still waiting while the app stays open (the line dropped at the end of a sprint): tried again every 45 seconds.
   const uid = user?.id, waiting = useKeptRounds(uid);
   useEffect(() => {
@@ -50,6 +57,12 @@ export function OfflineKeeper() {
     const timer = setInterval(() => { void sendRounds(uid).catch(() => {}); }, 45000);
     return () => clearInterval(timer);
   }, [uid, waiting]);
+  // The same for Offline Misfire's right answers still waiting (the line dropped after a mock): every 45 seconds.
+  useEffect(() => {
+    if (!uid) return;
+    const timer = setInterval(() => { void sendAllWaiting(); }, 45000);
+    return () => clearInterval(timer);
+  }, [uid]);
   return null;
 }
 

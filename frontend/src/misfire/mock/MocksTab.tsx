@@ -1,4 +1,5 @@
-// Misfire's "Mock" tab: make a new Misfire Mock, and every mock made on this phone (newest first) with its result.
+// Misfire's "Offline Misfire" tab (also behind the offline door, app/offline/misfire): make a new one, and every mock
+// made on this phone (newest first) with its result.
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
@@ -11,6 +12,7 @@ import { unixDate } from "@/src/navigation";
 import { timeLabel } from "@/src/choice/api";
 import { ChoiceHero, ON_HERO, heroStyles } from "@/src/choice/looks";
 import { useSendWaiting } from "./marking";
+import { useMockPaths } from "./offline";
 import { MockRow, mockOver, useMocks } from "./store";
 
 function MockItem({ m, onPress }: { m: MockRow; onPress: () => void }) {
@@ -38,20 +40,22 @@ function MockItem({ m, onPress }: { m: MockRow; onPress: () => void }) {
   </Press>;
 }
 
-export function MocksTab() {
+/** `online`: signed in (right answers still waiting are sent from here); behind the offline door they wait. */
+export function MocksTab({ online = true }: { online?: boolean }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const mocks = useMocks();
-  useSendWaiting(mocks);
+  const paths = useMockPaths();
+  useSendWaiting(mocks, online);
   return <FlatList testID="misfire-mocks" data={mocks} keyExtractor={(m) => m.id} initialNumToRender={8}
     contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xxl, gap: space.md }}
     ListHeaderComponent={<ChoiceHero testID="misfire-mock-hero">
-      <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>MISFIRE MOCK</T>
+      <T w="heavy" size={11} color={ON_HERO.soft} style={heroStyles.kicker}>OFFLINE MISFIRE</T>
       <T w="heavy" size={21} color={ON_HERO.ink}>Galtiyon se JEE Main mock</T>
-      <T size={13} color={ON_HERO.soft}>Subject, chapter aur ginti chuno. Jo sahi karoge, woh apne aap “Samajh gaya” ho jayenge.</T>
-      <Pill testID="misfire-mock-new" icon="fire" label="Naya mock banao" bg={colors.custom_card} ink={colors.custom_chipBloodDeep} onPress={() => router.push("/misfire/mock/new" as any)} />
+      <T size={13} color={ON_HERO.soft}>Subject, chapter aur ginti chuno. Internet na ho tab bhi chalega: sawaal phone par rakhe papers se. Jo sahi karoge, woh “Samajh gaya” ho jayenge.</T>
+      <Pill testID="misfire-mock-new" icon="fire" label="Naya mock banao" bg={colors.custom_card} ink={colors.custom_chipBloodDeep} onPress={() => router.push(paths.make)} />
     </ChoiceHero>}
-    renderItem={({ item }) => <MockItem m={item} onPress={() => router.push(`/misfire/mock/${item.id}` as any)} />}
+    renderItem={({ item }) => <MockItem m={item} onPress={() => router.push(paths.one(item.id))} />}
     ListEmptyComponent={<DCard testID="misfire-mocks-empty"><Empty icon="fire" title="Abhi koi mock nahi bana." body="Pehla mock banao. Woh yahan aur My Tests, dono mein dikhega." /></DCard>} />;
 }
 

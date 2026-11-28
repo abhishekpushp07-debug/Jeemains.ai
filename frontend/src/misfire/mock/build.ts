@@ -75,9 +75,10 @@ function questionOf(it: MisfireItem, q: any, rules: any): MockQ | null {
 
 /**
  * Makes the mock and keeps it on the phone (not started: its clock starts on "Shuru karo"). `short`: subjects that
- * gave fewer questions than asked (the student's rule: then as many as there are).
+ * gave fewer questions than asked (the student's rule: then as many as there are). `phone`: made without a line, from
+ * these questions of the papers kept on this phone (./offline.ts phonePool); their keys are read from those copies.
  */
-export async function buildMock(uid: string, ask: Ask, onStep: (s: Step) => void, signal: AbortSignal): Promise<{ mock: Mock; short: Subject[] }> {
+export async function buildMock(uid: string, ask: Ask, onStep: (s: Step) => void, signal: AbortSignal, phone?: MisfireItem[]): Promise<{ mock: Mock; short: Subject[] }> {
   onStep({ step: "pick", done: 0, total: 1 });
   const wanted = SUBJECTS.filter((s) => ask.counts[s] > 0);
   // Every bucket (a subject, or one chapter of it) with how many to draw from it.
@@ -87,7 +88,9 @@ export async function buildMock(uid: string, ask: Ask, onStep: (s: Step) => void
     const needs = share(ask.counts[s], chapters.map((c) => ask.sizes[s][c] || 0));
     return chapters.map((c, i) => ({ subject: s, chapter: c, need: needs[i] })).filter((b) => b.need > 0);
   });
-  const pools = await Promise.all(buckets.map((b) => candidates(b.subject, b.chapter, b.need, signal).then((items) => ({ ...b, items: shuffle(items) }))));
+  const fromPhone = (b: { subject: Subject; chapter: string }) => Promise.resolve((phone || []).map(applied)
+    .filter((it) => it.status === "open" && it.subject === b.subject && (!b.chapter || it.chapter === b.chapter)));
+  const pools = await Promise.all(buckets.map((b) => (phone ? fromPhone(b) : candidates(b.subject, b.chapter, b.need, signal)).then((items) => ({ ...b, items: shuffle(items) }))));
 
   const taken = new Set<string>(), papers = new Set<string>(), picked: MisfireItem[] = [];
   const counted = { ...NONE };
@@ -107,7 +110,10 @@ export async function buildMock(uid: string, ask: Ask, onStep: (s: Step) => void
   let done = 0;
   onStep({ step: "keys", done, total: attempts.length });
   for (let i = 0; i < attempts.length; i += 3) {
-    await Promise.all(attempts.slice(i, i + 3).map(async (a) => { results.set(a, await resultOf(a, signal)); done++; onStep({ step: "keys", done, total: attempts.length }); }));
+    await Promise.all(attempts.slice(i, i + 3).map(async (a) => {
+      results.set(a, phone ? await keptResult(a).catch(() => null) : await resultOf(a, signal));
+      done++; onStep({ step: "keys", done, total: attempts.length });
+    }));
   }
   const kept: MockQ[] = [];
   for (const it of picked) {
@@ -136,7 +142,7 @@ export async function buildMock(uid: string, ask: Ask, onStep: (s: Step) => void
   const n = nextNumber();
   const exams = [...new Set(questions.map((q) => q.exam))];
   const mock: Mock = {
-    v: 1, id: uuid(), uid, n, title: `Misfire Mock #${n}`, made_at: Date.now(), exam: exams.length === 1 ? exams[0] : "Mixed",
+    v: 1, id: uuid(), uid, n, title: `Offline Misfire #${n}`, made_at: Date.now(), exam: exams.length === 1 ? exams[0] : "Mixed", source: phone ? "phone" : "website",
     counts: counted, asked: { ...ask.counts }, minutes: minutesFor(counted, PER_QUESTION), questions, status: "ready", answers: {}, visited: [],
   };
   if (!totalOf(counted)) return { mock, short: wanted };

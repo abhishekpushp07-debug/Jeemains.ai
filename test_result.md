@@ -1199,3 +1199,16 @@ iteration161_jlive_analytics:
   main_recheck: "tests/jl_tracker_full_check.py 39/39, tests/jl_feature_entry_check.py 10/10 (both close the All India daily popup via rf-daily-popup-exit before tapping arena tabs; on the Rapid screen leave with arena-tab-home, there is no tab-index), jl_server_check 12/12, pytest 19/19, ceo_api_check 21/21."
   dashboard_side: "mission_link_created / mission_link_opened answered 'unregistered_event' by the collector; the collector accepts browser calls only from https://jeelive.ai (CORS), so the web copy of the app cannot deliver events; phones are not affected."
 
+
+
+## Iteration162 — Pocket 1: Offline Misfire (28 Nov 2026) — preview only
+iteration162_offline_misfire:
+  user_request: "Misfire's Mock tab becomes 'Offline Misfire': same setup/player/result; works without internet from the papers kept on the phone, leaving out questions last known as 'Samajh gaya'; with internet from the website's fresh list as today; setup says 'sirf phone par rakhe papers se, N sawaal mile'; right answers become 'Samajh gaya' on the website once internet is back; not on the website, still in My Tests; 7-day sign-in rule and phone pictures (512 MB) unchanged. One pocket at a time; nothing written to the owner's account in tests."
+  implemented: true
+  working: true
+  files: "NEW src/misfire/known.ts, src/misfire/mock/offline.ts, src/misfire/mock/Closed.tsx, app/offline/misfire/{index,new,[id]}.tsx; edited src/misfire/api.ts (getPage notes statuses), src/misfire/store.ts (patchMisfire notes status), src/misfire/mock/{build,store,marking,pictures,MocksTab,Ready,Result,Player}.ts(x), app/misfire/mock/{new,[id]}.tsx, app/misfire/index.tsx (tab label), app/(tabs)/tests.tsx (label), app/offline/index.tsx (card), src/offline/door.tsx (hold paths, sendAllWaiting + refreshKnown in fetchAll)."
+  independent_review: "testing_agent iteration_162: 30/30 + extra 23/23 + 8/8, no real bugs. Small items fixed after: waiting right answers retried every 45 s while signed in (src/offline/door.tsx); phone list re-read whenever the known 'Samajh gaya' list changes, not only its size (known.ts knownVersion); '1 paper' singular; offline home subtitle mentions Misfire. Re-run: offline_misfire_check 30/30, iter_offline_misfire_extra 23/23."
+  data_note: "misfire_mock_edge_check 'small chapter'/'select all back on' and my_tests_tabs_check 'compare selectors >= 2' fail only because the QA learner now has ONE finished paper (one untagged chapter, 25/25/25)."
+
+  main_checks: "tsc 0, eslint clean; tests/offline_misfire_check.py 30/30: tab name, website list with a line, phone fallback when the list fails (note + retry), injected 'Samajh gaya' question left out (25 -> 24), offline door -> list -> setup -> mock -> result with no line (pictures all from phone), nothing sent while signed out, 4/4 right answers sent (try+done) 6 s after the line came back, My Tests label, shut without a confirmed session."
+

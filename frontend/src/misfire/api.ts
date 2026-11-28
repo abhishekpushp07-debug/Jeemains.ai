@@ -1,6 +1,7 @@
 // Misfire: every wrong or skipped question of every finished paper, to be solved again. The same website answers as
 // jeelive.ai's Misfire page (/my/misfire…), plus the list of finished papers of each test family for the paper-wise tabs.
 import { api, post, registerAssetManifest } from "@/src/api/client";
+import { noteStatus } from "./known";
 
 export type MisfireStatus = "open" | "fixed";
 export type MisfireItem = {
@@ -16,8 +17,10 @@ export type ChapterReport = { papers: number; waiting: number; chapters: Chapter
 /** Everything Misfire keeps for one account starts with this, so one call forgets it all. */
 export const misfireKey = (uid: string) => `u.${uid}.misfire`;
 export const getSummary = (signal?: AbortSignal) => api<MisfireSummary>("/my/misfire/summary", { signal });
+// Every page the website answers also tells the phone which questions are understood (./known.ts, for Offline Misfire).
 export const getPage = (status: MisfireStatus, subject: string, chapter: string, page: number, signal?: AbortSignal) =>
-  api<MisfirePage>("/my/misfire?" + new URLSearchParams({ status, subject, chapter, page: String(page) }).toString(), { signal });
+  api<MisfirePage>("/my/misfire?" + new URLSearchParams({ status, subject, chapter, page: String(page) }).toString(), { signal })
+    .then((d) => { noteStatus(d?.items || []); return d; });
 export const getChapters = (signal?: AbortSignal) => api<ChapterReport>("/my/chapters", { signal });
 const act = (id: string, what: string) => `/my/misfire/${encodeURIComponent(id)}/${what}`;
 export const tryAgain = (id: string, value: string) => post<{ correct: boolean; item: MisfireItem }>(act(id, "try"), { value });

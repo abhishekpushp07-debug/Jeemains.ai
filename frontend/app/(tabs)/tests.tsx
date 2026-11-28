@@ -66,7 +66,7 @@ function MockCard({ m, onOpen }: { m: MockRow; onOpen: () => void }) {
       <Press testID={`mock-card-${m.id}`} onPress={onOpen} scaleTo={0.99} style={styles.attemptContent}>
         <View style={styles.statusRow}>
           <StatusLine testID={`mock-status-${m.id}`} label={label} color={colors.custom_chipBlood} ink={colors.custom_tabInk} />
-          <T testID={`mock-exam-${m.id}`} size={11.5} color={colors.custom_tabInkSoft}>Misfire Mock{m.exam && m.exam !== "Mixed" ? ` · ${m.exam}` : ""}</T>
+          <T testID={`mock-exam-${m.id}`} size={11.5} color={colors.custom_tabInkSoft}>Offline Misfire{m.exam && m.exam !== "Mixed" ? ` · ${m.exam}` : ""}</T>
         </View>
         <T testID={`mock-title-${m.id}`} w="heavy" size={17} color={colors.custom_tabInk}>{m.title}</T>
         <T testID={`mock-meta-${m.id}`} size={12} color={colors.custom_tabInkSoft}>
