@@ -1,5 +1,5 @@
 # JLive Command tracker (src/jlTracker.ts) in the browser preview, READ ONLY.
-# The collector (student-radar-5) is answered by the browser: nothing reaches the real dashboard. Every write to the
+# The collector (tribeapp.pro) is answered by the browser: nothing reaches the real dashboard. Every write to the
 # website outside /auth is stopped (same stand-ins as misfire_mock_check.py).
 # usage: python3 jl_tracker_check.py [path ...]   (extra paths are opened after sign-in and their events printed)
 import asyncio
@@ -28,7 +28,7 @@ async def collector(ctx):
                 pass
         await route.fulfill(status=200, content_type="application/json", body='{"ok":true}',
                             headers={"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*", "Access-Control-Allow-Methods": "POST, OPTIONS"})
-    await ctx.route(re.compile(r"https://student-radar-5\.emergent\.host/.*"), g)
+    await ctx.route(re.compile(r"https://tribeapp\.pro/.*"), g)
 
 
 def names():

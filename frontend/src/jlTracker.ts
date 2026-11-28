@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { AppState, AppStateStatus, Linking, Platform } from "react-native";
 
 const KEY = "pk_2jVih2x9csjvI_-9_QR-KPH6";
-const ENDPOINT = "https://student-radar-5.emergent.host/api/collect/v1/batch";
+const ENDPOINT = "https://tribeapp.pro/api/collect/v1/batch";
 const QMAX = 200, AGE = 24 * 3600e3, BATCH = 20, TICK = 5000, HB = 15000, IDLE = 30 * 60e3;
 type Ev = { event_id: string; event_name: string; occurred_at: string; anon_id: string; uid?: string; session_id: string; props: Record<string, string | number | boolean | null>; context: Record<string, unknown>; _t: number };
 

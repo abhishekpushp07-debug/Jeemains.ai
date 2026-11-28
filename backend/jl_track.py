@@ -20,7 +20,7 @@ from typing import Optional
 import httpx
 
 log = logging.getLogger("jl_track")
-COLLECTOR = os.environ.get("JLIVE_COLLECTOR_URL", "https://student-radar-5.emergent.host").rstrip("/") + "/api/collect/v1/server"
+COLLECTOR = os.environ.get("JLIVE_COLLECTOR_URL", "https://tribeapp.pro").rstrip("/") + "/api/collect/v1/server"
 WEBSITE_ID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")  # the dashboard's rule (lowercase)
 NAMESPACE = uuid.UUID("6f1c0d3e-7a43-4c39-9b54-2f8e0a5d1c77")
 _client: Optional[httpx.AsyncClient] = None

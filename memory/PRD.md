@@ -1582,3 +1582,9 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - Checks: misfire_web_check 37/37; testing_agent iteration_164 57/57. Book v5 rebuilt with the agreed contract (Part 4.8, examples/misfire_mock_answers.json).
 - Website point 8: its new production DB holds only the 2 preview accounts (same ids); old students sign up again with new ids; app data under old ids stays untouched (owner's call).
 - Waiting for: the website to build it (switch off) → real end-to-end on a test account (Pocket 3b) → Publish with the owner's OK.
+
+## JLive Command collector moved to https://tribeapp.pro (28 Nov 2026) — preview only
+- frontend/src/jlTracker.ts ENDPOINT → https://tribeapp.pro/api/collect/v1/batch (same public key, accepted there); backend/jl_track.py default collector → https://tribeapp.pro (JLIVE_COLLECTOR_URL still overrides). Only backend/jl_track.py exists (no tracking.py, per the dashboard).
+- JLIVE_TRACKING_SECRET_KEY re-saved by the owner (11:07 UTC). Probes with an unregistered name (nothing recorded): server key 200/rejected unregistered_event, wrong key 401, public key 200.
+- Checks: jl_tracker_full_check 39/39 (collector routes now tribeapp.pro), jl_server_check 12/12, ceo_api_check 21/21.
+- Dashboard side: mission_link_created / mission_link_opened are being registered there (names unchanged). Order: dashboard redeploy first, then the app's Publish.

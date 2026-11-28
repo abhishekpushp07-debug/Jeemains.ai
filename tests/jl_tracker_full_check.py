@@ -28,7 +28,7 @@ async def collector(ctx):
                 pass
         await route.fulfill(status=200, content_type="application/json", body='{"ok":true}',
                             headers={"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*", "Access-Control-Allow-Methods": "POST, OPTIONS"})
-    await ctx.route(re.compile(r"https://student-radar-5\.emergent\.host/.*"), g)
+    await ctx.route(re.compile(r"https://tribeapp\.pro/.*"), g)
 
     async def rf(route):
         if route.request.method in ("GET", "HEAD", "OPTIONS") or route.request.url.split("?")[0].endswith("/api/rf/access"):
