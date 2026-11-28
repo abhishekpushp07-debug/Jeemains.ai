@@ -41,6 +41,19 @@ Pocket 3 adjusts the app to the website's exact reply. While the switch is not `
 - Please also keep: a question wrong or left in the mock does **not** become a second Misfire item; it stays open
   under its first id `<attempt id>:<question id>`. `misfire.understood` counts only the questions this mock moved.
 
+## 6. Website's reply (28 Nov, no code yet) and the app's answers
+- Door A: 401 without a cookie, 404 with all switches off. With only misfire on: 200 {"pick": false, "random": false,
+  "misfire": true}. App: Student Choice unchanged (pick/random false = closed as today); the Mock tab opens.
+- Door C: same body; missing subject in counts = 0; unknown chapter = no questions from it. Answer adds title,
+  number ("Misfire Mock #n"), asked, given, minutes → app will show "maange X, mile Y" (Pocket 3).
+- Sentences (shown as-is): 422 x2, 409 "Misfire Mock abhi band hai." / "Yeh mock pehle hi ban chuka hai…" (asked to
+  say "Misfire ke Mock tab mein dekho"), 429 "Aaj ke Misfire Mock poore ho gaye…" (5 a day, apart from Student Choice).
+- Questions from all open Misfire (JEE Main + BITSAT papers), paper exam "JEE Main"; a duplicated question once;
+  right = both entries "Samajh gaya". understood/total count the mock's questions.
+- App asked for GET /api/my/misfire/mocks (unstarted ones too); with it the Mock tab does not need history kind=misfire.
+- Result misfire {understood,total} with the score; a retry attempt changes nothing → app asked: no `misfire` on a retry.
+- Website changed its production database on 28 Nov: app asked whether old students kept their user.id.
+
 ## App files
 `src/misfire/web.ts`, `src/misfire/web/WebMocksTab.tsx`, `src/misfire/web/Understood.tsx`, `app/misfire/index.tsx`
 (tab), `app/misfire/mock/new.tsx` (`?web=1`), `backend/choice.py` (`misfire_on`). Check: `tests/misfire_web_check.py`.
