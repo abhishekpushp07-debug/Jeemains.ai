@@ -37,7 +37,7 @@
 | `POST /api/choice/papers` | Student Choice: make the paper | 1.6, door C |
 | `GET /api/matched` | Matched: the list of published shifts, and the card's switch | 2.4c |
 | `GET /api/matched/<shift id>` | Matched: one shift | 2.4c |
-| `"misfire": true` in door A; door C with `mode: "misfire"`; `GET /api/exam-navigation/jee-main/history?kind=misfire` | the Misfire Mock | 4.8 |
+| `"misfire": true` in door A; door C with `mode: "misfire"`; `GET /api/my/misfire/mocks` | the Misfire Mock | 4.8 |
 
 And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part 1.8); `test_kind` "choice" and "matched" on those papers and their results; `test_kind` on the items of `GET /api/my/tests` (Part 1.9). For the Misfire Mock also `test_kind` "misfire", and `misfire: { understood, total }` in its result (Part 4.8).
 

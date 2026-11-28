@@ -14,16 +14,13 @@ export function MisfireUnderstood({ r, uid }: { r: any; uid?: string }) {
   const router = useRouter();
   const said = understoodOf(r);
   useEffect(() => { if (uid) invalidate(misfireKey(uid)); }, [uid, r?.id]);
+  if (!said) return null; // a retry of wrong questions: Misfire is unchanged, nothing to say
   return <DCard testID="result-misfire-understood" style={styles.card}>
     <View style={styles.row}>
       <Icon name="check-decagram" size={22} color={colors.custom_chipBlood} />
-      <T testID="result-misfire-understood-count" w="heavy" size={16} style={{ flex: 1 }}>{said
-        ? `${said.understood}${said.total != null ? ` / ${said.total}` : ""} sawaal “Samajh gaya” mein chale gaye`
-        : "Sahi kiye sawaal “Samajh gaya” mein chale jaate hain"}</T>
+      <T testID="result-misfire-understood-count" w="heavy" size={16} style={{ flex: 1 }}>{`${said.understood}${said.total != null ? ` / ${said.total}` : ""} sawaal “Samajh gaya” mein chale gaye`}</T>
     </View>
-    <T size={12.5} color={colors.muted}>{said
-      ? said.understood ? "Jo sahi kiye, woh Misfire ki list se hat gaye. Baaki galtiyan wahin hain, agle mock ke liye." : "Is baar koi sawaal list se nahi hata. Galtiyan Misfire mein wahin hain, dobara try karo."
-      : "Yeh mock aapke Misfire se bana tha. Misfire kholo: wahan list taaza dikhegi."}</T>
+    <T size={12.5} color={colors.muted}>{said.understood ? "Jo sahi kiye, woh Misfire ki list se hat gaye. Baaki galtiyan wahin hain, agle mock ke liye." : "Is baar koi sawaal list se nahi hata. Galtiyan Misfire mein wahin hain, dobara try karo."}</T>
     <Pill testID="result-misfire-open" kind="outline" size="sm" icon="fire" label="Misfire kholo" onPress={() => router.push({ pathname: "/misfire", params: { tab: "web" } } as any)} />
   </DCard>;
 }

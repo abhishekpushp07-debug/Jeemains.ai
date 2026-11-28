@@ -23,7 +23,7 @@
 <h3 id="new-in-version-5-28-nov-2026-all-that-a-reader-of-version-4-needs">New in version 5 (28 Nov 2026): all that a reader of version 4 needs</h3>
 <ol>
 <li><strong>Offline Misfire</strong> (Part 4.7, new). Misfire's "Mock" tab is now "Offline Misfire": a mock of the student's own Misfire questions on the phone, also with no internet, from the papers the phone keeps. It is never a paper on the website. A right answer becomes "Samajh gaya" through the website's own Misfire doors when the line is back. <strong>Nothing for the website to build</strong>; three things to keep as they are.</li>
-<li><strong>The Misfire Mock made by the website</strong> (Part 4.8, new). Built in the app and <strong>shut</strong> until door A says <code>"misfire": true</code>. The website makes the paper with door C (<code>mode: "misfire"</code>), lists it with <code>history?kind=misfire</code>, and says in its result how many questions went to "Samajh gaya". What to build, the JSON, and one question for the website are in Part 4.8.</li>
+<li><strong>The Misfire Mock made by the website</strong> (Part 4.8, new). Built in the app and <strong>shut</strong> until door A says <code>"misfire": true</code>. The website makes the paper with door C (<code>mode: "misfire"</code>), lists every one with <code>GET /my/misfire/mocks</code>, and says in its result how many questions went to "Samajh gaya". The website and the app agreed every door, answer and sentence on 28 Nov 2026; Part 4.8 has them all, with the JSON.</li>
 <li>Rules 27 and 28 are new in Part 0.4. Part 7.2 and Part 7.5 name the Misfire Mock's doors.</li>
 <li>The owner published again on 28 Nov 2026, after Offline Misfire was built and before the Misfire Mock was (Part 0.2). Everything else says what version 4 said.</li>
 </ol>
@@ -3218,7 +3218,7 @@
 <td>2.4c</td>
 </tr>
 <tr>
-<td><code>"misfire": true</code> in door A; door C with <code>mode: "misfire"</code>; <code>GET /api/exam-navigation/jee-main/history?kind=misfire</code></td>
+<td><code>"misfire": true</code> in door A; door C with <code>mode: "misfire"</code>; <code>GET /api/my/misfire/mocks</code></td>
 <td>the Misfire Mock</td>
 <td>4.8</td>
 </tr>
@@ -4003,7 +4003,7 @@
 <p>A row of the chapter list is best found as <code>[role=checkbox][data-testid^=choice-chapter-]</code>: the list's own name starts with the same letters.</p>
 <p><strong>A hard rule for anyone testing on the app's preview:</strong> the test learner there is the owner's own account on the real website. Never press Start, Begin, Resume or Submit with it, never open an attempt, never tap a chapter test whose button says Resume. Walks that need a started or finished paper use a test student on the website's test setup, or answers given by the browser in place of the website.</p>
 <h2 id="37-the-state-on-28-nov-2026-and-how-to-check-it-again">3.7 The state on 28 Nov 2026, and how to check it again</h2>
-<p>Read by the build of this book, at 15:21 India time on 28 Nov 2026:</p>
+<p>Read by the build of this book, at 16:12 India time on 28 Nov 2026:</p>
 <table>
 <thead>
 <tr>
@@ -4465,6 +4465,14 @@ curl -s https://jeelive.ai/api/auth/session
 <td>Offline Misfire (Part 4.7) stays as it is, next to it</td>
 <td>28 Nov 2026</td>
 </tr>
+<tr>
+<td>The website and the app agreed every door, answer and sentence below (the website's contract: its <code>memory/MISFIRE_MOCK_CONTRACT.md</code>)</td>
+<td>28 Nov 2026 (the website and the app side)</td>
+</tr>
+<tr>
+<td>A Misfire Mock's result is not counted in Misfire's chapter report; a question already "Samajh gaya" that is wrong in the mock stays "Samajh gaya"</td>
+<td>28 Nov 2026 (the website)</td>
+</tr>
 </tbody>
 </table>
 <div class="shots"><figure><img src="shots/x07_mock_tab.jpg" alt=""><figcaption>20. Switch on: Misfire's "Mock" tab</figcaption></figure><figure><img src="shots/x08_mock_setup.jpg" alt=""><figcaption>21. Its setup asks jeelive.ai for the paper</figcaption></figure><figure><img src="shots/x09_mock_paper.jpg" alt=""><figcaption>22. The made paper's page</figcaption></figure><figure><img src="shots/x10_mock_result.jpg" alt=""><figcaption>23. Its result: how many went to "Samajh gaya"</figcaption></figure></div>
@@ -4472,16 +4480,16 @@ curl -s https://jeelive.ai/api/auth/session
 <p>The pictures are from the app's preview, with the browser answering in place of the website: the website's doors for the Misfire Mock do not exist yet. The scores in them belong to a paper played as a Misfire Mock.</p>
 <p><strong>What a student sees, once the switch is on</strong></p>
 <ul>
-<li>Misfire gets a tab <strong>"Mock"</strong>, right after "Sab" (then "Offline Misfire" and the paper-wise tabs). Its dark-red card: "MISFIRE MOCK · Galtiyon se JEE Main mock · Paper jeelive.ai par banega: timer, autosave, result aur Analysis har paper ki tarah. App aur website, dono par chalega. Jo sahi karoge, woh “Samajh gaya” ho jayenge.", the button <strong>"Naya mock banao"</strong>, then the student's Misfire Mocks, newest first: a finished one with its score and its right, wrong and left counts ("Result dekho"), one being taken marked "CHAL RAHA HAI" ("Resume").</li>
+<li>Misfire gets a tab <strong>"Mock"</strong>, right after "Sab" (then "Offline Misfire" and the paper-wise tabs). Its dark-red card: "MISFIRE MOCK · Galtiyon se JEE Main mock · Paper jeelive.ai par banega: timer, autosave, result aur Analysis har paper ki tarah. App aur website, dono par chalega. Jo sahi karoge, woh “Samajh gaya” ho jayenge.", the button <strong>"Naya mock banao"</strong>, then every Misfire Mock of the student's, newest first, with its size ("15 sawaal · 32 min"): one not started yet, "SHURU NAHI HUA" ("Shuru karo", its paper's page); one being taken, "CHAL RAHA HAI" ("Resume"); a finished one with its score and its right, wrong and left counts ("Result dekho").</li>
 <li><strong>"Naya mock banao"</strong> opens the setup of Part 4.7, titled "Misfire Mock banao", with the website's open Misfire list only (never the phone's papers). The time it shows comes from door A's minutes (the owner's ratio).</li>
-<li><strong>"Mock banao"</strong> asks door C. While it waits: "jeelive.ai aapki galtiyon se paper bana raha hai…". Then the made paper's page opens ("JEE MAIN · MISFIRE MOCK"), and the student starts it like any paper.</li>
-<li><strong>The result</strong> of a paper whose <code>test_kind</code> is <code>misfire</code> has a card on its Analysis tab: "3 / 15 sawaal “Samajh gaya” mein chale gaye" and "Jo sahi kiye, woh Misfire ki list se hat gaye. Baaki galtiyan wahin hain, agle mock ke liye.", with "Misfire kholo". Its top line reads "JEE Main · Misfire Mock".</li>
+<li><strong>"Mock banao"</strong> asks door C. While it waits: "jeelive.ai aapki galtiyon se paper bana raha hai…". Then the made paper's page opens ("JEE MAIN · MISFIRE MOCK"), and the student starts it like any paper. When fewer questions came than were asked, it says so first: "Aapne 15 sawaal maange the, 12 mile: chune hue chapters mein itne hi khule sawaal the.", with "Paper kholo".</li>
+<li><strong>The result</strong> of a paper whose <code>test_kind</code> is <code>misfire</code> has a card on its Analysis tab: "3 / 15 sawaal “Samajh gaya” mein chale gaye" and "Jo sahi kiye, woh Misfire ki list se hat gaye. Baaki galtiyan wahin hain, agle mock ke liye.", with "Misfire kholo". A retry of the wrong questions changes nothing in Misfire, so its result has no card. The top line reads "JEE Main · Misfire Mock".</li>
 <li><strong>My Tests</strong> shows "JEE Main · Misfire Mock" under the paper's name.</li>
 <li><strong>The Dream College meter never counts it</strong>, like a chapter test and a Student Choice paper.</li>
 </ul>
 <h3 id="what-the-website-builds">What the website builds</h3>
 <p>The doors are Student Choice's (Part 1.6); the Misfire Mock only adds to them. The JSON is also in the <code>examples</code> folder (<code>misfire_mock_ask.json</code>, <code>misfire_mock_answers.json</code>).</p>
-<p><strong>1. The switch, in door A</strong> (<code>GET /api/choice/bank?exam=jee-main</code>). Add <code>"misfire": true</code>. Anything else (no <code>misfire</code>, <code>false</code>, <code>"true"</code>, <code>1</code>, or a 404) keeps the tab shut. It changes nothing about <code>pick</code> and <code>random</code>. The app's server reads door A every 2 minutes, so the tab appears (or goes) within about 2 minutes, on every phone.</p>
+<p><strong>1. The switch, in door A</strong> (<code>GET /api/choice/bank?exam=jee-main</code>). With only the Misfire Mock open it answers <code>200 { "pick": false, "random": false, "misfire": true, … }</code>; Student Choice then stays exactly as today (<code>pick</code> and <code>random</code> false = shut), and only Misfire's "Mock" tab opens. Anything else (no <code>misfire</code>, <code>false</code>, <code>"true"</code>, <code>1</code>, or the 404 of all switches off) keeps the tab shut. Door A answers 401 without a student's cookie. The app's server reads door A every 2 minutes, so the tab appears (or goes) within about 2 minutes, on every phone.</p>
 <p><strong>2. Make the paper: door C</strong> (<code>POST /api/choice/papers</code>, sent with the student's own session):</p>
 <pre><code class="language-json">{
   &quot;exam&quot;: &quot;jee-main&quot;,
@@ -4492,35 +4500,76 @@ curl -s https://jeelive.ai/api/auth/session
 }
 </code></pre>
 <ul>
-<li><code>counts</code>: 0 to 25 for each subject, at least 1 in all.</li>
-<li><code>chapters</code>: only for a subject where the student ticked some chapters, by their names exactly as <code>chapters[].name</code> in <code>GET /my/misfire?status=open&amp;subject=…</code>. A subject not named means every chapter.</li>
-<li>The questions are the student's own <strong>open</strong> Misfire items (never "Samajh gaya"), from those chapters. Fewer than asked: as many as there are. None at all: 422 with a plain <code>error.message</code>.</li>
-<li><strong>The same <code>request_key</code> gives the same paper.</strong> A retry never makes a second one (rule 6). The app keeps one key while the student stays on the screen with the same counts and chapters.</li>
-<li>The answers are door C's (Part 1.6): <code>{ "set_id": "…" }</code> with 200 or 201. 404 or 405: "not built yet" ("Paper banana abhi jeelive.ai se jud raha hai…"). 409, 422 or 429 with <code>error.message</code>: that sentence is shown. 5xx: "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."</li>
+<li><code>counts</code>: 0 to 25 for each subject, at least 1 in all; a subject left out counts as 0.</li>
+<li><code>chapters</code>: only for a subject where the student ticked some chapters, by their names exactly as <code>chapters[].name</code> in <code>GET /my/misfire?status=open&amp;subject=…</code>. A subject not named means every chapter; a name not in the student's open list brings no question.</li>
+<li>The questions are the student's own <strong>open</strong> Misfire items (never "Samajh gaya") of Physics, Chemistry and Mathematics, from JEE Main and BITSAT papers alike; the paper's exam is JEE Main. A question listed twice comes once; answered right, both entries go to "Samajh gaya".</li>
+<li><strong>The same <code>request_key</code> gives the same paper.</strong> A retry never makes a second one (rule 6). The app keeps one key while the student stays on the screen with the same counts and chapters, and takes a new one when they change.</li>
+<li>The answer (200 or 201): <code>{ "set_id", "title", "number", "asked", "given", "minutes" }</code> (the whole example below). When <code>given</code> is less than <code>asked</code>, the app says so before the paper opens.</li>
+<li>The trouble answers, each <code>error.message</code> shown word for word:</li>
 </ul>
-<p><strong>3. The paper.</strong> A set of the student's own, <code>test_kind: "misfire"</code>, exam JEE Main, marked +4 / −1 / 0 and timed by the ratio (rule 5; a made paper is not cut). Every question has its own subject, pieces, key and solution, so that the paper's page, start, player, autosave, deadline, result and Analysis work unchanged, in the app and on the website.</p>
-<p><strong>4. Its list.</strong> <code>GET /api/exam-navigation/jee-main/history?kind=misfire&amp;page=</code>: the student's Misfire Mocks, newest first, with the rows of the other history lists (<code>id</code> of the attempt, <code>title</code>, <code>started_at</code>, <code>submitted_at</code>, <code>summary {score, maximum, correct, incorrect, skipped}</code>), plus <code>status</code> and <code>resumable</code> on one still being taken. And <code>test_kind: "misfire"</code> on its rows in <code>GET /api/my/tests</code>.</p>
-<p><strong>5. Its result.</strong> <code>GET /api/attempts/&lt;id&gt;/results</code> carries <code>test_kind: "misfire"</code> and <code>"misfire": { "understood": 3, "total": 15 }</code>: how many of its questions <strong>the website moved to "Samajh gaya"</strong> because they were answered right, out of how many. The website moves them; the app only shows the number. Without <code>misfire</code>, the card says a general sentence instead.</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th><code>error.message</code></th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>422</td>
+<td>"Chune hue chapters mein abhi koi khula sawaal nahi hai. Doosre chapter chuno."</td>
+<td>no open question in the chosen chapters</td>
+</tr>
+<tr>
+<td>422</td>
+<td>"Har subject mein 25 tak sawaal chuno, kul kam se kam 1."</td>
+<td>counts out of bounds</td>
+</tr>
+<tr>
+<td>409</td>
+<td>"Misfire Mock abhi band hai."</td>
+<td>the switch is off</td>
+</tr>
+<tr>
+<td>409</td>
+<td>"Yeh mock pehle hi ban chuka hai. Misfire ke Mock tab mein dekho."</td>
+<td>the same <code>request_key</code> with another request</td>
+</tr>
+<tr>
+<td>429</td>
+<td>"Aaj ke Misfire Mock poore ho gaye. Kal naya mock banao."</td>
+<td>5 a day (apart from Student Choice's 5)</td>
+</tr>
+</tbody>
+</table>
+<p>404 or 405 mean "not built yet" ("Paper banana abhi jeelive.ai se jud raha hai…"); 5xx: "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."</p>
+<p><strong>3. The paper.</strong> A set of the student's own, <code>test_kind: "misfire"</code>, exam JEE Main, marked +4 / −1 / 0 and timed by the ratio (rule 5; a made paper is not cut). Every question has its own subject, pieces, key and solution, so that the paper's page, start, player, autosave, deadline, result and Analysis work unchanged, in the app and on the website. <code>test_kind: "misfire"</code> also on its rows in <code>GET /api/my/tests</code>.</p>
+<p><strong>4. Its list.</strong> <code>GET /api/my/misfire/mocks?page=</code>: every Misfire Mock of the student's, <strong>those not started too</strong> (5 can be made a day, so each must be findable), newest first, 20 a page; <code>attempt</code> is its newest attempt, or <code>null</code>. The app opens one not started at its paper's page, one being taken (<code>resumable</code>) in the paper, and any other at its result. (<code>history?kind=misfire</code> is not built: the history lists only attempts.)</p>
+<p><strong>5. Its result.</strong> <code>GET /api/attempts/&lt;id&gt;/results</code> carries <code>test_kind: "misfire"</code> and, once the result is ready (with the score), <code>"misfire": { "understood": 3, "total": 15 }</code>: how many of its <strong>questions</strong> (not entries) the website moved to "Samajh gaya" because they were answered right, out of how many. A retry of the wrong questions changes nothing in Misfire, and its result has no <code>misfire</code>. A fresh attempt of the same mock moves right answers again.</p>
 <pre><code class="language-json">{
-  &quot;door_A_adds&quot;: { &quot;misfire&quot;: true },
-  &quot;door_C_answer_200_or_201&quot;: { &quot;set_id&quot;: &quot;misfire-set-0001&quot; },
-  &quot;history_kind_misfire&quot;: {
+  &quot;door_A_with_only_the_misfire_mock_open&quot;: { &quot;pick&quot;: false, &quot;random&quot;: false, &quot;misfire&quot;: true },
+  &quot;door_C_answer_200_or_201&quot;: { &quot;set_id&quot;: &quot;misfire-set-0004&quot;, &quot;title&quot;: &quot;Misfire Mock #4&quot;, &quot;number&quot;: 4, &quot;asked&quot;: 15, &quot;given&quot;: 12, &quot;minutes&quot;: 26 },
+  &quot;my_misfire_mocks_page_1&quot;: {
     &quot;items&quot;: [
-      { &quot;id&quot;: &quot;&lt;attempt id&gt;&quot;, &quot;title&quot;: &quot;Misfire Mock · 15 Q · 27 Nov&quot;, &quot;status&quot;: &quot;completed&quot;, &quot;resumable&quot;: false,
-        &quot;started_at&quot;: 1764200000, &quot;submitted_at&quot;: 1764203000,
-        &quot;summary&quot;: { &quot;score&quot;: 20, &quot;maximum&quot;: 60, &quot;correct&quot;: 6, &quot;incorrect&quot;: 5, &quot;skipped&quot;: 4 } },
-      { &quot;id&quot;: &quot;&lt;attempt id&gt;&quot;, &quot;title&quot;: &quot;Misfire Mock · 10 Q · 28 Nov&quot;, &quot;status&quot;: &quot;active&quot;, &quot;resumable&quot;: true,
-        &quot;started_at&quot;: 1764300000, &quot;summary&quot;: null }
+      { &quot;set_id&quot;: &quot;misfire-set-0004&quot;, &quot;title&quot;: &quot;Misfire Mock #4&quot;, &quot;number&quot;: 4, &quot;created_at&quot;: 1764400000, &quot;asked&quot;: 15, &quot;given&quot;: 12, &quot;minutes&quot;: 26,
+        &quot;attempt&quot;: null },
+      { &quot;set_id&quot;: &quot;misfire-set-0003&quot;, &quot;title&quot;: &quot;Misfire Mock #3&quot;, &quot;number&quot;: 3, &quot;created_at&quot;: 1764299000, &quot;asked&quot;: 10, &quot;given&quot;: 10, &quot;minutes&quot;: 21,
+        &quot;attempt&quot;: { &quot;id&quot;: &quot;&lt;attempt id&gt;&quot;, &quot;status&quot;: &quot;active&quot;, &quot;resumable&quot;: true, &quot;started_at&quot;: 1764300000, &quot;submitted_at&quot;: null, &quot;summary&quot;: null } },
+      { &quot;set_id&quot;: &quot;misfire-set-0002&quot;, &quot;title&quot;: &quot;Misfire Mock #2&quot;, &quot;number&quot;: 2, &quot;created_at&quot;: 1764199000, &quot;asked&quot;: 15, &quot;given&quot;: 15, &quot;minutes&quot;: 32,
+        &quot;attempt&quot;: { &quot;id&quot;: &quot;&lt;attempt id&gt;&quot;, &quot;status&quot;: &quot;submitted&quot;, &quot;resumable&quot;: false, &quot;started_at&quot;: 1764200000, &quot;submitted_at&quot;: 1764203000,
+                     &quot;summary&quot;: { &quot;score&quot;: 20, &quot;maximum&quot;: 60, &quot;correct&quot;: 6, &quot;incorrect&quot;: 5, &quot;skipped&quot;: 4 } } }
     ],
     &quot;page&quot;: 1,
-    &quot;pages&quot;: 1
+    &quot;pages&quot;: 1,
+    &quot;total&quot;: 3
   },
   &quot;result_adds&quot;: { &quot;test_kind&quot;: &quot;misfire&quot;, &quot;misfire&quot;: { &quot;understood&quot;: 3, &quot;total&quot;: 15 } }
 }
 </code></pre>
-<p><strong>6. A question for the website.</strong> A wrong or left question of a Misfire Mock is already an open Misfire item, under the id of the paper it first came from (<code>&lt;attempt id&gt;:&lt;question id&gt;</code>). The app expects it <strong>not</strong> to become a second item under the Misfire Mock's own attempt. Please tell the app side what the website does.</p>
-<p><strong>Until all of this is ready, keep <code>misfire</code> off.</strong> Then tell the app side: the first real end-to-end run is on a test setup, before students see it (rule 20). On the app side, door A's <code>misfire</code> reaches production with the owner's next Publish; nothing else waits for the app.</p>
-<p><strong>Checked on 28 Nov 2026</strong> (<code>tests/misfire_web_check.py</code>, 30 checks; the browser answered in place of the website, and nothing was written). With the switch as the website answers today (not said): no tab, and nothing changed anywhere (Misfire's tabs, a link to <code>?tab=web</code>, the setup, Student Choice); door C never asked. With the switch on: the tab right after "Sab"; the list (a finished mock with its score, one being taken with "Resume"); the result's count; the setup asking door C (404, then 503, then a paper) with <strong>one</strong> <code>request_key</code> for all three; the chosen chapters sent by name, under a new key; the made paper's page; My Tests' label; Offline Misfire unchanged. On the app's server, <code>misfire</code> is <code>true</code> only for an exact <code>true</code> (<code>backend/tests/test_choice.py</code>). The app side's independent review found no fault in the app.</p>
+<p><strong>6. What the website decided</strong> (28 Nov 2026): a Misfire Mock's result is <strong>not counted</strong> in Misfire's chapter report, so one question is never counted twice; a question already "Samajh gaya" before the mock and wrong in it <strong>stays</strong> "Samajh gaya"; a question wrong or left in the mock does not become a second Misfire item, and stays open under its first id <code>&lt;attempt id&gt;:&lt;question id&gt;</code>.</p>
+<p><strong>Until all of this is built, keep <code>misfire</code> off.</strong> Then tell the app side, with the switch still off: the first real end-to-end run is on a test account (rule 20), and only then the switch goes on. On the app side, door A's <code>misfire</code> reaches production with the owner's next Publish; nothing else waits for the app.</p>
+<p><strong>Checked on 28 Nov 2026</strong> (<code>tests/misfire_web_check.py</code>, 37 checks, to the agreed contract; the browser answered in place of the website, and nothing was written). With the switch as the website answers today (not said): no tab, and nothing changed anywhere (Misfire's tabs, a link to <code>?tab=web</code>, the setup, Student Choice); door C never asked. With the switch on: the tab right after "Sab"; the list (one not started, newest first, opening its paper's page; one being taken with "Resume"; a finished one with its score and size); the result's count, and no card on a retry's result; the setup asking door C (404, then 503, then a paper) with <strong>one</strong> <code>request_key</code> for all three; the five sentences of the table word for word; "maange 5, mile 3" before the paper; the chosen chapters sent by name, under a new key; the made paper's page; My Tests' label; Offline Misfire unchanged. On the app's server, <code>misfire</code> is <code>true</code> only for an exact <code>true</code> (<code>backend/tests/test_choice.py</code>).</p>
 <p><strong>Not checked:</strong> anything against a real website door (none exists yet); a Misfire Mock started on the website and finished in the app, or the other way round; a real phone.</p>
 <h1 id="part-5-rapid-fire-in-a-browser-the-apps-linked-from-the-website">Part 5 — Rapid Fire in a browser: the app's, linked from the website</h1>
 <h2 id="51-what-it-is-and-who-owns-it">5.1 What it is, and who owns it</h2>
@@ -5138,9 +5187,9 @@ curl -s https://jeelive.ai/api/auth/session
 <td>Part 1.6; Part 4.8</td>
 </tr>
 <tr>
-<td><code>GET /exam-navigation/jee-main/history</code></td>
+<td><code>GET /my/misfire/mocks</code></td>
 <td>the Misfire Mock's list, asked only while door A says <code>"misfire": true</code></td>
-<td><code>?kind=misfire&amp;page=</code></td>
+<td><code>?page=</code></td>
 <td>Part 4.8</td>
 </tr>
 <tr>
@@ -5299,8 +5348,8 @@ curl -s https://jeelive.ai/api/auth/session
 <td>below</td>
 </tr>
 <tr>
-<td><code>"misfire": true</code> in <code>GET /api/choice/bank?exam=jee-main</code>; then <code>POST /api/choice/papers</code> with <code>mode: "misfire"</code>, <code>GET /api/exam-navigation/jee-main/history?kind=misfire</code>, and <code>misfire</code> in a result</td>
-<td>Misfire's "Mock" tab and the Misfire Mock. The last three are asked only once door A says <code>true</code></td>
+<td><code>"misfire": true</code> in <code>GET /api/choice/bank?exam=jee-main</code>; then <code>POST /api/choice/papers</code> with <code>mode: "misfire"</code>, <code>GET /api/my/misfire/mocks</code>, and <code>misfire</code> in a result</td>
+<td>Misfire's "Mock" tab and the Misfire Mock. The last three are asked only once door A says <code>true</code>; all agreed with the website on 28 Nov 2026</td>
 <td>Part 4.8</td>
 </tr>
 </tbody>

@@ -1,0 +1,30 @@
+{
+  "summary": "Misfire Mock Pocket 3a (website contract of 28 Nov 2026) tested in the browser at 375x667 with the QA learner. All website answers were played by the browser, every non-GET /api/jl/* (outside /auth) was stopped, and every non-GET /api/rf/dream** was faked. I wrote two new suites of my own and did not re-run E1's suite: tests/t1_misfire_web_pocket3a.py passed 44/44 and tests/t1_misfire_web_pocket3a_edges.py passed 13/13. Switch off (the real server answer today), misfire:'true' and misfire:1 (not exactly true), and a bank error all leave the Misfire tabs as Sab, Offline Misfire, AITS… with no Mock tab, and ?web=1 opens 'Offline Misfire banao'. Student Choice text is the same whether the switch is off or misfire:true is set with pick:false and random:false. Switch on: the Mock tab comes right after Sab. The list is newest first, skips a broken set_id and loads page 2 through 'Aur mocks dikhao'. The labels SHURU NAHI HUA / CHAL RAHA HAI / RESULT AA RAHA HAI / RESULT all show correctly, a mock that is resumable but already has a summary opens /result, and the error card (with a working retry) and the empty card both appear. Door C: the request body is exact, every retry of the same ask (8 retries across 429/409/422/500-html/network abort/405) reuses one request_key, and changing the chapters or the counts makes a new key. Chapters are sent only for the subject with ticked chapters. All five website sentences show word for word. 5xx and a network abort show 'jeelive.ai abhi jawab nahi de raha…'; 405 shows 'Paper banana abhi…'. When fewer questions come back, the note 'Aapne 10 sawaal maange the, 8 mile: …' and 'Paper kholo' open /set/<id>. When all come back, the app goes straight to /set/<id>. A double tap sends a single key. Closing the 'fewer' sheet and asking again reuses the same key. Offline Misfire setup without ?web, while the switch is on, makes a phone mock and sends no POST. Result, each in a fresh browser: '0 / 15 …' with the 'Is baar koi sawaal…' body, an invalid total shows '3 sawaal …', a retry shows no card, the eyebrow reads 'JEE Main · Misfire Mock', and 'Misfire kholo' opens /misfire?tab=web. Student Choice's random mock through the refactored askPaper/makePaper (door C played by the browser) sends {exam, request_key, mode:'random', count:30} and opens /set/<set_id>; its 405 and 429 sentences are shown. No page errors and nothing written to the website. The app did try DELETE /api/rf/dream/mocks/<QA attempt> once in each fresh result browser (3 times); all were faked. No deprecated Expo packages and no react-native SafeAreaView in the files I checked.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Misfire > Mock tab (list error)", "issues": ["The list-error card shows the app's general English message ('The website is not answering right now. Your saved work is safe…'), while the rest of the Misfire Mock screens are in Hinglish. Minor wording mismatch."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/t1_misfire_web_pocket3a.py", "/app/tests/t1_misfire_web_pocket3a_edges.py", "/app/test_reports/artifacts/t1_pocket3a_list.jpg", "/app/test_reports/artifacts/t1_pocket3a_fewer.jpg", "/app/test_reports/artifacts/t1_pocket3a_card.jpg"],
+  "action_items": [
+    "Optional (minor): in app/misfire/mock/new.tsx the key signature is JSON.stringify([counts, picked]). It includes the chapters of subjects whose count is 0, so changing chapters in a 0-count subject makes a NEW request_key even though the body sent is identical. After a timeout whose outcome is unknown, this could make a duplicate mock. Build the signature from the actual body sent (counts plus the chapters that are sent).",
+    "Optional (minor): on 409 'Misfire Mock abhi band hai', call invalidate('choice.bank') (and refresh the bank), so that the Mock tab and the website setup go away until the switch is on again. Today they stay until the bank is read again.",
+    "Optional (minor): new.tsx works out `asked` as web==='1' && online, so while access is still 'checking' the header and hero briefly say 'Offline Misfire banao' / 'OFFLINE MISFIRE' before switching to 'Misfire Mock banao' (found in code review, not measured)."
+  ],
+  "critical_code_review_comments": [
+    "src/dream/store.ts NEVER_FULL includes 'misfire': any result whose test_kind becomes 'misfire' is dropped from the Dream meter with a real DELETE /api/rf/dream/mocks/<id>. This is correct for real Misfire Mocks, but tests that play a real attempt as test_kind 'misfire' MUST fake non-GET /api/rf/dream** (both T1 suites do).",
+    "src/misfire/web.ts: careful parsing (set_id regex, given falls back to asked, attempt id required); webMockPath matches the contract; understoodOf ignores a missing or invalid misfire field (a retry shows no card).",
+    "src/choice/api.ts: the askPaper refactor keeps makePaper returning set_id; the 404/405 sentence and the set_id check are unchanged."
+  ],
+  "updated_files": ["/app/tests/t1_misfire_web_pocket3a.py (new)", "/app/tests/t1_misfire_web_pocket3a_edges.py (new)"],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100% (57/57)"},
+  "seed_data_creation": "None. Nothing written to the website or to the Dream meter. One Offline Misfire phone mock was made in a throwaway browser context (lives only in that context's storage).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run python3 /app/tests/t1_misfire_web_pocket3a.py (~3.5 min) and python3 /app/tests/t1_misfire_web_pocket3a_edges.py (~3 min). Chromium path is /usr/bin/chromium. The ST dict in the first file controls the browser-played answers (switch, papers mode, list mode, bank_extra, bank_fail, result misfire field, fewer). The real QA finished attempt is 1ea510f2-1d2a-41f7-9bb4-a8b28c16f98f; opening it as test_kind 'misfire' makes the app DELETE it from the Dream meter, so always fake non-GET /api/rf/dream**.",
+  "rca_of_issue": ""
+}

@@ -25,7 +25,7 @@
 ### New in version 5 ({{TODAY}}): all that a reader of version 4 needs
 
 1. **Offline Misfire** (Part 4.7, new). Misfire's "Mock" tab is now "Offline Misfire": a mock of the student's own Misfire questions on the phone, also with no internet, from the papers the phone keeps. It is never a paper on the website. A right answer becomes "Samajh gaya" through the website's own Misfire doors when the line is back. **Nothing for the website to build**; three things to keep as they are.
-2. **The Misfire Mock made by the website** (Part 4.8, new). Built in the app and **shut** until door A says `"misfire": true`. The website makes the paper with door C (`mode: "misfire"`), lists it with `history?kind=misfire`, and says in its result how many questions went to "Samajh gaya". What to build, the JSON, and one question for the website are in Part 4.8.
+2. **The Misfire Mock made by the website** (Part 4.8, new). Built in the app and **shut** until door A says `"misfire": true`. The website makes the paper with door C (`mode: "misfire"`), lists every one with `GET /my/misfire/mocks`, and says in its result how many questions went to "Samajh gaya". The website and the app agreed every door, answer and sentence on 28 Nov 2026; Part 4.8 has them all, with the JSON.
 3. Rules 27 and 28 are new in Part 0.4. Part 7.2 and Part 7.5 name the Misfire Mock's doors.
 4. The owner published again on 28 Nov 2026, after Offline Misfire was built and before the Misfire Mock was (Part 0.2). Everything else says what version 4 said.
 

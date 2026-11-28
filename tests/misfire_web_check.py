@@ -4,6 +4,7 @@
 # door C (POST /choice/papers, never sent to the website), a made paper's page, and a result marked as a Misfire Mock.
 # Every other write to the website is stopped (418) and listed. Nothing is started.
 # A. switch not said (the real answer): no "Mock" tab, nothing changed; ?web=1 is Offline Misfire; door C never asked.
+# The shapes are the contract the website agreed on 28 Nov 2026 (GET /my/misfire/mocks, door C answer with asked/given).
 # B. switch on: the "Mock" tab, its list, a result's "Samajh gaya" count, the setup asking door C (404, 503, then a
 #    paper) with one key for every retry, chapters sent when only some are ticked, the paper's page, My Tests' label.
 import asyncio
@@ -18,9 +19,10 @@ from shine_helpers import sign_in  # noqa: E402
 
 BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
 RES, BLOCKED, ASKS, ERRORS, BANKS = [], [], [], [], []
-STATE = {"switch": False, "papers": "404", "finished": None, "pool": False, "first_test": None}
+STATE = {"switch": False, "papers": "404", "finished": None, "pool": False, "first_test": None, "retry": False}
 SET_ID = "misfire-set-0001"
 RUNNING = "misfire-running-0001"
+UNSTARTED = "misfire-set-0003"
 SHOTS = "/app/test_reports/artifacts/misfire_web"
 
 
@@ -68,12 +70,23 @@ async def setup(ctx):
             body = json.loads(r.post_data or "{}")
             ASKS.append(body)
             mode = STATE["papers"]
+            asked = sum((body.get("counts") or {}).values())
+            sentences = {"422a": (422, "Chune hue chapters mein abhi koi khula sawaal nahi hai. Doosre chapter chuno."),
+                         "422b": (422, "Har subject mein 25 tak sawaal chuno, kul kam se kam 1."),
+                         "409a": (409, "Misfire Mock abhi band hai."),
+                         "409b": (409, "Yeh mock pehle hi ban chuka hai. Misfire ke Mock tab mein dekho."),
+                         "429": (429, "Aaj ke Misfire Mock poore ho gaye. Kal naya mock banao.")}
             if mode == "404":
                 await route.fulfill(status=404, content_type="application/json", body=env_error("Not found", "not_found"))
             elif mode == "503":
                 await route.fulfill(status=503, content_type="application/json", body=env_error("Service unavailable", "busy"))
-            else:
-                await route.fulfill(status=201, content_type="application/json", body=env({"set_id": SET_ID}))
+            elif mode in sentences:
+                code, text = sentences[mode]
+                await route.fulfill(status=code, content_type="application/json", body=env_error(text, mode))
+            else:  # the agreed answer: the set, its name and number, asked and given, minutes
+                given = max(1, asked - 2) if mode == "fewer" else asked
+                await route.fulfill(status=201, content_type="application/json", body=env({
+                    "set_id": SET_ID, "title": "Misfire Mock #4", "number": 4, "asked": asked, "given": given, "minutes": 12}))
             return
         BLOCKED.append(r.method + " " + path)
         await route.fulfill(status=418, content_type="application/json", body='{"data":null,"error":{"code":"blocked","message":"blocked by test"},"meta":{}}')
@@ -100,14 +113,18 @@ async def setup(ctx):
             await route.fulfill(response=resp)
     await ctx.route(re.compile(r".*/api/choice/bank.*"), bank)
 
-    async def history(route):
+    # The agreed list (28 Nov 2026): GET /my/misfire/mocks, newest first, those not started too; attempt = the newest one.
+    async def mocks(route):
         fin = STATE["finished"]
-        items = [{"id": RUNNING, "title": "Misfire Mock · 10 Q · 28 Nov", "exam": "JEE Main", "mode": "practice", "status": "active", "resumable": True, "started_at": 1764300000, "summary": None}]
+        items = [{"set_id": UNSTARTED, "title": "Misfire Mock #3", "number": 3, "created_at": 1764400000, "asked": 15, "given": 15, "minutes": 32, "attempt": None},
+                 {"set_id": "misfire-set-0002", "title": "Misfire Mock #2", "number": 2, "created_at": 1764299000, "asked": 10, "given": 10, "minutes": 21,
+                  "attempt": {"id": RUNNING, "status": "active", "resumable": True, "started_at": 1764300000, "submitted_at": None, "summary": None}}]
         if fin:
-            items.append({"id": fin, "title": "Misfire Mock · 15 Q · 27 Nov", "exam": "JEE Main", "mode": "practice", "status": "completed", "started_at": 1764200000,
-                          "submitted_at": 1764203000, "summary": {"score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4}})
+            items.append({"set_id": "misfire-set-0001b", "title": "Misfire Mock #1", "number": 1, "created_at": 1764199000, "asked": 15, "given": 15, "minutes": 32,
+                          "attempt": {"id": fin, "status": "submitted", "resumable": False, "started_at": 1764200000, "submitted_at": 1764203000,
+                                      "summary": {"score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4}}})
         await route.fulfill(status=200, content_type="application/json", body=env({"items": items, "page": 1, "pages": 1, "total": len(items)}))
-    await ctx.route(re.compile(r".*/api/jl/exam-navigation/jee-main/history\?kind=misfire.*"), history)
+    await ctx.route(re.compile(r".*/api/jl/my/misfire/mocks\?.*"), mocks)
 
     async def results(route):
         resp = await route.fetch()
@@ -115,7 +132,8 @@ async def setup(ctx):
             j = await resp.json()
             if STATE["finished"] and f"/attempts/{STATE['finished']}/results" in route.request.url and isinstance(j.get("data"), dict):
                 j["data"]["test_kind"] = "misfire"
-                j["data"]["misfire"] = {"understood": 3, "total": 15}
+                if not STATE["retry"]:  # a retry of wrong questions: no "misfire" (the website's word)
+                    j["data"]["misfire"] = {"understood": 3, "total": 15}
             await route.fulfill(response=resp, body=json.dumps(j))
         except Exception:
             await route.fulfill(response=resp)
@@ -211,18 +229,26 @@ async def main():
         ok = await visible(page, "misfire-web-hero", 15000)
         check("B3 Mock tab: hero", ok and "MISFIRE MOCK" in await txt(page, "misfire-web-hero"), (await txt(page, "misfire-web-hero"))[:80])
         fin = STATE["finished"]
-        ok = await visible(page, f"misfire-web-{fin}", 15000)
-        card = await txt(page, f"misfire-web-{fin}")
-        check("B4 finished mock listed with its score", ok and "20" in card and "/60" in card and "Result dekho" in card, card.replace("\n", " | "))
-        run = await txt(page, f"misfire-web-{RUNNING}")
+        ok = await visible(page, "misfire-web-misfire-set-0001b", 15000)
+        card = await txt(page, "misfire-web-misfire-set-0001b")
+        check("B4 finished mock listed with its score", ok and "20" in card and "/60" in card and "Result dekho" in card and "15 sawaal · 32 min" in card, card.replace("\n", " | "))
+        run = await txt(page, "misfire-web-misfire-set-0002")
         check("B5 running mock says Resume", "Resume" in run and "CHAL RAHA HAI" in run, run.replace("\n", " | "))
+        new = await txt(page, f"misfire-web-{UNSTARTED}")
+        check("B5b a mock not started is listed (newest first)", "SHURU NAHI HUA" in new and "Shuru karo" in new and "Misfire Mock #3" in new
+              and (await page.locator('[data-testid^="misfire-web-misfire-"]').first.get_attribute("data-testid")) == f"misfire-web-{UNSTARTED}", new.replace("\n", " | "))
         await page.screenshot(path=f"{SHOTS}_list.jpg", quality=40, type="jpeg")
-        await page.click(tid(f"misfire-web-{fin}"))
+        await page.click(tid(f"misfire-web-{UNSTARTED}"))
+        await page.wait_for_timeout(2500)
+        check("B5c a mock not started opens its paper's page", f"/set/{UNSTARTED}" in page.url, page.url)
+        await page.goto(BASE + "/misfire?tab=web", wait_until="domcontentloaded")
+        await visible(page, "misfire-web-misfire-set-0001b", 45000)
+        await page.click(tid("misfire-web-misfire-set-0001b"))
         ok = await visible(page, "result-misfire-understood", 60000)
         if not ok and await page.locator('[data-testid="share-gate-open"]').count():
             await page.click('[data-testid="share-gate-open"]'); ok = await visible(page, "result-misfire-understood", 30000)
         n = await txt(page, "result-misfire-understood-count")
-        check("B6 result says how many went to Samajh gaya", ok and n.startswith("3 / 15 sawaal"), n or page.url)
+        check("B6 result says how many went to Samajh gaya", ok and n.startswith("3 / 15 sawaal") and f"/result/{fin}" in page.url, n or page.url)
         await page.screenshot(path=f"{SHOTS}_result.jpg", quality=40, type="jpeg")
 
         # Setup on the website: 404 (door not built), 503, then a paper; one key for all three.
@@ -258,6 +284,35 @@ async def main():
         check("B14 one key for every retry of the same ask", len(ASKS) >= 3 and len(keys) == 1, [len(ASKS), keys])
         await page.screenshot(path=f"{SHOTS}_set.jpg", quality=40, type="jpeg")
 
+        # The website's own sentences, shown as they come (422, 409, 429), and fewer given than asked.
+        await page.goto(BASE + "/misfire/mock/new?web=1", wait_until="domcontentloaded")
+        await visible(page, "mock-new-open-physics", 45000)
+        await page.click(tid("mock-subject-physics"))
+        await page.click(tid("mock-count-physics-5"))
+        said = {}
+        for mode in ("422a", "422b", "409a", "409b", "429"):
+            STATE["papers"] = mode
+            if await page.locator(tid("mock-making-retry")).count():
+                await page.click(tid("mock-making-retry"))
+            else:
+                await page.click(tid("mock-new-bar-go"))
+            await visible(page, "mock-making-error", 20000)
+            await page.wait_for_timeout(800)
+            said[mode] = await txt(page, "mock-making-error")
+        want = {"422a": "Chune hue chapters mein abhi koi khula sawaal nahi hai. Doosre chapter chuno.", "422b": "Har subject mein 25 tak sawaal chuno, kul kam se kam 1.",
+                "409a": "Misfire Mock abhi band hai.", "409b": "Yeh mock pehle hi ban chuka hai. Misfire ke Mock tab mein dekho.", "429": "Aaj ke Misfire Mock poore ho gaye. Kal naya mock banao."}
+        check("B14b the website's sentences shown word for word", all(want[m] in said.get(m, "") for m in want), said)
+        STATE["papers"] = "fewer"
+        await page.click(tid("mock-making-retry"))
+        ok = await visible(page, "mock-making-fewer-note", 20000)
+        note = await txt(page, "mock-making-fewer-note")
+        check("B14c fewer given than asked: said once, before the paper", ok and "Aapne 5 sawaal maange the, 3 mile" in note and "/set/" not in page.url, note)
+        await page.screenshot(path=f"{SHOTS}_fewer.jpg", quality=40, type="jpeg")
+        await page.click(tid("mock-making-open"))
+        ok = await visible(page, "set-detail-screen", 30000)
+        check("B14d 'Paper kholo' opens the paper", ok and SET_ID in page.url, page.url)
+        STATE["papers"] = "ok"
+
         # Only some chapters ticked: they go to the website by their Misfire names, under a new key.
         STATE["pool"] = True
         await page.goto(BASE + "/misfire/mock/new?web=1", wait_until="domcontentloaded")
@@ -291,6 +346,24 @@ async def main():
         check("B19 Offline Misfire setup as before (no ?web)", "Offline Misfire banao" in await txt(page, "mock-new-header"))
         check("Z no page errors", not ERRORS, ERRORS[:3])
         check("Z nothing written to the website", not BLOCKED, BLOCKED)
+        await ctx.unroute_all(behavior="ignoreErrors")
+        await ctx.close()
+
+        # ---- C. A retry of wrong questions (its own attempt; a fresh browser, nothing kept): its result has no
+        # "misfire" (the website's word), so no "Samajh gaya" card.
+        STATE["retry"] = True
+        ctx = await b.new_context(viewport={"width": 390, "height": 844})
+        await setup(ctx)
+        page = await ctx.new_page()
+        page.on("pageerror", lambda e: ERRORS.append(str(e)[:200]))
+        await page.goto(BASE + "/", wait_until="domcontentloaded")
+        await sign_in(page, width=390)
+        await page.goto(BASE + f"/result/{STATE['finished']}", wait_until="domcontentloaded")
+        await visible(page, "result-analysis-panel", 60000)
+        await page.wait_for_timeout(3000)
+        head = await txt(page, "result-header")
+        check("C1 a retry's result: no Samajh gaya card, still a Misfire Mock", await page.locator(tid("result-misfire-understood")).count() == 0 and "MISFIRE MOCK" in head.upper(), head)
+        check("Z2 no page errors, nothing written", not ERRORS and not BLOCKED, [ERRORS[:3], BLOCKED])
         await ctx.unroute_all(behavior="ignoreErrors")
         await b.close()
     print(f"\n{sum(1 for _, ok in RES if ok)}/{len(RES)} passed", flush=True)

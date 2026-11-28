@@ -63,7 +63,7 @@ async def guards(ctx):
             await route.fallback(); return
         answered.append(f"{r.method} {r.url.split('/api/', 1)[-1][:70]}")
         if r.url.split("?")[0].endswith("/api/jl/choice/papers"):
-            await route.fulfill(status=201, content_type="application/json", body=env({"set_id": SET_ID})); return
+            await route.fulfill(status=201, content_type="application/json", body=env({"set_id": SET_ID, "title": "Misfire Mock #4", "number": 4, "asked": 15, "given": 15, "minutes": 32})); return
         await route.fulfill(status=200, content_type="application/json", body=OK)
     await ctx.route(re.compile(r".*/api/jl/.*"), jl)
 
@@ -170,13 +170,16 @@ async def mock_part(b):
             await route.fulfill(response=resp)
     await ctx.route(re.compile(r".*/api/jl/my/tests\?.*"), tests)
 
-    async def history(route):
-        items = [{"id": RUNNING, "title": "Misfire Mock · 10 Q · 28 Nov", "exam": "JEE Main", "mode": "practice", "status": "active", "resumable": True, "started_at": 1795850000, "summary": None}]
+    async def history(route):  # the agreed list: GET /my/misfire/mocks (newest first, those not started too)
+        items = [{"set_id": "misfire-set-0003", "title": "Misfire Mock #3", "number": 3, "created_at": 1795860000, "asked": 15, "given": 15, "minutes": 32, "attempt": None},
+                 {"set_id": "misfire-set-0002", "title": "Misfire Mock #2", "number": 2, "created_at": 1795849000, "asked": 10, "given": 10, "minutes": 21,
+                  "attempt": {"id": RUNNING, "status": "active", "resumable": True, "started_at": 1795850000, "submitted_at": None, "summary": None}}]
         if state["finished"]:
-            items.append({"id": state["finished"], "title": "Misfire Mock · 15 Q · 27 Nov", "exam": "JEE Main", "mode": "practice", "status": "completed", "started_at": 1795750000,
-                          "submitted_at": 1795753000, "summary": {"score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4}})
+            items.append({"set_id": "misfire-set-0001b", "title": "Misfire Mock #1", "number": 1, "created_at": 1795749000, "asked": 15, "given": 15, "minutes": 32,
+                          "attempt": {"id": state["finished"], "status": "submitted", "resumable": False, "started_at": 1795750000, "submitted_at": 1795753000,
+                                      "summary": {"score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4}}})
         await route.fulfill(status=200, content_type="application/json", body=env({"items": items, "page": 1, "pages": 1, "total": len(items)}))
-    await ctx.route(re.compile(r".*/api/jl/exam-navigation/jee-main/history\?kind=misfire.*"), history)
+    await ctx.route(re.compile(r".*/api/jl/my/misfire/mocks\?.*"), history)
 
     async def results(route):
         resp = await route.fetch()
@@ -202,7 +205,7 @@ async def mock_part(b):
     await seen(page, "my-tests-exam-filters", 45000)
     await page.wait_for_timeout(2500)
     await page.goto(BASE + "/misfire?tab=web", wait_until="domcontentloaded")
-    await seen(page, f"misfire-web-{state['finished']}", 60000)
+    await seen(page, "misfire-web-misfire-set-0001b", 60000)
     await shot(page, "x07_mock_tab", 2000)
     await page.click(tid("misfire-web-new"))
     await seen(page, "mock-new-open-physics", 60000)

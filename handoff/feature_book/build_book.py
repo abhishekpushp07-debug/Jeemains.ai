@@ -177,14 +177,19 @@ def check_examples():
     # The Misfire Mock (Part 4.8): the switch through the server's own rule, and the shapes the app sends and reads.
     ask_c, said = read("misfire_mock_ask.json"), read("misfire_mock_answers.json")
     one = {"subjects": [{"name": "Physics", "chapters": [{"id": "chapter-physics", "title": "A chapter", "count": 30}]}]}
-    assert choice.shape_bank({**one, **said["door_A_adds"]}, own=False)["misfire"] is True and choice.shape_bank(one, own=False)["misfire"] is False
+    assert choice.shape_bank({**one, **said["door_A_with_only_the_misfire_mock_open"]}, own=False)["misfire"] is True and choice.shape_bank(one, own=False)["misfire"] is False
+    shut = choice.shape_bank({**one, **said["door_A_with_only_the_misfire_mock_open"]}, own=False)
+    assert shut["pick"] is False and shut["random"] is False  # Student Choice stays shut while only the Misfire Mock is open
     assert all(choice.misfire_on({"misfire": bad}) is False for bad in (False, "true", 1, None))
     assert ask_c["mode"] == "misfire" and ask_c["exam"] == "jee-main" and re.match(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", ask_c["request_key"])
     assert set(ask_c["counts"]) == set(choice.SUBJECTS) and all(isinstance(n, int) and 0 <= n <= 25 for n in ask_c["counts"].values()) and sum(ask_c["counts"].values()) >= 1
     assert all(s in choice.SUBJECTS and ask_c["counts"][s] > 0 and names and all(isinstance(x, str) and x for x in names) for s, names in ask_c["chapters"].items())
-    assert re.match(matched.ID, said["door_C_answer_200_or_201"]["set_id"])
-    rows = said["history_kind_misfire"]["items"]
-    assert rows[0]["summary"] and not rows[1]["summary"] and rows[1]["resumable"] is True and said["history_kind_misfire"]["pages"] >= 1
+    made = said["door_C_answer_200_or_201"]
+    assert re.match(matched.ID, made["set_id"]) and 0 < made["given"] <= made["asked"] <= 75 and made["minutes"] > 0
+    rows = said["my_misfire_mocks_page_1"]["items"]
+    assert [r["created_at"] for r in rows] == sorted((r["created_at"] for r in rows), reverse=True) and rows[0]["attempt"] is None
+    assert rows[1]["attempt"]["resumable"] is True and not rows[1]["attempt"]["summary"] and rows[2]["attempt"]["summary"]
+    assert all(re.match(matched.ID, r["set_id"]) for r in rows) and said["my_misfire_mocks_page_1"]["pages"] >= 1
     m = said["result_adds"]
     assert m["test_kind"] == "misfire" and isinstance(m["misfire"]["understood"], int) and 0 <= m["misfire"]["understood"] <= m["misfire"]["total"]
     return shaped

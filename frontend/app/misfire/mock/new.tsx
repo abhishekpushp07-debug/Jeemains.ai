@@ -61,10 +61,12 @@ export default function NewMisfireMock() {
   const pool = useCached<Pool>(online ? `${misfireKey(uid)}.mockpool` : null, loadPool, false);
   // Opened from Misfire's "Mock" tab (?web=1) while the website's switch is on: jeelive.ai makes the paper (src/misfire/web.ts).
   // The same choosing, from the website's open list only; switch off, it is Offline Misfire as ever.
-  const asked = useLocalSearchParams<{ web?: string }>().web === "1" && online;
+  const webParam = useLocalSearchParams<{ web?: string }>().web === "1";
+  const asked = webParam && online;
   const site = useWebMisfire(asked ? uid : undefined);
   const web = asked && site.on === true, waitSwitch = asked && site.on === undefined;
-  const look = asked && site.on !== false; // the words of the website's mock while the switch is read
+  // The words of the website's mock while the account and the switch are read (no "Offline Misfire" flash first).
+  const look = webParam && (access.state === "checking" || (asked && site.on !== false));
   // Without a line, or when the website's list does not come: the finished papers kept on this phone.
   const fromPhone = !web && !waitSwitch && access.state === "open" && (!online || (!!pool.error && !pool.data));
   const phone = usePhonePool(fromPhone);
@@ -76,7 +78,7 @@ export default function NewMisfireMock() {
   const [counts, setCounts] = useState<Counts>({ ...NONE });
   // `null`: every chapter of the subject; otherwise the chapters ticked.
   const [picked, setPicked] = useState<Record<Subject, string[] | null>>({ Physics: null, Chemistry: null, Mathematics: null });
-  const [making, setMaking] = useState<{ step?: Step; error?: string; web?: boolean } | null>(null);
+  const [making, setMaking] = useState<{ step?: Step; error?: string; web?: boolean; made?: { setId: string; asked: number; given: number } } | null>(null);
   const stop = useRef<AbortController | null>(null);
   // The website's mock: every retry of the same ask (same counts, same chapters, on this screen) carries the same key.
   const ask = useRef({ sig: "", key: "" });
@@ -102,16 +104,21 @@ export default function NewMisfireMock() {
 
   async function makeOnSite(ctl: AbortController) {
     setMaking({ web: true });
-    const sig = JSON.stringify([counts, picked]);
+    // The key follows what is sent: a chapter changed in a subject asked for 0 sends the same body, so the same key.
+    const sig = JSON.stringify([counts, SUBJECTS.map((s) => (counts[s] > 0 ? picked[s] : null))]);
     if (ask.current.sig !== sig) ask.current = { sig, key: uuid() };
     try {
-      const setId = await askWebMock(counts, picked, ask.current.key);
+      const made = await askWebMock(counts, picked, ask.current.key);
       if (ctl.signal.aborted) return;
       invalidate(webMocksKey(uid));
+      // Fewer than asked (only so many open questions in those chapters): said once, then the paper.
+      if (made.asked != null && made.given != null && made.given < made.asked) { setMaking({ web: true, made: { setId: made.setId, asked: made.asked, given: made.given } }); return; }
       setMaking(null);
-      router.replace(`/set/${setId}` as any);
+      router.replace(`/set/${made.setId}` as any);
     } catch (e: any) {
       if (ctl.signal.aborted) return;
+      // 409 "Misfire Mock abhi band hai": the switch may have just gone off; read it again so the tab follows.
+      if (e instanceof ApiError && e.status === 409) invalidate("choice.bank");
       // The website down or busy (no answer, 5xx with its own technical words): said plainly. Its own sentences (4xx) as they come.
       const down = e instanceof ApiError && (e.status === 0 || e.status >= 500) && !/^Paper ban nahi paaya/.test(e.message);
       setMaking({ web: true, error: down ? "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."
@@ -221,11 +228,14 @@ export default function NewMisfireMock() {
         small={total ? SUBJECTS.filter((s) => counts[s]).map((s) => `${TINY[s]} ${counts[s]}`).join(" · ") : "Upar ginti chuno"}
         label="Mock banao" disabled={!total || waitSwitch} onPress={make} /> : null}
 
-      <DSheet visible={!!making} onClose={() => { stop.current?.abort(); setMaking(null); }} testID="mock-making-sheet" title={making?.error ? "Mock nahi ban paaya" : "Mock ban raha hai"}>
+      <DSheet visible={!!making} onClose={() => { stop.current?.abort(); setMaking(null); }} testID="mock-making-sheet" title={making?.error ? "Mock nahi ban paaya" : making?.made ? "Mock ban gaya" : "Mock ban raha hai"}>
         {making?.error ? <>
           <ErrorBox testID="mock-making-error" error={making.error} />
           <Pill testID="mock-making-retry" kind="brand" label="Dobara try karo" onPress={make} />
-        </> : making?.web ? <View testID="mock-making-progress" style={{ gap: space.md }}>
+        </> : making?.made ? <View testID="mock-making-fewer" style={{ gap: space.md }}>
+          <Notice tone="info" testID="mock-making-fewer-note">{`Aapne ${making.made.asked} sawaal maange the, ${making.made.given} mile: chune hue chapters mein itne hi khule sawaal the.`}</Notice>
+          <Pill testID="mock-making-open" kind="brand" icon="arrow-right" label="Paper kholo" onPress={() => { const id = making.made!.setId; setMaking(null); router.replace(`/set/${id}` as any); }} />
+        </View> : making?.web ? <View testID="mock-making-progress" style={{ gap: space.md }}>
           <View style={styles.progressRow}>
             <Icon name="fire" size={20} color={colors.custom_chipBlood} />
             <T testID="mock-making-step" w="bold" size={14} style={{ flex: 1 }}>jeelive.ai aapki galtiyon se paper bana raha hai…</T>
@@ -240,7 +250,7 @@ export default function NewMisfireMock() {
           <View style={styles.track}><View style={[styles.fill, { width: `${step?.step === "keys" ? 20 + (80 * step.done) / Math.max(1, step.total) : 12}%` }]} /></View>
           <T size={12} color={colors.muted}>{fromPhone ? "Sab kuch phone par hi banta hai, bina internet. Website par kuch shuru nahi hota." : "Jin papers ka result phone par rakha hai, woh wahin se aate hain. Website par kuch shuru nahi hota."}</T>
         </View>}
-        <Pill testID="mock-making-cancel" kind="outline" label={making?.error ? "Band karo" : "Ruko, wapas jao"} onPress={() => { stop.current?.abort(); setMaking(null); }} />
+        {making?.made ? null : <Pill testID="mock-making-cancel" kind="outline" label={making?.error ? "Band karo" : "Ruko, wapas jao"} onPress={() => { stop.current?.abort(); setMaking(null); }} />}
       </DSheet>
     </View>
   </ScreenMotion>;

@@ -1,16 +1,19 @@
 {
-  "door_A_adds": { "misfire": true },
-  "door_C_answer_200_or_201": { "set_id": "misfire-set-0001" },
-  "history_kind_misfire": {
+  "door_A_with_only_the_misfire_mock_open": { "pick": false, "random": false, "misfire": true },
+  "door_C_answer_200_or_201": { "set_id": "misfire-set-0004", "title": "Misfire Mock #4", "number": 4, "asked": 15, "given": 12, "minutes": 26 },
+  "my_misfire_mocks_page_1": {
     "items": [
-      { "id": "<attempt id>", "title": "Misfire Mock · 15 Q · 27 Nov", "status": "completed", "resumable": false,
-        "started_at": 1764200000, "submitted_at": 1764203000,
-        "summary": { "score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4 } },
-      { "id": "<attempt id>", "title": "Misfire Mock · 10 Q · 28 Nov", "status": "active", "resumable": true,
-        "started_at": 1764300000, "summary": null }
+      { "set_id": "misfire-set-0004", "title": "Misfire Mock #4", "number": 4, "created_at": 1764400000, "asked": 15, "given": 12, "minutes": 26,
+        "attempt": null },
+      { "set_id": "misfire-set-0003", "title": "Misfire Mock #3", "number": 3, "created_at": 1764299000, "asked": 10, "given": 10, "minutes": 21,
+        "attempt": { "id": "<attempt id>", "status": "active", "resumable": true, "started_at": 1764300000, "submitted_at": null, "summary": null } },
+      { "set_id": "misfire-set-0002", "title": "Misfire Mock #2", "number": 2, "created_at": 1764199000, "asked": 15, "given": 15, "minutes": 32,
+        "attempt": { "id": "<attempt id>", "status": "submitted", "resumable": false, "started_at": 1764200000, "submitted_at": 1764203000,
+                     "summary": { "score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4 } } }
     ],
     "page": 1,
-    "pages": 1
+    "pages": 1,
+    "total": 3
   },
   "result_adds": { "test_kind": "misfire", "misfire": { "understood": 3, "total": 15 } }
 }

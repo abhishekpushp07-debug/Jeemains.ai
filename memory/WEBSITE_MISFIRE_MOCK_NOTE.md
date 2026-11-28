@@ -27,13 +27,14 @@ Pocket 3 adjusts the app to the website's exact reply. While the switch is not `
   autosave, deadline, result, Analysis, My Tests, on the app and the website alike.
 - The Dream College meter never counts it (like `choice`).
 
-## 4. Lists and results the app reads
-- `GET /exam-navigation/jee-main/history?kind=misfire&page=` → `items[]` {id (attempt), title, started_at,
-  submitted_at, summary {score, maximum, correct, incorrect, skipped} | null, status, resumable}, `pages`.
+## 4. Lists and results the app reads (agreed 28 Nov, see part 6)
+- `GET /my/misfire/mocks?page=` → `items[]` {set_id, title, number, created_at, asked, given, minutes,
+  attempt: null | {id, status, resumable, started_at, submitted_at, summary | null}}, newest first, 20 a page.
+  (`history?kind=misfire` is not built.)
+- Door C answer: {set_id, title, number, asked, given, minutes}; given < asked → "maange X, mile Y" before the paper.
 - `GET /my/tests` rows: `test_kind: "misfire"` (shown as "JEE Main · Misfire Mock").
 - `GET /attempts/<id>/results`: `test_kind: "misfire"` and
-  `"misfire": { "understood": 3, "total": 15 }` = how many of its questions went to "Samajh gaya" (the website moves
-  every right one). Without `misfire` the result says the general sentence instead.
+  `"misfire": { "understood": 3, "total": 15 }` (questions, not entries). A retry's result has no `misfire` → no card.
 
 ## 5. The website's two decisions (28 Nov) — both fine for the app, no app change needed
 - A Misfire Mock's result is **not counted** in Misfire's chapter report (one question is never counted twice).

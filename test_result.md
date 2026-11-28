@@ -1222,3 +1222,13 @@ iteration163_misfire_web:
   main_checks: "tsc 0, eslint clean, pytest test_choice 12/12; tests/misfire_web_check.py 30/30; Pocket 1 offline_misfire_check 30/30 again."
   independent_review: "testing_agent iteration_163: no app bugs; own extra 20/20 + 2/2. It found the test script did not fake /api/rf/dream: playing the real PYQ attempt 1ea510f2 as a Misfire Mock made the app DELETE it from the QA learner's Dream meter (preview DB). Repaired: dropped emptied by the tester; tests/repair_dream_mock_once.py re-recorded the mock (opening the result normally, website writes blocked); misfire_web_check now fakes /api/rf/dream. Small items fixed: setup hero minutes follow the website's minutes; 5xx -> Hinglish 'jeelive.ai abhi jawab nahi de raha…'; result eyebrow 'JEE Main · Misfire Mock'. Re-run misfire_web_check 30/30."
 
+
+
+
+## Iteration164 — Pocket 3a: Misfire Mock matched to the website's agreed contract (28 Nov 2026) — preview only, switch off
+iteration164_misfire_contract:
+  user_request: "The website accepted all the app's points (1-7) and will build to them: GET /api/my/misfire/mocks (unstarted too, newest first, 20/page, attempt = newest); door C answer {set_id,title,number,asked,given,minutes}; 409/422/429 sentences verbatim; no history?kind=misfire; a retry's result has no misfire field. Point 8: the website's new production DB has only the 2 preview accounts (same ids); old students would sign up again with new ids."
+  implemented: true
+  files: "src/choice/api.ts (askPaper returns the whole answer; makePaper = its set_id, Student Choice unchanged), src/misfire/web.ts (loadWebMocks -> /my/misfire/mocks, WebMock shape, webMockPath, askWebMock -> {setId, asked, given}), src/misfire/web/WebMocksTab.tsx (not started / running / finished, size line), src/misfire/web/Understood.tsx (no card without misfire), app/misfire/mock/new.tsx ('maange X, mile Y' sheet + 'Paper kholo'), tests/misfire_web_check.py (37 checks), feature book Part 4.8/7.2/7.5/3.1/0 + examples + take_shots_misfire.py."
+  main_checks: "tsc 0, eslint clean; tests/misfire_web_check.py 37/37."
+  independent_review: "testing_agent iteration_164: 57/57 (own suites t1_misfire_web_pocket3a.py 44 + _edges.py 13), no bugs. Optional items fixed after: request key follows the body actually sent (chapters of a 0-count subject ignored); a 409 re-reads the switch (invalidate choice.bank); setup header shows 'Misfire Mock banao' while the account is checked (no Offline flash); Mock list errors in Hinglish. Re-run: misfire_web_check 37/37, t1 edges 13/13, t1 main 44/44; QA Dream meter intact."

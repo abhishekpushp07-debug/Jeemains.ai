@@ -99,9 +99,11 @@ export const timeLabel = (minutes: number) => (minutes >= 60 ? `${Math.floor(min
 export type PaperAsk = { mode: "pick"; question_ids: string[] } | { mode: "random"; count: number }
   // A Misfire Mock (src/misfire/web.ts): how many of each subject from the student's open Misfire, and the chapters where only some were ticked.
   | { mode: "misfire"; counts: Counts; chapters?: Partial<Record<Subject, string[]>> };
-/** Asks jeelive.ai to make the paper; `key` = the same for every retry of this one request, so it is never made twice.
- *  Gives the paper's id: its page (/set/<id>) starts it like any other paper. */
-export async function makePaper(ask: PaperAsk, key: string): Promise<string> {
+/** The website's answer to door C: the paper's id and, for a Misfire Mock, its name and number, how many questions
+ *  were asked and given, and its minutes (unchecked here: the caller reads what it needs). */
+export type MadePaper = { set_id: string; title?: unknown; number?: unknown; asked?: unknown; given?: unknown; minutes?: unknown };
+/** Asks jeelive.ai to make the paper; `key` = the same for every retry of this one request, so it is never made twice. */
+export async function askPaper(ask: PaperAsk, key: string): Promise<MadePaper> {
   let made: { set_id?: unknown } | null;
   try {
     made = await post<{ set_id?: unknown }>("/choice/papers", { exam: "jee-main", request_key: key, ...ask });
@@ -111,5 +113,7 @@ export async function makePaper(ask: PaperAsk, key: string): Promise<string> {
     throw e;
   }
   if (typeof made?.set_id !== "string" || !/^[A-Za-z0-9_-]{6,80}$/.test(made.set_id)) throw new ApiError("Paper ban nahi paaya. Dobara try karo.", 502);
-  return made.set_id;
+  return made as MadePaper;
 }
+/** The paper's id: its page (/set/<id>) starts it like any other paper. */
+export const makePaper = async (ask: PaperAsk, key: string): Promise<string> => (await askPaper(ask, key)).set_id;
