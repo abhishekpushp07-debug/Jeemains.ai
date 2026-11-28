@@ -78,7 +78,7 @@ export default function NewMisfireMock() {
   const [counts, setCounts] = useState<Counts>({ ...NONE });
   // `null`: every chapter of the subject; otherwise the chapters ticked.
   const [picked, setPicked] = useState<Record<Subject, string[] | null>>({ Physics: null, Chemistry: null, Mathematics: null });
-  const [making, setMaking] = useState<{ step?: Step; error?: string; web?: boolean; made?: { setId: string; asked: number; given: number } } | null>(null);
+  const [making, setMaking] = useState<{ step?: Step; error?: string; final?: boolean; web?: boolean; made?: { setId: string; asked: number; given: number } } | null>(null);
   const stop = useRef<AbortController | null>(null);
   // The website's mock: every retry of the same ask (same counts, same chapters, on this screen) carries the same key.
   const ask = useRef({ sig: "", key: "" });
@@ -121,7 +121,10 @@ export default function NewMisfireMock() {
       if (e instanceof ApiError && e.status === 409) invalidate("choice.bank");
       // The website down or busy (no answer, 5xx with its own technical words): said plainly. Its own sentences (4xx) as they come.
       const down = e instanceof ApiError && (e.status === 0 || e.status >= 500) && !/^Paper ban nahi paaya/.test(e.message);
-      setMaking({ web: true, error: down ? "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."
+      // The website's own "no" (409 switched off / already made, 422 counts or chapters, 429 five a day): the same ask
+      // again cannot help, so the sheet offers to change the choice instead of "Dobara try karo".
+      const final = e instanceof ApiError && [409, 422, 429].includes(e.status);
+      setMaking({ web: true, final, error: down ? "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."
         : e?.message || "Mock abhi nahi ban paaya. Thodi der mein dobara try karo." });
     }
   }
@@ -231,7 +234,8 @@ export default function NewMisfireMock() {
       <DSheet visible={!!making} onClose={() => { stop.current?.abort(); setMaking(null); }} testID="mock-making-sheet" title={making?.error ? "Mock nahi ban paaya" : making?.made ? "Mock ban gaya" : "Mock ban raha hai"}>
         {making?.error ? <>
           <ErrorBox testID="mock-making-error" error={making.error} />
-          <Pill testID="mock-making-retry" kind="brand" label="Dobara try karo" onPress={make} />
+          {making.final ? <Pill testID="mock-making-close" kind="outline" label="Theek hai, ginti badlo" onPress={() => setMaking(null)} />
+            : <Pill testID="mock-making-retry" kind="brand" label="Dobara try karo" onPress={make} />}
         </> : making?.made ? <View testID="mock-making-fewer" style={{ gap: space.md }}>
           <Notice tone="info" testID="mock-making-fewer-note">{`Aapne ${making.made.asked} sawaal maange the, ${making.made.given} mile: chune hue chapters mein itne hi khule sawaal the.`}</Notice>
           <Pill testID="mock-making-open" kind="brand" icon="arrow-right" label="Paper kholo" onPress={() => { const id = making.made!.setId; setMaking(null); router.replace(`/set/${id}` as any); }} />

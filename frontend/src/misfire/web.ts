@@ -19,6 +19,15 @@ export function useWebMisfire(uid?: string): { on: boolean | undefined; minutes?
 }
 
 const count = (n: unknown) => (typeof n === "number" && Number.isInteger(n) && n >= 0 ? n : null);
+/** How many questions: the website says it per subject ({"Physics": 5, "Chemistry": 3, "Mathematics": 0}); a plain
+ *  number is read as it is. null when it says neither. */
+const many = (n: unknown) => {
+  if (n && typeof n === "object" && !Array.isArray(n)) {
+    const each = SUBJECTS.map((s) => count((n as Record<string, unknown>)[s]));
+    return each.some((v) => v != null) ? each.reduce<number>((sum, v) => sum + (v || 0), 0) : null;
+  }
+  return count(n);
+};
 const unix = (n: unknown) => (typeof n === "number" && Number.isFinite(n) && n > 0 ? n : undefined);
 
 /** One Misfire Mock of the student's (GET /my/misfire/mocks): made, maybe started (`attempt` = its newest attempt). */
@@ -37,7 +46,7 @@ export async function loadWebMocks(page: number, signal?: AbortSignal): Promise<
     const a = m.attempt && typeof m.attempt.id === "string" && m.attempt.id ? m.attempt : null;
     items.push({
       set_id: m.set_id, title: typeof m.title === "string" && m.title.trim() ? m.title.trim().slice(0, 120) : mockName(m.number),
-      created_at: unix(m.created_at), given: count(m.given) ?? count(m.asked), minutes: count(m.minutes),
+      created_at: unix(m.created_at), given: many(m.given) ?? many(m.asked), minutes: count(m.minutes),
       attempt: a && { id: a.id, resumable: a.resumable === true, started_at: unix(a.started_at), submitted_at: unix(a.submitted_at), summary: a.summary && typeof a.summary === "object" ? a.summary : null },
     });
   }
@@ -53,7 +62,7 @@ export async function askWebMock(counts: Counts, picked: Record<Subject, string[
   const chapters = Object.fromEntries(SUBJECTS.filter((s) => counts[s] > 0 && picked[s] !== null).map((s) => [s, picked[s]!]));
   const made = await askPaper({ mode: "misfire", counts: { Physics: counts.Physics, Chemistry: counts.Chemistry, Mathematics: counts.Mathematics },
     ...(Object.keys(chapters).length ? { chapters } : {}) }, key);
-  return { setId: made.set_id, asked: count(made.asked), given: count(made.given) };
+  return { setId: made.set_id, asked: many(made.asked), given: many(made.given) };
 }
 
 /** How many of a finished Misfire Mock's questions went to "Samajh gaya", as its result says; null when it does not say

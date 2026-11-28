@@ -1,0 +1,29 @@
+{
+  "summary": "INDEPENDENT live E2E of Misfire Mock on LIVE jeelive.ai via the app web preview (390x844), TEST account B (9000004282) ONLY. Dream meter non-GETs answered in the browser (none reached the site), owner account untouched, no DB deletes, switches unchanged. All features in the request work end to end. 53/54 UI checks passed. The 1 FAIL (T6) was my test reading the badge too early: the Misfire badge first shows the cached count for about 0.5 s, then the right count. Re-checked 3 ways (C1, C2, P4), all PASS. API checks 8/8 PASS: the 4 sentences 422 x2, 409 and 429 match word for word, the same request_key gives the same set_id, and given<asked works. Found 0 critical bugs, only minor UX notes. Deprecated packages: none (no expo-av / expo-barcode-scanner / expo-background-fetch). No page errors in any run.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Misfire Mock setup – mock-making-sheet error", "issues": ["On the 429 'Aaj ke Misfire Mock poore ho gaye. Kal naya mock banao.' (and the 409 / 422 sentences) the sheet still offers 'Dobara try karo' (mock-making-retry). Retrying cannot work. Suggest hiding retry for 429/409/422 (for the 409 'pehle hi ban chuka' case, offer to open the Mock tab instead). Reference: app/misfire/mock/new.tsx:233-234"]},
+      {"screen": "Misfire header badge", "issues": ["misfire-open-count shows the cached count for about 0.5 s, then the fresh one (seen '63 OPEN' then '61 OPEN' after 'Misfire kholo'). Expected stale-while-revalidate behaviour. Cosmetic only."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/t1_misfire_live_b_ui.py", "/app/tests/t1_misfire_live_b_api.py", "/app/test_reports/artifacts/t1_mf_b_*.jpg"],
+  "action_items": [
+    "Optional (minor UX): in app/misfire/mock/new.tsx hide 'Dobara try karo' when the website's 429 / 409 / 422 sentence is shown (these are not temporary errors)."
+  ],
+  "critical_code_review_comments": [
+    "web.ts many() correctly adds up per-subject asked/given. The card uses given (#3 asked 25, given 15 → '15 sawaal · 36 min').",
+    "Retry results come back from the website with test_kind 'misfire' but no misfire field, so the header eyebrow says 'JEE MAIN · MISFIRE MOCK' and there is no Understood card. That matches the contract.",
+    "An expired mock that was never submitted shows 'RESULT AA RAHA HAI' / 'Result dekho' (the website's list has summary null until the result is opened, then 'completed'). The card opens /result correctly."
+  ],
+  "updated_files": ["/app/tests/t1_misfire_live_b_ui.py (new)", "/app/tests/t1_misfire_live_b_api.py (new)"],
+  "success_rate": {"backend": "100% (8/8 live API contract checks)", "frontend": "98% (53/54; the 1 fail was the test reading too early, re-verified 3x PASS)"},
+  "seed_data_creation": "Live writes on TEST account B only: Misfire Mock #1 (app, P6+C5, 23 min; attempt f70fbf76… 4 right / 3 wrong / 4 left → 4/11 understood), its retry attempt 8747a98d… (no misfire), Mock #2 (app, Maths 5, 16 min; attempt eacfaa01… 2/5 understood), #3 (API, Physics 25 asked → 15 given, 36 min, not started), #4 (API, P1, 3 min, started via API and left to expire → a8b33edf…, now completed 0/1), #5 (API, C1, not started). The 6th try got 429 in the UI. Account B: all 5 mocks for today used. Misfire now open 61 / fixed 6 (was 67/0). Account A and the owner's account were not touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Account B (9000004282/4282) has used all 5 Misfire Mocks for 28 Nov. Run state is in /tmp/t1_b.json and /tmp/mf_live_b.json. Run: MF_PHONE=9000004282 MF_PIN=4282 MF_STATE=/tmp/mf_live_b.json python3 /app/tests/t1_misfire_live_b_ui.py <make|take|retry|tests|offline|count|repro|limit|expire|sizes>. B has one open chapter per subject, so a mock body with 'chapters' (only some chapters ticked) cannot happen on B; the main agent checked it on account A. The player opens the next subject with player-next-subject (not player-next-button) at the end of a subject. Use the palette (player-palette-button → palette-subject-<subject> → palette-q-<n>) to jump to a question.",
+  "rca_of_issue": "T6 first FAIL: MisfireUnderstood invalidates the misfire.* cache, but useCached first paints the copy saved in localStorage and then fetches again. Polling showed 63→61 within 1 s (P4). This is not a defect."
+}

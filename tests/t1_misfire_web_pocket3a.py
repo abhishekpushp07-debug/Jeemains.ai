@@ -178,7 +178,10 @@ async def make_with(page, mode, wait="mock-making-error"):
     n = len(ASKS)
     if await page.locator(tid("mock-making-retry")).count():
         await page.click(tid("mock-making-retry"))
-    else:
+    else:  # the website's own "no" (4xx): the sheet offers to change the choice, then Mock banao again
+        if await page.locator(tid("mock-making-close")).count():
+            await page.click(tid("mock-making-close"))
+            await page.wait_for_timeout(600)
         await page.click(tid("mock-new-bar-go"))
     await vis(page, wait, 10000)
     await page.wait_for_timeout(400)

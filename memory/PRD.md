@@ -1588,3 +1588,9 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - JLIVE_TRACKING_SECRET_KEY re-saved by the owner (11:07 UTC). Probes with an unregistered name (nothing recorded): server key 200/rejected unregistered_event, wrong key 401, public key 200.
 - Checks: jl_tracker_full_check 39/39 (collector routes now tribeapp.pro), jl_server_check 12/12, ceo_api_check 21/21.
 - Dashboard side: mission_link_created / mission_link_opened are being registered there (names unchanged). Order: dashboard redeploy first, then the app's Publish.
+
+### Pocket 3b (29 Nov 2026) — Misfire Mock tested END TO END on LIVE jeelive.ai (TEST accounts only)
+- Owner turned the `misfire` switch On on live (Student Choice pick/random also On, "On hi rhega"). App preview → live website.
+- Found and fixed in the app: website sends `asked`/`given` per subject (summed in `src/misfire/web.ts` `many()`); Mock tab re-reads on focus (`useListFocus`); setup sheet shows "Theek hai, ginti badlo" instead of "Dobara try karo" for the website's 409/422/429 sentences.
+- Verified: create from ticked chapters, list newest first, Resume, expired → result, 202 while grading, "N / M Samajh gaya" = website numbers, open count drops by N, retry has no card and changes nothing, My Tests label, all 5 sentences word for word, 6th mock = 429. Independent: testing_agent iteration_165 53/54 UI + 8/8 API, no bugs.
+- TEST accounts: 9000004281/4281 and 9000004282/4282 (memory/test_credentials.md). Fixes are in preview only: Publish + new store build for students.

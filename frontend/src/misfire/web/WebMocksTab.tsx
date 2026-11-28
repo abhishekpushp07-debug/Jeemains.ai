@@ -9,6 +9,7 @@ import { DCard, Pill } from "@/src/components/design";
 import { ToneTag } from "@/src/analysis/parts";
 import { colors, space } from "@/src/theme";
 import { unixDate } from "@/src/navigation";
+import { useListFocus } from "@/src/useListFocus";
 import { ChoiceHero, ON_HERO, heroStyles } from "@/src/choice/looks";
 import { usePaged } from "../usePaged";
 import { WebMock, loadWebMocks, webMockPath, webMocksKey } from "../web";
@@ -45,6 +46,8 @@ export function WebMocksTab({ uid }: { uid: string }) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const list = usePaged<WebMock>(webMocksKey(uid), loadWebMocks);
+  // Back from a paper (started, handed in, its time over) or from the website: the cards say where each mock is now.
+  useListFocus(list.revalidate);
   return <FlatList testID="misfire-web-mocks" data={list.items} keyExtractor={(m) => m.set_id} initialNumToRender={8} windowSize={7}
     contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xxl, gap: space.md }}
     refreshControl={<RefreshControl refreshing={false} onRefresh={list.reload} />}

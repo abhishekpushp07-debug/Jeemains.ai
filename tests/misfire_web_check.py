@@ -294,7 +294,10 @@ async def main():
             STATE["papers"] = mode
             if await page.locator(tid("mock-making-retry")).count():
                 await page.click(tid("mock-making-retry"))
-            else:
+            else:  # the website's own "no" (4xx): the sheet offers to change the choice, then Mock banao again
+                if await page.locator(tid("mock-making-close")).count():
+                    await page.click(tid("mock-making-close"))
+                    await page.wait_for_timeout(600)
                 await page.click(tid("mock-new-bar-go"))
             await visible(page, "mock-making-error", 20000)
             await page.wait_for_timeout(800)
@@ -303,7 +306,12 @@ async def main():
                 "409a": "Misfire Mock abhi band hai.", "409b": "Yeh mock pehle hi ban chuka hai. Misfire ke Mock tab mein dekho.", "429": "Aaj ke Misfire Mock poore ho gaye. Kal naya mock banao."}
         check("B14b the website's sentences shown word for word", all(want[m] in said.get(m, "") for m in want), said)
         STATE["papers"] = "fewer"
-        await page.click(tid("mock-making-retry"))
+        if await page.locator(tid("mock-making-close")).count():
+            await page.click(tid("mock-making-close"))
+            await page.wait_for_timeout(600)
+            await page.click(tid("mock-new-bar-go"))
+        else:
+            await page.click(tid("mock-making-retry"))
         ok = await visible(page, "mock-making-fewer-note", 20000)
         note = await txt(page, "mock-making-fewer-note")
         check("B14c fewer given than asked: said once, before the paper", ok and "Aapne 5 sawaal maange the, 3 mile" in note and "/set/" not in page.url, note)

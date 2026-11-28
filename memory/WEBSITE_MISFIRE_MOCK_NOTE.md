@@ -55,6 +55,13 @@ Pocket 3 adjusts the app to the website's exact reply. While the switch is not `
 - Result misfire {understood,total} with the score; a retry attempt changes nothing → app asked: no `misfire` on a retry.
 - Website changed its production database on 28 Nov: app asked whether old students kept their user.id.
 
+## 7. Live end-to-end (29 Nov 2026, app preview against LIVE jeelive.ai, TEST accounts only)
+- Everything above matched the website, with one reading fixed in the app: `asked` / `given` come per subject
+  (`{"Physics": 5, "Chemistry": 3, "Mathematics": 0}`) in door C's answer and in the mocks list; the app adds them up.
+- Seen working: switch → Mock tab; app-made mock from ticked chapters; list newest first, active → Resume, expired →
+  result; result 202 while grading, then `misfire {understood,total}`; 4 right → 4 "Samajh gaya", wrong/left stay
+  open; "Mistake retry" has no `misfire` and changes nothing; the 6th mock of the day gets the 429 sentence.
+
 ## App files
 `src/misfire/web.ts`, `src/misfire/web/WebMocksTab.tsx`, `src/misfire/web/Understood.tsx`, `app/misfire/index.tsx`
 (tab), `app/misfire/mock/new.tsx` (`?web=1`), `backend/choice.py` (`misfire_on`). Check: `tests/misfire_web_check.py`.
