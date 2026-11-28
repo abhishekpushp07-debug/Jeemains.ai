@@ -1,133 +1,102 @@
-# JEELIVE.AI: Fix the live PYQ tests and make the selected option green, then the 8-level backend plan
+# JEE MAIN · 2027 JAN ATTEMPT: date-wise shift mocks on Home
 
-First, the PYQ tests that are broken in the live app are fixed, and in every test the selected option turns green in place of red. Both go live together.
-After that, the backend is rebuilt in 8 small, safe levels until it is fast, strong and ready for 50,000 students at once.
+On Home, COMEDK's tile gives its place to "JEE MAIN · 2027 JAN ATTEMPT". Every shift of the January 2027 session becomes its own mock: memory-based first (even if only partly recalled), then replaced by NTA's official paper when it is released.
+Each mock is a normal paper (timer, autosave, result, analysis), plus an All India rank among everyone who took that shift's mock, and a Rank Card in Analysis.
 
 ## Who it's for
-- **Students:**
-  - they can take JEE Main PYQ papers without errors
-  - answers are never lost and question pictures load
-  - the option they choose is clearly marked in green
-- **Owner (Abhishek):** the live app works again. Afterwards an **App Health** page shows speed and errors. There is no manual work in between: one Publish for Phase 1, and one Publish at the end of all the levels.
+- **Students:** JEE Main students who want to sit the real January shifts as mocks, including those preparing for the April session.
+- **Owner:** decides when the tile and papers go live.
+- **Website team:** makes the papers, ranks and data. The app tells them exactly what to send.
 
 ## Core features and experience
+**1. Home tile, in COMEDK's place**
+- **Name:** "JEE MAIN · 2027 JAN ATTEMPT". Home's tile names are set in a single line, so on small phones it may read "2027 JAN ATTEMPT" with "JEE MAIN" above it in small caps.
+- **Before the first paper:** a bold red diagonal ribbon runs corner to corner across the tile, saying "COMING SOON". The line under the name reads "20 Jan se".
+- **Once the first paper is out:** the ribbon goes, and the line shows how many shift papers are ready (for example "5 shift papers"). A small "NEW" badge appears on a day a new paper arrives.
+- **COMEDK:** still reachable from Explore ("comedk mocks") and its exam page. Only its Home tile moves.
+- **Switch:** the owner's switch on the website decides whether the tile shows. Off means Home is exactly as today, with COMEDK back.
 
-### 1. Problem found in the live app (from the screenshots)
-- The PYQ paper list shows "The origin web server sent a response that Cloudflare could not parse…" and pressing Retry gives the same error again and again.
-- During a paper, an answer stays stuck at "1 pending" and does not save.
-- A question picture shows "The original image could not load".
-- The student sees raw technical English text.
-- The jeelive.ai website was working fine in the browser at the same time. So the fault is not in the student's internet. It is on the path between our live server and the website, or in our live server itself.
+**2. 2027 Jan Attempt screen**
+- **Top:** "JEE Main · 2027 Jan Attempt". Before 20 Jan it shows a countdown ("20 Jan tak 52 din").
+- **Date-wise list:** 20, 21, 22, 23, 24 and 28 Jan. Each date has two cards: Shift 1 (9 AM–12 noon) and Shift 2 (3–6 PM). Today's date is highlighted.
+- **Each shift card says where it is:**
+  - "Paper shift ke baad aayega" (no paper yet).
+  - "Memory based · 62/75 sawaal" (partial) or "Memory based · 75 sawaal".
+  - "NTA official".
+  - The student's own state: Start / Resume / Result, their score, and their All India rank in that mock.
+- **Opening a paper:** goes to the usual paper page, timer, autosave, result and analysis, as every paper works today.
 
-### 2. What changes after the fix
-- The PYQ list, answer saving and pictures work without errors.
-- **Answers are never lost.** If a save cannot reach the website for a moment, the answer stays safe on the phone, a plain message shows, and it is sent again automatically when the line comes back.
-- **Submit waits until every pending answer has been sent.** A paper is never submitted with answers missing.
-- **Students never see technical text.** In its place they see one plain line, for example: "The website is not answering right now. Your answer is safe on this phone. We are trying again."
-- If a picture fails to load, it is tried again automatically a few times, a little later each time.
+**3. Memory-based → NTA official**
+- When NTA releases a shift's paper, the official one takes that shift's place and the memory-based one leaves the list.
+- Results of the memory-based attempt stay in My Tests and stay readable, labelled "Memory based".
+- If NTA changes the answer key (provisional → final), the website re-scores. The result shows the existing "revised scoring" note.
 
-### 3. The selected option turns green (every test)
-- **Today:** in PYQ papers (options cut from the paper's picture), the selected option gets a red border, and the number circle and tick circle also turn red, because red is the app's main colour.
-- **New:** the selected option gets a **light green border**, the **number circle and the tick circle turn green**, a white tick sits inside, and the card gets a very faint green wash.
-- **Same everywhere:** this applies to mock tests, PYQ papers, All India tests and every other test, and to all three kinds of options:
-  - options cut from a picture
-  - typed options
-  - big number tiles for scanned papers
+**4. All India rank of each shift mock**
+- **In the result:** the result's Rank tab shows that mock's leaderboard among everyone who took it, with the number of students so far. It updates as more students take it.
+- **On the shift card and in My Tests:** a rank chip, for example "#123 / 4,560".
 
-  Those other two kinds currently mark the choice in black; they become green too.
-- **No change to:** the solutions screen after a test (green = correct, red = wrong stays as it is), the question palette colours, and Rapid Fire's own game colours.
-- **Before any code is written, a picture of the new look is shown** (today's red option next to the new green one). Code starts only after that.
+**5. Rank Card in Analysis**
+- **On a 2027 Jan Attempt mock's Analysis:** a Rank Card in the Rank tab's card style. It shows the All India rank in that mock, the top percentage, and the score.
+- **For a complete 75-question paper:** it also shows expected JEE Main percentile and rank from that score, using the app's own Rank predictor (the same as the Rank tab).
+- **For a partial paper:** only the mock rank, because an expected rank from a partial paper would mislead.
+- **Sharing:** the card can be sent on WhatsApp, like Rank tab cards.
 
-### 4. The 8-level backend plan (as approved before)
-- No screen or button changes for students.
-- The same server addresses, so old builds of the app keep working.
-- A new **App Health** page in the owner panel (same login as the deletion panel). It shows how many students are on, the speed, the errors, the jeelive.ai website's health and the background jobs. It shows counts only, never a student's name or number.
-- Every step is checked against the previous correct answers. Every new fast path has a fallback to the old one.
+**6. My Tests**
+- These papers are labelled "JEE Main · 2027 Jan Attempt", with "Memory based" or "NTA official".
 
-### Why small steps (the straight answer)
-- After every step, everything is checked. If something breaks, only that one step is undone.
-- Speed is measured part by part, and future work gets faster.
-- **The honest truth:** splitting files alone does not make the app faster. The real speed comes from Levels 4–7. Splitting is needed so that the speed work can be done without anything breaking.
+## What the website must send (note for the website team)
+- **Switch:** "jan_attempt" On/Off, in Super Admin.
+- **Schedule:** the exam dates and shifts (date, shift number, time). The owner can edit it if NTA changes a date.
+- **For each shift, its current paper (if any):**
+  - The paper's id.
+  - Memory-based or NTA official.
+  - Questions in it and out of how many (62 of 75).
+  - Minutes and maximum marks.
+  - When it was published.
+- **For the signed-in student, per paper:** their attempt (state, resume, result), score, and their rank in that mock. This works the same way as the PYQ list today.
+- **When the official paper comes:** the memory-based paper stops appearing in the list. Its old attempts and results stay readable.
+- **Results of these papers:**
+  - Marked as a 2027 Jan Attempt paper, memory-based or official.
+  - The student's rank: rank, out of how many, and percentile among takers.
+  - A leaderboard for each of these papers, in the same way the result's Rank tab already reads leaderboards.
+- **Rank rule:** only a student's first attempt counts in a mock's rank. Re-attempts never change it.
 
 ## User flow
-**Owner**
-1. Approves the plan.
-2. A picture of the new green option look arrives first, and the owner sees it.
-3. The PYQ fix and the green option are built and checked on the preview.
-4. One message arrives: "Phase 1 is ready". The owner presses **Publish** once and opens one paper to check it.
-5. Levels 1–8 are built one after another on the preview, with nothing for the owner to do.
-6. At the end, one message arrives: "Everything is ready". The owner presses **Publish** once more, and the App Health page shows the live app's speed.
-
-**Student**
-- Opens JEE Main → PYQ papers (or any mock test) and picks a paper.
-- Taps an option: the border turns light green, and the number circle and tick turn green.
-- Answers are saved quietly. If the network drops for a moment, the answer stays safe and is sent on its own.
-- Submits and sees the result. Pictures load as normal.
+1. Student opens Home and sees "JEE MAIN · 2027 JAN ATTEMPT" with the red "COMING SOON" ribbon. They tap it and see the dates, shifts and countdown.
+2. On an exam day, the evening's memory-based paper appears on that shift's card. The student starts it, gives the mock, then sees the result, analysis, Rank Card and All India rank.
+3. Later, NTA's official paper replaces it on that card. The earlier result stays in My Tests.
 
 ## UI/UX feel
-- Apart from the option colour, the test screen looks exactly as it does now.
-- **Selected option:**
-  - light green border, slightly thicker than an unselected card
-  - green number circle and green tick circle with a white tick
-  - a very faint green wash on the card
-- **Unselected options** stay as they are: white card, grey border.
-- The error box shows a short, plain line in place of the technical English text. Next to "1 pending" it shows "Safe on phone · sending".
-- The App Health page uses the dark style of the owner panel, with big green / amber / red numbers, plain words, and a refresh every 30 seconds.
+- **Home tile:** the same look as its neighbours, so the grid stays calm. The one bold touch is the red diagonal "COMING SOON" ribbon, with white tracked capitals.
+- **2027 Jan Attempt screen:** a clean date timeline. Shift cards look like today's PYQ cards. JEE Main red accents, today glowing softly.
+- **Rank Card:** the same family as the Rank tab's cards. It will later take on the ruby-gold look with them, in the colour-cards task, asked about separately.
 
 ## Implementation phases
+**Phase 1 (now, MVP), one pocket at a time, each finished and tested before the next:**
+- **Pocket 0:** the website note above, ready to send. Nothing in the app changes.
+- **Pocket 1:** the Home tile with the "COMING SOON" ribbon, behind the website's switch. Switch off means Home is as today.
+- **Pocket 2:** the 2027 Jan Attempt screen: dates, shifts, countdown, every card state, and memory → official replacement. Tested with the website's answers played in the browser, since the website is not built yet.
+- **Pocket 3:** All India rank: the rank chip and the result's Rank tab for these papers.
+- **Pocket 4:** the Rank Card in Analysis, with expected JEE Main rank for complete papers, and WhatsApp share.
 
-**Phase 1: Live PYQ fix + green option (built now)**
-- **Green option, picture first:**
-  - Show the before/after picture.
-  - Then change all three kinds of options in every test to the light green border and green circles.
-  - Check it on the phone screen size on the preview.
-- **Find the cause** of the PYQ errors from the live server's records:
-  - who sent the error: our live server or the jeelive.ai website
-  - which tasks failed (paper list, answer save, pictures)
-  - since when: whether it started after the last Publish
-- **Reproduce** the same path on the preview, on a test account, without submitting any paper.
-- **Fix the real cause.** If our server is at fault, it is fixed. If the website is rejecting our server, the app keeps answers safe, shows a clear message and keeps trying again; an exact note for the website team is also written.
-- **Answers:** safe saving on the phone, automatic resending, and Submit waits for every pending answer.
-- **Pictures:** automatic retries, a little later each time.
-- Plain messages in place of technical text.
-- **Done when** the preview check shows two things:
-  - the full PYQ path (list → paper → answers → pictures → saving) with no errors
-  - a green selected option in every kind of test
+The switch stays off for students until the website is built.
 
-  Then one Publish.
+**Phase 2, once the website has built it:**
+- Live end-to-end test on TEST accounts: memory paper, partial paper, official replacement, re-scoring, ranks.
+- Then the owner turns the switch on.
+- Each shift card also links to Matched when that shift has matched questions.
 
-**Phase 2: Strong foundation (Levels 1–4)**
-- **Level 1, safety net:** record the right answer for every server address, merge the scattered tests into one full check, measure today's speed and crowd limit, and re-check All India Daily on a clean test account.
-- **Level 2, tidy the house:** sort the 40+ server files into clear parts, put settings in one place, and remove code that never runs. The NEET archive stays safe.
-- **Level 3, split the big main file:** addresses and answers stay exactly the same.
-- **Level 4, faster database:** the right index for every lookup, read only the fields needed, and old temporary data clears itself. Target: every Rapid Fire database task within 20 ms (95% of the time).
-
-**Phase 3: Power and proof (Levels 5–8)**
-- **Level 5, speed engine:** keep decks, leaderboards and profiles ready in advance, reuse the website connection, compress answers, and do non-urgent work in the background. Coins and answers are always saved at once. Target: Rapid Fire answers within 100 ms (95% of the time).
-- **Level 6, live match engine for 50,000:** many server copies can run side by side, background jobs run on only one copy, a match carries on if a copy restarts, and every reward is paid exactly once.
-- **Level 7, shields and eyes:**
-  - If jeelive.ai is slow or down, the server stops calling it again and again, and Rapid Fire keeps working.
-  - Limits per player.
-  - In a big crowd, important work comes first.
-  - PINs and passwords never appear in any record.
-  - The **App Health page** is built here.
-- **Level 8, proof of 50,000:**
-  - Increase the crowd step by step: 1k → 5k → 10k → 25k → 50k simulated players.
-  - Show that adding copies grows capacity in a straight line.
-  - Run tests lasting hours, plus fake website-down and website-slow tests.
-  - Compare with the baseline and rehearse the release, then one Publish.
+**Phase 3:**
+- The same pipeline for the April session (2–7 Apr 2027), by switching the session.
+- The ruby-gold look for this Rank Card together with the other Rank Cards.
 
 ## Assumptions
-- **Green covers every test kind and all three option styles,** not just PYQ papers, so every test feels the same.
-- **During a test, green only means "your choice".** No right or wrong is shown during a test. On the solutions screen afterwards, green still means correct and red still means wrong. That screen is not changed.
-- The green is the same green already used for "Answered" in the question palette, so the colours match. The border is a lighter shade of it.
-- Rapid Fire's game colours (its own world) do not change.
-- **The PYQ fix and the green option go live together in one Publish, before the 8 levels,** because students cannot take tests right now. The 8 levels still go live together, once, at the end. Only the owner can press Publish.
-- No paper is submitted on any real student's account during testing. The test account's PIN is never used to delete anything.
-- If the cause turns out to be on the jeelive.ai website (for example, the website rejecting our server), it cannot be fixed fully from the app side. In that case the app keeps answers safe, keeps trying again, shows plain messages, and an exact note is given for the website team.
-- **The 50,000 target covers what runs on our server:** Rapid Fire, matches, leaderboards, Cup Night and All India. The speed and capacity of login, tests and results are in the website's hands. The plan builds shields for them.
-- The preview cannot bring in a real crowd of 50,000. The proof comes from one copy's capacity plus the straight-line growth as copies are added. How many copies run in production is decided by the hosting.
-- Nothing in the live database is deleted or moved. The only change is new indexes, which build on the live app without stopping it.
-- No new paid outside service is used.
-- Play Store / App Store readiness is not part of this plan. It will be done separately later.
-- All technical decisions are taken during the build. Nothing is left for the owner to decide.
+- **Dates:** 20, 21, 22, 23, 24 and 28 Jan 2027, two shifts a day, as per NTA's notice of 24 Oct 2026. The website's schedule is what the app shows.
+- **Paper:** only Paper 1 (B.E./B.Tech); B.Arch and B.Planning are left out.
+- **Ribbon:** "COMING SOON" stays until the first paper of the session is published.
+- **Partial papers:** the website sets their minutes and marks for the questions they have. The app shows them as sent.
+- **Marking:** as JEE Main (+4 / −1), set by the website.
+- **Names on leaderboards:** the student's chosen name, or "Learner".
+- **Dream College meter:** only complete NTA official papers count, like PYQ. Memory-based papers do not.
+- **Cost:** free for all students. No push notifications.
+- **Untouched:** the start screen, the Rank tab, and the colour-cards task.
