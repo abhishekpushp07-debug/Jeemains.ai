@@ -26,7 +26,11 @@ def test_the_bank_keeps_three_subjects_in_order_and_the_owners_rules():
         {"name": "Biology", "chapters": [chapter("b-000001")]},
         {"name": "Physics", "chapters": [chapter(), chapter(), chapter("p-000002", title="", count=5), chapter("p-000003", count=0), {"id": "x"}, "junk",
                                          chapter("p-000004", number="2", mcq=999)]}]})
-    assert set(bank) == {"ready", "sample", "exam", "pick", "random", "max_questions", "max_per_subject", "minutes", "marks", "subjects"}
+    assert set(bank) == {"ready", "sample", "exam", "pick", "random", "max_questions", "max_per_subject", "minutes", "marks", "subjects", "misfire"}
+    assert bank["misfire"] is False  # not said: Misfire's "Mock" tab stays shut
+    one = {"subjects": [{"name": "Physics", "chapters": [chapter()]}]}
+    for said, on in (({"misfire": True}, True), ({"misfire": False}, False), ({"misfire": "true"}, False), ({"misfire": 1}, False), ({}, False)):
+        assert choice.shape_bank({**one, **said})["misfire"] is on and choice.misfire_on(said) is on
     assert bank["ready"] is True and bank["sample"] is False and bank["exam"] == "JEE Main"
     assert [s["name"] for s in bank["subjects"]] == ["Physics", "Mathematics"]  # no Chemistry chapter: not shown; Biology never
     physics = bank["subjects"][0]["chapters"]

@@ -30,6 +30,7 @@ import { examOf, isFullMock, recordMock } from "@/src/dream/store";
 import { useAnalysis } from "@/src/analysis/useAnalysis";
 import { AnalysisBar, AnalysisBody, useAnalysisNav } from "@/src/analysis/Workspace";
 import { SolutionInsight } from "@/src/analysis/SolutionInsight";
+import { MisfireUnderstood } from "@/src/misfire/web/Understood";
 import { An, index } from "@/src/analysis/format";
 import { MatchedWith } from "@/src/matched/MatchedWith";
 import { KeptOffer } from "@/src/offline/KeptOffer";
@@ -458,7 +459,7 @@ export default function Result() {
   const bar = !!ready && tab === "analysis" && !!analysis.data;
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={back} />
+      <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · ${r.test_kind === "misfire" ? "Misfire Mock" : "Result"}` : "Result"} onBack={back} />
       {ready ? (
         <View style={learningStyles.navigation}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
@@ -482,6 +483,8 @@ export default function Result() {
           </ScrollView>
         ) : null}
         {ready && version !== "original" ? <Notice tone="warning" testID="score-version-note">{r.change_note || "Revised scoring version. The original result is preserved."}</Notice> : null}
+        {/* A Misfire Mock made by the website: how many of its questions went to "Samajh gaya". */}
+        {ready && tab === "analysis" && r.test_kind === "misfire" ? <MisfireUnderstood r={r} uid={user?.id} /> : null}
         {/* Kept in place while another tab is open, so its filters and open lists are still there on return. */}
         {ready ? <View testID="result-analysis-panel" style={tab === "analysis" ? learningStyles.panel : learningStyles.hidden}>
           <AnalysisBody id={id!} state={analysis} nav={nav} shown={tab === "analysis"} onOpen={openQuestion} onSolutions={() => show("solutions")}

@@ -17,6 +17,8 @@ import { PapersTab } from "@/src/misfire/PapersTab";
 import { MocksTab } from "@/src/misfire/mock/MocksTab";
 import { PillRow } from "@/src/misfire/parts";
 import { misfireAccount } from "@/src/misfire/store";
+import { useWebMisfire } from "@/src/misfire/web";
+import { WebMocksTab } from "@/src/misfire/web/WebMocksTab";
 
 // Coming back to Misfire opens the tab it was left on.
 const memo = { tab: "all" };
@@ -34,7 +36,10 @@ export default function Misfire() {
   useEffect(() => { if (params.chapter) setTab("all"); else if (params.tab) setTab(params.tab); }, [params.tab, params.chapter, params.at]);
   const family = families.find(f => f.key === tab);
   const mocks = !family && tab === "mock";
-  memo.tab = family ? family.key : mocks ? "mock" : "all";
+  // The website's own Misfire Mocks: a tab only while its switch "misfire" is on.
+  const webOn = useWebMisfire(user?.id).on === true;
+  const web = !family && tab === "web" && webOn;
+  memo.tab = family ? family.key : mocks ? "mock" : web ? "web" : "all";
   const summary = useCached<MisfireSummary>(user ? `${misfireKey(user.id)}.summary` : null, getSummary);
   useListFocus(summary.revalidate);
   const d = summary.data, tries = useRef(0), revalidate = summary.revalidate;
@@ -49,9 +54,9 @@ export default function Misfire() {
       onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))}
       right={d ? <View style={styles.badge}><T testID="misfire-open-count" w="bold" size={11} color={colors.brandText} style={{ letterSpacing: 1.2 }}>{d.open} OPEN</T></View> : null} />
     <View style={{ paddingHorizontal: space.lg, paddingBottom: space.md }}>
-      <PillRow prefix="misfire-tab" value={memo.tab} onChange={setTab} items={[{ key: "all", label: "Sab" }, { key: "mock", label: "Offline Misfire" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
+      <PillRow prefix="misfire-tab" value={memo.tab} onChange={setTab} items={[{ key: "all", label: "Sab" }, ...(webOn ? [{ key: "web", label: "Mock" }] : []), { key: "mock", label: "Offline Misfire" }, ...families.map(f => ({ key: f.key, label: f.label }))]} />
     </View>
-    {!user ? null : family ? <PapersTab key={family.key} uid={user.id} family={family} /> : mocks ? <MocksTab />
+    {!user ? null : family ? <PapersTab key={family.key} uid={user.id} family={family} /> : mocks ? <MocksTab /> : web ? <WebMocksTab uid={user.id} />
       : <AllTab key={`${params.subject || ""}|${params.chapter || ""}|${params.at || ""}`} uid={user.id} summary={d} startSubject={params.subject} startChapter={params.chapter} />}
   </View>;
 }

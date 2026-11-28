@@ -171,7 +171,7 @@ export default function MyTests() {
         <Press testID={"attempt-card-" + item.id} onPress={() => router.push(((item.resumable ? "/attempt/" : "/result/") + item.id) as any)} scaleTo={0.99} style={styles.attemptContent}>
           <View style={styles.statusRow}>
             <StatusLine testID={`attempt-status-${item.id}`} label={label} color={dot} ink={colors.custom_tabInk} />
-            <T testID={`attempt-exam-${item.id}`} size={11.5} color={colors.custom_tabInkSoft}>{item.exam}</T>
+            <T testID={`attempt-exam-${item.id}`} size={11.5} color={colors.custom_tabInkSoft}>{item.exam}{item.test_kind === "misfire" ? " · Misfire Mock" : ""}</T>
           </View>
           <T testID={`attempt-title-${item.id}`} w="heavy" size={17} color={colors.custom_tabInk}>{item.title}</T>
           <T testID={`attempt-meta-${item.id}`} size={12} color={colors.custom_tabInkSoft}>

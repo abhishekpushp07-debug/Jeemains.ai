@@ -277,9 +277,10 @@ export function examOf(name?: string | null): DreamExam | null {
 }
 
 type MockIn = { id: string; exam?: string | null; score: number; maximum: number; questions?: number | null; title?: string; at?: number; kind?: string | null };
-/** Papers that are never a full mock, however long: a chapter test and a Student Choice paper (the owner's rule, 26 Nov
- *  2026: the Dream College meter runs on real full mocks only). `kind` = the paper's test_kind. */
-const NEVER_FULL = ["chapter", "choice"];
+/** Papers that are never a full mock, however long: a chapter test, a Student Choice paper and a Misfire Mock (made of
+ *  the student's own mistakes) (the owner's rule, 26 Nov 2026: the Dream College meter runs on real full mocks only).
+ *  `kind` = the paper's test_kind. */
+const NEVER_FULL = ["chapter", "choice", "misfire"];
 /** As long as a full paper: the full paper's question count (90% or more) and at least half its marks. */
 function fullLength(m: { exam?: string | null; maximum: number; questions?: number | null }) {
   const exam = examOf(m.exam);

@@ -155,7 +155,12 @@ def shape_bank(data, sample: bool = False, own: bool = True):
             "pick": data["pick"] if isinstance(data.get("pick"), bool) else own, "random": data["random"] if isinstance(data.get("random"), bool) else own,
             # The website may lower the top (never raise it past the owner's 75), and may add a top per subject.
             "max_questions": _count(top, MAX_QUESTIONS) or MAX_QUESTIONS, "max_per_subject": _count(each, MAX_QUESTIONS) or None,
-            "minutes": minutes, "marks": MARKS, "subjects": subjects}
+            "minutes": minutes, "marks": MARKS, "subjects": subjects, "misfire": misfire_on(data)}
+
+
+def misfire_on(data) -> bool:
+    """The website makes Misfire Mocks (door C, mode "misfire"): only an exact `"misfire": true` opens Misfire's "Mock" tab."""
+    return isinstance(data, dict) and data.get("misfire") is True
 
 
 def shape_question(row):
@@ -278,7 +283,7 @@ def make_router(db, client):
         if not bank:  # the usual way: the chapters are the chapter-wise tests the website already has
             lists = await asyncio.gather(*(chapter_wise(sid, s) for s in SUBJECTS))
             bank = shape_bank({**said, "subjects": [{"name": s, "chapters": chapter_tests(s, pages)} for s, pages in zip(SUBJECTS, lists)]}, own=False)
-        return bank or {"ready": False}
+        return bank or {"ready": False, "misfire": misfire_on(said)}
 
     async def load_chapter(sid: str, chapter_id: str):
         pages = []

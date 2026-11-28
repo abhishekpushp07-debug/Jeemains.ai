@@ -20,6 +20,8 @@ export type Chapter = { id: string; n: number | null; title: string; count: numb
 export type Bank = {
   ready: boolean; sample?: boolean; pick?: boolean; random?: boolean; exam?: string; max_questions: number; max_per_subject: number | null;
   minutes: Record<Subject, number>; marks: { correct: number; wrong: number }; subjects: { name: Subject; chapters: Chapter[] }[];
+  /** The website makes Misfire Mocks (door C, mode "misfire"): Misfire's "Mock" tab opens (src/misfire/web.ts). */
+  misfire?: boolean;
 };
 /** A question's picture, sized in print points (the picture file holds more pixels). */
 export type Stem = { url: string; w: number | null; h: number | null };
@@ -94,7 +96,9 @@ export function splitOf(n: number, subjects: readonly Subject[]): Counts {
 /** "1 hr 12 min", "45 min" */
 export const timeLabel = (minutes: number) => (minutes >= 60 ? `${Math.floor(minutes / 60)} hr${minutes % 60 ? ` ${minutes % 60} min` : ""}` : `${minutes} min`);
 
-export type PaperAsk = { mode: "pick"; question_ids: string[] } | { mode: "random"; count: number };
+export type PaperAsk = { mode: "pick"; question_ids: string[] } | { mode: "random"; count: number }
+  // A Misfire Mock (src/misfire/web.ts): how many of each subject from the student's open Misfire, and the chapters where only some were ticked.
+  | { mode: "misfire"; counts: Counts; chapters?: Partial<Record<Subject, string[]>> };
 /** Asks jeelive.ai to make the paper; `key` = the same for every retry of this one request, so it is never made twice.
  *  Gives the paper's id: its page (/set/<id>) starts it like any other paper. */
 export async function makePaper(ask: PaperAsk, key: string): Promise<string> {

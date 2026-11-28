@@ -92,7 +92,7 @@ export default function SetDetail() {
   const facts: [string, string | number, string][] = [["Questions", count, "set-question-count"], [minutes ? "Minutes" : "Untimed", minutes || "—", "set-duration"], ["Max marks", s.maximum ?? count * s.rules.correct, "set-maximum-marks"]];
   return (
     <View testID="set-detail-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader title={s.title} eyebrow={`${s.exam} · ${s.series_id ? "All India series" : s.test_kind === "chapter" ? "Chapter practice" : s.test_kind === "pyq" ? "Previous-year paper" : s.test_kind === "choice" ? "Student Choice" : s.test_kind === "matched" ? "Matched paper" : "Full mock"}`} eyebrowColor={subj ? subjectColor(subj) : undefined} onBack={() => router.back()}
+      <ScreenHeader title={s.title} eyebrow={`${s.exam} · ${s.series_id ? "All India series" : s.test_kind === "chapter" ? "Chapter practice" : s.test_kind === "pyq" ? "Previous-year paper" : s.test_kind === "choice" ? "Student Choice" : s.test_kind === "matched" ? "Matched paper" : s.test_kind === "misfire" ? "Misfire Mock" : "Full mock"}`} eyebrowColor={subj ? subjectColor(subj) : undefined} onBack={() => router.back()}
         right={<RoundButton testID="set-save-toggle" icon={saved ? "bookmark" : "bookmark-outline"} color={colors.custom_gold} active={saved} label={saved ? "Unsave paper" : "Save paper"} onPress={toggleSave} />} />
       <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.xs, paddingBottom: insets.bottom + space.xl, gap: space.lg }}>
         <DCard testID="set-facts" style={{ gap: space.lg }}>

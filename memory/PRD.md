@@ -1564,4 +1564,11 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - Behind the offline door: /offline home card "Offline Misfire" → /offline/misfire (list), /offline/misfire/new, /offline/misfire/[id] (same screens; `useMockPaths`), open only to the signed-in student or the account confirmed in the last 7 days (`useMockAccess`; inside the app it waits for the session check). Pictures trusted from the phone when signed out (trustKept).
 - Right answers: never sent while signed out (submit/settle `send`); sent by themselves after the next confirmed session (`sendAllWaiting` in OfflineKeeper fetchAll), and from the list/mock screens as before.
 - Check: tests/offline_misfire_check.py 30/30 (read-only; MCQ keys rewritten to A in the browser; try/done faked).
+- After review (iteration_162): waiting right answers also retried every 45 s while signed in; phone list re-read on any change of the known list (knownVersion); "1 paper" singular.
+### Pocket 2 — Misfire Mock made by the website, behind its switch (built, preview; waits for the website)
+- Switch: door A `misfire: true` (backend/choice.py `misfire_on`, exact `true` only; also on `{"ready": false}`). Off = nothing changes anywhere.
+- On: Misfire tab **"Mock"** after "Sab" (`src/misfire/web/WebMocksTab.tsx`): hero + "Naya mock banao" → `/misfire/mock/new?web=1` (same setup, website's open list only, no phone fallback) → door C `mode:"misfire"` {counts, chapters only when some ticked}, one `request_key` per ask (same for retries) → `/set/<set_id>` (eyebrow "Misfire Mock") → normal paper. List = `history?kind=misfire` (Resume / Result dekho).
+- Result of `test_kind:"misfire"`: `result-misfire-understood` "N / M sawaal “Samajh gaya” mein chale gaye" from `misfire.understood/total` (`src/misfire/web/Understood.tsx`), Misfire lists refreshed. My Tests "JEE Main · Misfire Mock". Dream meter never counts `misfire`.
+- Proposed contract for the website: memory/WEBSITE_MISFIRE_MOCK_NOTE.md. Check: tests/misfire_web_check.py 30/30 (website played by the browser; also fakes /api/rf/dream writes). testing_agent iteration_163: no app bugs. Incident: an earlier run of the script let the app drop the QA learner's real PYQ 1ea510f2 from his Dream meter (preview DB); repaired the same day (dropped empty, mock re-recorded).
+
 

@@ -1212,3 +1212,13 @@ iteration162_offline_misfire:
 
   main_checks: "tsc 0, eslint clean; tests/offline_misfire_check.py 30/30: tab name, website list with a line, phone fallback when the list fails (note + retry), injected 'Samajh gaya' question left out (25 -> 24), offline door -> list -> setup -> mock -> result with no line (pictures all from phone), nothing sent while signed out, 4/4 right answers sent (try+done) 6 s after the line came back, My Tests label, shut without a confirmed session."
 
+
+
+## Iteration163 — Pocket 2: Misfire Mock made by the website, behind its `misfire` switch (28 Nov 2026) — preview only
+iteration163_misfire_web:
+  user_request: "Read the website's switch 'misfire'. Only when misfire: true, show the website Mock tab; the website makes the paper; normal timer/autosave/result/Analysis; works in app and website; in My Tests and the Mock tab; result says how many became 'Samajh gaya'. Switch off: students see nothing changed. Do not disturb Student Choice, normal papers, Misfire list, AITS, or Pocket 1. Website answers played by the browser; nothing written to the owner's account."
+  implemented: true
+  files: "NEW src/misfire/web.ts, src/misfire/web/WebMocksTab.tsx, src/misfire/web/Understood.tsx, memory/WEBSITE_MISFIRE_MOCK_NOTE.md, tests/misfire_web_check.py; edited backend/choice.py (+misfire_on), backend/tests/test_choice.py, src/choice/api.ts (Bank.misfire, PaperAsk misfire), app/misfire/index.tsx (tab), app/misfire/mock/new.tsx (?web=1), app/set/[id].tsx (eyebrow), app/(tabs)/tests.tsx (label), app/result/[id].tsx (understood box), src/dream/store.ts (NEVER_FULL + misfire)."
+  main_checks: "tsc 0, eslint clean, pytest test_choice 12/12; tests/misfire_web_check.py 30/30; Pocket 1 offline_misfire_check 30/30 again."
+  independent_review: "testing_agent iteration_163: no app bugs; own extra 20/20 + 2/2. It found the test script did not fake /api/rf/dream: playing the real PYQ attempt 1ea510f2 as a Misfire Mock made the app DELETE it from the QA learner's Dream meter (preview DB). Repaired: dropped emptied by the tester; tests/repair_dream_mock_once.py re-recorded the mock (opening the result normally, website writes blocked); misfire_web_check now fakes /api/rf/dream. Small items fixed: setup hero minutes follow the website's minutes; 5xx -> Hinglish 'jeelive.ai abhi jawab nahi de raha…'; result eyebrow 'JEE Main · Misfire Mock'. Re-run misfire_web_check 30/30."
+

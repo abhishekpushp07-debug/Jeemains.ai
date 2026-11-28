@@ -1,0 +1,35 @@
+{
+  "summary": "Misfire Mock (Pocket 2) tested at 390x844 with the QA learner, READ ONLY (website writes played by the browser). Backend pytest test_choice.py 12/12 passed. The real /api/choice/bank answer carries misfire:false (A4). Main agent's tests/misfire_web_check.py passed 30/30 twice. New T1 checks tests/misfire_web_t1_extra.py (20 checks) and tests/misfire_web_t1_debug.py (2 checks) pass, once two of my own selector mistakes were fixed. With the switch off: no Mock tab, ?tab=web shows Sab, ?web=1 is Offline Misfire, Student Choice and My Tests are unchanged, and door C is never asked. With the switch on: the tab order, hero, list cards, result count, general sentence, the button from the result back to the Mock tab, 404/422/500/503 errors, a bad set_id, one key across 3 retries, a new key and chapters only for the subject with some chapters ticked, the set page eyebrow and the My Tests label all work. The string 'true' keeps the tab shut, and a cold load straight into the setup with ?web=1 works. Nothing was written to jeelive.ai. ONE TEST-HYGIENE DEFECT FOUND AND REVERTED: misfire_web_check.py did not fake /api/rf/dream, so playing a result as test_kind 'misfire' made the app send a real DELETE /api/rf/dream/mocks/1ea510f2-…. As a result, the owner's real JEE Main PYQ attempt was put on rf_dreams.dropped for uid cfcc3ac4… for good. No app logic bug was found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/misfire/mock/new?web=1", "issues": ["Hero body hard-codes 'Physics 60, Chemistry 40, Maths 80 min' (25 Q each), but the time shown uses door A's site.minutes when given. If the website's minutes differ, the hero contradicts the bar time. Reference: app/misfire/mock/new.tsx hero text vs line 72 (per)."]},
+      {"screen": "/misfire/mock/new?web=1 making sheet", "issues": ["On a 5xx with an error.message (503 'Service unavailable'), that raw English website text is shown. The note says 5xx = 'try again' (a 500 without a usable message shows the client's English generic sentence). Student Choice shares makePaper, so it behaves the same. Minor."]},
+      {"screen": "/result/<misfire id>", "issues": ["Header eyebrow stays 'JEE MAIN · RESULT' (not 'Misfire Mock'). Not required by the plan; cosmetic only."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_choice.py", "/app/tests/misfire_web_check.py", "/app/tests/misfire_web_t1_extra.py", "/app/tests/misfire_web_t1_debug.py", "/app/test_reports/pytest/pytest_choice_misfire.xml", "/app/test_reports/artifacts/misfire_t1_list.jpg", "/app/test_reports/artifacts/misfire_t1_result.jpg", "/app/test_reports/artifacts/misfire_t1_err.jpg"],
+  "action_items": [
+    "Keep the /api/rf/dream** browser stand-in that T1 added to tests/misfire_web_check.py. Any UI test that rewrites a result's test_kind to misfire/choice/chapter makes the app DELETE that real paper from the owner's Dream meter, and the server then drops it for good. Add this rule to memory/test_credentials.md.",
+    "Optional: build the setup hero's minutes sentence from `per` (site.minutes) instead of fixed 60/40/80.",
+    "Optional: for 5xx from door C, show a Hinglish 'Dobara try karo' sentence instead of the website's raw English error.message."
+  ],
+  "critical_code_review_comments": [
+    "backend/choice.py misfire_on: `data.get('misfire') is True`. It is in both shape_bank and the not-ready fallback, and the frontend repeats the check (`=== true`). Correct.",
+    "src/misfire/web.ts askWebMock sends chapters only for subjects with count > 0 and some chapters ticked. The request_key is set per signature (counts + picked) in new.tsx: the same key on retry, a new one after a change. Correct.",
+    "src/dream/store.ts NEVER_FULL includes 'misfire'. recordMock takes a misfire paper out and DELETEs it on the server, which then lists it as dropped. Correct for real data, but it is the reason test stand-ins must fake /api/rf/dream.",
+    "WebMocksTab: on a list error while an older cached list exists, the cached list stays and the error is hidden. On a cold load the ErrorBox misfire-web-error shows (D1). Acceptable.",
+    "Expo Router keeps the earlier /misfire screen mounted (hidden) in the stack, so after 'Misfire kholo' there are two misfire-web-hero nodes. Tests must use visible=true."
+  ],
+  "updated_files": ["/app/tests/misfire_web_check.py (added browser stand-in for /api/rf/dream writes)", "/app/tests/misfire_web_t1_extra.py (new)", "/app/tests/misfire_web_t1_debug.py (new)"],
+  "data_defects": "rf_dreams uid cfcc3ac4-54dc-4f3d-a421-bab91d26cfd7 (QA learner = owner) had dropped:['1ea510f2-1d2a-41f7-9bb4-a8b28c16f98f'], written 28 Nov 08:18 UTC by a misfire_web_check.py run. Several runs happened (the main agent's own run and T1's rerun), and it cannot be told which one wrote it. T1 reverted it with an exact-uid $pull (dropped is now []). Nothing else was touched; the mocks list was not changed.",
+  "success_rate": {"backend": "100% (12/12)", "frontend": "100% (30/30 main script, 20/20 T1 extra after selector fixes, 2/2 debug)"},
+  "seed_data_creation": "None. All website answers were played by the browser (TEST_ titles).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "QA learner finished attempt 1ea510f2-… is the only real result; test scripts play it as a misfire result. ALWAYS fake /api/rf/dream** writes when rewriting test_kind. The earlier /misfire screen stays mounted (hidden) in the stack, so use '>> visible=true'. The set page eyebrow is upper-cased ('JEE MAIN · MISFIRE MOCK').",
+  "rca_of_issue": "Dream drop: result/[id].tsx records the result with kind = test_kind. For 'misfire', store.ts recordMock removes it and DELETEs /api/rf/dream/mocks/<id>, and dream.py then $addToSet's it to dropped. misfire_web_check.py rewrote the real attempt's results to test_kind 'misfire' without faking /api/rf/dream, so the owner's real data was changed. Fix: browser stand-in (done) and a $pull of the one id (done)."
+}
