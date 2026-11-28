@@ -8,6 +8,7 @@ import { rankColors as colors } from "@/src/theme";
 import { useShareLink } from "@/src/mission/stats";
 import type { CardRef } from "@/src/shareCard";
 import { savePdf, sendPdfWhatsApp, SentVia } from "./pdf";
+import { track } from "@/src/jlTracker";
 
 const caption = (link: string) => `📄 Meri college list, JEELIVE.AI (2026 ke official data par). Apni list free mein banao: ${link}`;
 const SENT: Record<Exclude<SentVia, "cancelled">, (name: string) => string> = {
@@ -30,9 +31,13 @@ export function PdfButton({ path, body, label, testID, card }: { path: string; b
     if (working.current) return;
     working.current = true;
     setBusy(kind); setMsg(null);
+    // "/target/jee" -> "target_jee": which list the PDF was made of.
+    const report = path.replace(/^\//, "").replace(/\//g, "_");
     try {
-      if (kind === "wa") { const r = await sendPdfWhatsApp(path, body, caption(link), card); setMsg(r.via === "cancelled" ? null : { ok: true, text: SENT[r.via](r.name) }); }
-      else setMsg({ ok: true, text: `${await savePdf(path, body)} taiyaar` });
+      if (kind === "wa") {
+        const r = await sendPdfWhatsApp(path, body, caption(link), card); setMsg(r.via === "cancelled" ? null : { ok: true, text: SENT[r.via](r.name) });
+        if (r.via !== "cancelled") track("report_pdf_downloaded", { report, via: "whatsapp" });
+      } else { setMsg({ ok: true, text: `${await savePdf(path, body)} taiyaar` }); track("report_pdf_downloaded", { report, via: "file" }); }
     } catch (e: any) { setMsg({ ok: false, text: e?.message || "PDF nahi bani. Dobara try karo." }); }
     finally { working.current = false; setBusy(null); }
   };

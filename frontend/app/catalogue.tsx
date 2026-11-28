@@ -13,6 +13,7 @@ import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
 import { fmtClock, unixDate } from "@/src/navigation";
 import { cachedExamName, catalogueAll, cataloguePath } from "@/src/api/examCatalog";
 import { ClassLevel, classOf, hasClasses, useClassBook } from "@/src/classLevel";
+import { useSearchTrack } from "@/src/searchTrack";
 
 const ORDER = ["Physics", "Chemistry", "Mathematics"];
 // Chapter-wise, for a subject that is split into classes: All (Class 11 first, then Class 12), or one class alone.
@@ -108,6 +109,7 @@ function Catalogue() {
   const res = useCached<any>(fullKey, (signal) => (classy ? catalogueAll(slug, "chapters", "", subject, query, signal) : api(path, { signal })));
   useListFocus(res.revalidate);
   const items: any[] = res.data && res.dataKey === fullKey ? res.data.items : NONE;
+  useSearchTrack(kind === "chapters" ? "chapters" : "papers", query, res.data && res.dataKey === fullKey ? items.length : null);
   // Each chapter's class, and the rows of the tab in view. One chapter is opened at a time, as always: a tap on a row.
   const view = useMemo(() => {
     const levels = classy ? items.map((s) => classOf(slug, subject, String(s.title || ""))) : [];

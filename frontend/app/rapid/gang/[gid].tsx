@@ -12,6 +12,7 @@ import { InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, Sheet, withRapid } from "@/src/rapid/ui";
 import { scopeLabel, useScope } from "@/src/rapid/scope";
 import { go, sendChallenge, sendWhatsApp, seenText, shortSubject, useFriends } from "@/src/rapid/social";
+import { useSearchTrack } from "@/src/searchTrack";
 
 type Rival = { id: string; name: string; emblem: string; kind: string; members: number; wins: number; losses: number; ties: number };
 
@@ -20,6 +21,7 @@ function WarSheet({ uid, gid, onClose, visible }: { uid: string; gid: string; on
   const router = useRouter(), picks = useScope();
   const [q, setQ] = useState(""), [found, setFound] = useState<Rival[] | null>(null), [busy, setBusy] = useState(""), [error, setError] = useState("");
   const rows = q.trim().length < 2 ? null : found;
+  useSearchTrack("gangs", q.trim().length < 2 ? "" : q, rows ? rows.length : null);
   useEffect(() => {
     const term = q.trim();
     if (term.length < 2) return;

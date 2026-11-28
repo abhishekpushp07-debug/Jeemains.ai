@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -14,6 +14,7 @@ import { BoardLink } from "@/src/components/series/Board";
 import { colors, space } from "@/src/theme";
 import { ScreenMotion } from "@/src/motion";
 import { DayInfo, dayAction, dayAttempt, istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
+import { track } from "@/src/jlTracker";
 
 export default function Live() {
   const insets = useSafeAreaInsets();
@@ -31,6 +32,9 @@ export default function Live() {
   const today = days.find(x => x.isToday);
   const selected = picked ?? today?.day ?? (d && d.today > d.last_date ? days.length : 1);
   const selectedDay = days.find(x => x.day === selected);
+  // Analytics: each day card the student looks at (today's on opening, then every day picked).
+  const seen = d?.id && selectedDay ? `${d.id}|${selectedDay.day}` : "";
+  useEffect(() => { if (seen && d && selectedDay) track("series_slot_viewed", { series_id: d.id, slot: selectedDay.day }); }, [seen]); // eslint-disable-line react-hooks/exhaustive-deps
   const trend = trendSummary(days);
   const results = history.data?.items ?? [];
   const dayOf = (date?: string) => days.find(x => x.date === date)?.day;

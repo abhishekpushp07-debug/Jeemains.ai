@@ -9,6 +9,7 @@ import { Check } from "./parts";
 import { CardCountPicker } from "./CardCount";
 import { CardCount, CatalogSubject, PCM, Pick, SHORT, SUBJECTS, allTicked, cardCount, fitCount, getCardCount, isBitsat, picksToPlay, scopeLabel, setCardCount, tickAll, tickChapter, tickedOf } from "./scope";
 import { classOf, useClassBook } from "@/src/classLevel";
+import { useSearchTrack } from "@/src/searchTrack";
 
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", English: "alphabetical-variant", "Logical Reasoning": "puzzle-outline" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -68,6 +69,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
       return part.length ? [{ key: `class:${level}`, subject: "", count: part.length, label: `${level ? `CLASS ${level}` : "MORE"} · ${where} · ${part.length} CHAPTERS` }, ...part] : [];
     });
   }, [query, subjects, shown, tab, book]); // eslint-disable-line react-hooks/exhaustive-deps
+  useSearchTrack("rapid_chapters", query, subjects.length ? lines.length : null);
   const ticked = useMemo(() => new Set(subjects.flatMap((s) => tickedOf(draft, s).map((c) => `${s.name}:${c}`))), [draft, subjects]);
   // What SAVE / PLAY hands over: see picksToPlay (whole subjects share evenly; with single chapters, every ticked chapter does).
   const out = useMemo(() => picksToPlay(draft, subjects), [draft, subjects]);

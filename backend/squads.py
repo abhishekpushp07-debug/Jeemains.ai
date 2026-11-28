@@ -10,6 +10,7 @@ from fastapi.responses import FileResponse
 from pymongo import ReturnDocument
 
 from gamify import vault_of
+from jl_track import track_wallet
 
 SQUADS = [
     {"id": "squad_rookie", "level": 1, "title": "Rookie Squad", "body": "Crimson, royal blue and white-gold. They dance for your first crown.", "wins": 1, "gems": None},
@@ -67,6 +68,7 @@ def make_router(db, rf_user):
             wallet = vault_of(have)
             short = ", ".join(f"{n - wallet.get(c, 0)} more {c.title()}" for c, n in gems.items() if wallet.get(c, 0) < n)
             raise HTTPException(409, f"Not enough diamonds. You need {short}. Win them in cups and Phoenix streaks.")
+        track_wallet(uid, {f"diamonds.{c}": -n for c, n in gems.items()}, "squad_buy", key=f"squad:{s['id']}", item=s["id"])
         return await state(uid)
 
     @r.post("/squads/equip")

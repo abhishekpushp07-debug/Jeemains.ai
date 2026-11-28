@@ -22,6 +22,7 @@ import { ErrorBox, Icon, Press, Sheet, T, buzz, tap, withRapid } from "@/src/rap
 import { go } from "@/src/rapid/social";
 import { CARD_COUNTS, CARD_SECONDS, encodePicks, getCardCount, isBitsat, picksFrom, scopeLabel } from "@/src/rapid/scope";
 import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
+import { track } from "@/src/jlTracker";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type Params = { mode?: "random" | "ai"; subject?: string; chapter?: string; picks?: string; review?: string; did?: string; n?: string };
@@ -130,7 +131,13 @@ function Match() {
   const card = started ? d.cards?.[idx] : null;
   const verdict = fb && fb.index === idx ? fb : null;
   const playing = started && !!card;
-
+  // Analytics: once per match, when card 1 opens (an old match opened for review is not a start).
+  const told = useRef("");
+  useEffect(() => {
+    if (!started || !d?.id || p.review || told.current === d.id) return;
+    told.current = d.id;
+    track("rapid_fire_started", { mode: d.cup_id ? "cup" : d.team_mode ? "gang" : p.mode === "ai" ? "rival" : d.mode === "random" ? "quick" : "duel" });
+  }, [started, d?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     // After a reconnect: pick up where the server says we are, without cutting a visible verdict short.
     const mine = me?.answers || [];

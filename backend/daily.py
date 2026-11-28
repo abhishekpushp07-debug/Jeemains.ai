@@ -24,6 +24,7 @@ from revision import record_learning
 from scope import CARD_SECONDS
 from shared_pass import SharedPass
 from shop import equipped_of, safe_avatar
+from jl_track import track_server
 
 SUBJECTS = ("Physics", "Chemistry", "Mathematics")
 PER_SUBJECT = 15  # 45 cards a day
@@ -239,6 +240,7 @@ def make_router(db, rf_user, award):
         answered = sum(x["outcome"] in ("correct", "incorrect") for x in p["rows"])
         gems, best = phoenix([x["outcome"] for x in p["rows"]])
         await award(uid, ref_of(p), "solo", p["correct"], len(p["rows"]), answered, exam=p["exam"], diamonds=gems, phoenix_streak=best)
+        track_server("rapid_fire_match_completed", uid, {"mode": "daily", "exam": str(p["exam"]).lower(), "result": "completed"}, key=ref_of(p))
         return await result(p, uid)
 
     async def current(p: dict, uid: str) -> dict:

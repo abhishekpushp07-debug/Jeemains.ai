@@ -12,6 +12,7 @@ import { playSfx } from "@/src/sfx";
 import { ArenaBg, GoldTitle } from "@/src/rapid/arena";
 import { DailyResultView } from "@/src/rapid/DailyParts";
 import { DAILY_CARDS, DailyResult } from "@/src/rapid/daily";
+import { track } from "@/src/jlTracker";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
 // All India Rapid: the server deals one card at a time and keeps the clock (the phone never holds the answer key).
@@ -70,7 +71,7 @@ function DailyRound() {
     if (!uid) return;
     let alive = true;
     setError("");
-    rf<Reply>("/daily/start", uid, { method: "POST", body: { exam: "JEE" } }).then((r) => { if (alive) handle(r, true); }).catch((e) => { if (alive) setError(e.message); });
+    rf<Reply>("/daily/start", uid, { method: "POST", body: { exam: "JEE" } }).then((r) => { if (alive) { handle(r, true); track("rapid_fire_started", { mode: "daily" }); } }).catch((e) => { if (alive) setError(e.message); });
     return () => { alive = false; };
   }, [uid, n, handle]);
 

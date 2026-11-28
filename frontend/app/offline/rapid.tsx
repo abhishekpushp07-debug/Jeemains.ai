@@ -12,6 +12,7 @@ import { OfflineShell } from "@/src/offline/Shell";
 import { Button, Card, Empty, Skeleton } from "@/src/rapid/ui";
 import { CARD_COUNTS, decodePicks } from "@/src/rapid/scope";
 import { space } from "@/src/theme";
+import { track } from "@/src/jlTracker";
 
 export default function OfflineRapid() {
   const p = useLocalSearchParams<{ r?: string }>();
@@ -31,7 +32,7 @@ function Round() {
     (async () => {
       const mine = user ? { uid: user.id, name: nameOf(user) } : await offlineIdentity();
       const dealt = !mine ? null : takeRound(p.again) || (picks ? await dealRound(picks, size) : null);
-      if (alive) { setWho(mine); setCards(dealt); }
+      if (alive) { setWho(mine); setCards(dealt); if (mine && dealt) track("rapid_fire_started", { mode: "offline" }); }
     })();
     return () => { alive = false; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

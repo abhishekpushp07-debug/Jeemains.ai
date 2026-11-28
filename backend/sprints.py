@@ -16,6 +16,7 @@ from load_guard import arena_gate
 from rapid_deck import fresh_deck, seen_cards
 from revision import record_learning, weak_chapters, weak_topic_deck
 from scope import CARD_SECONDS, MAX_PICKS, Pick, normalise, scope_fields
+from jl_track import track_server
 
 
 class SessionCreate(BaseModel):
@@ -128,7 +129,7 @@ def make_router(db, rf_user, award):
         return {**existing.model_dump(exclude={"mongo_id", "user_id"}),
                 "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": CARD_SECONDS}
 
-    async def finish(uid: str, s: RfSession, results: List[CardResult]):
+    async def finish(uid: str, s: RfSession, results: List[CardResult], mode: str = "solo"):
         """Closes a sprint with the student's answers and pays it once. A sprint already closed answers as it did then."""
         sid = s.id
         if s.status == "completed":
@@ -170,6 +171,7 @@ def make_router(db, rf_user, award):
         # Diamonds come from fresh sprints only: replays of the same missed cards never earn them.
         gems, best = phoenix([row["outcome"] for row in s.results]) if s.mode == "fresh" else ({}, 0)
         reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam, diamonds=gems, phoenix_streak=best)
+        track_server("rapid_fire_match_completed", uid, {"mode": mode, "exam": s.exam.lower(), "result": "completed"}, key="solo:" + sid)
         return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
 
     @r.post("/sessions/{sid}/complete")
@@ -203,7 +205,7 @@ def make_router(db, rf_user, award):
                 await db.rf_sessions.insert_one({**s.to_mongo(), "offline": True, "played_at": data.played_at})
             except DuplicateKeyError:  # the same round sent twice at the same moment
                 s = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
-        return await finish(uid, s, data.results)
+        return await finish(uid, s, data.results, mode="offline")
 
     @r.get("/history")
     async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Header(None)):

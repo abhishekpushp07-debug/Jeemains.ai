@@ -34,6 +34,7 @@ import { An, index } from "@/src/analysis/format";
 import { MatchedWith } from "@/src/matched/MatchedWith";
 import { KeptOffer } from "@/src/offline/KeptOffer";
 import { keepAiCopy } from "@/src/offline/papers";
+import { track } from "@/src/jlTracker";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -172,8 +173,9 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
     if (i >= 0) setTimeout(() => rail.current?.scrollToIndex({ index: i, viewPosition: 0.5, animated: false }), 50);
   }, [q?.id, subject, filter]); // eslint-disable-line react-hooks/exhaustive-deps
   const consult = useCallback(async (x: any) => {
+    track("solution_viewed", { set_id: String(r.set_id || ""), question_no: Number(x.number) || 0 });
     try { await post(`/attempts/${id}/questions/${x.id}/solution-open`, {}); setOpened((o) => ({ ...o, [x.id]: "ok" })); } catch { setOpened((o) => ({ ...o, [x.id]: "err" })); }
-  }, [id]);
+  }, [id, r.set_id]);
   useEffect(() => { let live = true; Promise.resolve().then(() => { if (live && q && !opened[q.id]) void consult(q); }); return () => { live = false; }; }, [q, opened, consult]);
 
   return (
@@ -396,6 +398,10 @@ export default function Result() {
   }, [id, version, n, user]);
 
   const ready = resultIsReleased(status, r);
+  // Analytics: the result once per opening, and the analysis each time its tab is shown.
+  const setId = ready ? String(r?.set_id || "") : "";
+  useEffect(() => { if (setId) track("result_viewed", { set_id: setId }); }, [setId]);
+  useEffect(() => { if (setId && tab === "analysis") track("analysis_opened", { set_id: setId }); }, [setId, tab]);
   // Every released full mock is remembered with the account for the Dream College Meter (original score only).
   useEffect(() => {
     if (!ready || version !== "original" || !r?.summary) return;

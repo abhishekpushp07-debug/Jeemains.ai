@@ -19,6 +19,7 @@ import { GemColor } from "@/src/rapid/Art";
 import { ArenaBg } from "@/src/rapid/arena";
 import { CARD_COUNTS, CARD_SECONDS, decodePicks, isBitsat } from "@/src/rapid/scope";
 import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
+import { track } from "@/src/jlTracker";
 import { DiamondsWon, GemFlare, StreakGem, gemAt } from "@/src/rapid/StreakGem";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
@@ -146,7 +147,7 @@ function RapidSessionRound() {
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
       : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: p.revision === "1" || p.ids ? 30 : size, revision: p.revision === "1", weak_topics: p.weak === "1", request_id: reqId.current,
           ...(picks && !p.ids && p.revision !== "1" && p.weak !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
-          .then((s) => { clearTimeout(slow); if (!alive) return; setSession(s); setCards(s.cards); });
+          .then((s) => { clearTimeout(slow); if (!alive) return; setSession(s); setCards(s.cards); track("rapid_fire_started", { mode: "solo" }); });
     run.catch(async (e) => {
       clearTimeout(slow);
       if (!alive) return;

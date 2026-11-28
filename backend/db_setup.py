@@ -104,6 +104,8 @@ async def setup_database(db, cups):
     await db.rf_duels.create_index([("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])
     await db.rf_duels.create_index("players.uid")
     await db.rf_awards.create_index([("uid", 1), ("ref", 1)], unique=True)
+    await db.rf_awards.create_index("ts")  # CEO API: the paid matches of a range of days
+    await db.mission_links.create_index([("created_ts", -1), ("code", 1)])  # CEO API: links newest first
     await db.rf_profiles.create_index("uid", unique=True)
     await db.rf_profiles.create_index([("xp", -1)])
     await db.rf_cards.create_index([("exam", 1), ("subject", 1), ("chapter", 1), ("retired", 1)])

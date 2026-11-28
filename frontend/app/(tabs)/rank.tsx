@@ -28,6 +28,7 @@ import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
 import { PdfButton } from "@/src/rank/PdfButton";
 import { shareJee } from "@/src/rank/share";
 import { shareCard } from "@/src/shareCard";
+import { track } from "@/src/jlTracker";
 import { useShareLink } from "@/src/mission/stats";
 import { DreamPanel } from "@/src/dream/DreamPanel";
 import { setJeeProfile } from "@/src/dream/need";
@@ -84,6 +85,7 @@ export default function RankTab() {
   const scrollY = useRef(0);
   const winH = useWindowDimensions().height;
   const tapTool = (t: Tool) => {
+    if (t !== tool) track("rank_tool_opened", { tool: t });
     openTool(t);
     if (formTop.current - scrollY.current > winH * 0.62) scroll.current?.scrollTo({ y: Math.max(0, formTop.current - winH * 0.3), animated: true });
   };

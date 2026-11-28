@@ -12,6 +12,7 @@ import { NameSheet } from "@/src/components/series/NameSheet";
 import { useChosenName } from "@/src/profileName";
 import { useBank } from "@/src/offline/bank";
 import { useKeptResults } from "@/src/offline/papers";
+import { AnalyticsSwitch } from "@/src/AnalyticsSwitch";
 
 export default function Account() {
   const insets = useSafeAreaInsets();
@@ -73,6 +74,7 @@ export default function Account() {
         </GroupList> : null}
         <GroupList title="Privacy" testID="account-group-privacy">
           <ListRow testID="account-privacy" icon="shield-check-outline" label="Privacy policy & support" onPress={() => router.push("/privacy")} />
+          <AnalyticsSwitch />
           {/* Papers and their images are not part of the browser arena. */}
           {ARENA ? null : <ListRow testID="account-loading-performance" icon="speedometer" label="Loading performance" sub="Check how fast papers and images load" onPress={() => router.push("/performance")} />}
         </GroupList>

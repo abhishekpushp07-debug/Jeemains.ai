@@ -34,6 +34,7 @@ from client_ip import client_ip
 from jl_transport import UpstreamError, canonical_request
 from legal_pages import CONTENT
 from rf_access import forget_grants, verified_grant
+from jl_track import track_server
 
 logger = logging.getLogger("account_deletion")
 API = os.environ['JEELIVE_API'].rstrip('/')
@@ -307,6 +308,7 @@ def make_router(db, client):
             update["$push"] = {"history": {"at": _now(), "event": "rapid_fire_erased", "by": "server"}}
         doc = await db.account_deletions.find_one_and_update({"id": doc["id"]}, update, projection={"_id": 0}, return_document=ReturnDocument.AFTER)
         logger.info("account deletion requested id=%s first=%s", doc["id"], first)
+        track_server("account_delete_requested", uid, {"source": doc.get("source", "")}, key="deletion:" + doc["id"])
         return receipt(doc)
 
     @router.get("/delete-request/{rid}")

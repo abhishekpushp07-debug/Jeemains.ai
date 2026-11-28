@@ -20,6 +20,7 @@ import { useExams } from "@/src/api/examCatalog";
 import { timeLabel } from "@/src/choice/api";
 import { MockRow, mockOver, useMocks } from "@/src/misfire/mock/store";
 import { useSendWaiting } from "@/src/misfire/mock/marking";
+import { useSearchTrack } from "@/src/searchTrack";
 
 type Tab = "progress" | "saved" | "completed";
 const TABS: Tab[] = ["completed", "progress", "saved"];
@@ -105,6 +106,7 @@ export default function MyTests() {
   }, [q]);
   const search = new URLSearchParams({ tab, page: "1", q: query, status: "all", exam }).toString();
   const list = useCached<any>(user ? `u.${user.id}.tests.${search}` : null, (signal) => api("/my/tests?" + search, { signal }));
+  useSearchTrack("my_tests", query, list.data ? (list.data.items || []).length : null);
   useListFocus(list.revalidate);
   // Exam filters follow the website's exam list, so attempts of a newly added exam can be filtered too.
   const catalog = useExams();

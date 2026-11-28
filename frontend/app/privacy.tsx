@@ -6,6 +6,7 @@ import { Pill } from "@/src/components/design";
 import { useTheme } from "@/src/theme";
 import content from "@/src/legal/content.json";
 import { LegalLayout, legalStyles } from "@/src/legal/LegalLayout";
+import { ANALYTICS_NOTICE } from "@/src/AnalyticsSwitch";
 
 export default function Privacy() {
   const router = useRouter();
@@ -17,6 +18,10 @@ export default function Privacy() {
       <T testID={`privacy-heading-${section.id}`} w="heavy" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2.2 }}>{section.title.toUpperCase()}</T>
       <T testID={`privacy-body-${section.id}`} size={15} color={colors.muted} style={legalStyles.body}>{section.body}</T>
     </View>)}
+    <View testID="privacy-section-analytics" style={legalStyles.block}>
+      <T testID="privacy-heading-analytics" w="heavy" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2.2 }}>USAGE ANALYTICS</T>
+      <T testID="privacy-body-analytics" size={15} color={colors.muted} style={legalStyles.body}>{ANALYTICS_NOTICE}</T>
+    </View>
     <Pill testID="privacy-account-deletion" label="Delete account" kind="outline" icon="account-remove-outline" onPress={() => router.push("/delete-account")} />
   </LegalLayout>;
 }

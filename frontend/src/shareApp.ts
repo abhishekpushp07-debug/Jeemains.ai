@@ -1,6 +1,7 @@
 // The app's own invite: one message for the Home share card, the "share with friends" chip and Our Mission.
 import { Share } from "react-native";
 import { sendWhatsApp } from "@/src/rapid/social";
+import { track } from "@/src/jlTracker";
 
 export const APP_LINK = "https://jeelive.ai";
 
@@ -19,5 +20,5 @@ export const APP_SHARE_TEXT = [
   `100% free, forever. Join me 👉 ${APP_LINK}`,
 ].join("\n");
 
-export const shareAppWhatsApp = () => sendWhatsApp(APP_SHARE_TEXT);
-export const shareAppAnywhere = () => { Share.share({ message: APP_SHARE_TEXT }).catch(() => {}); };
+export const shareAppWhatsApp = () => { track("share_sheet_opened", { target: "whatsapp", from: "app_invite" }); return sendWhatsApp(APP_SHARE_TEXT); };
+export const shareAppAnywhere = () => { track("share_sheet_opened", { target: "share_sheet", from: "app_invite" }); Share.share({ message: APP_SHARE_TEXT }).catch(() => {}); };

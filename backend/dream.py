@@ -8,6 +8,8 @@ from fastapi import APIRouter, Header, HTTPException, Path
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
 
+from jl_track import track_server
+
 DreamExam = Literal["jee", "bitsat", "comedk"]
 MAX_DREAMS, MAX_MOCKS, MAX_DROPPED = 5, 30, 200
 
@@ -98,6 +100,11 @@ def make_router(db, rf_user):
             except DuplicateKeyError:  # the list changed meanwhile (the unique uid blocks a second document)
                 continue
             if res.matched_count or res.upserted_id is not None:
+                had = {d["id"] for d in doc.get("dreams", [])}
+                for d in dreams:  # a dream college newly on the account's list (never one that was already there)
+                    if d["id"] not in had:
+                        track_server("dream_college_selected", uid, {"exam": d["exam"], "college": d.get("college", ""), "branch": d.get("branch", ""), "count": sum(x["exam"] == d["exam"] for x in dreams)},
+                                     key="dream:" + d["id"])
                 return {"dreams": dreams}
         raise HTTPException(503, "Abhi bahut badlav ek saath aa rahe hain. Thodi der mein phir try hoga.")
 

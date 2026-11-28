@@ -4,6 +4,7 @@ import { advanceAuthEpoch, ApiError, api, clearAssetCache, clearRapidAccess, pos
 import { storage } from "@/src/utils/storage";
 import { draftIndex, discardAllDrafts } from "@/src/drafts";
 import { flushDreams, setDreamAccount } from "@/src/dream/store";
+import { identify, reset as resetTracker } from "@/src/jlTracker";
 
 // A busy or unreachable server is not a signed-out student: the session check retries by itself (honouring the
 // server's Retry-After, spread a little so a crowd does not come back at the same second) before showing an error.
@@ -13,6 +14,9 @@ const pause = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 // After a session ends by itself the sign-in screen keeps the number, so coming back needs only the PIN.
 const LAST_PHONE = "jl_last_phone", ENDED = "jl_session_ended";
 const shownPhone = (p: unknown) => { const n = typeof p === "string" ? p.replace(/[^\d+]/g, "") : ""; return /^\+91\d{10}$/.test(n) ? n.slice(3) : n; };
+// The account the analytics were last told about in this run (src/jlTracker.ts): told once per sign-in or session
+// restore, not again on every return to the app.
+let identified = "";
 
 export type User = { id: string; name: string; phone?: string; role: string; exam?: string; access_type?: string; pin_set?: boolean; display_name?: string | null };
 /** The name the app shows for a student: the name chosen on jeelive.ai (display_name), or "Learner" when there is none.
@@ -76,6 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signedIn.current = true;
     setAssetAccount(u.id); setDreamAccount(u.id);
     setUser(u); setExpired(false); setSessionError(""); setSignOutWarning(""); setReady(true);
+    if (identified !== u.id) { identified = u.id; identify(u.id); } // the website's user id only, never the number
     return u;
   }, []);
   const checkSession = useCallback((): Promise<void> => {
@@ -164,6 +169,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       catch { setSignOutWarning("Signed out on this device. Server sign-out couldn't be confirmed while offline."); }
     } else setSignOutWarning("");
     await forgetPrivateProfile(true); await resetSessionHandle(); setExpired(false);
+    identified = ""; resetTracker(); // the next events on this phone belong to nobody until someone signs in
     // Signing out on purpose leaves no number behind (a shared phone stays private).
     ended.current = false; setLastPhone("");
     await Promise.all([storage.removeItem(LAST_PHONE), storage.removeItem(ENDED)]);

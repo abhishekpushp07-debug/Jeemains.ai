@@ -8,6 +8,7 @@ import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
 import { CATEGORY_LABEL, EXAM, KIND, TAG } from "./tones";
 import { CollegeCol, CollegeSide, compareColleges, fmt, getColleges, JeeProfileIn } from "./api";
+import { track } from "@/src/jlTracker";
 import { RemoveButton, Strip, Switch, Tag } from "./controls";
 import { useAccent } from "./accent";
 import { CollegeSearch, Option } from "./CollegeSearch";
@@ -62,7 +63,7 @@ export function CollegeCompare({ profile, onBranches }: { profile: JeeProfileIn;
     if (chosen.length < 2) { setData(null); return; }
     let live = true;
     setBusy(true); setError(null);
-    compareColleges(chosen.map(c => ({ exam: c.exam, id: c.key })), profile).then(d => { if (live) setData(d); })
+    compareColleges(chosen.map(c => ({ exam: c.exam, id: c.key })), profile).then(d => { if (live) { setData(d); track("college_compare_used", { kind: "colleges", count: chosen.length }); } })
       .catch(e => { if (live) setError(e.message); }).finally(() => { if (live) setBusy(false); });
     return () => { live = false; setBusy(false); };
   }, [key, tries]); // eslint-disable-line react-hooks/exhaustive-deps

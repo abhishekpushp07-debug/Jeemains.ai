@@ -13,6 +13,8 @@ import { InboxPoller, isRoomPath } from "@/src/rapid/social";
 import { SmoothMode } from "@/src/analysis/smooth";
 import { MatchedGate } from "@/src/matched/gate";
 import { OfflineDoor, OfflineKeeper } from "@/src/offline/door";
+import { init, ScreenTracker } from "@/src/jlTracker";
+import { FeatureTracker } from "@/src/featureTrack";
 import { colors, space } from "@/src/theme";
 
 // "matched" (JEE Main questions that matched ours) is open to people who have not signed in.
@@ -20,6 +22,9 @@ import { colors, space } from "@/src/theme";
 const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account", "matched", "offline"];
 
 LogBox.ignoreAllLogs(true);
+// JLive Command analytics (first-party; src/jlTracker.ts): app_open, sessions, heartbeats and screens. Never awaited.
+// An automated browser (this project's own checks) is never counted; every real browser and phone is.
+if (!(globalThis as any).navigator?.webdriver) void init();
 
 export default function RootLayout() {
   // Prewarm brand + icon fonts so icons render on first paint (Expo Go Android).
@@ -47,6 +52,8 @@ export default function RootLayout() {
             <SmoothMode />
             <MatchedGate />
             <OfflineKeeper />
+            <ScreenTracker />
+            <FeatureTracker />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="offline/index" options={{ animation: "none" }} />
               <Stack.Screen name="offline/rapid" options={{ gestureEnabled: false, animation: "none" }} />

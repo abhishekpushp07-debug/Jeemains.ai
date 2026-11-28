@@ -11,6 +11,7 @@ import * as Sharing from "expo-sharing";
 import { captureRef } from "react-native-view-shot";
 import { sendWhatsApp } from "@/src/rapid/social";
 import { sendFileToWhatsApp } from "@/src/whatsappFile";
+import { track } from "@/src/jlTracker";
 
 export type CardRef = React.RefObject<React.ComponentRef<typeof View> | null>;
 /** shared = false only when the student closed the share sheet without sending (where the phone tells us).
@@ -37,6 +38,8 @@ export async function cardWebFile(card: CardRef, filename: string): Promise<any 
 }
 
 export async function shareCard(card: CardRef, o: CardShare): Promise<ShareOutcome> {
+  // "JEELIVE-Mission.png" -> from "Mission": which card was shared.
+  track("share_sheet_opened", { target: o.toWhatsApp === false ? "share_sheet" : "whatsapp", from: o.filename.replace(/\.png$/i, "").replace(/^JEELIVE-/i, "").slice(0, 60) });
   const text = o.fallback ?? o.caption;
   if (Platform.OS === "web") {
     const nav = (globalThis as any).navigator;

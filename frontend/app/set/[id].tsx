@@ -11,6 +11,7 @@ import { DCard, Pill, RoundButton, ScreenHeader, SectionLabel } from "@/src/comp
 import { colors, radius, space, subjectColor } from "@/src/theme";
 import { checkReadiness } from "@/src/api/readiness";
 import { warmAttempt } from "@/src/api/paperOpening";
+import { track } from "@/src/jlTracker";
 
 export default function SetDetail() {
   const { id, start: auto } = useLocalSearchParams<{ id: string; start?: string }>();
@@ -29,7 +30,7 @@ export default function SetDetail() {
 
   useEffect(() => {
     let alive = true;
-    api(`${user ? "/my/sets/" : "/sets/"}${id}`).then((d) => { if (alive) { setError(""); setS(d); setSaved(!!d.saved); } }).catch((e) => alive && setError(e.message));
+    api(`${user ? "/my/sets/" : "/sets/"}${id}`).then((d) => { if (alive) { setError(""); setS(d); setSaved(!!d.saved); track("test_card_viewed", { set_id: String(id) }); } }).catch((e) => alive && setError(e.message));
     storage.getItem<string | null>(startKeyName, null).then(async (k) => {
       key.current = k || uuid();
       if (!k) await storage.setItem(startKeyName, key.current);
@@ -49,6 +50,7 @@ export default function SetDetail() {
 
   // One tap: the device/connection check the server needs runs silently, then the attempt opens.
   async function start(checkedAt = 0) {
+    track("test_start_clicked", { set_id: String(id) }); // the tap only: the website alone says what an attempt did
     setBusy(true);
     setError("");
     try {

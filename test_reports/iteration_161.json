@@ -1,0 +1,63 @@
+{
+  "summary": "JLive Command analytics review (READ ONLY on the QA learner). BACKEND: ceo_api_check 21/21, jl_server_check 12/12, new pytest test_iter_jlive_ceo_mission.py 19/19 (401 without/with a bad bearer, 200 + Cache-Control no-store on all 6 CEO endpoints, users is_test + last_active desc/uid asc order + include_test, page=0 no 500, bad/inverted/too-long ranges -> 400, mission/links limit capped at 500, Mission redirect 302 with UTM for ZZZZZZ2 and plain https://jeelive.ai for 'bad!'). Server hooks reviewed in code: every track_server/track_wallet call comes after the successful DB write; track_server is sync, schedules a task, swallows all errors; business responses unchanged. FRONTEND (390x844, collector answered in the browser, nothing reached the real dashboard, no non-GET /api/jl outside /auth reached the website, solution-open POST stopped): jl_tracker_check 9/9; jl_tracker_full_check 36/39 (the 3 FAILs: 1 test artifact (a daily-offer modal covered the Store tab), 1 inconclusive selector run, later checked again and passing, and 1 REAL BUG: Gang tab -> /rapid/gang/new sends a 2nd feature_entry_viewed {feature:gangs}); jl_feature_entry_check: misfire -> /misfire/mock/new sends no 2nd entry, Store tab fires on a clean tap; jl_solution_viewed_check 2/2. Checked and passing: app_open/session_start/screen_view/identify (uid is a lowercase website UUID), only the X-JL-Key pk_ header with no Authorization, no phone/PIN/name/token in props or context, no forbidden event names, feature_entry_viewed for misfire/choice/mission/performance/store/leagues/gangs, series_slot_viewed, test_card_viewed, result_viewed, analysis_opened, solution_viewed, rank_tool_opened, search_performed/search_zero_results {area} without the typed text, the privacy switch (default ON, exact notice, OFF -> opt_out then nothing POSTed over 3 screens, jl_optout='1' survives a reload, ON -> opt_in and events start again, left ON), /privacy analytics section, sign-out reset (no uid and a new anon_id afterwards). Integration finding: the real collector's CORS allows only https://jeelive.ai, so the web build/preview origin cannot deliver events (native apps are not affected).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/ceo/* (401/400 errors)", "issue": "Error responses (HTTPException) come without Cache-Control: no-store. Only the 200 JSONResponses set NO_STORE. Low risk because the errors carry no data."},
+      {"endpoint": "backend/jl_track.py:23", "issue": "JLIVE_COLLECTOR_URL falls back to a hardcoded default URL, which goes against the env-only rule. Acceptable if this is intended."},
+      {"endpoint": "backend/sprints.py:174 finish", "issue": "track_server runs even when this call was not the one that completed the sprint (twin request, done=None). Only the deterministic uuid5 key 'solo:'+sid stops a double count. That is fine but relies on the collector's de-duplication."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "feature_entry_viewed gangs", "issue": "REPRODUCED: on the Rapid Gang tab, rapid.tsx:45 trackFeature('gangs') fires, then tapping rf-new-gang (/rapid/gang/new) or a gang (/rapid/gang/<gid>) makes FeatureTracker (featureTrack.ts:9 /^\\/rapid\\/gang/) fire a 2nd {feature:'gangs'}, because was.current is '' on /rapid. This breaks the 'not again for sub-pages of the same feature' rule. Fix: let FeatureTracker skip when the previous path was /rapid and the arena tab was gang (or keep one shared 'last feature' value in featureTrack for both trackers).", "affected_testIDs": ["arena-tab-gang", "rf-new-gang"]},
+      {"flow": "Rapid tab re-entry (code review, unverified)", "issue": "rapid.tsx:45 tracks only on [tab] change. The tab screen stays mounted and useArenaTab is a global store, so leaving the Rapid tab with Store/Trophy/Gang selected and coming back sends no new feature_entry_viewed. Per entry it is undercounted.", "affected_testIDs": ["tab-rapid"]},
+      {"flow": "Web build -> real collector CORS", "issue": "OPTIONS preflight to https://student-radar-5.emergent.host/api/collect/v1/batch: Origin https://jeelive.ai -> 204 with allow headers; Origin = the app's preview origin (or app.jeelive.ai, or none) -> 403 without CORS headers. Any web copy of the app cannot deliver events (the queue fills up, nothing arrives). Native iOS/Android send no preflight. Dashboard side: allow-list the app's web origin(s) if web tracking matters.", "affected_testIDs": []},
+      {"flow": "optOut race (jlTracker.ts:81)", "issue": "optOut() pushes opt_out, calls flush(), then sets q=[] at once. If a flush is already running (sending=true), or backoff (until) is active, or the POST fails, opt_out is lost and never retried. Fix: keep opt_out in the queue (q = q.filter(e => e.event_name==='opt_out')) and let push/flush allow that single event while optedOut.", "affected_testIDs": ["account-analytics-switch"]},
+      {"flow": "first screen_view (jlTracker.ts:14,86)", "issue": "screen starts as '/'. When the app opens on '/', no screen_view is sent for that first screen, only on later navigation. Fix: start screen as '' so the first path is always reported.", "affected_testIDs": []}
+    ],
+    "design_issues": [
+      {"screen": "Account > Privacy", "issues": ["account-analytics-switch renders 40x20 px on web. Only the switch is tappable, not the 68 px row, so it is below the 44x44 touch target. Make the whole row a Pressable that toggles, or add a hitSlop.", "The notice says 'Settings > Privacy' but the screen is titled 'Account' (group 'Privacy'). The owner mandated the copy, so consider which label to use."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter_jlive_ceo_mission.py",
+    "/app/tests/jl_tracker_full_check.py",
+    "/app/tests/jl_feature_entry_check.py",
+    "/app/tests/jl_solution_viewed_check.py",
+    "/app/tests/jl_tracker_check.py",
+    "/app/tests/ceo_api_check.py",
+    "/app/tests/jl_server_check.py",
+    "/app/test_reports/pytest/jlive_ceo_mission.xml"
+  ],
+  "action_items": [
+    "Fix the double feature_entry_viewed {feature:gangs} on Gang tab -> /rapid/gang/* (featureTrack.ts + rapid.tsx:45): one shared 'current feature' value for both trackers.",
+    "Optional: fire store/leagues/gangs again when the Rapid tab regains focus (useFocusEffect) so every entry is counted.",
+    "Make opt_out reliable: do not drop it when a flush is in flight, in backoff, or failed (jlTracker.ts:81).",
+    "Initialise `screen` to '' so the first screen ('/') gets a screen_view (jlTracker.ts:14).",
+    "Make the 'Share usage analytics' row fully tappable or add a hitSlop to the switch (40x20 on web).",
+    "Dashboard side (not an app bug): the collector's CORS allows only https://jeelive.ai. Add the app's web origin(s) if the web copy should be tracked.",
+    "Optional: add NO_STORE headers to CEO API error responses."
+  ],
+  "critical_code_review_comments": [
+    "Server hooks follow the rules: sprints.finish after find_one_and_update + award; duels settle only `if flipped`; daily settle after award; gamify.award only when pay_once returned a profile; shop buy / rush / quest / league / squad after the guarded update (the failure paths raise before); dream only for ids that were not in the list before and only after a matched or upserted write; mission_link_created after insert_one (DuplicateKeyError skips it); mission_link_opened goes to the link OWNER uid, and an invalid or nonexistent code returns before any DB write; account_delete_requested after find_one_and_update with key 'deletion:'+id.",
+    "track_server: only website-UUID uids, secret required, scalar props capped at 30 keys / 200 chars, 2 s httpx timeout, task kept in the _running set, every exception swallowed. jl_server_check confirms it does not block or raise.",
+    "Client events seen: analysis_opened, app_background, app_open, feature_entry_viewed, heartbeat, identify, opt_in, opt_out, rank_tool_opened, result_viewed, screen_view, search_performed, search_zero_results, series_slot_viewed, session_start, solution_viewed, test_card_viewed. No account_created and no test/attempt started|submitted|resumed|expired. Note: set/[id].tsx:53 has 'test_start_clicked' (tap only). It matches the owner's list but its name is close to the banned family, so worth a confirmation.",
+    "analysis_opened fires automatically on every result load because 'analysis' is the default tab. That is acceptable per the request, but it equals result_viewed in count.",
+    "Catalogue search 'JEE' on /catalogue?slug=jee-main&kind=mocks returned 0 results for the QA learner (both searches were zero-results). The tracker was right, but someone should check whether the mocks search is meant to find nothing for 'JEE'."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter_jlive_ceo_mission.py (new)",
+    "/app/tests/jl_tracker_full_check.py (new)",
+    "/app/tests/jl_feature_entry_check.py (new)",
+    "/app/tests/jl_solution_viewed_check.py (new)"
+  ],
+  "success_rate": {"backend": "100% (52/52 checks)", "frontend": "~95% (all requested events verified; 1 real double-count bug in gangs)"},
+  "seed_data_creation": "None. No DB writes; QA learner untouched (the privacy switch was left ON; the sign-out at the end of jl_tracker_full_check only ended that browser's session, and its POST /api/rf/access/revoke was stopped in the browser).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run `python3 /app/tests/jl_tracker_full_check.py` (~4 min, signs in, collector answered in the browser, stops non-GET /api/jl and /api/rf except /api/rf/access). Wait >=6.5 s after a tap before reading events (flush tick is 5 s). On the Rapid tab a daily-offer modal can cover the arena bar on the first tap. The QA learner's finished attempt: 1ea510f2-1d2a-41f7-9bb4-a8b28c16f98f (set jee-main-pyq-2025-01-22-s2). Home tab testID is not 'tab-index' (unverified). Use /catalogue?slug=jee-main&kind=mocks for search.",
+  "rca_of_issue": "gangs double count: two independent trackers. rapid.tsx tracks the in-screen Gang tab, and FeatureTracker tracks the /rapid/gang route. FeatureTracker's was.current is '' on /rapid, so the gang sub-route counts as a new entry. Repro: sign in -> tab-rapid -> arena-tab-gang (gangs fires) -> rf-new-gang (gangs fires again)."
+}

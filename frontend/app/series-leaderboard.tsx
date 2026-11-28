@@ -26,6 +26,7 @@ import { ScreenMotion } from "@/src/motion";
 import { istDate } from "@/src/navigation";
 import { colors, fonts, noOutline, pastel, radius, space, tabEdges } from "@/src/theme";
 import { DayInfo, dayAttempt, istTime, useSeriesData } from "@/src/series";
+import { useSearchTrack } from "@/src/searchTrack";
 import { heard } from "@/src/profileName"; // the name last heard in this run of the app (and whose it is): shared with the Account screen
 
 type Part = "top" | "around" | "find";
@@ -208,6 +209,7 @@ function Find({ id, q, onQ, you, daily, onPick }: { id: string; q: string; onQ: 
 /** The answer for one search term. A new term starts a new look-up, so an older answer is never shown under it. */
 function Found({ id, term, you, onPick }: { id: string; term: string; you?: BoardRow | null; onPick?: (r: BoardRow) => void }) {
   const d: Board | null = useBoard(id, term);
+  useSearchTrack("aits_leaderboard", term, d && d.state === "ready" ? (d.found || []).length : null);
   if (!d) return <Skeleton h={60} style={styles.soft} />;
   if (d.state === "error") return <T testID="aits-board-find-error" size={13} color={colors.error}>Dhoondh nahi paaye. Internet dekh kar dobara likho.</T>;
   const found = d.found || [];

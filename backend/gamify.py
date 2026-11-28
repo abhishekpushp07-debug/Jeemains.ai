@@ -18,6 +18,7 @@ from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, GEM_SHOP, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
 from later import later
+from jl_track import track_server, track_wallet
 
 IST = timezone(timedelta(hours=5, minutes=30))
 logger = logging.getLogger("jeelive")
@@ -290,6 +291,10 @@ def make_router(db, rf_user):
                 sets["win_run"] = 0
         update = {"$inc": inc, "$max": {"best_streak": streak, "best_phoenix": phoenix_streak}, **({"$set": sets} if sets else {})}
         fresh = await pay_once(db, uid, ref, update)
+        if fresh:  # this call paid: the dashboard hears of the streak and the wallet once
+            if sets.get("streak"):
+                track_server("streak_awarded", uid, {"streak": streak}, key=ref)
+            track_wallet(uid, {"coins": coins, "xp": xp, **{f"diamonds.{c}": n for c, n in diamonds.items()}}, "match_reward", key=ref)
         p = fresh or await db.rf_profiles.find_one({"uid": uid}) or {"uid": uid, "xp": xp, "coins": coins}
         win_run = p.get("win_run", 0)
         before = level_of(p.get("xp", 0) - xp)
@@ -433,6 +438,7 @@ def make_router(db, rf_user):
             need = ", ".join(f"{n} {c.title()}" for c, n in (gems or {}).items())
             raise HTTPException(409, "You already own this." if item["id"] in have.get("owned", []) else f"Not enough diamonds. You need {need}. Win them with Phoenix streaks." if gems
                                 else f"Not enough coins — you need {item['price']}. Earn more in sprints and duels.")
+        track_wallet(uid, {f"diamonds.{c}": -n for c, n in gems.items()} if gems else {"coins": -item["price"]}, "shop_buy", item=item["id"])
         return {"coins": p.get("coins", 0), "owned": p.get("owned", []), "freezes": p.get("freezes", 0), "diamonds": vault_of(p)}
 
     @r.post("/rush/claim")
@@ -447,6 +453,7 @@ def make_router(db, rf_user):
                                                      {"$inc": inc, "$addToSet": {"day_stats.rush": at}}, return_document=True)
         if not p:
             raise HTTPException(409, "This chest is not ready yet, or you already opened it.")
+        track_wallet(uid, {"coins": coins, **({f"diamonds.{bonus}": 1} if bonus and bonus != "freeze" else {})}, "rush_claim", key=f"rush:{ist_day()}:{at}")
         return {"chest": name, "coins": coins, "bonus": bonus, "coins_total": p["coins"], "rush": rush_of(p)}
 
     @r.post("/shop/equip")
@@ -484,6 +491,7 @@ def make_router(db, rf_user):
                                               {"$inc": {"coins": q["coins"]}, "$addToSet": {"day_stats.claimed": q["id"]}})
         if not res.modified_count:
             raise HTTPException(409, "Already claimed.")
+        track_wallet(uid, {"coins": q["coins"]}, "quest_claim", key=f"quest:{ist_day()}:{q['id']}")
         return {"coins": q["coins"]}
 
     return r, award

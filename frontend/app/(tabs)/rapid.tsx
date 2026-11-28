@@ -18,6 +18,7 @@ import { go, setArenaTab, useArenaTab } from "@/src/rapid/social";
 import { useAuth } from "@/src/auth";
 import { DailyPopup } from "@/src/rapid/DailyPopup";
 import { useDaily, useDailyLook } from "@/src/rapid/daily";
+import { enterFeature } from "@/src/featureTrack";
 
 // The Crimson Arena: Rapid Fire's own world with its own bottom bar. The app's bar hides while this tab is open.
 /**
@@ -40,6 +41,8 @@ function Arena() {
   const uid = useAuth().user?.id || "", daily = useDaily(uid), look = useDailyLook();
   const [ask, done] = useDailyOffer();
   const offer = ask && !!daily.data && daily.data.you.status !== "done" && tab === "arena";
+  // Analytics: the Store, the Trophy tab's leagues and the Gang tab, each time one is opened.
+  useFocusEffect(useCallback(() => { enterFeature(tab === "store" ? "store" : tab === "trophy" ? "leagues" : tab === "gang" ? "gangs" : ""); }, [tab]));
   // Warm the Trophy and Gang lists while the lobby is open, so those tabs open with their data in one go (no spinner, no jump).
   useEffect(() => {
     if (!uid) return;

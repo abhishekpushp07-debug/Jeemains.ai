@@ -13,6 +13,7 @@ from gamify import crown_of, ist_week, level_of, week_ends_in
 from shared_pass import SharedPass
 from shop import equipped_of, safe_avatar
 from social import blocked_uids, public_name
+from jl_track import track_wallet
 
 FRIEND_PRIZES = (150, 100, 50)
 EMPTY = {"xp": 0, "wins": 0, "correct": 0, "matches": 0}
@@ -82,6 +83,7 @@ def make_router(db, rf_user):
         p = await db.rf_profiles.find_one_and_update({"uid": uid, "league_claims": {"$ne": f"f:{last}"}}, {"$inc": {"coins": prize}, "$addToSet": {"league_claims": f"f:{last}"}}, return_document=True)
         if not p:
             raise HTTPException(409, "You already collected this prize.")
+        track_wallet(uid, {"coins": prize}, "league_prize", key=f"league:{last}")
         return {"coins": prize, "coins_total": p["coins"]}
 
     # ---------- Gang War board ----------

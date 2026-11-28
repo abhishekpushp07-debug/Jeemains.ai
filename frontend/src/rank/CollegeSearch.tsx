@@ -6,6 +6,7 @@ import { Press, T } from "@/src/components/ui";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, fonts, noOutline, radius, space } from "@/src/theme";
+import { useSearchTrack } from "@/src/searchTrack";
 
 export type Option = { key: string; title: string; sub: string; find?: string };
 
@@ -18,6 +19,7 @@ export function CollegeSearch({ visible, title, options, onPick, onClose, testID
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
     return options.filter(o => words.every(w => `${o.title} ${o.sub} ${o.find ?? ""}`.toLowerCase().includes(w))).slice(0, 60);
   }, [q, options]);
+  useSearchTrack("colleges", q, options.length ? shown.length : null);
   return <DSheet visible={visible} onClose={onClose} title={title} testID={testID}>
     {header}
     <TextInput testID={`${testID}-search`} value={q} onChangeText={setQ} placeholder={hint} placeholderTextColor={colors.custom_dim}

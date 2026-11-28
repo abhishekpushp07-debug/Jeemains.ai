@@ -6,10 +6,12 @@ import { space } from "@/src/theme";
 import { Switch } from "@/src/rank/controls";
 import { DreamMeter } from "./DreamMeter";
 import { DreamExam, dreamsOf, EXAM_NAME, EXAMS, MAX_DREAMS, useDreams } from "./store";
+import { enterFeature } from "@/src/featureTrack";
 
 export function DreamPanel({ onAdd }: { onAdd: () => void }) {
   const s = useDreams();
   const [exam, setExam] = useState<DreamExam | null>(null);
+  useEffect(() => { enterFeature("dream"); }, []); // the Dream College tool is opened (it stays mounted once opened)
   const first = EXAMS.find(e => dreamsOf(s, e).length) ?? null;
   // Until the student picks an exam, follow the first exam that has dreams (they load from the phone after mount).
   useEffect(() => { if (exam === null && first) setExam(first); }, [exam, first]);

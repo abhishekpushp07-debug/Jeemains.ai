@@ -14,6 +14,7 @@ import { CollegeSearch } from "./CollegeSearch";
 import { Chooser, useOnce, useTarget } from "./TargetMarks";
 import { CutoffList } from "./CutoffList";
 import { SAVED, useProfileSaves } from "./profile";
+import { track } from "@/src/jlTracker";
 
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
 /** One exam's choice. `text` is what is typed in the score box; `score` is the one the list is filtered by (null = show all). */
@@ -65,6 +66,9 @@ export function Cutoff({ states }: { states: string[] }) {
   const t = useTarget(q, cutoff);
   // While the next list loads, the old one is another exam's or another college's: never show it under this choice.
   const data = t.data && q && t.data.exam === exam && t.data.by === p.by && t.data.key === q.key ? t.data : null;
+  // One event for each answer shown (a new exam, college or branch), not for every score typed under it.
+  const shown = data ? `${data.exam}|${data.by}|${data.key}` : "";
+  useEffect(() => { if (shown && data) track("cutoff_search_completed", { exam: data.exam, by: data.by, rows: data.rows.length }); }, [shown]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <>
     <Switch prefix="cut-exam" value={exam} onChange={e => patch({ exam: e })} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />

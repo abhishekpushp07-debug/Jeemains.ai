@@ -6,6 +6,7 @@ import { Icon, T } from "@/src/components/ui";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { TONE, mmss, pc } from "./format";
 import { Block, ChipButton, EmptyLine } from "./parts";
+import { useSearchTrack } from "@/src/searchTrack";
 
 const seen = new Map<string, { d: any; at: number }>();
 /** Forget a paper's leaderboard, so the next look asks the website again. */
@@ -67,6 +68,7 @@ function Rows({ rows, value, onPick, testID }: { rows: any[]; value: string; onP
 export function Leaderboard({ id, value, onPick }: { id: string; value: string; onPick: (v: string) => void }) {
   const [q, setQ] = useState("");
   const d = useBoard(id, q.trim());
+  useSearchTrack("paper_leaderboard", q, d && d.state === "ready" ? (d.found || []).length : null);
   if (!d || d.state !== "ready") return null;
   const top: any[] = d.rows.slice(0, 10);
   const rows: any[] = q.trim() ? d.found : top;

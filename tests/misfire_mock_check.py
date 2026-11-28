@@ -13,7 +13,7 @@ from playwright.async_api import async_playwright  # noqa: E402
 from shine_helpers import sign_in  # noqa: E402
 
 BASE = dotenv_values("/app/frontend/.env")["EXPO_PUBLIC_BACKEND_URL"].rstrip("/")
-W = int(sys.argv[1]) if len(sys.argv) > 1 else 390
+W = int(sys.argv[1]) if len(sys.argv) > 1 and sys.argv[1].isdigit() else 390
 # "right": every result's option questions answered in the browser with key "A", so picking A is right (tests "Samajh gaya").
 RIGHT = len(sys.argv) > 2 and sys.argv[2] == "right"
 RES, BLOCKED, FAKED, ERRORS = [], [], [], []

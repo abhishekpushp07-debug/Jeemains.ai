@@ -23,6 +23,7 @@ from gamify import level_of, phoenix
 from social import make_pid, public_name, team_line, team_scores
 from scope import CARD_COUNTS, CARD_SECONDS, MAX_PICKS, Pick, label_for, normalise, scope_fields, scope_of
 from leagues import record_battle
+from jl_track import track_server
 
 DUEL_CARDS = 30
 MAX_CARDS = max(CARD_COUNTS)
@@ -496,6 +497,13 @@ def make_router(db, rf_user, public_card, award):
             # Every player is paid at settle time, even one who never returns; the players' rewards are independent of
             # each other, so they are written side by side (the last answer of a 5-player room waited for 5 in a row).
             await asyncio.gather(*(reward_for(d, p["uid"]) for p in d["players"] if not p.get("bot")))
+            if flipped:  # the dashboard hears of a match once, from the call that finished it
+                mode = ("cup" if d.get("cup_id") else "gang" if d.get("team_mode") else "quick" if d.get("mode") == "random"
+                        else "rival" if any(p.get("bot") for p in d["players"]) else "duel")
+                for p in d["players"]:
+                    if not p.get("bot"):
+                        result = "win" if won_by(d, p["uid"]) else "draw" if d.get("winner") in (None, "", "tie") else "loss"
+                        track_server("rapid_fire_match_completed", p["uid"], {"mode": mode, "exam": str(d.get("exam", "")).lower(), "result": result}, key="duel:" + d["id"])
             for hook in hooks if flipped else ():
                 try:
                     await hook(d)

@@ -10,6 +10,7 @@ import { ErrorBox, Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, space } from "@/src/theme";
 import { compareSaved, CompareCol, fmt, JeeProfileIn } from "./api";
+import { track } from "@/src/jlTracker";
 import { EXAM, TAG } from "./tones";
 import { RemoveButton, Strip, Switch, Tag } from "./controls";
 import { PdfButton } from "./PdfButton";
@@ -56,7 +57,7 @@ function BranchCompare({ onGoCollege, onColleges }: { onGoCollege: () => void; o
     if (chosen.length < 2) { setData(null); return; }
     let live = true;
     setBusy(true); setError(null);
-    compareSaved(chosen.map(toCompareItem)).then(d => { if (live) setData(d); }).catch(e => { if (live) setError(e.message); }).finally(() => { if (live) setBusy(false); });
+    compareSaved(chosen.map(toCompareItem)).then(d => { if (live) { setData(d); track("college_compare_used", { kind: "branches", count: chosen.length }); } }).catch(e => { if (live) setError(e.message); }).finally(() => { if (live) setBusy(false); });
     return () => { live = false; setBusy(false); };
   }, [key, tries]); // eslint-disable-line react-hooks/exhaustive-deps
 
