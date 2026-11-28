@@ -1572,3 +1572,8 @@ Owner approved two jobs and left the technical decisions to the agent ("dono ka 
 - Proposed contract for the website: memory/WEBSITE_MISFIRE_MOCK_NOTE.md. Check: tests/misfire_web_check.py 30/30 (website played by the browser; also fakes /api/rf/dream writes). testing_agent iteration_163: no app bugs. Incident: an earlier run of the script let the app drop the QA learner's real PYQ 1ea510f2 from his Dream meter (preview DB); repaired the same day (dropped empty, mock re-recorded).
 
 
+
+## Feature book v5 (28 Nov 2026) — website hand-off
+- New pages: handoff/feature_book/parts/41_misfire_offline.md (Part 4.7 Offline Misfire) and 42_misfire_mock.md (Part 4.8 Misfire Mock: what the website builds, JSON, one question); examples/misfire_mock_ask.json + misfire_mock_answers.json (checked by build_book.py through choice.misfire_on/shape_bank); shots x04–x10 by take_shots_misfire.py (read-only; website + /api/rf/dream writes answered by the browser).
+- Edited: 00_start (owner box, "New in version 5" box, 0.2 rows, 0.3, rules 27–28, words), 40_misfire (4.1 + decisions), 30_reference (3.1, 3.6, names), 50_rapid_fire (28 Nov Publish; picture 24), 60_one_account (picture 25), 70_together (7.2/7.5/7.6). VERSION 5.
+- Built: JEELIVE_Student_Choice_and_Matched_Book.pdf (74 pages), BOOK.md, /app/handoff/JEELIVE_Student_Choice_and_Matched_Book.zip. Build noticed: website door A now answers 401 signed out (was 404).

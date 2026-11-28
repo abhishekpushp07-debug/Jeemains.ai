@@ -6,7 +6,7 @@
 
 | Address | Who may call | What it gives | Other answers |
 | --- | --- | --- | --- |
-| `GET /api/choice/bank` | a signed-in student (a short pass in the `Authorization` header) | the chapters of the three subjects with their tests, the owner's rules, and `pick` / `random` | `{ "ready": false }` when there is no chapter at all; 401 without a pass; 401 with the code `website_session` when the website wants a fresh session; 503 when the website does not answer |
+| `GET /api/choice/bank` | a signed-in student (a short pass in the `Authorization` header) | the chapters of the three subjects with their tests, the owner's rules, `pick` / `random`, and `misfire` (Part 4.8: `true` only when door A says exactly `true`) | `{ "ready": false, "misfire": … }` when there is no chapter at all; 401 without a pass; 401 with the code `website_session` when the website wants a fresh session; 503 when the website does not answer |
 | `GET /api/choice/chapters/<id>` | a signed-in student | door B's questions in the shape the app draws; everything else dropped | 404 no questions to choose; 401; 503 |
 | `POST /api/jl/choice/papers` | the student's own session | passed on to the website's door C as it is | the website's own answer |
 | `GET /api/matched` | everyone | all published shifts, newest first, without their questions; `total` | |
@@ -37,8 +37,9 @@
 | `POST /api/choice/papers` | Student Choice: make the paper | 1.6, door C |
 | `GET /api/matched` | Matched: the list of published shifts, and the card's switch | 2.4c |
 | `GET /api/matched/<shift id>` | Matched: one shift | 2.4c |
+| `"misfire": true` in door A; door C with `mode: "misfire"`; `GET /api/exam-navigation/jee-main/history?kind=misfire` | the Misfire Mock | 4.8 |
 
-And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part 1.8); `test_kind` "choice" and "matched" on those papers and their results; `test_kind` on the items of `GET /api/my/tests` (Part 1.9).
+And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part 1.8); `test_kind` "choice" and "matched" on those papers and their results; `test_kind` on the items of `GET /api/my/tests` (Part 1.9). For the Misfire Mock also `test_kind` "misfire", and `misfire: { understood, total }` in its result (Part 4.8).
 
 ## 3.2 Every number
 
@@ -213,15 +214,17 @@ None of these needs an app update, except taking the tile off Home.
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
 | Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
 | Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5), `test_samples_stay_home.py` (6): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
-| Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4) |
+| Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4), except Offline Misfire's mocks and its note of the "Samajh gaya" ids (Part 4.7) |
+| Offline Misfire (Part 4.7) | `frontend/app/misfire/mock/new.tsx`, `[id].tsx`; `frontend/app/offline/misfire/index.tsx`, `new.tsx`, `[id].tsx`; `frontend/src/misfire/mock/` (`build.ts`, `store.ts`, `marking.ts`, `pictures.ts`, `offline.ts`, `MocksTab.tsx`, `Ready.tsx`, `Player.tsx`, `Result.tsx`, `Closed.tsx`); `frontend/src/misfire/known.ts`; the offline door `frontend/src/offline/door.tsx`. Checks: `python3 tests/offline_misfire_check.py` (30), `python3 tests/misfire_mock_check.py` |
+| Misfire Mock (Part 4.8) | `frontend/src/misfire/web.ts`, `web/WebMocksTab.tsx`, `web/Understood.tsx`; the setup `frontend/app/misfire/mock/new.tsx` (`?web=1`); the tab `frontend/app/misfire/index.tsx`; the switch on the server `backend/choice.py` (`misfire_on`). Check: `python3 tests/misfire_web_check.py` (30) |
 | All India Rapid's "Misfires" | server `backend/daily.py` (`GET /api/rf/daily/misses`); app `frontend/src/rapid/DailyMisses.tsx` |
 | Rapid Fire in a browser | the built copy `backend/arena_web/`, served by `backend/arena_web.py` at `/api/arena`; built by `scripts/build_arena_web.sh` (then the owner's Publish); `backend/tests/test_arena_web_complete.py` (every file the copy names is answered; no file is left out of a Publish; no workspace address in it). In a browser: `python3 tests/slow_phone_check.py arena`, `python3 tests/slow_phone_wins.py arena` (also with `calm`, `reduce`, `narrow`, `laptop`) |
 | One account | `frontend/src/auth.tsx`, `frontend/src/api/client.ts`, `backend/jl_proxy.py` (the website's doors), `backend/rf_access.py` (Rapid Fire's id from `auth/me`), `backend/account_deletion.py`, `backend/pin_reset.py` |
 | Working together (Part 7) | the app's calls: `frontend/src/api/client.ts` and the screens; the app's server: `backend/jl_proxy.py`, `jl_transport.py`, `website_shield.py`, `session_coordination.py`, `login_guard.py`, `client_ip.py`. The read-only walk: `python3 tests/website_doors_walk.py`. The list of Part 7.2 is checked against the app's code by `build_book.py` |
 | Samples stay in the workspace | `backend/workspace.py`; used by `backend/matched.py` and `backend/choice.py`; `backend/tests/test_samples_stay_home.py` (6) |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
-| Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on {{TODAY}} and takes their place for readers outside the app side |
-| This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
+| Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`, `memory/WEBSITE_MISFIRE_MOCK_NOTE.md`. This book was written from the code on {{TODAY}} and takes their place for readers outside the app side |
+| This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py`, `take_shots_more.py`, `take_shots_misfire.py` |
 
 ### Names of the screens' parts, for automated checks
 
@@ -239,6 +242,7 @@ Every part of the two features carries a fixed name (`testID`; in the web previe
 | Matched page | `matched-screen`, `matched-total`, `matched-month-…` (the pills) or `matched-month-only`, `matched-day-<day>`, `matched-shift-<shift id>` (a row), `-count`, `-number`, `matched-empty`, `matched-error`, `matched-refresh` |
 | A shift | `matched-shift-screen`, `matched-shift-count`, `matched-attempt` (the button), `matched-attempt-facts`, `matched-attempt-questions`, `matched-attempt-note`, `matched-attempt-soon`, `matched-shift-list-title`, `matched-subject-…` (the pills), `matched-shift-list`, `matched-shift-empty`, `matched-shift-error`, `matched-signup-sheet`, `matched-signup-yes`, `matched-signup-login` |
 | The paper's page, player, solutions, result | `set-detail-screen`; `matched-with` (the JEE question under ours), `matched-with-where`, `matched-with-jee`; `result-dream` (the Dream College meter: must be absent on a chapter test and on a Student Choice paper) |
+| Misfire's two mocks (Parts 4.7, 4.8) | the tabs `misfire-tab-mock` ("Offline Misfire") and `misfire-tab-web` ("Mock", only with the switch on); `misfire-mock-hero`, `misfire-mock-new`; `misfire-web-hero`, `misfire-web-new`, `misfire-web-<attempt id>`; the setup `mock-new-screen`, `mock-new-header`, `mock-new-phone` (the phone's sentence), `mock-new-web-retry`, `mock-new-bar-go`, `mock-making-error`, `mock-making-retry`; offline `offline-misfire-open`, `mock-closed`; the results `mock-result-waiting`, `mock-result-moved`, `result-misfire-understood`, `result-misfire-understood-count` |
 
 A row of the chapter list is best found as `[role=checkbox][data-testid^=choice-chapter-]`: the list's own name starts with the same letters.
 

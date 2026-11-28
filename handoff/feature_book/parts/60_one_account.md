@@ -11,7 +11,7 @@ The owner (26 Nov 2026): a student who signs up on the website can sign in to th
 - **One user list:** the website's. The app's server keeps only the app's own extras (Rapid Fire profile, coins, diamonds, friends, Dream College, Mission) under the **website's own student id**. It reads that id from the website's `GET /api/auth/me` and never makes up an id of its own.
 - **The browser Rapid Fire** (Part 5) signs in the same way, with the same id.
 
-[[shots: a01_signin | 18. The app's sign-in screen: the same phone number and PIN as on jeelive.ai]]
+[[shots: a01_signin | 25. The app's sign-in screen: the same phone number and PIN as on jeelive.ai]]
 
 ## 6.2 Every door the app uses for accounts
 

@@ -107,9 +107,10 @@ The list of 7.2 is not written from memory: when this book is built, every door 
 
 | Door | Used for | Sent | The app relies on |
 | --- | --- | --- | --- |
-| `GET /choice/bank` | **(server)** Student Choice, door A | `?exam=jee-main` | Part 1.6 |
+| `GET /choice/bank` | **(server)** Student Choice, door A; the Misfire Mock's switch `misfire` | `?exam=jee-main` | Part 1.6; Part 4.8 |
 | `GET /choice/chapters/<id>/questions` | **(server)** Student Choice, door B | `?page=` | Part 1.6 |
-| `POST /choice/papers` | Student Choice, door C | Part 1.6 | Part 1.6 |
+| `POST /choice/papers` | Student Choice, door C; the Misfire Mock (`mode: "misfire"`) | Part 1.6; Part 4.8 | Part 1.6; Part 4.8 |
+| `GET /exam-navigation/jee-main/history` | the Misfire Mock's list, asked only while door A says `"misfire": true` | `?kind=misfire&page=` | Part 4.8 |
 | `GET /matched` | **(server)** Matched: the list, every 2 minutes | — | Part 2.4c |
 | `GET /matched/<id>` | **(server)** Matched: one shift | — | Part 2.4c |
 | `GET /series/all-india-jee/leaderboard` | the whole-series leaderboard | `?q=` | Part 7.5 |
@@ -191,6 +192,7 @@ The app asks these today and gets 404. **Nothing breaks; a part of the app simpl
 | `GET /api/choice/bank?exam=jee-main`, `GET /api/choice/chapters/<set id>/questions`, `POST /api/choice/papers` | question picking and the random mock | Part 1.6 |
 | `GET /api/matched`, `GET /api/matched/<shift id>` | the real shifts of Matched | Part 2.4c |
 | `GET /api/series/all-india-jee/leaderboard` (and `?q=<name or Rank>`) | a "Poori series" tab on the AITS Leaderboard, with its Rank card and share card | below |
+| `"misfire": true` in `GET /api/choice/bank?exam=jee-main`; then `POST /api/choice/papers` with `mode: "misfire"`, `GET /api/exam-navigation/jee-main/history?kind=misfire`, and `misfire` in a result | Misfire's "Mock" tab and the Misfire Mock. The last three are asked only once door A says `true` | Part 4.8 |
 
 **The whole-series leaderboard** (the app side's earlier note, repeated here so that it is in one book). The same envelope and the same row as `GET /api/attempts/<id>/leaderboard`, plus three fields:
 
@@ -222,6 +224,7 @@ The app asks these today and gets 404. **Nothing breaks; a part of the app simpl
 - **The list against the code:** every door the app's screens name in their code is in 7.2 (the build of this book stops otherwise). The doors of the app's server were read from its code (`backend/jl_proxy.py`, `choice.py`, `matched.py`, `rf_access.py`, `pin_reset.py`, `account_deletion.py`, `owner_panel.py`).
 - **A read-only walk** (`tests/website_doors_walk.py`): 30 screens of the app's preview were opened as the test learner, and every call to the website was written down. Signing in was the one write; nothing was started, answered, saved or submitted. 21 doors were seen: 19 answered 200; `auth/refresh` answered 401 once, before sign-in, as it should; `series/all-india-jee/leaderboard` answered 404 (7.5).
 - **The rules of 7.3** were read from the app server's code (`jl_proxy.py`, `jl_transport.py`, `website_shield.py`, `session_coordination.py`, `login_guard.py`) and from the app's (`frontend/src/api/client.ts`).
+- **Misfire's two mocks (28 Nov 2026):** Offline Misfire and the Misfire Mock were walked on the preview with the website's answers played by the browser (Parts 4.7 and 4.8). Nothing was written to the website.
 
 **Not checked**
 

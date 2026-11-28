@@ -4,13 +4,15 @@
 
 **Misfire** is every question a student got wrong or left in a finished paper, kept so they can solve it again. jeelive.ai has it, and the app has had it since 24 Nov 2026.
 
-**It is the website's Misfire.** The app does not keep, count or mark Misfire questions of its own. It reads the website's answers and sends the student's tries back to the website. So the website and the app always show the same open questions, the same "Samajh gaya" (understood) questions and the same counts. **Nothing has to be handed over in either direction for it to work: it is already connected.** This part is here so the website agent can check that the two stay the same (Part 4.4).
+**It is the website's Misfire.** The app does not keep, count or mark Misfire questions of its own. (Its one practice of its own, new on 28 Nov 2026, is **Offline Misfire**, Part 4.7: a mock kept on the phone, which never changes the website's Misfire by itself and sends a right answer only through the website's own doors. The website's own **Misfire Mock**, built in the app and waiting for its switch, is Part 4.8.) It reads the website's answers and sends the student's tries back to the website. So the website and the app always show the same open questions, the same "Samajh gaya" (understood) questions and the same counts. **Nothing has to be handed over in either direction for it to work: it is already connected.** This part is here so the website agent can check that the two stay the same (Part 4.4).
 
 | Decision | Date | Where it shows |
 | --- | --- | --- |
 | Misfire must be the same on the website and in the app: one calculation, the website's | 26 Nov 2026 (the owner) | the whole of this part |
 | The app also shows it paper-wise for AITS, JEE Chapter-wise, JEE PYQ, BITSAT Mocks, BITSAT Chapter-wise and COMEDK Mocks | 24 Nov 2026 | Part 4.2 |
 | All India Rapid's "Misfires" tab is Rapid Fire's own and is not given to the website | 26 Nov 2026 | Part 4.5 |
+| The app's "Mock" tab becomes "Offline Misfire": on the phone, also with no internet | 28 Nov 2026 (the owner) | Part 4.7 |
+| A Misfire mock for the website and the app alike is the website's paper, behind the switch `misfire` | 28 Nov 2026 (the owner) | Part 4.8 |
 
 ## 4.2 What a student sees in the app
 

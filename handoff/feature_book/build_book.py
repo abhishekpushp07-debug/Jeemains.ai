@@ -44,9 +44,9 @@ import choice  # noqa: E402
 import matched  # noqa: E402
 
 NAME = "JEELIVE_Student_Choice_and_Matched_Book"
-VERSION = "4"
+VERSION = "5"
 PARTS = ["00_start", "10_choice_today", "11_choice_doors", "12_choice_rest", "20_matched_student", "21_matched_website", "22_matched_admin", "30_reference",
-         "40_misfire", "50_rapid_fire", "60_one_account", "70_together"]
+         "40_misfire", "41_misfire_offline", "42_misfire_mock", "50_rapid_fire", "60_one_account", "70_together"]
 PDF, MD, ZIP = HERE / f"{NAME}.pdf", HERE / "BOOK.md", ROOT / "handoff" / f"{NAME}.zip"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
@@ -174,6 +174,19 @@ def check_examples():
     assert listed[shift["id"]] == shift["updated_at"] == shaped["updated_at"], "the list and the shift must carry the same updated_at"
     assert datetime.fromtimestamp(shift["updated_at"], IST).strftime("%Y-%m-%d") == shift["id"][:10]
     assert [s["n"] for s in shaped["subjects"]] == [1, 1, 1] and shaped["items"][0]["jee"]["correct"] == 1 and shaped["items"][0]["ours"][0]["correct"] == 1
+    # The Misfire Mock (Part 4.8): the switch through the server's own rule, and the shapes the app sends and reads.
+    ask_c, said = read("misfire_mock_ask.json"), read("misfire_mock_answers.json")
+    one = {"subjects": [{"name": "Physics", "chapters": [{"id": "chapter-physics", "title": "A chapter", "count": 30}]}]}
+    assert choice.shape_bank({**one, **said["door_A_adds"]}, own=False)["misfire"] is True and choice.shape_bank(one, own=False)["misfire"] is False
+    assert all(choice.misfire_on({"misfire": bad}) is False for bad in (False, "true", 1, None))
+    assert ask_c["mode"] == "misfire" and ask_c["exam"] == "jee-main" and re.match(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", ask_c["request_key"])
+    assert set(ask_c["counts"]) == set(choice.SUBJECTS) and all(isinstance(n, int) and 0 <= n <= 25 for n in ask_c["counts"].values()) and sum(ask_c["counts"].values()) >= 1
+    assert all(s in choice.SUBJECTS and ask_c["counts"][s] > 0 and names and all(isinstance(x, str) and x for x in names) for s, names in ask_c["chapters"].items())
+    assert re.match(matched.ID, said["door_C_answer_200_or_201"]["set_id"])
+    rows = said["history_kind_misfire"]["items"]
+    assert rows[0]["summary"] and not rows[1]["summary"] and rows[1]["resumable"] is True and said["history_kind_misfire"]["pages"] >= 1
+    m = said["result_adds"]
+    assert m["test_kind"] == "misfire" and isinstance(m["misfire"]["understood"], int) and 0 <= m["misfire"]["understood"] <= m["misfire"]["total"]
     return shaped
 
 
@@ -383,7 +396,7 @@ def headings(body):
 
 LEAD = ("The app side's final hand-off to jeelive.ai. The app's two new features, Student Choice and Matched: what a student sees, "
         "what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen. "
-        "Then the three things that keep the website and the app one: Misfire, Rapid Fire in a browser, and one account. "
+        "Then the three things that keep the website and the app one: Misfire (with Offline Misfire and the website's Misfire Mock, new in version 5), Rapid Fire in a browser, and one account. "
         "Then how the two sides work together: every door of the website the app uses, and how a change to one is agreed. And what has not been checked yet.")
 TITLE = "Student Choice, Matched, Misfire, Rapid Fire and one account"
 
@@ -406,7 +419,16 @@ README = f"""# {TITLE}: the website hand-off (v{VERSION}, {TODAY})
 For the JE Live website agent and the JE Live super admin. Written by the app side from the app's code on {TODAY}.
 Give the website agent `BOOK.md` (paste it into its chat) or the PDF. Nothing in it is a password, a key or a private link.
 
-New in version 4 (27 Nov 2026). A reader who has version 3 needs only the box "New in version 4" at the start of Part 0:
+New in version 5 (28 Nov 2026). A reader who has version 4 needs only the box "New in version 5" at the start of Part 0:
+- Part 4.7, Offline Misfire: Misfire's "Mock" tab is now "Offline Misfire", a practice mock of the student's own
+  Misfire questions on the phone, also with no internet. Never a paper on the website; a right answer becomes
+  "Samajh gaya" through the website's own Misfire doors when the line is back. Nothing for the website to build.
+- Part 4.8, the Misfire Mock made by the website: built in the app and shut until door A says "misfire": true. What
+  the website builds (door C mode "misfire", history kind=misfire, the result's "misfire" count), the JSON
+  (examples/misfire_mock_*.json) and one question for the website.
+- Rules 27 and 28 in Part 0.4; the new doors in Parts 7.2 and 7.5; the owner's Publish of 28 Nov 2026 in Part 0.2.
+
+New in version 4 (27 Nov 2026):
 - Where things stand after the owner's Publish of 26 Nov 2026 (Part 0.2), read when the book was built.
 - Rapid Fire in a browser (Part 5.2): in production its icons are empty boxes, because its icon font never reached
   production. Found and mended on the app's preview on 27 Nov 2026; students get it with the owner's next Publish.

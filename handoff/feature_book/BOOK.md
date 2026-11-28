@@ -1,15 +1,15 @@
 # JEELIVE.AI — Student Choice, Matched, Misfire, Rapid Fire and one account: the website hand-off
 
-For the JE Live website agent and the JE Live super admin. Written by the app side on 27 Nov 2026. Version 4.
+For the JE Live website agent and the JE Live super admin. Written by the app side on 28 Nov 2026. Version 5.
 
-The app side's final hand-off to jeelive.ai. The app's two new features, Student Choice and Matched: what a student sees, what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen. Then the three things that keep the website and the app one: Misfire, Rapid Fire in a browser, and one account. Then how the two sides work together: every door of the website the app uses, and how a change to one is agreed. And what has not been checked yet.
+The app side's final hand-off to jeelive.ai. The app's two new features, Student Choice and Matched: what a student sees, what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen. Then the three things that keep the website and the app one: Misfire (with Offline Misfire and the website's Misfire Mock, new in version 5), Rapid Fire in a browser, and one account. Then how the two sides work together: every door of the website the app uses, and how a change to one is agreed. And what has not been checked yet.
 
 # Part 0 — Read this first
 
 ### Owner ke liye (short)
 
-- Yeh **website ko dene wala hand-off, version 4** hai (27 Nov 2026). Version 3 ki saari baatein isme hain; **naya kya hai**, woh theek neeche ke box mein hai.
-- **Sabse zaroori (production, 27 Nov 2026):** 26 Nov ke Publish (14:40 UTC) ne production ko **preview ke database ki copy** par chala diya. Isliye students ko abhi preview ka test data dikh raha hai, aur Matched mein **3 banawati (sample) shifts** asli ki tarah dikh rahe hain. Asli database delete nahi hua; use wapas lagwana platform support ka kaam hai (Part 0.2 ka laal box). App side par 27 Nov ko rok laga di gayi hai: workspace ke bahar sample kabhi nahi dikhega (agle Publish se).
+- Yeh **website ko dene wala hand-off, version 5** hai (28 Nov 2026). Version 4 ki saari baatein isme hain; **naya kya hai**, woh theek neeche ke box mein hai.
+- **Production:** is book ke bante waqt wahan koi banawati (sample) shift nahi mila.
 - Isme chheh cheezein hain: **Student Choice** (Part 1), **Matched** (Part 2), **Misfire** (Part 4: website ka hi, app sirf dikhata hai), **browser wala Rapid Fire** (Part 5: app ka, website sirf link lagati hai), **ek hi account** (Part 6: website ya app, kahin bhi sign up karo, dono jagah wahi phone + PIN chalta hai; yeh pehle se aisa hi hai), aur **saath kaam karne ke niyam** (Part 7, naya: app website ke kaun-kaun se darwaze use karta hai, aur website koi darwaza badalne se pehle kya kare, taaki students ke phone mein app kabhi na toote).
 - **Student Choice aaj chalta hai**: student chapters tick karta hai (naam likh kar dhoondh bhi sakta hai) aur har chune chapter ka poora test deta hai. Sawaal JEE Main ke chapter-wise sawaal hi hain; alag bank nahi hai.
 - **Naya rang (26 Nov):** Student Choice ke upar ka card result page jaisa gehra laal, aur Physics / Chemistry / Maths ke chamakte rangeen tabs (laal, amber, teal). Neeche ke cards safed hi hain. Banaye paper ke subject-wise minute ab hamesha total ke barabar judte hain.
@@ -18,15 +18,24 @@ The app side's final hand-off to jeelive.ai. The app's two new features, Student
 - **Dream College meter**: chapter test aur Student Choice paper kabhi nahi ginte, chahe kitne bhi lambe hon.
 - **Matched**: app taiyaar hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Home ka Matched card **pehla asli shift publish hote hi, usi din** aa jayega; AITS ke bache dinon mein All India series us card ke theek neeche ek bar ban jaati hai. (Koi shift na ho to bhi 28 Jan 2027 se card aa jayega.)
 - **Misfire**: website aur app ka Misfire ek hi hai (website ka). Website agent ko Part 4.4 ki 6 baatein check karni hain. All India Rapid ka "Misfires" tab Rapid Fire ka apna hai, alag.
-- **Rapid Fire browser mein**: app ke server par chalta hai; website ko sirf "Rapid Fire" button / link lagana hai, code nahi lena (Part 5). **27 Nov ko mila:** production mein iske icons khaali dibbe dikh rahe hain (icon ki file Publish ke saath gayi hi nahi thi). Preview par theek kar diya hai; agle Publish se students ko theek dikhega.
-- **Students tak kab:** 26 Nov ke Publish (14:40 UTC) mein version 3 tak ka saara kaam server par pahunch gaya (pehli shift wala rule, AITS bar, 3 ghante wala sentence, naya rang, 26 Nov wala browser Rapid Fire). Screens phone mein tabhi badalti hain jab us Publish ke baad bana naya app build install ho. 27 Nov ka kaam (icons, slow phone par aaram, sample ki rok) agle Publish ke saath jayega.
+- **Naya (28 Nov): Offline Misfire** (Part 4.7). Misfire ka "Mock" tab ab "Offline Misfire" hai: apni galtiyon ka mock phone par, bina internet bhi (phone par rakhe papers se). Yeh website ka paper kabhi nahi banta; sahi jawab internet aate hi website par "Samajh gaya" ho jaate hain. **Website ko kuch nahi banana.**
+- **Naya (28 Nov): website wala Misfire Mock** (Part 4.8). App mein bana hua hai, par **band** hai: jab tak website door A mein `"misfire": true` nahi bhejti, students ko kuch nahi dikhega. Website ko paper banana hai (door C, `mode: "misfire"`), list aur result mein "Samajh gaya" ki ginti deni hai: Part 4.8 ki baatein.
+- **Rapid Fire browser mein**: app ke server par chalta hai; website ko sirf "Rapid Fire" button / link lagana hai, code nahi lena (Part 5). **27 Nov ko mila:** production mein iske icons khaali dibbe dikh rahe hain (icon ki file Publish ke saath gayi hi nahi thi). Preview par theek kar diya gaya tha; yeh 28 Nov ke Publish ke saath gaya. Production mein aaj kya dikhta hai, woh Part 0.2 mein hai (book bante waqt padha gaya).
+- **Students tak kab:** 26 Nov ke Publish (14:40 UTC) mein version 3 tak ka saara kaam server par pahunch gaya (pehli shift wala rule, AITS bar, 3 ghante wala sentence, naya rang, 26 Nov wala browser Rapid Fire). Aapka agla Publish 28 Nov ko hua: Offline Misfire ke banne ke baad, website wale Misfire Mock se pehle. Production mein aaj kya hai, woh is book ke bante waqt padha jaata hai (Part 0.2). Screens phone mein tabhi badalti hain jab naya app build install ho. Website wale Misfire Mock ka switch (door A ka `misfire`) agle Publish ke saath jayega.
 - Website agent ko yeh PDF (ya saath ki `BOOK.md`) dena hai. Super admin ke kaam ke hisse: Part 1.11, Part 2.8, Part 2.9 aur Part 6.5.
 
-### New in version 4 (27 Nov 2026): all that a reader of version 3 needs
+### New in version 5 (28 Nov 2026): all that a reader of version 4 needs
+
+1. **Offline Misfire** (Part 4.7, new). Misfire's "Mock" tab is now "Offline Misfire": a mock of the student's own Misfire questions on the phone, also with no internet, from the papers the phone keeps. It is never a paper on the website. A right answer becomes "Samajh gaya" through the website's own Misfire doors when the line is back. **Nothing for the website to build**; three things to keep as they are.
+2. **The Misfire Mock made by the website** (Part 4.8, new). Built in the app and **shut** until door A says `"misfire": true`. The website makes the paper with door C (`mode: "misfire"`), lists it with `history?kind=misfire`, and says in its result how many questions went to "Samajh gaya". What to build, the JSON, and one question for the website are in Part 4.8.
+3. Rules 27 and 28 are new in Part 0.4. Part 7.2 and Part 7.5 name the Misfire Mock's doors.
+4. The owner published again on 28 Nov 2026, after Offline Misfire was built and before the Misfire Mock was (Part 0.2). Everything else says what version 4 said.
+
+### New in version 4 (27 Nov 2026)
 
 1. **Where things stand has changed** (Part 0.2). The owner published on 26 Nov 2026 (live at 14:40 UTC): the app's server in production now has everything of version 3. What is still only on the preview is said there, row by row.
 2. **Rapid Fire in a browser** (Part 5.2). In production its icons are empty boxes: the icon font never reached production. Found on 27 Nov 2026 and mended on the preview; students get it with the owner's next Publish. The same new copy rests its decoration and its celebrations on a slow device. **Nothing for the website to do.**
-3. **Part 7 is new: working together.** Every door of the website the app uses (63, checked against the app's code when this book is built), how the app's server reaches the website, **what the website must not change without telling the app side**, how a change is agreed, and the doors the app already asks for (among them the whole-series leaderboard of the All India series).
+3. **Part 7 is new: working together.** Every door of the website the app uses (64, checked against the app's code when this book is built), how the app's server reaches the website, **what the website must not change without telling the app side**, how a change is agreed, and the doors the app already asks for (among them the whole-series leaderboard of the All India series).
 4. **Two more rules in Part 0.4** (25 and 26): never a redirect or an HTML page on an API door; tell the app side before a door changes.
 5. **A made-up sample is never shown outside the app's own workspace** (Part 2.12). Before, this was only a rule for people; since 27 Nov 2026 the app's server keeps it by itself.
 6. Parts 1, 4 and 6 say what they said in version 3. In Part 2 only the lines about production and about the samples changed.
@@ -42,7 +51,7 @@ Two new features, three things the website must know so that the website and the
 
 **Matched.** After every JEE Main shift, the questions of that shift that matched JE Live's own questions are shown side by side: the JEE Main question, and under it the question of ours it matched. Open to everyone, signed in or not. A signed-in student attempts all of ours in one **real paper** ("Attempt all matched"); a person without an account is asked to sign up first. On Home, the All India series card gives its place to the Matched card as soon as the first shift is published; for its remaining days the series is a bar right under that card.
 
-**Misfire** (Part 4). Every wrong or left question of a finished paper, to be solved again. **It is the website's own**; the app shows it as it comes. The website agent checks six points so the two stay the same.
+**Misfire** (Part 4). Every wrong or left question of a finished paper, to be solved again. **It is the website's own**; the app shows it as it comes. The website agent checks six points so the two stay the same. New in version 5: **Offline Misfire** (Part 4.7), the phone's own practice mock of those questions, also without internet; and the **Misfire Mock** (Part 4.8), the website's paper of them, built in the app and waiting for the website's switch.
 
 **Rapid Fire in a browser** (Part 5). The app's game also runs in any browser from the app's own server. **It is the app's**; the website only links to it.
 
@@ -50,7 +59,7 @@ Two new features, three things the website must know so that the website and the
 
 **Working together** (Part 7). Every door of the website the app uses, how the app's server reaches the website, and how a change to a door is agreed. An app in a student's phone cannot be changed without a new build, so the website must know what the app reads.
 
-## 0.2 Where things stand on 27 Nov 2026
+## 0.2 Where things stand on 28 Nov 2026
 
 | What | State | Waits for |
 | --- | --- | --- |
@@ -59,25 +68,21 @@ Two new features, three things the website must know so that the website and the
 | Student Choice: random mock | Built in the app, **closed** | the website: doors A and C |
 | Whole chapter tests timed by the 80 / 60 / 40 ratio, three hours at most | **Not true yet**: every chapter test has 60 minutes | the website: new minutes on 81 sets (Part 1.8) |
 | Dream College meter never counts a chapter test or a Student Choice paper | **Works** in the app | the website: `test_kind` "choice" on made papers (Part 1.9) |
-| Matched: public pages, sign-up sheet, the way back after sign-in, Home card, sign-in bar, the JEE question under ours | **Built.** In production **no real shift** is published; on 27 Nov 2026 it wrongly lists the preview's 3 made-up samples (the red box under this table) | the website and the super admin: the admin page, the real paper, two public doors (Part 2.4) |
-| Matched card on Home and the bar on the sign-in screen | **On in production, wrongly:** switched on by the preview's samples and by the samples' own switch, which came with them. With them gone it is off until the first real shift is published, and on from **28 Jan 2027** (India time) at the latest | the real database put back, or the next Publish (the red box under this table); then the first published shift (Part 2.6) |
+| Matched: public pages, sign-up sheet, the way back after sign-in, Home card, sign-in bar, the JEE question under ours | **Built.** In production the list is **empty** and the card is **off** | the website and the super admin: the admin page, the real paper, two public doors (Part 2.4) |
+| Matched card on Home and the bar on the sign-in screen | **Off in production:** no shift is published. They come on by themselves **when the first shift is published**, and on **28 Jan 2027** (India time) at the latest | the first published shift (Part 2.6) |
 | The first-shift rule of the card, and the All India bar under the Matched card | **In production's server since the Publish of 26 Nov 2026** (live at 14:40 UTC). The bar is a screen: a phone shows it with an app build made after that Publish | new app builds (whether one was made was not checked by the app side) |
 | Student Choice's new colours (dark-red top cards, glossy subject tabs) and a made paper's subject minutes that add up to its time | **Published on 26 Nov 2026** (Part 1.2). Screens: with an app build made after that Publish | new app builds |
 | Misfire | **Works:** the app shows the website's own Misfire, plus paper-wise tabs | the website: the checks of Part 4.4 |
-| Rapid Fire in a browser (`…/api/arena` on the app's server) | **Works** in production, from the copy built on 26 Nov 2026 (with All India Rapid's "Misfires" tab; live since the Publish of that day). Built again on 27 Nov 2026 on the preview. **In production its icons are empty boxes** (the icon font never reached production; found and mended on the preview on 27 Nov 2026, Part 5.2) | the owner's next Publish; the website: a link (Part 5.3) |
-| A made-up sample is never shown outside the app's own workspace | **Built on 27 Nov 2026, on the preview** (Part 2.12) | the owner's next Publish |
+| Offline Misfire: the phone's own practice mock of Misfire questions, also with no internet | **Built and checked on the preview on 28 Nov 2026**, and in the owner's Publish of that day. Screens: with an app build made after it | nothing from the website (Part 4.7) |
+| Misfire Mock made by the website | **Built on the preview on 28 Nov 2026, shut:** no student sees it while door A does not say `"misfire": true`. The app's side of the switch reaches production with the owner's next Publish | the website: Part 4.8 |
+| Rapid Fire in a browser (`…/api/arena` on the app's server) | **Works** in production, from the newest copy (built on 27 Nov 2026). Its icons are drawn in production | nothing; the website: a link (Part 5.3) |
+| A made-up sample is never shown outside the app's own workspace | **Built on 27 Nov 2026** (Part 2.12); in the owner's Publish of 28 Nov 2026 | nothing |
 | One account for the website and the app | **Works:** the app signs up and signs in only through the website's own doors | nothing new; the website keeps those doors (Part 6.3) |
 | The website's doors the app uses (Part 7) | **Listed and checked against the app's code** when this book is built | the website: read Part 7.4 before changing one |
 
-### Production on 27 Nov 2026: its database is not the real one
 
-- The owner's Publish of 26 Nov 2026 (live at 14:40 UTC) was made from a **copy of the workspace**. It pointed production at a **copy of the preview's database** instead of production's own. (Read from the platform's own record of that Publish on 27 Nov 2026. No code of the app did this.)
-- So production now holds the preview's test data, and **lists the preview's 3 made-up sample shifts as published** (`2027-01-22-s1`, `2027-01-22-s2`, `2027-01-24-s1`). Home's Matched card is on because of them. **They are not real shifts.** The website has published nothing: its Matched doors are not built (Part 3.7).
-- **The real production database was not deleted.** Putting it back is with the owner and the platform's support.
-- **Built on the app side on 27 Nov 2026:** a server that is not the workspace's own never shows a sample and never follows the samples' own switch, whatever its database holds (Part 2.12). It reaches production with the next Publish.
-- **Nothing for the website to do.** No student's `id` changed: the ids are the website's (Part 6).
 
-"In production" here means: the app's own server in production answers these addresses (checked on 27 Nov 2026, Part 3.7). The owner's last Publish before this book went live on 26 Nov 2026 at 14:40 UTC (the one before it at 05:33 UTC the same day). The server it published holds everything of version 3 of this book. **It does not hold** what was built after it: the browser Rapid Fire copy of 27 Nov 2026 with its icon font, the rest on slow devices, and the rule that keeps samples in the workspace. Those reach production with the next Publish. **Screens reach a student only with a build:** a phone keeps the screens of the build installed on it until a newer build is installed. Whether an app build was made after that Publish was not checked by the app side.
+"In production" here means: the app's own server in production answers these addresses (checked on 28 Nov 2026, Part 3.7). The owner published on 26 Nov 2026 (live at 14:40 UTC; the one before at 05:33 UTC the same day), with everything of version 3 of this book, and again on 28 Nov 2026, after Offline Misfire (Part 4.7) was built and before the Misfire Mock (Part 4.8) was. What production answers today is read when this book is built (the rows above and Part 3.7). The Misfire Mock's switch on the app's server reaches production with the next Publish. **Screens reach a student only with a build:** a phone keeps the screens of the build installed on it until a newer build is installed. Whether an app build was made after that Publish was not checked by the app side.
 
 ## 0.3 Who does what
 
@@ -90,14 +95,14 @@ Two new features, three things the website must know so that the website and the
 
 | Who | Misfire (Part 4) | Rapid Fire in a browser (Part 5) | One account (Part 6) |
 | --- | --- | --- | --- |
-| **The website agent** | The six checks of Part 4.4; tells the app side the `kind` of Student Choice and Matched papers | A "Rapid Fire" button / link. Nothing else: never a copy of its code | Keeps the sign-in doors, their fields and every student's `id` as they are (Part 6.3) |
+| **The website agent** | The six checks of Part 4.4; tells the app side the `kind` of Student Choice and Matched papers. Offline Misfire: nothing to build (Part 4.7). The Misfire Mock: Part 4.8, then the switch | A "Rapid Fire" button / link. Nothing else: never a copy of its code | Keeps the sign-in doors, their fields and every student's `id` as they are (Part 6.3) |
 | **The super admin** | Nothing | Nothing | Deletes a website account by hand when the app's owner panel lists a request (Part 6.5) |
-| **The app side** | Shows the website's Misfire; builds nothing of its own | Owns it; builds the browser copy again after screen changes | Uses only the website's accounts |
+| **The app side** | Shows the website's Misfire. Its one practice of its own is Offline Misfire, on the phone, never a website paper (Part 4.7). The Misfire Mock is built and waits for the switch (Part 4.8) | Owns it; builds the browser copy again after screen changes | Uses only the website's accounts |
 | **The owner** | — | Publishes the app | — |
 
 **Working together (Part 7).** The website agent reads Part 7.4 before changing a door that Part 7.2 lists, and tells the app side first when the change is not a free one. The app side keeps the list true: the build of this book checks it against the app's code.
 
-## 0.4 Twenty-six things nobody must get wrong
+## 0.4 Twenty-eight things nobody must get wrong
 
 1. **Student Choice has no question bank of its own.** Its questions ARE the JEE Main chapter-wise questions. A chapter in Student Choice is a chapter-wise test of the website, under that test's own id. Do not build a second bank.
 2. **A question listed for choosing never carries its options, its answer or its solution** (door B). Options appear only inside the paper.
@@ -125,6 +130,8 @@ Two new features, three things the website must know so that the website and the
 24. **A student's `id` never changes**, not on a PIN change, not ever: the app's coins, friends and ranks hang on it (Part 6.3).
 25. **An API door never answers with a redirect or an HTML page.** The app's server does not follow a redirect, and an HTML page is never shown to a student. Trouble is said as JSON: a status, `error.message` in plain words, `Retry-After` when there is one (Part 7.3).
 26. **Tell the app side before a door of Part 7.2 changes.** A new field is always safe. A renamed or removed field, another address or method, or another meaning of a status is not: phones keep old app builds for months (Part 7.4).
+27. **Offline Misfire is the phone's; the Misfire Mock is the website's.** An Offline Misfire mock is never a set, an attempt or a result on the website (Part 4.7). A Misfire Mock always is one, with `test_kind` exactly `"misfire"` (Part 4.8). Neither may make a second Misfire item for a question that already has one.
+28. **`"misfire": true` in door A only when all of Part 4.8 is ready.** The app opens Misfire's "Mock" tab on every phone within about 2 minutes of reading it.
 
 ## 0.5 How to read this book
 
@@ -148,6 +155,8 @@ Two new features, three things the website must know so that the website and the
 | the envelope | the website's usual wrapper round an answer: `{ "data": …, "error": null, "meta": { "api_version": "1" } }` |
 | to tick | to choose a chapter or a question by tapping it |
 | the ratio | the owner's time rule: 25 Maths = 80 minutes, 25 Physics = 60, 25 Chemistry = 40 |
+| Offline Misfire | the app's practice mock of a student's own Misfire questions, kept on the phone; also with no internet (Part 4.7) |
+| a Misfire Mock | a paper the website makes of a student's own open Misfire questions, `test_kind` `"misfire"` (Part 4.8) |
 | a new build | a new version of the app that students must install. Everything in this book is made so that the website's future work needs **no** new build. The app side's own changes (Part 0.2) do need the owner's Publish, and the screens need new builds |
 
 # Part 1 — Student Choice
@@ -181,7 +190,7 @@ What Student Choice must never do: make up an attempt, a result or a paper on th
 
 **2. First screen** ("Student Choice", small line "Apne chapters, apni marzi").
 
-- At the top, a **dark-red card** like the result page's score card (a gloss, a glass shine from corner to corner, a coloured edge): the small line "JEE MAIN · CHAPTER-WISE SAWAAL", the title "Apne chapters, apni marzi.", one sentence, and three facts read from the website, in clear glass chips: how many chapters, how many questions, the marking. On 27 Nov 2026: **81 chapters, 3750 sawaal, +4 / −1**.
+- At the top, a **dark-red card** like the result page's score card (a gloss, a glass shine from corner to corner, a coloured edge): the small line "JEE MAIN · CHAPTER-WISE SAWAAL", the title "Apne chapters, apni marzi.", one sentence, and three facts read from the website, in clear glass chips: how many chapters, how many questions, the marking. On 28 Nov 2026: **81 chapters, 3750 sawaal, +4 / −1**.
 - The cards below stay white; their icons are red on soft pink.
 - Card **"Chapters chuno"**: "Physics, Chemistry aur Maths ke chapters tick karo. Har chune chapter ka poora test milega: ek-ek karke do." When chapters are already ticked it adds "3 chapters chune hue hain".
 - Card **"Aapke chapter tests"** (only when at least one chapter is ticked): straight to the ticked chapters' tests.
@@ -241,7 +250,7 @@ The box on step 1 looks in **all three subjects at once**, with every letter typ
 
 Results are ordered best fit first; equal fits stay in the website's order (Physics, Chemistry, Maths). The count line reads "3 chapters mile · teeno subjects mein dhoonda". The search uses only the chapters' **titles** as the website gives them: a new chapter is searchable as soon as it is in the list.
 
-Checked on 27 Nov 2026: 55 searches against the 81 real chapter names all give the expected chapters (`node /app/tests/choice_search_check.js`); 2000 searches take about 33 thousandths of a second on the build machine.
+Checked on 28 Nov 2026: 55 searches against the 81 real chapter names all give the expected chapters (`node /app/tests/choice_search_check.js`); 2000 searches take about 33 thousandths of a second on the build machine.
 
 ## 1.4 The owner's rules for a made paper
 
@@ -553,7 +562,7 @@ The four pictures below were taken with **the browser answering in place of door
 
 ## 1.8 Whole chapter tests by the 80 / 60 / 40 ratio, three hours at most: a change on the website
 
-The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". Shown what the ratio alone gives (some tests longer than four hours), he added on 26 Nov 2026: **a longest time of three hours.** **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on 27 Nov 2026 every JEE Main chapter-wise test has 60 minutes, whatever its length.
+The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". Shown what the ratio alone gives (some tests longer than four hours), he added on 26 Nov 2026: **a longest time of three hours.** **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on 28 Nov 2026 every JEE Main chapter-wise test has 60 minutes, whatever its length.
 
 **What to change on the website**
 
@@ -1155,7 +1164,7 @@ Rules of the two doors:
 - Plain JSON, or the usual envelope **with `meta`**.
 - **Pictures in a shift:** plain https links that open **without sign-in** and **do not expire**. Not the signed links of a paper: the app's server keeps its copy of a shift until the shift changes. A question of ours that exists only as cut pictures: give its question picture or pictures in `images`, its answer in `answer`, and its solution picture or pictures in `solution_images`.
 - Limits read by the app: 200 shifts, 150 matched questions a shift, 4 of ours for one question.
-- Until the doors exist they answer 404 and nothing changes in the app. That is the state on 27 Nov 2026.
+- Until the doors exist they answer 404 and nothing changes in the app. That is the state on 28 Nov 2026.
 
 ## 2.5 How the shifts reach the app
 
@@ -1195,7 +1204,7 @@ One switch decides both: Home's Matched card (in the All India series card's pla
 
 | The switch says | Meaning |
 | --- | --- |
-| `auto` | on **as soon as one shift is published** (the owner, 26 Nov 2026: on the day of JEE Main's first shift itself). "Published" means the shift is in the app server's list (`GET /api/matched` of the app's server), so about 5 minutes after the super admin publishes it. **And in any case from the day after the All India series' last day**, India time, also with no shift: the app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On 27 Nov 2026 the website says the series runs **9 Dec 2026 to 27 Jan 2027**, so with no shift at all the card comes on at 00:00 on **28 Jan 2027**. If the only published shift is taken back while the series still runs, the All India card comes back |
+| `auto` | on **as soon as one shift is published** (the owner, 26 Nov 2026: on the day of JEE Main's first shift itself). "Published" means the shift is in the app server's list (`GET /api/matched` of the app's server), so about 5 minutes after the super admin publishes it. **And in any case from the day after the All India series' last day**, India time, also with no shift: the app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On 28 Nov 2026 the website says the series runs **9 Dec 2026 to 27 Jan 2027**, so with no shift at all the card comes on at 00:00 on **28 Jan 2027**. If the only published shift is taken back while the series still runs, the All India card comes back |
 | `on` | on now, whatever is published and whatever the dates are |
 | `off` | never, also when shifts are published |
 
@@ -1368,13 +1377,13 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 - **The All India bar on a real day of the series:** the series begins on 9 Dec 2026. On the preview the bar was seen before the series ("50 DAYS", "Starts 9 Dec", a tap opens the series hub) and, with the browser answering the schedule as a day of the series, as "DAY 46 / 50", "Live today · Start today's test" (at a phone's usual width and at a narrow one). Its tap into a paper was not pressed.
 - **The card turning on with the first shift, against production:** the rule is covered by automated tests of the app's server; on the preview the card is switched `on` by hand, so `auto` was not watched there.
 
-**The samples on the preview** (27 Nov 2026)
+**The samples on the preview** (28 Nov 2026)
 
 - Three made-up shifts are published on the **preview's** database, for the owner's eyes: `2027-01-22-s1` (6 matched questions), `2027-01-22-s2` (3), `2027-01-24-s1` (2). So that the button and the JEE question under ours can be seen, the first one names a real paper of the website as a stand-in (the chapter test "01 Sets and Relations").
 - Home's card is switched `on` by hand on the preview. (With the samples published it would be on under `auto` too, by the first-shift rule.)
 - They are taken back with `python3 backend/tests/matched_sample.py hide` (and shown with `show`). Nothing is deleted. The tool refuses to write into a database that is not the workspace's own.
 - **A sample never leaves the workspace (since 27 Nov 2026).** The app's server shows a shift marked `sample: true`, and follows the samples' own switch, only when it is the workspace's own server (its database runs on the same machine). Any other server, production above all, leaves them out of the list, answers 404 for their pages and their paper, and does not turn Home's card for them, **whatever its database holds**. Checked by `backend/tests/test_samples_stay_home.py`, also against the preview's own database read the way production would read it: 3 samples kept in, no shift given out, the card off.
-- **Production must have none of this. On 27 Nov 2026 it wrongly has it** (Part 0.2): a Publish made from a copy of the workspace pointed production at a copy of the preview's database, samples and switch included. The day the website publishes a real shift with the id of a sample, the website's shift takes the sample's place.
+- **Production has none of this** (checked, Part 3.7). The day the website publishes a real shift with the id of a sample, the website's shift takes the sample's place.
 
 # Part 3 — Reference
 
@@ -1384,7 +1393,7 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 
 | Address | Who may call | What it gives | Other answers |
 | --- | --- | --- | --- |
-| `GET /api/choice/bank` | a signed-in student (a short pass in the `Authorization` header) | the chapters of the three subjects with their tests, the owner's rules, and `pick` / `random` | `{ "ready": false }` when there is no chapter at all; 401 without a pass; 401 with the code `website_session` when the website wants a fresh session; 503 when the website does not answer |
+| `GET /api/choice/bank` | a signed-in student (a short pass in the `Authorization` header) | the chapters of the three subjects with their tests, the owner's rules, `pick` / `random`, and `misfire` (Part 4.8: `true` only when door A says exactly `true`) | `{ "ready": false, "misfire": … }` when there is no chapter at all; 401 without a pass; 401 with the code `website_session` when the website wants a fresh session; 503 when the website does not answer |
 | `GET /api/choice/chapters/<id>` | a signed-in student | door B's questions in the shape the app draws; everything else dropped | 404 no questions to choose; 401; 503 |
 | `POST /api/jl/choice/papers` | the student's own session | passed on to the website's door C as it is | the website's own answer |
 | `GET /api/matched` | everyone | all published shifts, newest first, without their questions; `total` | |
@@ -1415,8 +1424,9 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 | `POST /api/choice/papers` | Student Choice: make the paper | 1.6, door C |
 | `GET /api/matched` | Matched: the list of published shifts, and the card's switch | 2.4c |
 | `GET /api/matched/<shift id>` | Matched: one shift | 2.4c |
+| `"misfire": true` in door A; door C with `mode: "misfire"`; `GET /api/exam-navigation/jee-main/history?kind=misfire` | the Misfire Mock | 4.8 |
 
-And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part 1.8); `test_kind` "choice" and "matched" on those papers and their results; `test_kind` on the items of `GET /api/my/tests` (Part 1.9).
+And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part 1.8); `test_kind` "choice" and "matched" on those papers and their results; `test_kind` on the items of `GET /api/my/tests` (Part 1.9). For the Misfire Mock also `test_kind` "misfire", and `misfire: { understood, total }` in its result (Part 4.8).
 
 ## 3.2 Every number
 
@@ -1590,16 +1600,18 @@ None of these needs an app update, except taking the tile off Home.
 | Dream College meter | `frontend/src/dream/store.ts` (`isFullMock`), `frontend/app/result/[id].tsx`, `backend/dream.py` |
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
 | Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
-| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5), `test_samples_stay_home.py` (6): all 29 pass on 27 Nov 2026. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
-| Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4) |
+| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5), `test_samples_stay_home.py` (6): all 29 pass on 28 Nov 2026. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
+| Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4), except Offline Misfire's mocks and its note of the "Samajh gaya" ids (Part 4.7) |
+| Offline Misfire (Part 4.7) | `frontend/app/misfire/mock/new.tsx`, `[id].tsx`; `frontend/app/offline/misfire/index.tsx`, `new.tsx`, `[id].tsx`; `frontend/src/misfire/mock/` (`build.ts`, `store.ts`, `marking.ts`, `pictures.ts`, `offline.ts`, `MocksTab.tsx`, `Ready.tsx`, `Player.tsx`, `Result.tsx`, `Closed.tsx`); `frontend/src/misfire/known.ts`; the offline door `frontend/src/offline/door.tsx`. Checks: `python3 tests/offline_misfire_check.py` (30), `python3 tests/misfire_mock_check.py` |
+| Misfire Mock (Part 4.8) | `frontend/src/misfire/web.ts`, `web/WebMocksTab.tsx`, `web/Understood.tsx`; the setup `frontend/app/misfire/mock/new.tsx` (`?web=1`); the tab `frontend/app/misfire/index.tsx`; the switch on the server `backend/choice.py` (`misfire_on`). Check: `python3 tests/misfire_web_check.py` (30) |
 | All India Rapid's "Misfires" | server `backend/daily.py` (`GET /api/rf/daily/misses`); app `frontend/src/rapid/DailyMisses.tsx` |
 | Rapid Fire in a browser | the built copy `backend/arena_web/`, served by `backend/arena_web.py` at `/api/arena`; built by `scripts/build_arena_web.sh` (then the owner's Publish); `backend/tests/test_arena_web_complete.py` (every file the copy names is answered; no file is left out of a Publish; no workspace address in it). In a browser: `python3 tests/slow_phone_check.py arena`, `python3 tests/slow_phone_wins.py arena` (also with `calm`, `reduce`, `narrow`, `laptop`) |
 | One account | `frontend/src/auth.tsx`, `frontend/src/api/client.ts`, `backend/jl_proxy.py` (the website's doors), `backend/rf_access.py` (Rapid Fire's id from `auth/me`), `backend/account_deletion.py`, `backend/pin_reset.py` |
 | Working together (Part 7) | the app's calls: `frontend/src/api/client.ts` and the screens; the app's server: `backend/jl_proxy.py`, `jl_transport.py`, `website_shield.py`, `session_coordination.py`, `login_guard.py`, `client_ip.py`. The read-only walk: `python3 tests/website_doors_walk.py`. The list of Part 7.2 is checked against the app's code by `build_book.py` |
 | Samples stay in the workspace | `backend/workspace.py`; used by `backend/matched.py` and `backend/choice.py`; `backend/tests/test_samples_stay_home.py` (6) |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
-| Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on 27 Nov 2026 and takes their place for readers outside the app side |
-| This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
+| Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`, `memory/WEBSITE_MISFIRE_MOCK_NOTE.md`. This book was written from the code on 28 Nov 2026 and takes their place for readers outside the app side |
+| This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py`, `take_shots_more.py`, `take_shots_misfire.py` |
 
 ### Names of the screens' parts, for automated checks
 
@@ -1617,29 +1629,30 @@ Every part of the two features carries a fixed name (`testID`; in the web previe
 | Matched page | `matched-screen`, `matched-total`, `matched-month-…` (the pills) or `matched-month-only`, `matched-day-<day>`, `matched-shift-<shift id>` (a row), `-count`, `-number`, `matched-empty`, `matched-error`, `matched-refresh` |
 | A shift | `matched-shift-screen`, `matched-shift-count`, `matched-attempt` (the button), `matched-attempt-facts`, `matched-attempt-questions`, `matched-attempt-note`, `matched-attempt-soon`, `matched-shift-list-title`, `matched-subject-…` (the pills), `matched-shift-list`, `matched-shift-empty`, `matched-shift-error`, `matched-signup-sheet`, `matched-signup-yes`, `matched-signup-login` |
 | The paper's page, player, solutions, result | `set-detail-screen`; `matched-with` (the JEE question under ours), `matched-with-where`, `matched-with-jee`; `result-dream` (the Dream College meter: must be absent on a chapter test and on a Student Choice paper) |
+| Misfire's two mocks (Parts 4.7, 4.8) | the tabs `misfire-tab-mock` ("Offline Misfire") and `misfire-tab-web` ("Mock", only with the switch on); `misfire-mock-hero`, `misfire-mock-new`; `misfire-web-hero`, `misfire-web-new`, `misfire-web-<attempt id>`; the setup `mock-new-screen`, `mock-new-header`, `mock-new-phone` (the phone's sentence), `mock-new-web-retry`, `mock-new-bar-go`, `mock-making-error`, `mock-making-retry`; offline `offline-misfire-open`, `mock-closed`; the results `mock-result-waiting`, `mock-result-moved`, `result-misfire-understood`, `result-misfire-understood-count` |
 
 A row of the chapter list is best found as `[role=checkbox][data-testid^=choice-chapter-]`: the list's own name starts with the same letters.
 
 **A hard rule for anyone testing on the app's preview:** the test learner there is the owner's own account on the real website. Never press Start, Begin, Resume or Submit with it, never open an attempt, never tap a chapter test whose button says Resume. Walks that need a started or finished paper use a test student on the website's test setup, or answers given by the browser in place of the website.
 
-## 3.7 The state on 27 Nov 2026, and how to check it again
+## 3.7 The state on 28 Nov 2026, and how to check it again
 
-Read by the build of this book, at 01:51 India time on 27 Nov 2026:
+Read by the build of this book, at 15:21 India time on 28 Nov 2026:
 
 | What was asked | The answer | What it means |
 | --- | --- | --- |
-| The app's server in production: `GET /api/app/switches` | 200, `"matched": true` | Home shows the Matched card, **only because of the preview's samples** (Part 0.2) |
-| The app's server in production: `GET /api/matched` | 200, 3 shifts, 11 questions | **3 of them are the preview's made-up samples, not real shifts** (Part 0.2); no real shift is published |
+| The app's server in production: `GET /api/app/switches` | 200, `"matched": false` | Home shows the All India series card; no Matched bar on the sign-in screen |
+| The app's server in production: `GET /api/matched` | 200, 0 shifts, 0 questions | no shift is published in production |
 | The app's server in production: `GET /api/choice/bank`, signed out | 401 | the door is there, for signed-in students only |
 | The website: `GET /api/matched` | 404 | Matched: the list of shifts: not built yet |
 | The website: `GET /api/matched/2027-01-25-s1` | 404 | Matched: one shift: not built yet |
-| The website: `GET /api/choice/bank?exam=jee-main` | 404 | Student Choice: door A (asked signed out here; a signed-in student got 404 on 26 Nov 2026): not built yet |
+| The website: `GET /api/choice/bank?exam=jee-main` | 401 | Student Choice: door A (asked signed out here; a signed-in student got 404 on 26 Nov 2026): the website answers; tell the app side |
 | The website: `GET /api/series/all-india-jee` | 200, 2026-12-09 to 2027-01-27 | with no shift published, Home's card turns to Matched on 28 Jan 2027 (India time); a published shift turns it sooner, the switch at any time |
-| The app's server in production: `GET /api/arena` (Rapid Fire in a browser, Part 5) | 200 | an older copy is live; the copy built on the preview on 27 Nov 2026 comes with the owner's next Publish |
-| The app's server in production: the icon font of Rapid Fire in a browser | 404 | **missing: its icons are empty boxes**, until the owner's next Publish (Part 5.2) |
+| The app's server in production: `GET /api/arena` (Rapid Fire in a browser, Part 5) | 200 | the newest copy is live |
+| The app's server in production: the icon font of Rapid Fire in a browser | 200 | the icons are drawn |
 | The website: `GET /api/auth/session`, signed out | 200, `"user": null` | the website's sign-in doors answer; the app signs up and signs in only through them (Part 6) |
 
-Also true on 27 Nov 2026, seen through the app's preview: the website lists **81 chapter-wise tests** (Physics 30, Chemistry 24, Mathematics 27) with **3750 questions**, and every one of them has **60 minutes**.
+Also true on 28 Nov 2026, seen through the app's preview: the website lists **81 chapter-wise tests** (Physics 30, Chemistry 24, Mathematics 27) with **3750 questions**, and every one of them has **60 minutes**.
 
 To check again, from any machine:
 
@@ -1685,7 +1698,7 @@ curl -s https://jeelive.ai/api/auth/session
 | 6 | **The made-up sample shifts on the preview:** keep them for looking, or hide them now? | they stay published on the preview only |
 | 7 | **The `kind` of Student Choice papers and Matched papers in the paper history** (a question for the website agent, Part 4.4 point 5) | their Misfire questions are in "Sab" |
 | 8 | **Opening Rapid Fire from the website without typing the PIN again** (Part 5.4: written, not built) | the student types the phone and PIN once in the browser Rapid Fire |
-| 9 | **Production's database** (Part 0.2): putting the real one back; and how to publish from a copy of the workspace without changing the database | with the owner and the platform's support. Until then production runs on a copy of the preview's database |
+
 
 # Part 4 — Misfire: the website's own, shown in the app
 
@@ -1693,13 +1706,15 @@ curl -s https://jeelive.ai/api/auth/session
 
 **Misfire** is every question a student got wrong or left in a finished paper, kept so they can solve it again. jeelive.ai has it, and the app has had it since 24 Nov 2026.
 
-**It is the website's Misfire.** The app does not keep, count or mark Misfire questions of its own. It reads the website's answers and sends the student's tries back to the website. So the website and the app always show the same open questions, the same "Samajh gaya" (understood) questions and the same counts. **Nothing has to be handed over in either direction for it to work: it is already connected.** This part is here so the website agent can check that the two stay the same (Part 4.4).
+**It is the website's Misfire.** The app does not keep, count or mark Misfire questions of its own. (Its one practice of its own, new on 28 Nov 2026, is **Offline Misfire**, Part 4.7: a mock kept on the phone, which never changes the website's Misfire by itself and sends a right answer only through the website's own doors. The website's own **Misfire Mock**, built in the app and waiting for its switch, is Part 4.8.) It reads the website's answers and sends the student's tries back to the website. So the website and the app always show the same open questions, the same "Samajh gaya" (understood) questions and the same counts. **Nothing has to be handed over in either direction for it to work: it is already connected.** This part is here so the website agent can check that the two stay the same (Part 4.4).
 
 | Decision | Date | Where it shows |
 | --- | --- | --- |
 | Misfire must be the same on the website and in the app: one calculation, the website's | 26 Nov 2026 (the owner) | the whole of this part |
 | The app also shows it paper-wise for AITS, JEE Chapter-wise, JEE PYQ, BITSAT Mocks, BITSAT Chapter-wise and COMEDK Mocks | 24 Nov 2026 | Part 4.2 |
 | All India Rapid's "Misfires" tab is Rapid Fire's own and is not given to the website | 26 Nov 2026 | Part 4.5 |
+| The app's "Mock" tab becomes "Offline Misfire": on the phone, also with no internet | 28 Nov 2026 (the owner) | Part 4.7 |
+| A Misfire mock for the website and the app alike is the website's paper, behind the switch `misfire` | 28 Nov 2026 (the owner) | Part 4.8 |
 
 ## 4.2 What a student sees in the app
 
@@ -1771,6 +1786,139 @@ The result screen of **All India Rapid** has a **"Misfires"** tab. All India Rap
 - A real All India day (the series begins on 9 Dec 2026).
 - Anything on a real phone.
 
+## 4.7 Offline Misfire: a practice mock on the phone, also without internet
+
+**New on 28 Nov 2026 (the owner's decision of that day).** Misfire's tab that was called "Mock" is now **"Offline Misfire"**. It makes a JEE Main-like mock out of the student's own Misfire questions, **on the phone**. With a line it takes them from the website's fresh Misfire list, as before; with no line, from the finished papers the phone already keeps. **It is never a paper on the website.** It never changes the website's Misfire by itself: the one thing it sends is a right answer, through the website's own Misfire doors, once the line is back.
+
+| Decision | Date | Where it shows |
+| --- | --- | --- |
+| The "Mock" tab is called "Offline Misfire"; its setup, player and result stay as they were | 28 Nov 2026 (the owner) | the tab, My Tests, the mock's own screens |
+| With no line, the questions come from the finished papers kept on the phone, leaving out those last seen as "Samajh gaya" | 28 Nov 2026 | below |
+| A right answer becomes "Samajh gaya" on the website when the line is back | 28 Nov 2026 | below |
+| Offline Misfire mocks are not on the website; they are in the app's My Tests | 28 Nov 2026 | below |
+| The rules of the app's offline part stay: a sign-in with a line in the last 7 days, only the pictures already on the phone (512 MB at most) | 28 Nov 2026 | below |
+
+- Picture `shots/x04_offline_home.jpg`: 17. No internet: the offline home offers Offline Misfire
+- Picture `shots/x05_offline_setup.jpg`: 18. Its setup, from the papers kept on the phone
+- Picture `shots/x06_offline_result.jpg`: 19. Its result: the right answers wait for the line
+
+**What a student sees**
+
+- **Misfire → "Offline Misfire"** (`/misfire?tab=mock`): the dark-red card "OFFLINE MISFIRE · Galtiyon se JEE Main mock", the button "Naya mock banao", and every mock made on this phone, newest first.
+- **With no line**, the offline home ("Phone par rakha hua · Rapid Fire, results aur Misfire") has the card **"Offline Misfire"** ("Apni galtiyon se JEE Main jaisa mock, bina internet. Jo sahi karoge, internet aate hi “Samajh gaya” ho jayenge."). It opens the same list at `/offline/misfire`.
+- **The setup** is the one it always was: Physics, Chemistry and Mathematics, up to 25 each (5, 10, 25 or "Max"), and the chapters. Time by the owner's ratio: 25 Physics = 60 min, 25 Chemistry = 40, 25 Maths = 80. When the questions come from the phone, it says so:
+    - no line: "Sirf phone par rakhe N papers se · M sawaal mile. Jo pehle “Samajh gaya” ho chuke, woh nahi liye.";
+    - a line, but the website's Misfire list does not come: "Website se list abhi nahi aa paayi." before the same sentence, and a button "Website se dobara laao".
+- **The ready screen** adds "Phone par rakhe papers se bana: internet ke bina bhi poora chalega.", and "Saare sawaal phone par taiyaar" once every picture is there.
+- **The result** is the one it always was: the score, subject by subject, the chapters to look at again, and every question with its key and solution. While right answers wait for the line: "N sahi sawaal “Samajh gaya” mein ja rahe hain. Internet aate hi pahunch jayenge." Once they are through: "N sawaal “Samajh gaya” mein chale gaye".
+- **My Tests** lists it as "Offline Misfire #n", and its own screens are titled "OFFLINE MISFIRE #n".
+
+**How it works (all of it on the phone)**
+
+| What | How |
+| --- | --- |
+| The questions, with a line | the website's open Misfire list, `GET /my/misfire?status=open&subject=…` (Part 4.2), as before |
+| The questions, with no line | every `incorrect` or `skipped` question of the finished papers the phone keeps (the same papers "Mere results" opens offline), of Physics, Chemistry and Mathematics, with its key; not a bonus or dropped question; once only (the newest paper's copy when a question was in two); and **only when its pictures are already on the phone**. A result kept but never opened once is left out, as it is everywhere offline. The question's id is its Misfire id `<attempt id>:<question id>` |
+| "Samajh gaya", with no line | the phone remembers the ids it last saw in the website's `status=fixed` list, and leaves them out. It learns them from Misfire's own screens and, after the phone keeps papers, at most once in 15 minutes and never during a paper: `GET /my/misfire/summary`, and the `status=fixed` pages (20 a page, 50 pages at most) only when the website's count differs from the phone's, or a day after the last full read. A question marked on the website since then can still come in once |
+| Who may open it with no line | the same rule as for the rest of the app's offline part: the account signed in on this phone **with a line in the last 7 days**. Otherwise: "Pehle ek baar internet ke saath app kholo" |
+| A right answer | kept on the phone. When the line and the session are back, the app sends it **through the website's own doors**: `POST /my/misfire/<id>/try` with the answer, then `POST /my/misfire/<id>/done` when the website says it is right. It tries again every 45 seconds while the student is signed in, until it is through. **Nothing is sent while nobody is signed in** |
+| Pictures | only those already on the phone (the same 512 MB as before); nothing new is fetched without a line |
+| Where the mock is kept | on the phone only, under that account. It is **never** a set, an attempt or a result on the website, and the website's Mock tab never lists it |
+
+**For the website: nothing to build.** Please keep three things as they are (Part 4.4 and Part 7.2 already ask for them):
+
+1. `POST /my/misfire/<id>/try` judges the answer itself and gives `correct`. The app never decides on the website's behalf that an answer is right. A try that comes **hours later**, from a phone that was offline, is judged the same way.
+2. `POST /my/misfire/<id>/done` after a right try moves the item to "Samajh gaya". A second `done` on an item already there does no harm (the app may send it again after an answer that got lost).
+3. A try on an item the student has meanwhile marked "Samajh gaya" on the website is answered like any other try (the app then sends `done`, which changes nothing).
+
+**Checked on 28 Nov 2026** (`tests/offline_misfire_check.py`, 30 checks; the website's writes were answered by the browser, nothing was written): the tab's name; the website's list with a line; the phone's papers when the list does not come, with the sentence and the button; a question listed as "Samajh gaya" left out; the offline door, the list, the setup, the mock and its result with no line at all, every picture from the phone; nothing sent while signed out; each right answer sent once (try, then done) about 6 seconds after the line came back; My Tests' name; shut on a phone with no confirmed session. The app side's independent review found no fault.
+
+**Not checked:** a real phone with no network (the preview's browser was cut off from the network instead); many days offline; one student's two phones offline at once.
+
+## 4.8 Misfire Mock made by the website: built in the app, shut until its switch
+
+**Built in the app on 28 Nov 2026, and shut until the website opens it.** The owner decided (28 Nov 2026) that a Misfire mock taken **on the website and in the app alike** must be the website's own paper. So the app asks the website to make it, and from then on it is an ordinary paper on both sides: its page, its timer, autosave, its result, its Analysis, My Tests. **Until door A says `"misfire": true`, no student sees any of it.** The app was checked with the switch off and with it on.
+
+| Decision | Date |
+| --- | --- |
+| A Misfire mock for both sides is the website's paper, made by door C with `mode: "misfire"` | 28 Nov 2026 (the owner) |
+| Its switch is `misfire` in door A, shut unless it is exactly `true` | 28 Nov 2026 |
+| Its result says how many of its questions went to "Samajh gaya" | 28 Nov 2026 |
+| Offline Misfire (Part 4.7) stays as it is, next to it | 28 Nov 2026 |
+
+- Picture `shots/x07_mock_tab.jpg`: 20. Switch on: Misfire's "Mock" tab
+- Picture `shots/x08_mock_setup.jpg`: 21. Its setup asks jeelive.ai for the paper
+- Picture `shots/x09_mock_paper.jpg`: 22. The made paper's page
+- Picture `shots/x10_mock_result.jpg`: 23. Its result: how many went to "Samajh gaya"
+
+The pictures are from the app's preview, with the browser answering in place of the website: the website's doors for the Misfire Mock do not exist yet. The scores in them belong to a paper played as a Misfire Mock.
+
+**What a student sees, once the switch is on**
+
+- Misfire gets a tab **"Mock"**, right after "Sab" (then "Offline Misfire" and the paper-wise tabs). Its dark-red card: "MISFIRE MOCK · Galtiyon se JEE Main mock · Paper jeelive.ai par banega: timer, autosave, result aur Analysis har paper ki tarah. App aur website, dono par chalega. Jo sahi karoge, woh “Samajh gaya” ho jayenge.", the button **"Naya mock banao"**, then the student's Misfire Mocks, newest first: a finished one with its score and its right, wrong and left counts ("Result dekho"), one being taken marked "CHAL RAHA HAI" ("Resume").
+- **"Naya mock banao"** opens the setup of Part 4.7, titled "Misfire Mock banao", with the website's open Misfire list only (never the phone's papers). The time it shows comes from door A's minutes (the owner's ratio).
+- **"Mock banao"** asks door C. While it waits: "jeelive.ai aapki galtiyon se paper bana raha hai…". Then the made paper's page opens ("JEE MAIN · MISFIRE MOCK"), and the student starts it like any paper.
+- **The result** of a paper whose `test_kind` is `misfire` has a card on its Analysis tab: "3 / 15 sawaal “Samajh gaya” mein chale gaye" and "Jo sahi kiye, woh Misfire ki list se hat gaye. Baaki galtiyan wahin hain, agle mock ke liye.", with "Misfire kholo". Its top line reads "JEE Main · Misfire Mock".
+- **My Tests** shows "JEE Main · Misfire Mock" under the paper's name.
+- **The Dream College meter never counts it**, like a chapter test and a Student Choice paper.
+
+### What the website builds
+
+The doors are Student Choice's (Part 1.6); the Misfire Mock only adds to them. The JSON is also in the `examples` folder (`misfire_mock_ask.json`, `misfire_mock_answers.json`).
+
+**1. The switch, in door A** (`GET /api/choice/bank?exam=jee-main`). Add `"misfire": true`. Anything else (no `misfire`, `false`, `"true"`, `1`, or a 404) keeps the tab shut. It changes nothing about `pick` and `random`. The app's server reads door A every 2 minutes, so the tab appears (or goes) within about 2 minutes, on every phone.
+
+**2. Make the paper: door C** (`POST /api/choice/papers`, sent with the student's own session):
+
+```json
+{
+  "exam": "jee-main",
+  "request_key": "0f6c2a8e-3b1d-4c55-9a47-7e2d1b9c4f10",
+  "mode": "misfire",
+  "counts": { "Physics": 10, "Chemistry": 5, "Mathematics": 0 },
+  "chapters": { "Physics": ["01 Units and Measurement", "02 Kinematics"] }
+}
+```
+
+- `counts`: 0 to 25 for each subject, at least 1 in all.
+- `chapters`: only for a subject where the student ticked some chapters, by their names exactly as `chapters[].name` in `GET /my/misfire?status=open&subject=…`. A subject not named means every chapter.
+- The questions are the student's own **open** Misfire items (never "Samajh gaya"), from those chapters. Fewer than asked: as many as there are. None at all: 422 with a plain `error.message`.
+- **The same `request_key` gives the same paper.** A retry never makes a second one (rule 6). The app keeps one key while the student stays on the screen with the same counts and chapters.
+- The answers are door C's (Part 1.6): `{ "set_id": "…" }` with 200 or 201. 404 or 405: "not built yet" ("Paper banana abhi jeelive.ai se jud raha hai…"). 409, 422 or 429 with `error.message`: that sentence is shown. 5xx: "jeelive.ai abhi jawab nahi de raha. Thodi der mein dobara try karo; aapki ginti aur chapters yahin rahenge."
+
+**3. The paper.** A set of the student's own, `test_kind: "misfire"`, exam JEE Main, marked +4 / −1 / 0 and timed by the ratio (rule 5; a made paper is not cut). Every question has its own subject, pieces, key and solution, so that the paper's page, start, player, autosave, deadline, result and Analysis work unchanged, in the app and on the website.
+
+**4. Its list.** `GET /api/exam-navigation/jee-main/history?kind=misfire&page=`: the student's Misfire Mocks, newest first, with the rows of the other history lists (`id` of the attempt, `title`, `started_at`, `submitted_at`, `summary {score, maximum, correct, incorrect, skipped}`), plus `status` and `resumable` on one still being taken. And `test_kind: "misfire"` on its rows in `GET /api/my/tests`.
+
+**5. Its result.** `GET /api/attempts/<id>/results` carries `test_kind: "misfire"` and `"misfire": { "understood": 3, "total": 15 }`: how many of its questions **the website moved to "Samajh gaya"** because they were answered right, out of how many. The website moves them; the app only shows the number. Without `misfire`, the card says a general sentence instead.
+
+```json
+{
+  "door_A_adds": { "misfire": true },
+  "door_C_answer_200_or_201": { "set_id": "misfire-set-0001" },
+  "history_kind_misfire": {
+    "items": [
+      { "id": "<attempt id>", "title": "Misfire Mock · 15 Q · 27 Nov", "status": "completed", "resumable": false,
+        "started_at": 1764200000, "submitted_at": 1764203000,
+        "summary": { "score": 20, "maximum": 60, "correct": 6, "incorrect": 5, "skipped": 4 } },
+      { "id": "<attempt id>", "title": "Misfire Mock · 10 Q · 28 Nov", "status": "active", "resumable": true,
+        "started_at": 1764300000, "summary": null }
+    ],
+    "page": 1,
+    "pages": 1
+  },
+  "result_adds": { "test_kind": "misfire", "misfire": { "understood": 3, "total": 15 } }
+}
+```
+
+**6. A question for the website.** A wrong or left question of a Misfire Mock is already an open Misfire item, under the id of the paper it first came from (`<attempt id>:<question id>`). The app expects it **not** to become a second item under the Misfire Mock's own attempt. Please tell the app side what the website does.
+
+**Until all of this is ready, keep `misfire` off.** Then tell the app side: the first real end-to-end run is on a test setup, before students see it (rule 20). On the app side, door A's `misfire` reaches production with the owner's next Publish; nothing else waits for the app.
+
+**Checked on 28 Nov 2026** (`tests/misfire_web_check.py`, 30 checks; the browser answered in place of the website, and nothing was written). With the switch as the website answers today (not said): no tab, and nothing changed anywhere (Misfire's tabs, a link to `?tab=web`, the setup, Student Choice); door C never asked. With the switch on: the tab right after "Sab"; the list (a finished mock with its score, one being taken with "Resume"); the result's count; the setup asking door C (404, then 503, then a paper) with **one** `request_key` for all three; the chosen chapters sent by name, under a new key; the made paper's page; My Tests' label; Offline Misfire unchanged. On the app's server, `misfire` is `true` only for an exact `true` (`backend/tests/test_choice.py`). The app side's independent review found no fault in the app.
+
+**Not checked:** anything against a real website door (none exists yet); a Misfire Mock started on the website and finished in the app, or the other way round; a real phone.
+
 # Part 5 — Rapid Fire in a browser: the app's, linked from the website
 
 ## 5.1 What it is, and who owns it
@@ -1790,7 +1938,7 @@ This is the app's own live server. If the app's live address ever changes, the a
 - On a laptop it stays a phone-wide column on the blood-red stage. Home in its bar goes to jeelive.ai. The student's own profile has "Account & sign out".
 - It is also what a person without the app gets from a match link ("Play in your browser").
 
-- Picture `shots/r01_arena_laptop.jpg`: 17. Rapid Fire in a laptop's browser, from the app's server
+- Picture `shots/r01_arena_laptop.jpg`: 24. Rapid Fire in a laptop's browser, from the app's server
 
 ## 5.2 What changed for it (26 and 27 Nov 2026)
 
@@ -1799,7 +1947,7 @@ The browser copy has to be built again whenever the app's screens change. Buildi
 - **26 Nov 2026:** built again with **All India Rapid's "Misfires" tab** (Part 4.5). This copy is in production since the owner's Publish of that day.
 - **Found on 27 Nov 2026: in production its icons are empty boxes.** The copy's icon font sat in a folder that does not travel with a Publish, so production answers 404 for it. On the sign-in screen the phone, the lock and the eye are drawn as empty boxes, and so is every other icon that comes from that font; words, pictures and the game itself are right. The preview read the font from its own disk, so it was not seen there. **Mended on 27 Nov 2026, on the preview:** the font now ships under a name that travels; the build refuses to put a copy in place when one of its files would be left out of a Publish; and a test asks the app's server for every file the copy's pages name (`backend/tests/test_arena_web_complete.py`).
 - **27 Nov 2026, the same new copy:** on a slow device the browser Rapid Fire now notices it and rests its decoration and its celebrations, as the app does; scores, coins and the game do not change. The copy talks only to the server it was opened from: no address of a workspace is in it (the build refuses one).
-- Students get the new copy **with the owner's next Publish**. The state in production is read when this book is built (Part 3.7).
+- Students got the new copy **with the owner's Publish of 28 Nov 2026**. The state in production is read when this book is built (Part 0.2 and Part 3.7).
 
 Nothing in the address, the sign-in or the website's part changes with a rebuild.
 
@@ -1829,7 +1977,7 @@ Today a student who is signed in on the website types the phone and PIN once mor
 ## 5.5 Not checked
 
 - The website's Rapid Fire button: whether it is on jeelive.ai today was not checked by the app side.
-- The copy of 27 Nov 2026 in production: it reaches production with the next Publish. On the preview it was walked in a browser at a phone's width, at 320 points and at a laptop's width, at full motion and at rest: it opens, signs in and plays a practice round answered by the browser (picture 17 is the copy of 26 Nov).
+- The copy of 27 Nov 2026 in production went with the owner's Publish of 28 Nov 2026; whether production serves it, and its icon font, is read when this book is built (Part 0.2). Only on the preview was it walked in a browser at a phone's width, at 320 points and at a laptop's width, at full motion and at rest: it opens, signs in and plays a practice round answered by the browser (picture 24 is the copy of 26 Nov).
 - A real slow phone: the rest on a slow device was checked in a browser slowed down on purpose, not on a phone.
 
 # Part 6 — One account for the website and the app
@@ -1838,14 +1986,14 @@ Today a student who is signed in on the website types the phone and PIN once mor
 
 The owner (26 Nov 2026): a student who signs up on the website can sign in to the app, and one who signs up in the app can sign in on the website, whenever they like. The two together make **one user list**, and one sign-up gives the student everything on both sides.
 
-**This is already how it works.** It was checked from the app's code and its live answers on 27 Nov 2026:
+**This is already how it works.** It was checked from the app's code and its live answers on 28 Nov 2026:
 
 - **The app has no account system of its own.** Signing up, signing in, the session, renewing it, changing the PIN and signing out are all **the website's own doors**. The app's server passes them on unchanged to `https://jeelive.ai/api/…`.
 - So **an account made in the app is a website account**, and the same phone number and PIN sign in on jeelive.ai. **An account made on the website signs in to the app** at once. Nothing is copied from one side to the other: there is only one account, the website's.
 - **One user list:** the website's. The app's server keeps only the app's own extras (Rapid Fire profile, coins, diamonds, friends, Dream College, Mission) under the **website's own student id**. It reads that id from the website's `GET /api/auth/me` and never makes up an id of its own.
 - **The browser Rapid Fire** (Part 5) signs in the same way, with the same id.
 
-- Picture `shots/a01_signin.jpg`: 18. The app's sign-in screen: the same phone number and PIN as on jeelive.ai
+- Picture `shots/a01_signin.jpg`: 25. The app's sign-in screen: the same phone number and PIN as on jeelive.ai
 
 ## 6.2 Every door the app uses for accounts
 
@@ -1884,7 +2032,7 @@ The exam a student chose, papers, attempts, results, Misfire and the All India s
 - **The website has no door to delete an account.** The website account is deleted **by the owner on the website by hand**, within 30 days, from the list in the app's owner panel. While a request waits, the app does not sign that account in again.
 - If the website ever adds a delete door, tell the app side: the request can then be finished in one step.
 
-## 6.6 How it was checked (27 Nov 2026)
+## 6.6 How it was checked (28 Nov 2026)
 
 - The app's code: sign-up, sign-in, session, renewal, PIN and sign-out are only ever sent to the website's doors above (`frontend/src/auth.tsx`, `frontend/src/api/client.ts`, `backend/jl_proxy.py`). Rapid Fire takes its id from the website's `auth/me` (`backend/rf_access.py`).
 - The live answers: the website's `GET /api/auth/session` answers for a signed-out visitor (Part 3.7). The test learner's account is a website account: its papers, results and Misfire are the website's, and it signs in to the app and to the browser Rapid Fire with the same phone and PIN.
@@ -1896,7 +2044,7 @@ The exam a student chose, papers, attempts, results, Misfire and the All India s
 
 The website can be changed any day. **An app in a student's phone cannot:** it changes only when the student installs a new build, and phones keep an old build for months. So every answer of the website that the app reads is, in effect, a promise. This part lists those answers, so that the website's own work never breaks the app unseen:
 
-- **7.2** every door of the website the app uses today (63 of them);
+- **7.2** every door of the website the app uses today (64 of them);
 - **7.3** how the app's server reaches the website, and what it does with what comes back;
 - **7.4** what may change freely, what may not, and how a change is agreed;
 - **7.5** the doors the app already asks for that the website has not built;
@@ -1999,9 +2147,10 @@ The list of 7.2 is not written from memory: when this book is built, every door 
 
 | Door | Used for | Sent | The app relies on |
 | --- | --- | --- | --- |
-| `GET /choice/bank` | **(server)** Student Choice, door A | `?exam=jee-main` | Part 1.6 |
+| `GET /choice/bank` | **(server)** Student Choice, door A; the Misfire Mock's switch `misfire` | `?exam=jee-main` | Part 1.6; Part 4.8 |
 | `GET /choice/chapters/<id>/questions` | **(server)** Student Choice, door B | `?page=` | Part 1.6 |
-| `POST /choice/papers` | Student Choice, door C | Part 1.6 | Part 1.6 |
+| `POST /choice/papers` | Student Choice, door C; the Misfire Mock (`mode: "misfire"`) | Part 1.6; Part 4.8 | Part 1.6; Part 4.8 |
+| `GET /exam-navigation/jee-main/history` | the Misfire Mock's list, asked only while door A says `"misfire": true` | `?kind=misfire&page=` | Part 4.8 |
 | `GET /matched` | **(server)** Matched: the list, every 2 minutes | — | Part 2.4c |
 | `GET /matched/<id>` | **(server)** Matched: one shift | — | Part 2.4c |
 | `GET /series/all-india-jee/leaderboard` | the whole-series leaderboard | `?q=` | Part 7.5 |
@@ -2083,6 +2232,7 @@ The app asks these today and gets 404. **Nothing breaks; a part of the app simpl
 | `GET /api/choice/bank?exam=jee-main`, `GET /api/choice/chapters/<set id>/questions`, `POST /api/choice/papers` | question picking and the random mock | Part 1.6 |
 | `GET /api/matched`, `GET /api/matched/<shift id>` | the real shifts of Matched | Part 2.4c |
 | `GET /api/series/all-india-jee/leaderboard` (and `?q=<name or Rank>`) | a "Poori series" tab on the AITS Leaderboard, with its Rank card and share card | below |
+| `"misfire": true` in `GET /api/choice/bank?exam=jee-main`; then `POST /api/choice/papers` with `mode: "misfire"`, `GET /api/exam-navigation/jee-main/history?kind=misfire`, and `misfire` in a result | Misfire's "Mock" tab and the Misfire Mock. The last three are asked only once door A says `true` | Part 4.8 |
 
 **The whole-series leaderboard** (the app side's earlier note, repeated here so that it is in one book). The same envelope and the same row as `GET /api/attempts/<id>/leaderboard`, plus three fields:
 
@@ -2109,11 +2259,12 @@ The app asks these today and gets 404. **Nothing breaks; a part of the app simpl
 
 ## 7.6 What was checked, and what was not
 
-**Checked on 27 Nov 2026**
+**Checked on 28 Nov 2026**
 
 - **The list against the code:** every door the app's screens name in their code is in 7.2 (the build of this book stops otherwise). The doors of the app's server were read from its code (`backend/jl_proxy.py`, `choice.py`, `matched.py`, `rf_access.py`, `pin_reset.py`, `account_deletion.py`, `owner_panel.py`).
 - **A read-only walk** (`tests/website_doors_walk.py`): 30 screens of the app's preview were opened as the test learner, and every call to the website was written down. Signing in was the one write; nothing was started, answered, saved or submitted. 21 doors were seen: 19 answered 200; `auth/refresh` answered 401 once, before sign-in, as it should; `series/all-india-jee/leaderboard` answered 404 (7.5).
 - **The rules of 7.3** were read from the app server's code (`jl_proxy.py`, `jl_transport.py`, `website_shield.py`, `session_coordination.py`, `login_guard.py`) and from the app's (`frontend/src/api/client.ts`).
+- **Misfire's two mocks (28 Nov 2026):** Offline Misfire and the Misfire Mock were walked on the preview with the website's answers played by the browser (Parts 4.7 and 4.8). Nothing was written to the website.
 
 **Not checked**
 
